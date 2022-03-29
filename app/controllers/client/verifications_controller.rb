@@ -1,33 +1,38 @@
 class Client::VerificationsController < Client::ApplicationController
   layout 'verification'
 
+  helper_method :form_path
+
   def new
-    verification = applicant.verifications.new verification_params
-    render locals:{verification: verification, encoded_external_id: params[:encoded_external_id]}
+    verification = applicant.verifications.new params.fetch(:verification, {}).merge(external_id: external_id)
+    render locals: {verification: verification}
   end
 
   def create
-    encoded_external_id = params[:encoded_external_id]
-    verification = applicant.verifications.create!(verification_params)
-    render :created, locals: {verification: verification, encoded_external_id: encoded_external_id}
+    verification = applicant.verifications.create! verification_params.merge(external_id: external_id)
+    render :created, locals: { verification: verification }
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
-    render :new, locals: {verification: verification, encoded_external_id: encoded_external_id}
+    render :new, locals: { verification: e.record }
   end
 
   private
 
-  def applicant
-    @applicant ||= find_applicant
+  def form_path
+    Rails.application.routes.url_helpers.client_verifications_path params[:encoded_external_id]
   end
 
-  def find_applicant
-    payload = VerificationUrlGenerator.payload_from_token(params[:encoded_external_id], current_client.secret)
-    raise ActiveRecord::RecordNotFound unless payload.present?
-    current_client.applicants.find_or_create_by!(external_id: payload)
+  def applicant
+    @applicant ||= current_client.applicants.find_or_create_by!(external_id: external_id)
+  end
+
+  def external_id
+    VerificationUrlGenerator.payload_from_token(params[:encoded_external_id], current_client.secret)
   end
 
   def verification_params
-    params.fetch(:verification, {}).permit!
+    params.
+      require(:verification).
+      permit(:name, :reason, :country, :last_name, :email, :passport_data, documents: [])
   end
 end

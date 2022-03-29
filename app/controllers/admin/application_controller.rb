@@ -2,6 +2,7 @@ class Admin::ApplicationController < ApplicationController
   before_action :basic_auth
 
   helper_method :current_user
+  helper_method :current_client
 
   private
 

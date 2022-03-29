@@ -13,9 +13,9 @@ ru:
         reason: 'Причина обращения'
         status: 'Password'
         email: 'Email, на который придет уведомление о статусе заявки'
-        passport_data: 'Номер Паспорта'
-        name: 'Ваше Имя (Ivan)'
-        last_name: 'Ваша Фамилия (Ivanov)'
+        passport_data: 'Серия и Номер Паспорта'
+        name: 'Ваше Имя'
+        last_name: 'Ваша Фамилия'
       client:
         subdomain: 'Поддомен'
         verification_callback_url: 'Адрес уведомлений'

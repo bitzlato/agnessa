@@ -15,6 +15,14 @@ class Client < ApplicationRecord
     save!
   end
 
+  def public_name
+    name
+  end
+
+  def host
+    subdomain + '.' + Rails.application.routes.default_url_options.fetch(:host)
+  end
+
   private
 
   def generate_secret
