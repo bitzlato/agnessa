@@ -1,5 +1,7 @@
 class VerificationUrlGenerator
-  WrongPayload = Class.new StandardError
+  Error = Class.new StandardError
+  WrongPayload = Class.new Error
+  WrongDigest = Class.new Error
 
   class << self
     def generate_url(url, payload, secret)
@@ -17,10 +19,11 @@ class VerificationUrlGenerator
       payload = values.is_a?(Array) ? values.join(":") : values
 
       original_digest = Digest::MD5.hexdigest("#{secret}:#{payload}")
-      payload if original_digest == digest
+      raise WrongDigest unless original_digest == digest
+      payload
     rescue StandardError => err
       Rails.logger.error err
-      raise WrongPayload
+      raise WrongPayload unless err.is_a? WrongDigest
     end
   end
 end
