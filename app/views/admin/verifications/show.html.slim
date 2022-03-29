@@ -1,6 +1,6 @@
 .row
   .col-md-6
-    = render 'attributes', record: :verification
+    = render 'attributes', item: verification
     .row
       .col-6
         = link_to 'Подтвердить', confirm_admin_verification_path(verification), method: :post, method: { confirm: 'Подтверждаем заявку?' }
