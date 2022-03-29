@@ -1,0 +1,15 @@
+= search_form_for [:admin, q] do |f|
+  .row
+    .col-md-4
+      = f.input :legacy_verification_id_cont, label: 'ID содержит:'
+    .col-md-4
+      = f.input :name_or_last_name_cont, label: 'Имя\Фамилия содержит:'
+    .col-md-4
+      = f.input :passport_data_cont, label: 'Номер паспорта содержит:'
+    .col-md-4
+      = f.input :created_at_gteq, input_html: { class: 'datetimepicker' }
+    .col-md-4
+      = f.input :created_at_lt, input_html: { class: 'datetimepicker' }
+  - if block_given? 
+    = yield f
+  = f.button :submit, class: 'btn btn-primary'
