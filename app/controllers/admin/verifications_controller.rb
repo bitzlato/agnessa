@@ -1,12 +1,4 @@
-class Admin::VerificationsController < Admin::ApplicationController
-  before_action :superadmin?
-
-  def index
-    q = Verification.ransack(params[:q])
-    verifications = q.result(distinct: false).page(page).per(per_page).decorate
-
-    render locals: { q: q, verifications: verifications }
-  end
+class Admin::VerificationsController < Admin::ResourcesController
 
   def show
     render locals: { verification: verification }

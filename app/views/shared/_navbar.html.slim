@@ -1,7 +1,6 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky-top[style="background-color: #e3f2fd;"]
   = content_tag :div, class: 'container-fluid' do
-    - unless controller_name == 'boards' && action_name == 'show'
-      = render 'shared/brand'
+    = render 'shared/brand'
     button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navigation"]
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse

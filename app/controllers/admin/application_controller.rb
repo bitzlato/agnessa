@@ -1,6 +1,6 @@
-class Admin::ApplicationController < ActionController::Base
-  layout 'admin'
+class Admin::ApplicationController < ApplicationController
   before_action :basic_auth
+
   helper_method :current_user
 
   private
@@ -19,23 +19,11 @@ class Admin::ApplicationController < ActionController::Base
     end
   end
 
-  def superadmin?
-    redirect_to admin_moderation_index_path unless current_user.superadmin?
-  end
-
   def current_client
     RequestStore.store[:current_client]
   end
 
   def current_user
     ClientUser.find_by(id: session.dig(:current_user))
-  end
-
-  def per_page
-    params[:per]
-  end
-
-  def page
-    params[:page]
   end
 end

@@ -1,6 +1,16 @@
 module ApplicationHelper
 
+  # TODO Вынести в Uploader
   VIDEO_EXTS = %w[.mp4 .mov]
+
+  def sort_column(column, title)
+    sort_link q, column, title
+  end
+
+  def hided_columns
+    # TODO
+    []
+  end
 
   def back_link(url = nil)
     link_to ('&larr; ' + t('.back')).html_safe, url || root_path
