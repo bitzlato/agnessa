@@ -1,0 +1,16 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky-top[style="background-color: #e3f2fd;"]
+  = content_tag :div, class: 'container-fluid' do
+    - unless controller_name == 'boards' && action_name == 'show'
+      = render 'shared/brand'
+    button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navigation"]
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item.dropdown.mr-2.d-flex.align-items-center
+          =active_link_to 'Администраторы', admin_client_users_path, class: 'my-lg-0 py-lg-0 nav-link'
+        li.nav-item.dropdown.mr-2.d-flex.align-items-center
+          =active_link_to 'Список верификаций', admin_verifications_path, class: 'my-lg-0 py-lg-0 nav-link'
+        li.nav-item.dropdown.mr-2.d-flex.align-items-center
+          =active_link_to 'Статусы Верификаций', admin_review_result_label_index_path, class: 'my-lg-0 py-lg-0 nav-link'
+        li.nav-item.dropdown.mr-2.d-flex.align-items-center
+          = active_link_to 'Настройки',admin_client_path, class: 'my-lg-0 py-lg-0 nav-link'

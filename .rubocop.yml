@@ -1,0 +1,11 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'bin/*'
+    - 'db/schema.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/**'
+Style/Documentation:
+  Enabled: false

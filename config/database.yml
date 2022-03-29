@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+
+production:
+  <<: *default
+  url: <%= ENV.fetch('AGNESSA_DATABASE_URL', 'postgres://localhost/angessa_development' ) %>
+
+development:
+  <<: *default
+  database: agnessa_development
+
+test:
+  <<: *default
+  database: agnessa_test
+  user: <%= ENV.fetch('POSTGRES_USER', 'postgres' ) %>
+  password: <%= ENV.fetch( 'POSTGRES_PASSWORD', 'password' ) %>    

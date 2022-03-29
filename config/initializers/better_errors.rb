@@ -1,0 +1,1 @@
+BetterErrors.editor='x-mine://open?file=%{file}&line=%{line}' if defined? BetterErrors

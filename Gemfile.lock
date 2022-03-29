@@ -1,0 +1,640 @@
+GIT
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: 49a43fc9519408e47a4844d3cdbeb2838687041a
+  specs:
+    ransack (2.5.0)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
+
+GIT
+  remote: https://github.com/bitzlato/sumsub-ruby-sdk.git
+  revision: 115dfd4bc83ae873270938eedc35127ea247c297
+  specs:
+    sumsub-ruby-sdk (0.1.3)
+      dry-struct
+      http (>= 4.0)
+      mime-types (~> 3.3)
+
+GIT
+  remote: https://github.com/brandymint/capistrano-systemd-multiservice.git
+  revision: 47c98c65aa3d8f601efa4b947faf249c5abc9cab
+  specs:
+    capistrano-systemd-multiservice (0.1.0.beta12)
+      capistrano (>= 3.7.0, < 3.17.0)
+
+GIT
+  remote: https://github.com/brandymint/capistrano-tasks.git
+  revision: ed94c975c36a7ba41a173bddf6dba46034ca41e2
+  specs:
+    capistrano-tasks (0.0.1)
+
+GIT
+  remote: https://github.com/glyph-fr/redactor-rails.git
+  revision: 6f6655fd71199700f2e5d7bc1f7f3c19f37dde50
+  specs:
+    redactor-rails (0.6.0)
+      mime-types
+      orm_adapter
+
+GIT
+  remote: https://github.com/jwt/ruby-jwt.git
+  revision: 8a84340c39a9714c70ea99b021710da3932f6aa8
+  specs:
+    jwt (2.3.0)
+
+GIT
+  remote: https://github.com/seuros/capistrano-puma.git
+  revision: f9801f6762d152c5d9da18ce726c7561cc4f9a8b
+  specs:
+    capistrano3-puma (5.2.0)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (>= 4.0, < 6.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    actioncable (6.1.4.6)
+      actionpack (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+      nio4r (~> 2.0)
+      websocket-driver (>= 0.6.1)
+    actionmailbox (6.1.4.6)
+      actionpack (= 6.1.4.6)
+      activejob (= 6.1.4.6)
+      activerecord (= 6.1.4.6)
+      activestorage (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+      mail (>= 2.7.1)
+    actionmailer (6.1.4.6)
+      actionpack (= 6.1.4.6)
+      actionview (= 6.1.4.6)
+      activejob (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+      mail (~> 2.5, >= 2.5.4)
+      rails-dom-testing (~> 2.0)
+    actionpack (6.1.4.6)
+      actionview (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+      rack (~> 2.0, >= 2.0.9)
+      rack-test (>= 0.6.3)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.2.0)
+    actiontext (6.1.4.6)
+      actionpack (= 6.1.4.6)
+      activerecord (= 6.1.4.6)
+      activestorage (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+      nokogiri (>= 1.8.5)
+    actionview (6.1.4.6)
+      activesupport (= 6.1.4.6)
+      builder (~> 3.1)
+      erubi (~> 1.4)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
+    activejob (6.1.4.6)
+      activesupport (= 6.1.4.6)
+      globalid (>= 0.3.6)
+    activemodel (6.1.4.6)
+      activesupport (= 6.1.4.6)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
+    activerecord (6.1.4.6)
+      activemodel (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+    activestorage (6.1.4.6)
+      actionpack (= 6.1.4.6)
+      activejob (= 6.1.4.6)
+      activerecord (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+      marcel (~> 1.0.0)
+      mini_mime (>= 1.1.0)
+    activesupport (6.1.4.6)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
+    airbrussh (1.4.0)
+      sshkit (>= 1.6.1, != 1.7.0)
+    ast (2.4.2)
+    bcrypt (3.1.16)
+    better_errors (2.9.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
+    bindex (0.8.1)
+    binding_of_caller (1.0.0)
+      debug_inspector (>= 0.0.1)
+    bootsnap (1.10.3)
+      msgpack (~> 1.2)
+    bson (4.12.1)
+    bugsnag (6.24.2)
+      concurrent-ruby (~> 1.0)
+    bugsnag-capistrano (2.1.0)
+    builder (3.2.4)
+    byebug (11.1.3)
+    capistrano (3.16.0)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (2.0.1)
+      capistrano (~> 3.1)
+    capistrano-db-tasks (0.6)
+      capistrano (>= 3.0.0)
+    capistrano-dotenv (0.0.5)
+      capistrano (>= 3.5.0, < 4.0.0)
+    capistrano-dotenv-tasks (0.1.5)
+      capistrano (~> 3.0)
+    capistrano-git-with-submodules (2.0.4)
+      capistrano (~> 3.7)
+    capistrano-rails (1.6.2)
+      capistrano (~> 3.1)
+      capistrano-bundler (>= 1.1, < 3)
+    capistrano-rails-console (2.3.0)
+      capistrano (>= 3.5.0, < 4.0.0)
+      sshkit-interactive (~> 0.3.0)
+    capistrano-rbenv (2.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
+    capistrano-shell (0.2.0)
+      capistrano (~> 3.1)
+    carrierwave (2.2.2)
+      activemodel (>= 5.0.0)
+      activesupport (>= 5.0.0)
+      addressable (~> 2.6)
+      image_processing (~> 1.1)
+      marcel (~> 1.0.0)
+      mini_mime (>= 0.1.3)
+      ssrf_filter (~> 1.0)
+    carrierwave-bombshelter (0.2.2)
+      activesupport (>= 3.2.0)
+      carrierwave
+      fastimage
+    carrierwave-mongoid (1.3.0)
+      carrierwave (>= 0.8, < 3)
+      mongoid (>= 3.0, < 8.0)
+      mongoid-grid_fs (>= 1.3, < 3.0)
+    coderay (1.1.3)
+    concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
+    countries (4.2.2)
+      i18n_data (~> 0.15.0)
+      sixarm_ruby_unaccent (~> 1.1)
+    country_select (6.1.1)
+      countries (~> 4.2)
+      sort_alphabetical (~> 1.1)
+    crack (0.4.5)
+      rexml
+    crass (1.0.6)
+    database_cleaner (2.0.1)
+      database_cleaner-active_record (~> 2.0.0)
+    database_cleaner-active_record (2.0.1)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
+    debug_inspector (1.1.0)
+    diff-lcs (1.5.0)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
+    draper (4.0.2)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
+      ruby2_keywords
+    dry-configurable (0.14.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.6)
+    dry-container (0.9.0)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.13, >= 0.13.0)
+    dry-core (0.7.1)
+      concurrent-ruby (~> 1.0)
+    dry-inflector (0.2.1)
+    dry-logic (1.2.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.5, >= 0.5)
+    dry-struct (1.4.0)
+      dry-core (~> 0.5, >= 0.5)
+      dry-types (~> 1.5)
+      ice_nine (~> 0.11)
+    dry-types (1.5.1)
+      concurrent-ruby (~> 1.0)
+      dry-container (~> 0.3)
+      dry-core (~> 0.5, >= 0.5)
+      dry-inflector (~> 0.1, >= 0.1.2)
+      dry-logic (~> 1.0, >= 1.0.2)
+    email_validator (2.2.3)
+      activemodel
+    erubi (1.10.0)
+    execjs (2.8.1)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    faraday (2.2.0)
+      faraday-net_http (~> 2.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (2.0.1)
+    fastimage (2.2.6)
+    ffi (1.15.5)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
+    foreman (0.87.2)
+    globalid (1.0.0)
+      activesupport (>= 5.0)
+    grape (1.6.2)
+      activesupport
+      builder
+      dry-types (>= 1.1)
+      mustermann-grape (~> 1.0.0)
+      rack (>= 1.3.0)
+      rack-accept
+    hashdiff (1.0.1)
+    http (5.0.4)
+      addressable (~> 2.8)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.2)
+      llhttp-ffi (~> 0.4.0)
+    http-cookie (1.0.4)
+      domain_name (~> 0.5)
+    http-form_data (2.3.0)
+    i18n (1.10.0)
+      concurrent-ruby (~> 1.0)
+    i18n-debug (1.2.0)
+      i18n (< 2)
+    i18n_data (0.15.0)
+      simple_po_parser (~> 1.1)
+    ice_nine (0.11.2)
+    image_processing (1.12.1)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
+    invisible_captcha (2.0.0)
+      rails (>= 5.0)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
+    jwt-multisig (1.0.5)
+      activesupport (>= 4.0)
+      jwt (~> 2.2)
+    jwt-rack (0.1.1)
+      jwt (~> 2.2)
+      rack
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
+    libv8-node (15.14.0.1)
+    listen (3.7.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+    llhttp-ffi (0.4.0)
+      ffi-compiler (~> 1.0)
+      rake (~> 13.0)
+    loofah (2.14.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.5.9)
+    mail (2.7.1)
+      mini_mime (>= 0.1.1)
+    marcel (1.0.2)
+    method_source (1.0.0)
+    mime-types (3.4.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2022.0105)
+    mini_magick (4.11.0)
+    mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
+    mini_racer (0.4.0)
+      libv8-node (~> 15.14.0.0)
+    minitest (5.15.0)
+    mongo (2.16.0)
+      bson (>= 4.8.2, < 5.0.0)
+    mongoid (7.3.3)
+      activemodel (>= 5.1, < 6.2)
+      mongo (>= 2.10.5, < 3.0.0)
+      ruby2_keywords (~> 0.0.5)
+    mongoid-grid_fs (2.4.0)
+      mime-types (>= 1.0, < 4.0)
+      mongoid (>= 3.0, < 8.0)
+    msgpack (1.4.5)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
+    mustermann-grape (1.0.1)
+      mustermann (>= 1.0.0)
+    net-scp (3.0.0)
+      net-ssh (>= 2.6.5, < 7.0.0)
+    net-ssh (6.1.0)
+    nio4r (2.5.8)
+    nokogiri (1.13.3)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
+    orm_adapter (0.5.0)
+    paper_trail (12.2.0)
+      activerecord (>= 5.2)
+      request_store (~> 1.1)
+    parallel (1.21.0)
+    parser (3.1.1.0)
+      ast (~> 2.4.1)
+    pg (1.3.3)
+    pry (0.14.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-byebug (3.8.0)
+      byebug (~> 11.0)
+      pry (~> 0.10)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
+    public_suffix (4.0.6)
+    puma (5.6.2)
+      nio4r (~> 2.0)
+    racc (1.6.0)
+    rack (2.2.3)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+    rack-mini-profiler (2.3.4)
+      rack (>= 1.2.0)
+    rack-proxy (0.7.2)
+      rack
+    rack-test (0.8.3)
+      rack (>= 1.0, < 3)
+    rails (6.1.4.6)
+      actioncable (= 6.1.4.6)
+      actionmailbox (= 6.1.4.6)
+      actionmailer (= 6.1.4.6)
+      actionpack (= 6.1.4.6)
+      actiontext (= 6.1.4.6)
+      actionview (= 6.1.4.6)
+      activejob (= 6.1.4.6)
+      activemodel (= 6.1.4.6)
+      activerecord (= 6.1.4.6)
+      activestorage (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+      bundler (>= 1.15.0)
+      railties (= 6.1.4.6)
+      sprockets-rails (>= 2.0.0)
+    rails-dom-testing (2.0.3)
+      activesupport (>= 4.2.0)
+      nokogiri (>= 1.6)
+    rails-html-sanitizer (1.4.2)
+      loofah (~> 2.3)
+    railties (6.1.4.6)
+      actionpack (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+      method_source
+      rake (>= 0.13)
+      thor (~> 1.0)
+    rainbow (3.1.1)
+    rake (13.0.6)
+    rb-fsevent (0.11.1)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
+    redis (4.6.0)
+    regexp_parser (2.2.1)
+    request_store (1.5.1)
+      rack (>= 1.4)
+    rexml (3.2.5)
+    rspec-core (3.11.0)
+      rspec-support (~> 3.11.0)
+    rspec-expectations (3.11.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-grape (0.0.4)
+      rack-test (~> 0.6)
+      rspec-core (~> 3.0)
+    rspec-mocks (3.11.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-rails (4.0.2)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.10)
+      rspec-expectations (~> 3.10)
+      rspec-mocks (~> 3.10)
+      rspec-support (~> 3.10)
+    rspec-sidekiq (3.1.0)
+      rspec-core (~> 3.0, >= 3.0.0)
+      sidekiq (>= 2.4.0)
+    rspec-support (3.11.0)
+    rubocop (1.25.1)
+      parallel (~> 1.10)
+      parser (>= 3.1.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.15.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.16.0)
+      parser (>= 3.1.1.0)
+    ruby-progressbar (1.11.0)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
+    ruby2_keywords (0.0.5)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
+    sd_notify (0.1.1)
+    selectize-rails (0.12.6)
+    semantic_range (3.0.0)
+    semver (1.0.1)
+    semver2 (3.4.2)
+    sidekiq (6.4.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
+    simple_form_extension (1.4.18)
+      rails (>= 3.1)
+      redactor-rails
+      selectize-rails
+      simple_form
+    simple_form_fancy_uploads (0.5.0)
+      carrierwave (>= 1.3)
+      rails (>= 5.0)
+      simple_form (>= 5.0.2)
+    simple_po_parser (1.1.5)
+    sixarm_ruby_unaccent (1.2.0)
+    slackistrano (4.0.1)
+      capistrano (>= 3.8.1)
+    slim (4.1.0)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
+    slim-rails (3.3.0)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 5.0)
+    sort_alphabetical (1.1.0)
+      unicode_utils (>= 1.2.2)
+    spring (4.0.0)
+    sprockets (4.0.2)
+      concurrent-ruby (~> 1.0)
+      rack (> 1, < 3)
+    sprockets-rails (3.4.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      sprockets (>= 3.0.0)
+    sshkit (1.21.2)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
+    sshkit-interactive (0.3.0)
+      sshkit (~> 1.12)
+    ssrf_filter (1.0.7)
+    temple (0.8.2)
+    thor (1.2.1)
+    tilt (2.0.10)
+    timecop (0.9.4)
+    turbolinks (5.2.1)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8)
+    unicode-display_width (2.1.0)
+    unicode_utils (1.4.0)
+    validate_url (1.0.13)
+      activemodel (>= 3.0.0)
+      public_suffix
+    web-console (4.2.0)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
+      bindex (>= 0.4.0)
+      railties (>= 6.0.0)
+    webmock (3.14.0)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
+    webpacker (5.4.3)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
+    websocket-driver (0.7.5)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
+    zeitwerk (2.5.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  active_link_to
+  bcrypt
+  better_errors
+  binding_of_caller
+  bootsnap (>= 1.4.4)
+  bugsnag
+  bugsnag-capistrano
+  byebug
+  capistrano
+  capistrano-bundler
+  capistrano-db-tasks
+  capistrano-dotenv
+  capistrano-dotenv-tasks
+  capistrano-git-with-submodules
+  capistrano-rails
+  capistrano-rails-console
+  capistrano-rbenv
+  capistrano-shell
+  capistrano-systemd-multiservice!
+  capistrano-tasks!
+  capistrano3-puma!
+  carrierwave (~> 2.0)
+  carrierwave-bombshelter (~> 0.2.2)
+  carrierwave-mongoid
+  country_select
+  database_cleaner
+  dotenv-rails
+  draper
+  email_validator
+  execjs
+  factory_bot
+  faraday (~> 2.0)
+  foreman
+  grape (~> 1.6)
+  i18n-debug
+  invisible_captcha
+  jbuilder (~> 2.7)
+  jwt!
+  jwt-multisig (~> 1.0.0)
+  jwt-rack (~> 0.1.0)
+  kaminari
+  listen (~> 3.3)
+  mini_racer (~> 0.4.0)
+  mongoid
+  mongoid-grid_fs
+  paper_trail (>= 12.0.0)
+  pg (~> 1.1)
+  pry-byebug (~> 3.7)
+  pry-rails
+  puma (~> 5.0)
+  rack-mini-profiler (~> 2.0)
+  rails (~> 6.1.4, >= 6.1.4.4)
+  ransack!
+  redactor-rails!
+  request_store
+  rspec-grape
+  rspec-rails (~> 4.0.2)
+  rspec-sidekiq
+  rubocop
+  sass-rails (>= 6)
+  sd_notify (~> 0.1.1)
+  semver
+  semver2 (~> 3.4)
+  sidekiq (~> 6.4.1)
+  simple_form (~> 5.1)
+  simple_form_extension (~> 1.4)
+  simple_form_fancy_uploads
+  slackistrano
+  slim-rails
+  spring
+  sumsub-ruby-sdk (~> 0.1.3)!
+  timecop
+  turbolinks (~> 5)
+  tzinfo-data
+  uglifier
+  validate_url (~> 1.0.4)
+  web-console (>= 4.1.0)
+  webmock
+  webpacker (~> 5.0)
+
+RUBY VERSION
+   ruby 2.7.5p203
+
+BUNDLED WITH
+   2.3.5

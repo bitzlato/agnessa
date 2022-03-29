@@ -1,0 +1,9 @@
+hr style='margin-top: 9em'
+= render 'application/flashes'
+.container.text-muted
+  .float-left
+    / span.mr-2= present_peatio_version
+    / span= present_barong_version
+  .float-right
+    = Rails.env
+    span.ml-2= AppVersion

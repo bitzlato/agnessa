@@ -1,0 +1,51 @@
+ru:
+  verification:
+    success_sending: 'Данные отправлены'
+  helpers:
+    submit:
+      create: "Отправить"
+      update: "Отправить"
+    disable_with: 'Идет отправка...'
+  simple_form:
+    labels:
+      verification:
+        country: 'Гражданство'
+        reason: 'Причина обращения'
+        status: 'Password'
+        email: 'Email, на который придет уведомление о статусе заявки'
+        passport_data: 'Номер Паспорта'
+        name: 'Ваше Имя (Ivan)'
+        last_name: 'Ваша Фамилия (Ivanov)'
+      client:
+        subdomain: 'Поддомен'
+        verification_callback_url: 'Адрес уведомлений'
+
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

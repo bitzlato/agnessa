@@ -1,0 +1,23 @@
+.row
+  .col-12
+    table.table.table-striped.table-narrow.table-hover
+      thead.thead-dark
+        tr
+          th Role
+          th Login
+          th Active at
+          th
+          th
+          th
+
+      tbody
+        - admin_users.each do |admin_user|
+          tr
+            td = admin_user.role
+            td = admin_user.login
+            td = admin_user.active_at
+            td = link_to 'Show', admin_admin_user_path(admin_user)
+            td = link_to 'Edit', edit_admin_admin_user_path(admin_user)
+            td = link_to 'Destroy',  admin_admin_user_path(admin_user), data: { confirm: 'Are you sure?' }, method: :delete
+    br
+    = link_to 'New Admin user', new_admin_admin_user_path

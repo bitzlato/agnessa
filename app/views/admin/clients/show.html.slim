@@ -1,0 +1,39 @@
+.row
+  .col-6
+    .card
+      .card-header
+        | Настройки
+      .card-body
+        = simple_form_for(client, url: admin_client_path) do |f|
+          = f.error_notification
+          = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+          .form-inputs
+            = f.input :subdomain
+            = f.input :verification_callback_url
+
+
+          .form-actions
+            = f.button :submit, class: 'btn btn-success', value: 'Сохранить'
+
+  .col-6
+    .card
+      .card-header
+        | Секрет
+      .card-body
+        = client.secret
+        br
+        = link_to 'создать новый', recreate_secret_admin_client_path, method: :post, 'data-confirm': "Точно создать новый секрет?", class: 'btn btn-success'
+
+br
+
+.row
+  .col-6
+    .card
+      .card-header
+        | Пример уведомления
+      .card-body
+        pre
+          code
+            |  { id: 123, status: 'verified'}
+        |  Возможные status: verified, banned, rejected, reseted, pending

@@ -1,0 +1,24 @@
+
+
+
+.row
+  div
+    = search_form_for q, url: admin_verifications_path do |f|
+      = f.label 'ID contains'
+      = f.search_field :legacy_verification_id_cont
+      br
+      = f.label 'Name containts:'
+      = f.search_field :name_or_last_name_cont
+      br
+      = f.label 'Passport contains:'
+      = f.search_field :passport_data_cont
+      br
+      = f.submit
+    ul.nav.nav-pills.mb-3
+      li.nav-item
+      - Verification.statuses.each do |m|
+        li.nav-item
+          = link_to m[0], url_for(q: request.query_parameters.fetch(:q, {}).merge(status_eq: m[1])), class: active_class('nav-link', request.query_parameters.fetch(:q, {}).fetch(:status_eq, nil) == m[1].to_s)
+  .col-12
+    = render 'table', items: verifications
+    = paginate verifications

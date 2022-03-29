@@ -1,0 +1,15 @@
+.row
+  .col-md-6
+    = render 'attributes', record: :verification
+    .row
+      .col-6
+        = link_to 'Подтвердить', confirm_admin_verification_path(verification), method: :post, method: { confirm: 'Подтверждаем заявку?' }
+      .col-6
+        = simple_form_for verification, url: refuse_admin_verification_path(verification), method: :post do |f|
+          = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 15, multiple: true }, label: 'Причины', required: true
+          = f.input :user_comment, as: :text, label: 'Дополнительный Комментарий для пользователя', required: true
+          = f.input :moderator_comment, as: :text, label: 'Комментарий для модераторов', required: false
+          = f.button :submit, 'Отклонить', class: 'btn btn-danger align-right'
+
+  .col-md-6
+    = render 'documents', verification: verification

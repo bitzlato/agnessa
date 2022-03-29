@@ -1,0 +1,12 @@
+= simple_form_for(client_user, url: admin_client_users_path) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :login
+    = f.input :role
+    = f.input :password
+    = f.input :password_confirmation
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-success'

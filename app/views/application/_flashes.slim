@@ -1,0 +1,4 @@
+- rails_flash_types = { notice: :info, alert: :warning }
+- flash.map do |type, text|
+  = render 'flash', type: rails_flash_types[type.to_sym] || type, text: text
+

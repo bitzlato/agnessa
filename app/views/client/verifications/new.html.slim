@@ -1,0 +1,28 @@
+.row.justify-content-center.instruction
+  .jumbotron
+    = simple_form_for verification, url: verifications_url(encoded_external_id) do |f|
+      .row
+        .col-md-12
+          h1 =I18n.t 'instruction.title'
+          div = raw I18n.t 'instruction.text'
+          div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+        .col-md-12
+          = f.input :country, as: :country, priority: Rails.configuration.x.settings[:form][:country_priority]
+          = f.input :reason, collection: Verification.reasons.keys.to_a, :label_method => lambda { |item| t("attributes.reasons.#{item}") }
+          = f.input :email
+          .row
+            .col-6
+              = f.input :name
+            .col-6
+              = f.input :last_name
+
+          = f.input :passport_data
+          / = f.invisible_captcha :subtitle
+      .row
+          = f.file_field :documents, multiple: true, accept: Rails.configuration.x.settings[:form][:all_formats]
+          div style='color: red;'
+            = f.error :documents
+      br
+      br
+      div.text-center
+        = f.button :submit, class: 'btn btn-primary'

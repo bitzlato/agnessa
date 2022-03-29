@@ -1,0 +1,17 @@
+default:  &settings
+  form:
+    max_file_size: 500
+    country_priority: ['RU', 'KZ', 'BY', 'UA']
+    video_formats: 'video/mp4,video/mov'
+    image_formats: 'image/png,image/gif,image/jpeg,image/webp,image/*'
+    all_formats: 'image/png,image/gif,image/jpeg,image/webp,image/*,video/mp4,video/mov'
+
+
+development:
+  <<: *settings
+
+production:
+  <<: *settings
+
+test:
+  <<: *settings
