@@ -1,10 +1,16 @@
 class Verification < ApplicationRecord
+  attr_accessor :external_id
+
   has_paper_trail
   mount_uploaders :documents, DocumentUploader
 
   belongs_to :moderator, class_name: 'ClientUser', required: false
   belongs_to :applicant
   has_one :client, through: :applicant
+
+  before_validation on: :create do
+    self.applicant ||= client.applicants.find_or_create_by!(external_id: external_id)
+  end
 
   validates :country, :name, :last_name, :passport_data, :reason, :documents, presence: true, on: :create
   validates :email, presence: true, email: true

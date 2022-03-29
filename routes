@@ -2,6 +2,8 @@
                              public_root GET      /                                                                                                 public/landing#index {:subdomain=>""}
                       public_sidekiq_web          /sidekiq                                                                                          Sidekiq::Web {:subdomain=>""}
                                          GET      /users.json(.:format)                                                                             legacy_verifications#index
+                        admin_applicants GET      /applicants(.:format)                                                                             admin/applicants#index
+                         admin_applicant GET      /applicants/:id(.:format)                                                                         admin/applicants#show
                               admin_root GET      /                                                                                                 admin/dashboard#index
                       admin_client_users GET      /client_users(.:format)                                                                           admin/client_users#index
                                          POST     /client_users(.:format)                                                                           admin/client_users#create

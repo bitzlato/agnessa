@@ -1,28 +1,37 @@
 .row.justify-content-center.instruction
   .jumbotron
-    = simple_form_for verification, url: verifications_url(encoded_external_id) do |f|
+    h1.mb-4 
+      = t 'instruction.title', account_id: verification.external_id, org: current_client.public_name
+    = simple_form_for verification, url: form_path do |f|
       .row
         .col-md-12
-          h1 =I18n.t 'instruction.title'
-          div = raw I18n.t 'instruction.text'
           div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
         .col-md-12
+          = f.input :reason, 
+            include_blank: false, 
+            collection: Verification.reasons.keys.to_a, 
+            label_method: lambda { |item| t("attributes.reasons.#{item}") }
+      .row
+        .col-6
           = f.input :country, as: :country, priority: Rails.configuration.application.country_priority
-          = f.input :reason, collection: Verification.reasons.keys.to_a, :label_method => lambda { |item| t("attributes.reasons.#{item}") }
-          = f.input :email
-          .row
-            .col-6
-              = f.input :name
-            .col-6
-              = f.input :last_name
-
+        .col-6
           = f.input :passport_data
+      .row
+        .col-6
+          = f.input :name
+        .col-6
+          = f.input :last_name
+        .col-6
+          = f.input :email, as: :email
+
+      .row
+        .col-md-12
+          .alert.alert-warning role='alert'
+            = raw I18n.t 'instruction.text', host: current_client.host
       .row
         .col-md-12
           = f.file_field :documents, multiple: true, accept: Rails.configuration.application.document_formats
           div style='color: red;'
             = f.error :documents
       br
-      br
-      div.text-center
-        = f.button :submit, class: 'btn btn-primary'
+      = f.submit class: 'btn btn-bg btn-primary'
