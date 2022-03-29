@@ -2,7 +2,7 @@ require 'sidekiq/web'
 
 module ClientConstraint
   def self.matches?(request)
-    (RequestStore.store[:current_client] = Client.find_by_subdomain(request.subdomain)).present?
+    (RequestStore.store[:current_account] = Account.find_by_subdomain(request.subdomain)).present?
   end
 end
 

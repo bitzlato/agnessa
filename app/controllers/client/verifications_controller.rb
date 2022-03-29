@@ -22,9 +22,9 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def find_applicant
-    payload = VerificationUrlGenerator.payload_from_token(params[:encoded_external_id], current_client.secret)
+    payload = VerificationUrlGenerator.payload_from_token(params[:encoded_external_id], current_account.secret)
     raise ActiveRecord::RecordNotFound unless payload.present?
-    current_client.applicants.find_or_create_by!(external_id: payload)
+    current_account.applicants.find_or_create_by!(external_id: payload)
   end
 
   def verification_params

@@ -4,7 +4,7 @@ class Verification < ApplicationRecord
 
   belongs_to :moderator, class_name: 'ClientUser', required: false
   belongs_to :applicant
-  has_one :client, through: :applicant
+  has_one :account, through: :applicant
 
   validates :country, :name, :last_name, :passport_data, :reason, :documents, presence: true, on: :create
   validates :email, presence: true, email: true

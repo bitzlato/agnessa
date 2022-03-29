@@ -32,8 +32,8 @@ class Mongo::Verification
 
         pg_verifcation = ::Verification.new legacy_verification_id: self['_id']
 
-        client = Client.first
-        applicant = client.applicants.find_or_create_by!(external_id: v.legacy_verification_id)
+        account = Account.first
+        applicant = account.applicants.find_or_create_by!(external_id: v.legacy_verification_id)
         pg_verifcation.applicant_id = applicant.id
 
         if self.status == 'new'

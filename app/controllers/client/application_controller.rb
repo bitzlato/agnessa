@@ -1,9 +1,9 @@
 class Client::ApplicationController < ApplicationController
-  helper_method :current_client
+  helper_method :current_account
 
   private
 
-  def current_client
-    RequestStore.store[:current_client]
+  def current_account
+    RequestStore.store[:current_account]
   end
 end

@@ -1,4 +1,4 @@
-class Client < ApplicationRecord
+class Account < ApplicationRecord
   has_many :applicants
   has_many :verifications, through: :applicants
   has_many :client_users

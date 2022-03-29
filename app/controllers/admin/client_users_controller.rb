@@ -2,7 +2,7 @@ class Admin::ClientUsersController < Admin::ApplicationController
   before_action :superadmin?
 
   def index
-    client_users = current_client.client_users
+    client_users = current_account.client_users
     render locals: {client_users: client_users}
   end
 
@@ -11,7 +11,7 @@ class Admin::ClientUsersController < Admin::ApplicationController
   end
 
   def new
-    client_user = current_client.client_users.new
+    client_user = current_account.client_users.new
     render locals: {client_user: client_user}
   end
 
@@ -43,7 +43,7 @@ class Admin::ClientUsersController < Admin::ApplicationController
   private
 
   def client_user
-    @client_user ||= current_client.client_users.find(params[:id])
+    @client_user ||= current_account.client_users.find(params[:id])
   end
 
   def admin_user_params

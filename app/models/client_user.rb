@@ -1,8 +1,8 @@
 class ClientUser < ApplicationRecord
-  belongs_to :client
+  belongs_to :account
 
-  validates :login, :client, presence: true
-  validates :login, uniqueness: {scope: :client}
+  validates :login, :account, presence: true
+  validates :login, uniqueness: {scope: :account}
 
   has_secure_password
 
