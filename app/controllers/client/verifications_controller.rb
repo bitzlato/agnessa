@@ -1,10 +1,12 @@
 class Client::VerificationsController < Client::ApplicationController
   layout 'verification'
 
+  PERMITTED_ATTRIBUTES = %i[name reason country last_name email passport_data documents]
+
   helper_method :form_path
 
   def new
-    verification = applicant.verifications.new params.fetch(:verification, {}).merge(external_id: external_id)
+    verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES).merge(external_id: external_id)
     render locals: {verification: verification}
   end
 
@@ -33,6 +35,6 @@ class Client::VerificationsController < Client::ApplicationController
   def verification_params
     params.
       require(:verification).
-      permit(:name, :reason, :country, :last_name, :email, :passport_data, documents: [])
+      permit(*PERMITTED_ATTRIBUTES)
   end
 end
