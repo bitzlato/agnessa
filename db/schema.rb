@@ -10,18 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_25_112048) do
+ActiveRecord::Schema.define(version: 2022_03_29_145348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accounts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "subdomain", null: false
+    t.string "secret", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "verification_callback_url"
+    t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
+  end
+
   create_table "applicants", force: :cascade do |t|
-    t.bigint "client_id", null: false
+    t.bigint "account_id", null: false
     t.string "external_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id", "external_id"], name: "index_applicants_on_client_id_and_external_id", unique: true
-    t.index ["client_id"], name: "index_applicants_on_client_id"
+    t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
+    t.index ["account_id"], name: "index_applicants_on_account_id"
   end
 
   create_table "client_users", force: :cascade do |t|
@@ -32,19 +42,9 @@ ActiveRecord::Schema.define(version: 2022_03_25_112048) do
     t.integer "role", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "client_id", null: false
-    t.index ["client_id", "login"], name: "index_client_users_on_client_id_and_login", unique: true
-    t.index ["client_id"], name: "index_client_users_on_client_id"
-  end
-
-  create_table "clients", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "subdomain", null: false
-    t.string "secret", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "verification_callback_url"
-    t.index ["subdomain"], name: "index_clients_on_subdomain", unique: true
+    t.bigint "account_id", null: false
+    t.index ["account_id", "login"], name: "index_client_users_on_account_id_and_login", unique: true
+    t.index ["account_id"], name: "index_client_users_on_account_id"
   end
 
   create_table "review_result_labels", force: :cascade do |t|
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2022_03_25_112048) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "applicants", "clients"
-  add_foreign_key "client_users", "clients"
+  add_foreign_key "applicants", "accounts"
+  add_foreign_key "client_users", "accounts"
   add_foreign_key "verifications", "applicants"
 end

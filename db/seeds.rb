@@ -8,14 +8,14 @@
 
 require 'agnessa/seed'
 
-client = Client.
+account = Account.
   create_with(name: 'test', secret: 'secret', verification_callback_url: 'http://test.test.test').
   find_or_create_by!(subdomain: 'test')
 
-client.client_users.create_with(login: 'test', password: 'test', role: 'superadmin').
+account.client_users.create_with(login: 'test', password: 'test', role: 'superadmin').
   find_or_create_by!(login: 'test')
 
-applicant = client.applicants.find_or_create_by!(external_id: 'test')
+applicant = account.applicants.find_or_create_by!(external_id: 'test')
 
 applicant.verifications.create({
   name: 'test', last_name: 'test', legacy_verification_id: 'test', country: 'ru', passport_data: 'test',

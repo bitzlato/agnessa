@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :applicant do
-    association :client
+    association :account
     sequence(:external_id) { |i| "external_id_#{i}" }
   end
 end
