@@ -5,8 +5,12 @@ class VerificationDecorator < ApplicationDecorator
     PaginatingDecorator
   end
 
+  def self.attributes
+    table_columns + %i[legacy_verification_id applicant external_id]
+  end
+
   def self.table_columns
-    %i[id country legacy_verification_id status reason name last_name passport_data moderator created_at]
+    %i[id created_at country status reason name last_name passport_data moderator]
   end
 
   CSS_STATUS_CLASSES = { 'init' => 'badge badge-muted',
@@ -17,6 +21,10 @@ class VerificationDecorator < ApplicationDecorator
                          'trusted_trader' => 'badge badge-success',
                          'restore' => 'badge badge-info',
                          'other' => 'badge badge-mute', }
+
+  def external_id
+    h.content_tag(:code, object.applicant.external_id)
+  end
 
   def status
     h.content_tag(:span, object.status, class: CSS_STATUS_CLASSES[object.status])
