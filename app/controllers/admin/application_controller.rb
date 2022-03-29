@@ -2,14 +2,14 @@ class Admin::ApplicationController < ApplicationController
   before_action :basic_auth
 
   helper_method :current_user
-  helper_method :current_client
+  helper_method :current_account
 
   private
 
   def basic_auth
     unless current_user
       authenticate_or_request_with_http_basic do |login, password|
-        user = current_client.client_users.find_by_login(login)&.authenticate(password)
+        user = current_account.members.find_by_login(login)&.authenticate(password)
         if user
           session[:current_user] = user.id
           true
@@ -20,11 +20,11 @@ class Admin::ApplicationController < ApplicationController
     end
   end
 
-  def current_client
-    RequestStore.store[:current_client]
+  def current_account
+    RequestStore.store[:current_account]
   end
 
   def current_user
-    ClientUser.find_by(id: session.dig(:current_user))
+    Member.find_by(id: session.dig(:current_user))
   end
 end

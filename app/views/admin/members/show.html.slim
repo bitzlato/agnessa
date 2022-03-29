@@ -1,0 +1,16 @@
+p#notice = notice
+
+p
+  strong Login:
+  = member.login
+
+p
+  strong Role:
+  = member.role
+
+p
+  strong Active at:
+  = member.active_at
+
+
+=> link_to 'Edit', edit_admin_member_path(member)

@@ -1,5 +1,5 @@
 class Admin::ReviewResultLabelController < Admin::ApplicationController
-  before_action :superadmin?
+  # before_action :superadmin?
 
   def index
     @labels = ReviewResultLabel.all

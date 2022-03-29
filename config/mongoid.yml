@@ -1,7 +1,7 @@
 development:
   # Configure available database clients. (required)
   clients:
-    # Defines the default client. (required)
+    # Defines the default account. (required)
     default:
       # Mongoid can connect to a URI accepted by the driver:
       # uri: mongodb://user:password@mongodb.domain.com:27017/kyc_service_development

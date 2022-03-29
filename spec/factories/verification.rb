@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :verification do
     association :applicant
-    association :moderator, factory: :client_user
+    association :moderator, factory: :member
     country { "ru" }
 
     sequence(:name) { |i| "name_#{i}" }

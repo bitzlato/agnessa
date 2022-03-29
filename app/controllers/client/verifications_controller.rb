@@ -25,11 +25,11 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def applicant
-    @applicant ||= current_client.applicants.find_or_create_by!(external_id: external_id)
+    @applicant ||= current_account.applicants.find_or_create_by!(external_id: external_id)
   end
 
   def external_id
-    VerificationUrlGenerator.payload_from_token(params[:encoded_external_id], current_client.secret)
+    VerificationUrlGenerator.payload_from_token(params[:encoded_external_id], current_account.secret)
   end
 
   def verification_params

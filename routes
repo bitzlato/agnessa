@@ -5,14 +5,14 @@
                         admin_applicants GET      /applicants(.:format)                                                                             admin/applicants#index
                          admin_applicant GET      /applicants/:id(.:format)                                                                         admin/applicants#show
                               admin_root GET      /                                                                                                 admin/dashboard#index
-                      admin_client_users GET      /client_users(.:format)                                                                           admin/client_users#index
-                                         POST     /client_users(.:format)                                                                           admin/client_users#create
-                   new_admin_client_user GET      /client_users/new(.:format)                                                                       admin/client_users#new
-                  edit_admin_client_user GET      /client_users/:id/edit(.:format)                                                                  admin/client_users#edit
-                       admin_client_user GET      /client_users/:id(.:format)                                                                       admin/client_users#show
-                                         PATCH    /client_users/:id(.:format)                                                                       admin/client_users#update
-                                         PUT      /client_users/:id(.:format)                                                                       admin/client_users#update
-                                         DELETE   /client_users/:id(.:format)                                                                       admin/client_users#destroy
+                      admin_members GET      /members(.:format)                                                                           admin/members#index
+                                         POST     /members(.:format)                                                                           admin/members#create
+                   new_admin_member GET      /members/new(.:format)                                                                       admin/members#new
+                  edit_admin_member GET      /members/:id/edit(.:format)                                                                  admin/members#edit
+                       admin_member GET      /members/:id(.:format)                                                                       admin/members#show
+                                         PATCH    /members/:id(.:format)                                                                       admin/members#update
+                                         PUT      /members/:id(.:format)                                                                       admin/members#update
+                                         DELETE   /members/:id(.:format)                                                                       admin/members#destroy
               admin_review_result_labels GET      /review_result_labels(.:format)                                                                   admin/review_result_labels#index
                                          POST     /review_result_labels(.:format)                                                                   admin/review_result_labels#create
            new_admin_review_result_label GET      /review_result_labels/new(.:format)                                                               admin/review_result_labels#new

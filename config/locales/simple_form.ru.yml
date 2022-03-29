@@ -16,7 +16,10 @@ ru:
         passport_data: 'Серия и Номер Паспорта'
         name: 'Ваше Имя'
         last_name: 'Ваша Фамилия'
-      client:
+      account:
+        passport_data: 'Номер Паспорта'
+        name: 'Ваше Имя (Ivan)'
+        last_name: 'Ваша Фамилия (Ivanov)'
         subdomain: 'Поддомен'
         verification_callback_url: 'Адрес уведомлений'
 
