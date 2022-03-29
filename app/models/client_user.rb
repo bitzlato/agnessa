@@ -10,4 +10,8 @@ class ClientUser < ApplicationRecord
     moderator: 0,
     superadmin: 1
   }
+
+  def to_s
+    login
+  end
 end
