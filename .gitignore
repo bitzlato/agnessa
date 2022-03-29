@@ -44,3 +44,5 @@ yarn-debug.log*
 /config/credentials/staging.key
 
 /config/credentials/development.key
+
+*.sql
