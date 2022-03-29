@@ -49,6 +49,6 @@ module Agnessa
     config.autoloader = :classic
     config.autoload_paths += %W(#{config.root}/lib)
 
-    config.x.settings = config_for(:settings)
+    config.application = config_for(:application)
   end
 end

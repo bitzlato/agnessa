@@ -7,7 +7,7 @@
           div = raw I18n.t 'instruction.text'
           div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
         .col-md-12
-          = f.input :country, as: :country, priority: Rails.configuration.x.settings[:form][:country_priority]
+          = f.input :country, as: :country, priority: Rails.configuration.application.fetch(:country_priority)
           = f.input :reason, collection: Verification.reasons.keys.to_a, :label_method => lambda { |item| t("attributes.reasons.#{item}") }
           = f.input :email
           .row
@@ -17,9 +17,9 @@
               = f.input :last_name
 
           = f.input :passport_data
-          / = f.invisible_captcha :subtitle
       .row
-          = f.file_field :documents, multiple: true, accept: Rails.configuration.x.settings[:form][:all_formats]
+        .col-md-12
+          = f.file_field :documents, multiple: true, accept: Rails.configuration.application.fetch(:document_formats)
           div style='color: red;'
             = f.error :documents
       br

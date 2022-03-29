@@ -1,0 +1,19 @@
+default:  &settings
+  default_url_options: &default_url_options
+    protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
+    host: <%= ENV.fetch('AGNESSA_HOST', 'localhost') %>
+
+  max_upload_file_size: 1_000_000
+  country_priority: ['RU', 'KZ', 'BY', 'UA']
+  document_formats: 'image/png,image/gif,image/jpeg,image/webp,image/*,video/mp4,video/mov'
+  # video_formats: 'video/mp4,video/mov'
+  # image_formats: 'image/png,image/gif,image/jpeg,image/webp,image/*'
+
+development:
+  <<: *settings
+
+production:
+  <<: *settings
+
+test:
+  <<: *settings
