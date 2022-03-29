@@ -13,6 +13,6 @@
  *= require_self
  */
 
-.instruction {
-    padding-top: 100px;
+th .sort_link  {
+    color: #fff !important;
 }
