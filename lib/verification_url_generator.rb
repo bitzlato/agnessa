@@ -4,10 +4,6 @@ class VerificationUrlGenerator
   WrongDigest = Class.new Error
 
   class << self
-    def generate_url(url, payload, secret)
-      [url, generate_token(payload, secret)].join('/')
-    end
-
     def generate_token payload, secret
       digest = Digest::MD5.hexdigest("#{secret}:#{payload}")
       Base64.urlsafe_encode64("#{digest}:#{payload}")
