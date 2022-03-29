@@ -15,7 +15,7 @@ RSpec.describe Client::VerificationsController, type: :controller do
 
     it 'fails to open page with invalid encoded_external_id ' do
       @request.host = "#{client.subdomain}.example.com"
-      expect { get :new, params: {encoded_external_id: '123'} }.to raise_exception(ActiveRecord::RecordNotFound)
+      expect { get :new, params: {encoded_external_id: '123'} }.to raise_exception(VerificationUrlGenerator::WrongPayload)
     end
   end
 end
