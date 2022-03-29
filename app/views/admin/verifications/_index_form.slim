@@ -1,1 +1,10 @@
+= render 'time_form' do |f|
+  .row
+    .col-md-4
+      = f.input :legacy_verification_id_cont, label: 'ID содержит:'
+    .col-md-4
+      = f.input :name_or_last_name_cont, label: 'Имя\Фамилия содержит:'
+    .col-md-4
+      = f.input :passport_data_cont, label: 'Номер паспорта содержит:'
+br
 = render 'status_search_form'
