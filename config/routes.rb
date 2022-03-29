@@ -21,9 +21,10 @@ Rails.application.routes.draw do
   end
 
   scope constraints: ClientConstraint do
+    get ENV.fetch('USERS_PATH','users.json'), to: 'legacy_verifications#index'
+
     scope as: :admin, module: :admin do
       resources :review_result_label
-      get ENV.fetch('USERS_PATH','users.json'), to: 'verifications#legacy_index'
 
       root to: 'dashboard#index'
       resources :review_result_label

@@ -25,16 +25,6 @@ class Verification < ApplicationRecord
 
   after_update :send_notification_after_status_change
 
-  def legacy_show
-    {
-      id: legacy_verification_id,
-      status: status == 'confirmed' ? true : false,
-      comment: raw_changebot['comment'],
-      time: legacy_created || (created_at.to_i * 1000)
-
-    }
-  end
-
   def legacy_created
     raw_changebot['created'].to_datetime.to_i * 1000 rescue nil
   end
