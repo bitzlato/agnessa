@@ -1,0 +1,24 @@
+h2 Summary
+
+table.table.table-bordered.table-condensed.table-narrow.table-sm.text-small
+  thead.thead-dark
+    tr
+      - summary[:grouped_by].each do |column|
+        th= column
+
+      - summary[:aggregations].each do |column|
+        th.text-right= column
+
+  tbody
+    - summary[:rows].each do |record|
+      tr
+        - q = {}
+        - summary[:grouped_by].each_with_index do |column, index|
+          - value = record[index]
+          - q.merge! column.to_s + '_eq' => value
+          th= value
+        - summary[:aggregations].each_with_index do |column, index|
+          - value = record[index + summary[:grouped_by].length]
+          td.text-right
+            = link_to url_for(q: q) do
+              = value

@@ -5,22 +5,8 @@
 # Summary query for different models
 #
 class SummaryQuery
-  RANSAK_COLUMN_MAPPING = {
-    'operations_accounts.description' => 'account_description'
-  }
   SUMMARY_MODELS = {
-    Verification => { grouped_by: %i[status kind country reason], aggregations: [:total] },
-    #Withdraw => { grouped_by: %i[currency_id aasm_state], aggregations: ['sum(amount)', 'sum(sum)', 'sum(fee)'] },
-    #Account => { grouped_by: [:currency_id], aggregations: ['sum(balance)', 'sum(locked)', :total] },
-    #Operations::Liability => { grouped_by: [:currency_id, 'operations_accounts.description'], aggregations: ['sum(credit)', 'sum(debit)', :total] },
-    #Operations::Revenue => { grouped_by: [:currency_id, 'operations_accounts.description'], aggregations: ['sum(credit)', 'sum(debit)', :total] },
-    #Operations::Asset => { grouped_by: [:currency_id, 'operations_accounts.description'], aggregations: ['sum(credit)', 'sum(debit)', :total] },
-    #Transaction => { grouped_by: %i[currency_id status], aggregations: ['sum(amount)', 'sum(fee)'] },
-    #ServiceWithdraw => { grouped_by: %i[currency_id status], aggregations: ['sum(amount)'] },
-    #ServiceInvoice => { grouped_by: %i[currency_id status], aggregations: ['sum(amount)'] },
-    #ServiceTransaction => { grouped_by: %i[currency_id], aggregations: ['sum(service_transactions.amount)'] },
-    #WhalerTransfer => { grouped_by: %i[currency_code state], aggregations: ['sum(amount)'] },
-    #MemberTransfer => { grouped_by: %i[currency_id service], aggregations: ['sum(amount)'] }
+    Verification => { grouped_by: %i[status country reason], aggregations: ['count(verifications.id)'] },
   }.freeze
 
   # rubocop:disable Metrics/MethodLength
@@ -30,19 +16,34 @@ class SummaryQuery
 
     meta = SUMMARY_MODELS[model_class]
 
-    plucks = ((meta[:grouped_by] + meta[:aggregations]) - [:total]).map do |p|
+    if meta[:grouped_by].join.include? '>'
+      extra_plucks = []
+    else
+      extra_plucks = meta[:grouped_by]
+    end
+
+    order = meta[:order] || meta[:grouped_by].first
+
+    plucks = ((extra_plucks + meta[:aggregations])).map do |p|
       p.to_s.include?('(') || p.to_s.include?('.') ? p : [model_class.table_name, p].join('.')
     end
-    rows = scope
+
+    scope = scope
            .group(*meta[:grouped_by])
            .reorder('')
-           .order(meta[:grouped_by].first)
-           .pluck(plucks.join(', '))
+           .order(order)
+
+    if plucks.any?
+      scope = scope.pluck(plucks.join(', '))
+    else
+      scope = scope.count
+    end
+    rows = scope
            .map { |row| prepare_row row, meta[:aggregations] }
 
     {
-      grouped_by: meta[:grouped_by].map { |col| RANSAK_COLUMN_MAPPING[col] || col },
-      aggregations: meta[:aggregations].map { |col| RANSAK_COLUMN_MAPPING[col] || col },
+      grouped_by: meta[:grouped_by],
+      aggregations: meta[:aggregations],
       rows: rows
     }
   end
@@ -51,14 +52,6 @@ class SummaryQuery
   private
 
   def prepare_row(row, aggregations)
-    return row unless aggregations.include? :total
-
-    count = (aggregations - [:total]).count
-    total = if aggregations.join.include? 'debit'
-              row.last(2).first - row.last
-            else
-              row.slice(row.length - count, count).inject(&:+)
-            end
-    row + [total]
+    row
   end
 end

@@ -1,4 +1,7 @@
 h1= paginated_records.model_name.human_plural
+.row
+  .col-md-6
+    = render 'summary', summary: summary if summary.present? && summary[:rows].present?
 .clearfix
 = render index_form
 hr
