@@ -6,12 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'agnessa/seed'
 
+client = Client.
+  create_with(name: 'test', secret: 'secret', verification_callback_url: 'http://test.test.test').
+  find_or_create_by!(subdomain: 'test')
 
-seed = Agnessa::Seed.new
+client.client_users.create_with(login: 'test', password: 'test', role: 'superadmin').
+  find_or_create_by!(login: 'test')
 
-seed.seed_clients
-seed.seed_client_users
-seed.seed_applicants
-seed.seed_verifications
-seed.seed_review_result_labels
+applicant = client.applicants.find_or_create_by!(external_id: 'test')
+
+applicant.verifications.create({
+  name: 'test', last_name: 'test', legacy_verification_id: 'test', country: 'ru', passport_data: 'test',
+  reason: :unban, email: 'test@test.test', status: :init,
+  documents: [Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')))]
+})
+
+Agnessa::Seed.new.seed_review_result_labels
