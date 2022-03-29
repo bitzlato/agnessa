@@ -1,4 +1,6 @@
 class Client::ApplicationController < ApplicationController
+  helper_method :current_client
+
   private
 
   def current_client

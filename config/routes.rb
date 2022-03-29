@@ -24,11 +24,10 @@ Rails.application.routes.draw do
     get ENV.fetch('USERS_PATH','users.json'), to: 'legacy_verifications#index'
 
     scope as: :admin, module: :admin do
-      resources :review_result_label
 
       root to: 'dashboard#index'
-      resources :review_result_label
       resources :client_users
+      resources :review_result_labels
       resources :verifications do
         member  do
           post :confirm

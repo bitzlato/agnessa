@@ -1,5 +1,5 @@
 class Client::VerificationsController < Client::ApplicationController
-  # invisible_captcha only: [:create], honeypot: :subtitle
+  layout 'verification'
 
   def new
     verification = applicant.verifications.new verification_params
