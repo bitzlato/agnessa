@@ -1,5 +1,7 @@
 require_relative "boot"
 
+ENV['RANSACK_FORM_BUILDER'] = '::SimpleForm::FormBuilder'
+
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -52,5 +54,13 @@ module Agnessa
     config.application = config_for(:application)
 
     config.action_dispatch.tld_length = config.application.default_url_options.fetch(:host).split('.').count-1
+
+    config.autoload_paths += Dir[
+      "#{Rails.root}/app/errors",
+      "#{Rails.root}/app/services",
+      "#{Rails.root}/app/uploaders",
+      "#{Rails.root}/app/decorators",
+    ]
+
   end
 end
