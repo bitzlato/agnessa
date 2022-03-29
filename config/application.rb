@@ -50,5 +50,7 @@ module Agnessa
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.application = config_for(:application)
+
+    config.action_dispatch.tld_length = config.application.default_url_options.fetch(:host).split('.').count-1
   end
 end

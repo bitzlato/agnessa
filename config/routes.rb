@@ -1,32 +1,32 @@
 require 'sidekiq/web'
 
+module ClientConstraint
+  def self.matches?(request)
+    (RequestStore.store[:current_client] = Client.find_by_subdomain(request.subdomain)).present?
+  end
+end
+
+module PublicConstraint
+  def self.matches?(request)
+    request.subdomain.blank?
+  end
+end
+
 Rails.application.routes.draw do
-  class ClientConstraint
-    def matches?(request)
-      RequestStore.store[:current_client] = Client.find_by_subdomain(request.subdomain)
-    end
+  default_url_options Rails.configuration.application.default_url_options.symbolize_keys
+
+  scope as: :public, module: :public, subdomain: '', constraints: PublicConstraint do
+    root to: 'landing#index'
+    mount Sidekiq::Web => "/sidekiq"
   end
 
-  root to: redirect('/admin')
-
-  namespace :admin do
-    get 'review_result_label/index'
-  end
-
-  constraints ClientConstraint.new do
-    namespace :api do
+  scope constraints: ClientConstraint do
+    scope as: :admin, module: :admin do
+      resources :review_result_label
       get ENV.fetch('USERS_PATH','users.json'), to: 'verifications#legacy_index'
-    end
 
-    namespace :admin do
-      get '/' => 'verifications#index'
-      resources :review_result_label, only: [:index]
-      resources :moderation, only: [:index] do
-        member  do
-          post :confirm
-          post :refuse
-        end
-      end
+      root to: 'dashboard#index'
+      resources :review_result_label
       resources :client_users
       resources :verifications do
         member  do
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
       end
     end
 
-    scope module: 'client' do
+    scope as: :client, module: :client do
       resources :applicants, only: [], param: :encoded_external_id do
         member do
           resources :verifications, only: [:new, :create]
@@ -50,5 +50,6 @@ Rails.application.routes.draw do
     end
   end
 
-  mount Sidekiq::Web => "/sidekiq"
+  match '*anything', to: 'errors#not_found', via: %i[get post]
+  match '', to: 'errors#not_found', via: %i[get post]
 end
