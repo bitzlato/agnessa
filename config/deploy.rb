@@ -19,7 +19,7 @@ set :disallow_pushing, true
 
 set :db_dump_extra_opts, '--force'
 
-default_branch = 'main'
+default_branch = 'master'
 current_branch = `git rev-parse --abbrev-ref HEAD`.chomp
 
 if ENV.key? 'BRANCH'
