@@ -31,6 +31,19 @@ br
   .col-6
     .card
       .card-header
+        | Проверка отправки уведомлений
+      .card-body
+        = simple_form_for :data, url: verification_callback_test_admin_client_path, html: { id: "verification_callback_form" }, remote: true do |f|
+          = f.input :id, input_html: { value: '123' }, required: false
+          = f.input :email, input_html: { value: 'test@test.test' }, required: false
+          = f.input :status, input_html: { value: 'verified' }, required: false
+
+          = f.button :submit, class: 'btn btn-success', value: 'Отправить'
+      .card-footer#verification_callback_result
+
+  .col-6
+    .card
+      .card-header
         | Пример уведомления
       .card-body
         pre

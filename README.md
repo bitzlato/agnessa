@@ -14,7 +14,7 @@ rails db:setup
 ```
 
 ## Env
-
+- AGNESSA_HOST - host of server
 - AGNESSA_DATABASE_NAME - url of postgres
 - AGNESSA_REDIS_URL - url for redis
 - AGNESSA_SIDEKIQ_AUTH_USER - auth for sidekiq web
