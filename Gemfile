@@ -50,6 +50,7 @@ gem "sd_notify", "~> 0.1.1"
 gem 'dotenv-rails'
 
 group :development, :test do
+  gem 'letter_opener', group: :development
   gem 'i18n-debug'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug', '~> 3.7'

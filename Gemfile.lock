@@ -307,6 +307,10 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     libv8-node (15.14.0.1)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -599,6 +603,7 @@ DEPENDENCIES
   jwt-multisig (~> 1.0.0)
   jwt-rack (~> 0.1.0)
   kaminari
+  letter_opener
   listen (~> 3.3)
   mini_racer (~> 0.4.0)
   mongoid
