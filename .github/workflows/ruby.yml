@@ -9,9 +9,9 @@ name: Ruby
 
 on:
   push:
-    branches: [ master fix/actions ]
+    branches: [ master, fix/actions ]
   pull_request:
-    branches: [ master fix/actions ]
+    branches: [ master, fix/actions ]
 
 jobs:
   rspec:
