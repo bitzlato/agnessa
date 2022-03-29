@@ -1,0 +1,7 @@
+
+ul.nav.nav-pills.mb-3
+  - Verification.statuses.each do |key, value|
+    -url = url_for(q: request.query_parameters.fetch(:q, {}).merge(status_eq: value))
+    -klass = active_class('nav-link', request.query_parameters.fetch(:q, {}).fetch(:status_eq, nil) == value.to_s)
+    li.nav-item
+      = link_to key, url, class: klass
