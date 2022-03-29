@@ -2,4 +2,4 @@ h1 Agnessa Publis Landing
 
 ul
   - clients.each do |client|
-    li= link_to client.name, root_url(subdomain: client.subdomain)
+    li= link_to client.name, admin_root_url(subdomain: client.subdomain)
