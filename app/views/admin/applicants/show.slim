@@ -4,4 +4,4 @@ h1 Аппликат ##{record.id}
   .col-md-6
     = render 'attributes', item: record
 = render partial: 'admin/applicants/block_form', locals: {applicant: record}
-= render partial: 'verification_list', locals: {applicant: record}
+= render partial: 'verification', locals: {applicant: record}
