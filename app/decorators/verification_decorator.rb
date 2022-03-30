@@ -10,7 +10,7 @@ class VerificationDecorator < ApplicationDecorator
   end
 
   def self.table_columns
-    %i[id created_at country status reason name last_name passport_data moderator]
+    %i[id created_at country status reason name last_name document_number moderator]
   end
 
   CSS_STATUS_CLASSES = { 'pending' => 'badge badge-muted',

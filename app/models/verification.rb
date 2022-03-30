@@ -12,7 +12,7 @@ class Verification < ApplicationRecord
     self.applicant ||= client.applicants.find_or_create_by!(external_id: external_id)
   end
 
-  validates :country, :name, :last_name, :passport_data, :reason, :documents, presence: true, on: :create
+  validates :country, :name, :last_name, :document_number, :reason, :documents, presence: true, on: :create
   validates :email, presence: true, email: true
 
   validate :validate_labels
@@ -66,7 +66,7 @@ class Verification < ApplicationRecord
         verification.reason = 'restore'
       end
 
-      verification.passport_data = raw['passportData']
+      verification.document_number = raw['passportData']
       verification.name = raw['name']
       verification.last_name = raw['lastName']
       verification.created_at = raw['created']
