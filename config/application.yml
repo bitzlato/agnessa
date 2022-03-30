@@ -5,6 +5,8 @@ default:  &settings
     domain: <%= ENV.fetch('SMTP_DOMAIN', '') %>
     address: <%= ENV.fetch('SMTP_ADDRESS', '') %>
     port: <%= ENV.fetch('SMTP_PORT', 587) %>
+    authentication: <%= ENV.fetch('SMTP_AUTHENTICATION', :plain) %>
+    enable_starttls_auto: <%= ENV.fetch('SMTP_TLS', true) %>
 
   default_url_options: &default_url_options
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
