@@ -10,6 +10,10 @@ class ApplicantDecorator < ApplicationDecorator
   end
 
   def self.table_columns
-    %i[id account_id external_id created_at blocked]
+    %i[id full_name confirmed_at last_confirmed_verification_id account_id external_id created_at blocked]
+  end
+
+  def full_name
+    "#{object.first_name} #{object.last_name}"
   end
 end
