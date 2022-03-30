@@ -44,7 +44,7 @@ ru:
               blank: 'Имя не указано'
             last_name:
               blank: 'Фамилия не указана'
-            passport_data:
+            document_number:
               blank: 'Серия и номер не указан'
             documents:
               blank: 'Документы не были прикреплены'
