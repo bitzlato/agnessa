@@ -1,7 +1,7 @@
 class Client::VerificationsController < Client::ApplicationController
   layout 'verification'
 
-  PERMITTED_ATTRIBUTES = %i[name reason country last_name email document_number documents]
+  PERMITTED_ATTRIBUTES = [:name, :reason, :country, :last_name, :email, :document_number, {documents: []}].freeze
 
   helper_method :form_path
 
