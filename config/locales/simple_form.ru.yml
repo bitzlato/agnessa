@@ -13,11 +13,11 @@ ru:
         reason: 'Причина обращения'
         status: 'Статус'
         email: 'Email, на который придет уведомление о статусе заявки'
-        passport_data: 'Серия и Номер Паспорта'
+        document_number: 'Серия и Номер документа'
         name: 'Ваше Имя'
         last_name: 'Ваша Фамилия'
       account:
-        passport_data: 'Номер Паспорта'
+        document_number: 'Номер документа'
         name: 'Ваше Имя (Ivan)'
         last_name: 'Ваша Фамилия (Ivanov)'
         subdomain: 'Поддомен'

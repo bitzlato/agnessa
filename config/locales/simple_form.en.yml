@@ -12,9 +12,7 @@ en:
         country: 'Citizenship'
         reason: 'Reason'
         status: 'Password'
-        passport_data: 'Passport Serial'
-
-
+        document_number: 'ID document number'
 
     "yes": 'Yes'
     "no": 'No'
