@@ -20,6 +20,16 @@ rails db:setup
 - AGNESSA_SIDEKIQ_AUTH_USER - auth for sidekiq web
 - AGNESSA_SIDEKIQ_AUTH_PASSWORD - auth for sidekiq web
 
+# SMTP setup:
+
+For sending emails on production, set this env variables:
+
+- SMTP_USERNAME 
+- SMTP_PASSWORD
+- SMTP_DOMAIN
+- SMTP_ADDRESS
+- SMTP_PORT
+
 
 ## Notification
 Content-Type: 'application/json'  

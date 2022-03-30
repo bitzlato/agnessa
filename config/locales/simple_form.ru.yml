@@ -22,6 +22,7 @@ ru:
         last_name: 'Ваша Фамилия (Ivanov)'
         subdomain: 'Поддомен'
         verification_callback_url: 'Адрес уведомлений'
+        email_from: 'Email с которого отправляются уведомления'
         return_url: 'Адрес возврата на сайт после подачи заявки'
 
     "yes": 'Yes'
