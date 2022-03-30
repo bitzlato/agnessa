@@ -9,7 +9,7 @@
         .col-md-12
           = f.input :reason, 
             include_blank: false, 
-            collection: Verification.reasons.keys.to_a, 
+            collection: Verification::REASONS,
             label_method: lambda { |item| t("attributes.reasons.#{item}") }
       .row
         .col-6
