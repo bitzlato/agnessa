@@ -37,7 +37,7 @@ class Mongo::Verification
         pg_verifcation.applicant_id = applicant.id
 
         if self.status == 'new'
-            pg_verifcation.status = 'init'
+            pg_verifcation.status = 'pending'
         else
             pg_verifcation.status = status
         end

@@ -13,7 +13,7 @@ class VerificationDecorator < ApplicationDecorator
     %i[id created_at country status reason name last_name passport_data moderator]
   end
 
-  CSS_STATUS_CLASSES = { 'init' => 'badge badge-muted',
+  CSS_STATUS_CLASSES = { 'pending' => 'badge badge-muted',
                          'refused' => 'badge badge-warning',
                          'confirmed' => 'badge badge-success', }
 
