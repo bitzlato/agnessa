@@ -1,8 +1,8 @@
 class Applicant < ApplicationRecord
-  belongs_to :client
+  belongs_to :account
   has_many :verifications
 
-  validates :external_id, presence: true, uniqueness: {scope: :client}
+  validates :external_id, presence: true, uniqueness: {scope: :account}
 
   def to_s
     # TODO Добавить ФИО из последней одобренной заявки, если нет одобренной то из последней заявки вообще

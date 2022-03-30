@@ -11,7 +11,7 @@ class VerificationStatusNotifier
   attr_accessor :url, :data
 
   def self.perform verification
-    url = verification.client.verification_callback_url
+    url = verification.account.verification_callback_url
     data = {id: verification.applicant.external_id, status: STATUS_MAPPING[verification.status]}
     notifier = self.new(url, data)
     notifier.perform
