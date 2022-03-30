@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_29_164958) do
+ActiveRecord::Schema.define(version: 2022_03_30_065344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_164958) do
     t.bigint "applicant_id", null: false
     t.string "country", limit: 2
     t.string "legacy_verification_id"
-    t.integer "status"
+    t.string "status", default: "pending", null: false
     t.string "commment"
     t.integer "kind"
     t.json "documents", default: []
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_164958) do
     t.json "params", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "reason"
+    t.string "reason"
     t.string "name"
     t.string "last_name"
     t.string "passport_data"

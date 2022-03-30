@@ -17,23 +17,20 @@ class Verification < ApplicationRecord
 
   validate :validate_labels
 
-  enum status: {
-    init: -1,
-    refused: 0,
-    confirmed: 1
-  }, _default: 'init'
+  STATUSES = %w[pending refused confirmed]
+  validates :status, presence: true, inclusion: { in: STATUSES }
 
-  enum reason: {
-    unban: 0,
-    trusted_trader: 1,
-    restore: 2,
-    other: 3
-  }, _default: 'trusted_trader'
+  REASONS = %w[unban trusted_trader restore other]
+  validates :restore, presence: true, inclusion: { in: REASONS }, if: :refused?
 
   after_update :send_notification_after_status_change
 
   def legacy_created
     raw_changebot['created'].to_datetime.to_i * 1000 rescue nil
+  end
+
+  def refused?
+    status == 'refused'
   end
 
   def confirm!(user: nil)
@@ -51,7 +48,7 @@ class Verification < ApplicationRecord
   end
 
   def reset!(user: nil)
-    update!(status: :init, moderator_id: user)
+    update!(status: :pending, moderator_id: user)
   end
 
   def self.export_details
