@@ -6,7 +6,7 @@ FactoryBot.define do
 
     sequence(:name) { |i| "name_#{i}" }
     sequence(:last_name) { |i| "LastName_#{i}" }
-    sequence(:passport_data) { |i| "passport_#{i}" }
+    sequence(:document_number) { |i| "passport_#{i}" }
     sequence(:legacy_verification_id) { |i| "legacy_id_#{i}" }
     sequence(:reason) { |i| Verification::REASONS.sample }
     sequence(:email) { |i| "email#{i}@domain.com" }

@@ -12,16 +12,18 @@ class Admin::AccountsController < Admin::ApplicationController
   end
 
   def verification_callback_test
-    begin
-      notifier = VerificationStatusNotifier.new(current_account.verification_callback_url, params[:data])
-      response = notifier.perform
-      status = response.status
-      body = response.body
-    rescue Faraday::ConnectionFailed
-      status = nil
-      body = 'ConnectionFailed'
+    url = current_account.verification_callback_url
+    if url.present?
+      begin
+        response = VerificationStatusNotifier.new(url, params[:data]).perform
+        status = response.status
+        body = response.body
+      rescue Faraday::ConnectionFailed
+        body = 'ConnectionFailed'
+      end
+    else
+      body = "Не задан #{I18n.t('simple_form.labels.account.verification_callback_url')}"
     end
-
     render locals: {status: status, body: body}, layout: false
   end
 
