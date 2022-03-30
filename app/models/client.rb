@@ -3,8 +3,7 @@ class Client < ApplicationRecord
   has_many :verifications, through: :applicants
   has_many :client_users
 
-  validates :name, :secret, presence: true
-  validates :email_from, :secret, presence: true
+  validates :name, :secret, :email_from, presence: true
   validates :subdomain, presence: true, uniqueness: true
   validates :verification_callback_url, url: true, if: :verification_callback_url?
 
