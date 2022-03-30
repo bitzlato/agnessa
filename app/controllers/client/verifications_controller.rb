@@ -1,7 +1,7 @@
 class Client::VerificationsController < Client::ApplicationController
   layout 'verification'
 
-  PERMITTED_ATTRIBUTES = %i[name reason country last_name email passport_data documents]
+  PERMITTED_ATTRIBUTES = %i[name reason country last_name email document_number documents]
 
   helper_method :form_path
 
