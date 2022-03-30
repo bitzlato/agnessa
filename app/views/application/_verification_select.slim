@@ -11,6 +11,6 @@
   = f.submit
 ul.nav.nav-pills.mb-3
   li.nav-item
-  - Verification.statuses.keys.each do |m|
+  - Verification::STATUSES.each do |m|
     li.nav-item
       = link_to m, url_for(q: request.query_parameters.fetch(:q, {}).merge(status_eq: m)), class: active_class('nav-link', true)

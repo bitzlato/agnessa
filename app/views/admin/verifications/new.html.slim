@@ -2,7 +2,7 @@
   .row
     .col-md-4
       = f.input :country, as: :country, priority: [:UA, :RU, :BY, :KZ], label: 'Гражданство'
-      = f.input :reason, collection: Verification.reasons
+      = f.input :reason, collection: Verification::REASONS
       = f.input :name
       = f.input :last_name
       = f.input :passport_data

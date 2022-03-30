@@ -5,7 +5,7 @@ describe Verification do
     let(:verification) { create(:verification) }
 
     it 'notifies after status change' do
-      expect(verification.confirmed!)
+      expect(verification.confirm!)
       expect(VerificationStatusNotifyJob.jobs.size).to eq(1)
     end
   end
