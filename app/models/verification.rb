@@ -93,9 +93,9 @@ class Verification < ApplicationRecord
   def send_email_to_applicant
     case status
     when 'refused'
-      VerificationMailer.refused(id).deliver_now!
+      VerificationMailer.refused(id).deliver_now
     when 'confirmed'
-      VerificationMailer.confirmed(id).deliver_now!
+      VerificationMailer.confirmed(id).deliver_now
     end
   end
 end
