@@ -1,4 +1,4 @@
-= simple_form_for(client_user, url: admin_client_users_path) do |f|
+= simple_form_for(member, url: admin_members_path) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 

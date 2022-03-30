@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def test_new_client_verification_url
-    new_client_verification_path(encoded_external_id: VerificationUrlGenerator.generate_token('test', current_client.secret))
+    new_client_verification_path(encoded_external_id: VerificationUrlGenerator.generate_token('test', current_account.secret))
   end
 
   def hided_columns

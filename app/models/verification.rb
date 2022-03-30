@@ -4,9 +4,9 @@ class Verification < ApplicationRecord
   has_paper_trail
   mount_uploaders :documents, DocumentUploader
 
-  belongs_to :moderator, class_name: 'ClientUser', required: false
+  belongs_to :moderator, class_name: 'Member', required: false
   belongs_to :applicant
-  has_one :client, through: :applicant
+  has_one :account, through: :applicant
 
   before_validation on: :create do
     self.applicant ||= client.applicants.find_or_create_by!(external_id: external_id)

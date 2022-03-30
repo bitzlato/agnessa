@@ -1,7 +1,7 @@
 .row.justify-content-center.instruction
   .jumbotron
     h1.mb-4 
-      = t 'instruction.title', account_id: verification.external_id, org: current_client.public_name
+      = t 'instruction.title', account_id: verification.external_id, org: current_account.public_name
     = simple_form_for verification, url: form_path do |f|
       .row
         .col-md-12
@@ -27,7 +27,7 @@
       .row
         .col-md-12
           .alert.alert-warning role='alert'
-            = raw I18n.t 'instruction.text', host: current_client.host
+            = raw I18n.t 'instruction.text', host: current_account.host
       .row
         .col-md-12
           = f.file_field :documents, multiple: true, accept: Rails.configuration.application.document_formats
