@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_065344) do
+ActiveRecord::Schema.define(version: 2022_03_30_081801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2022_03_30_065344) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "verification_callback_url"
+    t.string "return_url"
+    t.string "email_from"
     t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
   end
 
@@ -71,7 +73,7 @@ ActiveRecord::Schema.define(version: 2022_03_30_065344) do
     t.string "reason"
     t.string "name"
     t.string "last_name"
-    t.string "passport_data"
+    t.string "document_number"
     t.integer "moderator_id"
     t.string "comment"
     t.string "email"

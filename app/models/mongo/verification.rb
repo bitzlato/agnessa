@@ -57,7 +57,7 @@ class Mongo::Verification
             pg_verifcation.reason = 'restore'
         end
 
-        pg_verifcation.passport_data = raw['passportData']
+        pg_verifcation.document_number = raw['passportData']
         pg_verifcation.name = raw['name']
         pg_verifcation.last_name = raw['lastName']
         pg_verifcation.created_at = raw['created']

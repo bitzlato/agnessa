@@ -11,7 +11,7 @@ ru:
       verification:
         country: 'Гражданство'
         reason: 'Причина обращения'
-        status: 'Password'
+        status: 'Статус'
         email: 'Email, на который придет уведомление о статусе заявки'
         passport_data: 'Серия и Номер Паспорта'
         name: 'Ваше Имя'
@@ -23,6 +23,7 @@ ru:
         subdomain: 'Поддомен'
         verification_callback_url: 'Адрес уведомлений'
         email_from: 'Email с которого приходят уведомления'
+        return_url: 'Адрес возврата на сайт после подачи заявки'
 
     "yes": 'Yes'
     "no": 'No'

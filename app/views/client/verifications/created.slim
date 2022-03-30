@@ -1,5 +1,9 @@
 .row.justify-content-center.instruction
   .jumbotron
+    .row
+      .col-md-12
+        div= raw I18n.t 'instruction.success.text'
+    - if current_account.return_url.present?
       .row
         .col-md-12
-          div= raw I18n.t 'instruction.success.text'
+          = link_to 'Вернуться на сайт', current_account.return_url
