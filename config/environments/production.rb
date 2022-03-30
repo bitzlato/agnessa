@@ -99,11 +99,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: ENV.fetch('SMTP_USERNAME', ''),
-    password: ENV.fetch('SMTP_PASSWORD', ''),
-    domain: ENV.fetch('SMTP_DOMAIN', ''),
-    address: ENV.fetch('SMTP_ADDRESS', ''),
-    port: ENV.fetch('SMTP_PORT', ''),
+    user_name: Rails.configuration.application.smtp.fetch(:user_name),
+    password: Rails.configuration.application.smtp.fetch(:password),
+    domain: Rails.configuration.application.smtp.fetch(:domain),
+    address: Rails.configuration.application.smtp.fetch(:address),
+    port: Rails.configuration.application.smtp.fetch(:port),
     authentication: :plain,
     enable_starttls_auto: true
   }
