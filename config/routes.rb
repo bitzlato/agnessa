@@ -24,7 +24,10 @@ Rails.application.routes.draw do
     get ENV.fetch('USERS_PATH','users.json'), to: 'legacy_verifications#index'
 
     scope as: :admin, module: :admin do
-      resources :applicants, only: [:index, :show]
+      resources :applicants, only: [:index, :show] do
+        post :block, on: :member
+        post :unblock, on: :member
+      end
 
       root to: 'dashboard#index'
       resources :members

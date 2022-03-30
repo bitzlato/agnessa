@@ -16,6 +16,7 @@ class Verification < ApplicationRecord
   validates :email, presence: true, email: true
 
   validate :validate_labels
+  validate :validate_not_blocked_applicant, on: :create
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
@@ -84,6 +85,10 @@ class Verification < ApplicationRecord
     review_result_labels.each do |label|
       errors.add :labels, "Нет такого lable #{label}" unless ReviewResultLabel.exists?(label: label)
     end
+  end
+
+  def validate_not_blocked_applicant
+    errors.add :applicant_id, "Заблокированный аппликант #{applicant.external_id}" if applicant.blocked
   end
 
   def send_notification_after_status_change
