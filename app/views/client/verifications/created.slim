@@ -6,4 +6,6 @@
     - if current_account.return_url.present?
       .row
         .col-md-12
-          = link_to 'Вернуться на сайт', current_account.return_url
+          .text-center
+            .mt-2
+              = link_to 'Вернуться на сайт', current_account.return_url
