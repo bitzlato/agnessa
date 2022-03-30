@@ -4,6 +4,7 @@ class Client < ApplicationRecord
   has_many :client_users
 
   validates :name, :secret, presence: true
+  validates :email_from, :secret, presence: true
   validates :subdomain, presence: true, uniqueness: true
   validates :verification_callback_url, url: true, if: :verification_callback_url?
 
