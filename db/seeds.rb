@@ -9,7 +9,7 @@
 require 'agnessa/seed'
 
 client = Client.
-  create_with(name: 'test', secret: 'secret', verification_callback_url: 'http://test.test.test').
+  create_with(name: 'test', secret: 'secret', verification_callback_url: 'http://test.test.test', email_from: 'norepy@client.com').
   find_or_create_by!(subdomain: 'test')
 
 client.client_users.create_with(login: 'test', password: 'test', role: 'superadmin').
