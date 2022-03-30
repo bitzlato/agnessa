@@ -79,6 +79,7 @@ class Verification < ApplicationRecord
 
   private
 
+
   def validate_labels
     review_result_labels.each do |label|
       errors.add :labels, "Нет такого lable #{label}" unless ReviewResultLabel.exists?(label: label)
@@ -86,6 +87,18 @@ class Verification < ApplicationRecord
   end
 
   def send_notification_after_status_change
-    VerificationStatusNotifyJob.perform_async(id) if saved_change_to_status?
+    return unless saved_change_to_status?
+
+    VerificationStatusNotifyJob.perform_async(id)
+    send_email_to_applicant
+  end
+
+  def send_email_to_applicant
+    case status
+    when 'refused'
+      VerificationMailer.refused(id).deliver_now
+    when 'confirmed'
+      VerificationMailer.confirmed(id).deliver_now
+    end
   end
 end

@@ -1,4 +1,13 @@
 default:  &settings
+  smtp:
+    user_name: <%= ENV.fetch('SMTP_USERNAME', '') %>
+    password: <%= ENV.fetch('SMTP_PASSWORD', '') %>
+    domain: <%= ENV.fetch('SMTP_DOMAIN', '') %>
+    address: <%= ENV.fetch('SMTP_ADDRESS', '') %>
+    port: <%= ENV.fetch('SMTP_PORT', 587) %>
+    authentication: <%= ENV.fetch('SMTP_AUTHENTICATION', :plain) %>
+    enable_starttls_auto: <%= ENV.fetch('SMTP_TLS', true) %>
+
   default_url_options: &default_url_options
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
     host: <%= ENV.fetch('AGNESSA_HOST', 'localhost') %>
@@ -11,9 +20,7 @@ default:  &settings
 
 development:
   <<: *settings
-
 production:
   <<: *settings
-
 test:
   <<: *settings
