@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2022_03_30_081801) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "verification_callback_url"
-    t.string "return_url"
     t.string "email_from"
+    t.string "return_url"
     t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
   end
 
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2022_03_30_081801) do
     t.string "external_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "blocked", default: false, null: false
     t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
     t.index ["account_id"], name: "index_applicants_on_account_id"
   end

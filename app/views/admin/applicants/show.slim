@@ -3,3 +3,4 @@ h1 Аппликат ##{record.id}
 .row
   .col-md-6
     = render 'attributes', item: record
+= render partial: 'admin/applicants/block_form', locals: {applicant: record}
