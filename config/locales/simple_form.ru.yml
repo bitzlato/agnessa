@@ -21,7 +21,7 @@ ru:
         name: 'Ваше Имя (Ivan)'
         last_name: 'Ваша Фамилия (Ivanov)'
         subdomain: 'Поддомен'
-        verification_callback_url: 'Адрес уведомлений'
+        verification_callback_url: 'API URL для получений уведомлени о статусе верификации'
         email_from: 'Email с которого отправляются уведомления'
         return_url: 'Адрес возврата на сайт после подачи заявки'
 

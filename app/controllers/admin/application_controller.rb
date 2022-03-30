@@ -1,4 +1,6 @@
 class Admin::ApplicationController < ApplicationController
+  layout 'fluid'
+
   before_action :basic_auth
 
   helper_method :current_user

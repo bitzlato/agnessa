@@ -9,12 +9,11 @@ class Account < ApplicationRecord
   validates :email_from, email: true
   validates :return_url, url: true, if: :return_url?
 
-  before_validation :generate_secret, on: :create
+  before_validation :set_secret, on: :create
   before_validation :downcase_subdomain
 
   def recreate_secret!
-    generate_secret
-    save!
+    update_column(:secret, generate_secret)
   end
 
   def public_name
@@ -27,8 +26,12 @@ class Account < ApplicationRecord
 
   private
 
+  def set_secret
+    self.secret = generate_secret
+  end
+
   def generate_secret
-    self.secret = SecureRandom.hex(3)
+    SecureRandom.hex(3)
   end
 
   def downcase_subdomain

@@ -1,10 +1,4 @@
 class VerificationStatusNotifier
-  STATUS_MAPPING = {
-    # banned, reseted, pending
-    'refused': :rejected,
-    'confirmed': :verified
-  }
-
   OPEN_TIMEOUT = 10 # opening connection timeout in seconds
   TIMEOUT = 300 # waiting for response timeout in seconds
 
@@ -12,7 +6,13 @@ class VerificationStatusNotifier
 
   def self.perform verification
     url = verification.account.verification_callback_url
-    data = {id: verification.applicant.external_id, status: STATUS_MAPPING[verification.status]}
+    data = {
+      external_id: verification.applicant.external_id,
+      applicant_id: verification.applicant.id,
+      verification_id: verification.id,
+      email: verification.email,
+      status: verification.status
+    }
     notifier = self.new(url, data)
     notifier.perform
   end
@@ -23,13 +23,22 @@ class VerificationStatusNotifier
   end
 
   def perform
+    if url.present?
+      send_request
+    else
+      Rails.logger.error("Не задан урл отправки получений уведомлени для payload '#{data}'")
+      nil
+    end
+  end
+
+  private
+
+  def send_request
     client.post('/') do |req|
       req.body = data.to_json
       req.headers['Content-Type'] = 'application/json'
     end
   end
-
-  private
 
   def client
     Faraday.new(url) do |conn|

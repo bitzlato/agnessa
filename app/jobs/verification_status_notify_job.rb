@@ -12,6 +12,6 @@ class VerificationStatusNotifyJob
   def perform(verification_id)
     verification = Verification.find(verification_id)
     response = VerificationStatusNotifier.perform(verification)
-    response.assert_success!
+    response.assert_success! if response.present?
   end
 end
