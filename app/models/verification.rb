@@ -12,7 +12,7 @@ class Verification < ApplicationRecord
     self.applicant ||= client.applicants.find_or_create_by!(external_id: external_id)
   end
 
-  validates :country, :name, :last_name, :document_number, :reason, :documents, presence: true, on: :create
+  validates :country, :name, :last_name, :document_number, :reason, presence: true, on: :create
   validates :email, presence: true, email: true
 
   validate :validate_labels
