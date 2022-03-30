@@ -6,6 +6,7 @@ class Account < ApplicationRecord
   validates :name, :secret, :email_from, presence: true
   validates :subdomain, presence: true, uniqueness: true
   validates :verification_callback_url, url: true, if: :verification_callback_url?
+  validates :email_from, email: true
   validates :return_url, url: true, if: :return_url?
 
   before_validation :generate_secret, on: :create
