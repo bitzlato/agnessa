@@ -1,0 +1,13 @@
+.card
+  .card-header
+    | Проверка отправки уведомлений
+  .card-body
+    = simple_form_for :data, url: verification_callback_test_admin_account_path, html: { id: "verification_callback_form" }, remote: true do |f|
+      = f.input :external_id, input_html: { value: '123' }, label: :external_id, required: true
+      = f.input :applicant_id, input_html: { value: '1' }, label: :applicant_id, required: true
+      = f.input :verification_id, input_html: { value: '22' }, label: :verification_id, required: true
+      = f.input :email, input_html: { value: 'test@test.test' }, label: :email, required: true
+      = f.input :status, collection: Verification::STATUSES, label: :status, selected: Verification::STATUSES.first, include_blank: false
+
+      = f.button :submit, class: 'btn btn-success', value: 'Отправить'
+  .card-footer#verification_callback_result
