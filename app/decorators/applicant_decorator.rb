@@ -6,10 +6,10 @@ class ApplicantDecorator < ApplicationDecorator
   end
 
   def self.attributes
-    table_columns + %i[id client_id external_id]
+    table_columns + %i[id account_id external_id]
   end
 
   def self.table_columns
-    %i[id client_id external_id created_at]
+    %i[id account_id external_id created_at]
   end
 end

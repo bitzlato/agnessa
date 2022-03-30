@@ -1,7 +1,7 @@
-class Client < ApplicationRecord
+class Account < ApplicationRecord
   has_many :applicants
   has_many :verifications, through: :applicants
-  has_many :client_users
+  has_many :members
 
   validates :name, :secret, :email_from, presence: true
   validates :subdomain, presence: true, uniqueness: true
@@ -13,6 +13,14 @@ class Client < ApplicationRecord
   def recreate_secret!
     generate_secret
     save!
+  end
+
+  def public_name
+    name
+  end
+
+  def host
+    subdomain + '.' + Rails.application.routes.default_url_options.fetch(:host)
   end
 
   private

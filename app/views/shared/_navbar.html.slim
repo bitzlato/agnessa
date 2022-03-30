@@ -9,13 +9,15 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
           =active_link_to 'Заявки на верификацию', admin_verifications_path, class: 'my-lg-0 py-lg-0 nav-link'
         li.nav-item.mr-2.d-flex.align-items-center
           = active_link_to 'Аппликанты', admin_applicants_path, class: 'my-lg-0 py-lg-0 nav-link'
+        li.nav-item.mr-2.d-flex.align-items-center
+          = active_link_to 'Заявка от пользователя', test_new_client_verification_url, class: 'my-lg-0 py-lg-0 nav-link'
       ul.navbar-nav.navbar-right
         li.nav-item.dropdown
           = link_to 'Настройки', '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', data: { toggle: 'dropdown' }, id: :navbarDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false
           .dropdown-menu.dropdown-menu-right[aria-labelledby="navbarDropdown"]
-            = link_to 'Администраторы', admin_client_users_path, class: 'dropdown-item'
+            = link_to 'Администраторы', admin_members_path, class: 'dropdown-item'
             = link_to 'Статусы Верификаций', admin_review_result_labels_path, class: 'dropdown-item'
-            = link_to 'Профиль организации', admin_client_path, class: 'dropdown-item'
+            = link_to 'Профиль организации', admin_account_path, class: 'dropdown-item'
         li.nav-item.dropdown
           = link_to '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', data: { toggle: 'dropdown' }, id: :navbarDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false do
             = gravatar_tag current_user,

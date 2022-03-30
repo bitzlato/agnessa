@@ -2,7 +2,7 @@ require 'sidekiq/web'
 
 module ClientConstraint
   def self.matches?(request)
-    (RequestStore.store[:current_client] = Client.find_by_subdomain(request.subdomain)).present?
+    (RequestStore.store[:current_account] = Account.find_by_subdomain(request.subdomain)).present?
   end
 end
 
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       resources :applicants, only: [:index, :show]
 
       root to: 'dashboard#index'
-      resources :client_users
+      resources :members
       resources :review_result_labels
       resources :verifications do
         member  do
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resource :client, only: [:show, :update] do
+      resource :account, only: [:show, :update] do
         post :recreate_secret
         post :verification_callback_test
       end

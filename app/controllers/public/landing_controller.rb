@@ -2,6 +2,6 @@ class Public::LandingController < Public::ApplicationController
   layout 'simple'
 
   def index
-    render locals: { clients: Client.all }
+    render locals: { accounts: Account.all }
   end
 end

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :client do
+  factory :account do
     sequence(:name) { |i| "Company #{i}" }
     sequence(:subdomain) { |i| "subdomain#{i}" }
     sequence(:email_from) { |i| "noreply#{i}@client.com" }
