@@ -9,7 +9,7 @@
 require 'agnessa/seed'
 
 account = Account.
-  create_with(name: 'test', secret: 'secret', verification_callback_url: 'http://test.test.test', email_from: 'noreply@client.com').
+  create_with(name: 'test', secret: 'secret', verification_callback_url: 'http://test.test.test', email_from: 'noreply@client.com', form_description: '%{email_from} %{sumdomain} %{name}').
   find_or_create_by!(subdomain: 'test')
 
 account.members.create_with(login: 'test', password: 'test', role: 'superadmin').
