@@ -30,33 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 ru:
-  activerecord:
-    errors:
-      models:
-        verification:
-          attributes:
-            email:
-              invalid: Неверный формат электронной почты
-              blank: Не указана почта
-            reason:
-              blank: 'Причина обращения не выбрана'
-            name:
-              blank: 'Имя не указано'
-            last_name:
-              blank: 'Фамилия не указана'
-            document_number:
-              blank: 'Серия и номер не указан'
-            documents:
-              blank: 'Документы не были прикреплены'
-      messages:
-        record_invalid: 'Возникли ошибки: %{errors}'
-  attributes:
-    reasons:
-      unban: 'Разблокировка учетной записи'
-      trusted_trader: 'Стать доверенным торговцем'
-      restore: 'Восстановление утерянного аккаунта'
-      other: 'Другое'
-
   instruction:
     success:
       text: '<div ng-show="vm.submited" style="text-align: justify; font-size: 1em;" class="ng-binding">

@@ -1,0 +1,13 @@
+table.table.table-striped.table-hover.table-narrow
+  tr
+    th class='text-right' Модератор
+    th class='text-right' Субъект
+    th class='text-right' Изменения
+  - versions.each do |v|
+    tr
+      td class='text-right'
+        = v.member.login
+      td class='text-right'
+        = history_subject(v)
+      td class='text-right'
+        = history_changes(v)

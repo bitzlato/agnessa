@@ -1,4 +1,6 @@
 class Applicant < ApplicationRecord
+  include Versionable
+
   belongs_to :account
   has_many :verifications
 

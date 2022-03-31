@@ -3,5 +3,7 @@ h1 Аппликат ##{record.id}
 .row
   .col-md-6
     = render 'attributes', item: record
+  .col-md-6
+    = render 'history', versions: versions
 = render partial: 'admin/applicants/block_form', locals: {applicant: record}
 = render partial: 'verifications', locals: {applicant: record}

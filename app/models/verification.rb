@@ -1,7 +1,6 @@
 class Verification < ApplicationRecord
   attr_accessor :external_id
 
-  has_paper_trail
   mount_uploaders :documents, DocumentUploader
 
   belongs_to :moderator, class_name: 'Member', required: false

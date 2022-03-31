@@ -3,17 +3,17 @@ class Admin::ApplicationController < ApplicationController
 
   before_action :basic_auth
 
-  helper_method :current_user
+  helper_method :current_member
   helper_method :current_account
 
   private
 
   def basic_auth
-    unless current_user
+    unless current_member
       authenticate_or_request_with_http_basic do |login, password|
         user = current_account.members.find_by_login(login)&.authenticate(password)
         if user
-          session[:current_user] = user.id
+          session[:current_member] = user.id
           true
         else
           false
@@ -26,7 +26,9 @@ class Admin::ApplicationController < ApplicationController
     RequestStore.store[:current_account]
   end
 
-  def current_user
-    Member.find_by(id: session.dig(:current_user))
+  def current_member
+    member = Member.find_by(id: session.dig(:current_member))
+    RequestStore.store[:current_member] = member
+    member
   end
 end
