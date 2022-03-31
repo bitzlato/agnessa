@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => "/sidekiq"
   end
 
+  scope module: :user, subdomain: '', constraints: PublicConstraint do
+    resource :profile, only: [:show, :update], controller: 'profile'
+  end
+
   scope constraints: ClientConstraint do
     get ENV.fetch('USERS_PATH','users.json'), to: 'legacy_verifications#index'
 
