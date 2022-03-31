@@ -29,9 +29,10 @@
           .alert.alert-warning role='alert'
             = raw I18n.t 'instruction.text', host: current_account.host
       .row
-        .col-md-12
-          = f.file_field :documents, multiple: true, accept: Rails.configuration.application.document_formats
-          div style='color: red;'
-            = f.error :documents
+        = f.input :documents, as: :file, label: "Документы", hint: "До #{Rails.configuration.application.max_upload_file_size} мб"
+        / .col-md-12
+        /   = f.file_field :documents, multiple: true, accept: Rails.configuration.application.document_formats
+        /   div style='color: red;'
+        /     = f.error :documents
       br
       = f.submit class: 'btn btn-bg btn-primary'
