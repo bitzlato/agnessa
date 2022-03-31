@@ -1,14 +1,19 @@
+hr
+h3 Список изменений верификаций
 table.table.table-striped.table-hover.table-narrow
   thead.thead-dark
     tr
       th class='text-right' Модератор
+      th class='text-right' Заявка
       th class='text-right' Изменения
       th class='text-right' Дата
   - versions.each do |v|
     tr
       td class='text-right'
-        = v.member.login
+        = v.member.login if v.member
       td class='text-right'
-        = history_blocked_status(v)
+        = link_to "Заявка #{v.subject.id}", admin_verification_path(v.subject)
+      td class='text-right'
+        = history_verification_changes(v)
       td class='text-right'
         = I18n.l v.created_at

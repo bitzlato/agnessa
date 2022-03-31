@@ -1,4 +1,6 @@
 class Verification < ApplicationRecord
+  include Versionable
+
   attr_accessor :external_id
 
   mount_uploaders :documents, DocumentUploader

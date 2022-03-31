@@ -3,6 +3,7 @@ class Applicant < ApplicationRecord
 
   belongs_to :account
   has_many :verifications
+  has_many :verifications_versions, through: :verifications, source: :versions
 
   validates :external_id, presence: true, uniqueness: {scope: :account}
 

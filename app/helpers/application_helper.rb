@@ -33,17 +33,30 @@ module ApplicationHelper
     flag ? "#{css_classes} active" : css_classes
   end
 
-  def history_changes version
-    values = version.subject_changes['blocked']
-    values.last ? 'заблокирован' : 'разблокирован'
+  def history_verification_changes version
+    changes = version.subject_changes.except('created_at', 'updated_at')
+    if changes['id'].present? and changes['id'].first == nil
+      return 'создана новая заявка'
+    end
+    subject_class = version.subject.class
+    changes.map do |k, v|
+      "#{subject_class.human_attribute_name(k)}: #{history_verification_changes_values(subject_class, k, v)}"
+    end.join('<br>').html_safe
   end
 
-  def history_subject version
-    # if version.subject.is_a?(Verification)
-    #   link_to admin_verification_path()
-    #     I18n.t("activerecord.models.#{version.subject_type.downcase}")
-    # else
-      I18n.t("activerecord.models.#{version.subject_type.downcase}")
-    # end
+  def history_verification_changes_values subject_class, key, values
+    values = case key.to_sym
+             when :status
+               values.map { |v| subject_class.human_enum_name(:status, v) }
+             else
+               values
+             end
+
+    values.join(' => ')
+  end
+
+  def history_blocked_status version
+    values = version.subject_changes['blocked']
+    values.last ? 'заблокирован' : 'разблокирован'
   end
 end

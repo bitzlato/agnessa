@@ -5,7 +5,7 @@ class RemoveOldVersionsAndCreateNew < ActiveRecord::Migration[6.1]
       t.references :subject, polymorphic: true
       t.jsonb :subject_changes, null: false, default: {}
       t.jsonb :state, null: false, default: {}
-      t.bigint :member_id, null: false
+      t.references :member
 
       t.timestamps
     end

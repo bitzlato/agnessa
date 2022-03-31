@@ -1,8 +1,9 @@
 class Version < ApplicationRecord
   belongs_to :subject, polymorphic: true
-  belongs_to :member
+  belongs_to :member, optional: true
 
-  scope :with_blocked, ->(){where("subject_changes ? 'blocked'")}
+  scope :with_blocked, ->(){ where("subject_changes ? 'blocked'") }
+  scope :ordered, ->(){ order(:created_at) }
 
-  validates :subject, :changes, :member_id, presence: true
+  validates :subject, :changes, presence: true
 end

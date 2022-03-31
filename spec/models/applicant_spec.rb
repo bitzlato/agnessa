@@ -6,10 +6,11 @@ describe Applicant do
     let(:member) { create(:member) }
 
     it 'writes version after block' do
-      expect(Version.count).to eq(0)
       RequestStore.store[:current_member] = member
+      applicant
+      expect(applicant.versions.count).to eq(1)
       expect(applicant.update(blocked: true))
-      expect(Version.count).to eq(1)
+      expect(applicant.versions.count).to eq(2)
     end
   end
 end

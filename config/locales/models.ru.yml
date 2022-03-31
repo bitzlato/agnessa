@@ -22,6 +22,13 @@ ru:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
     attributes:
+      verification:
+        status: Статус
+        moderator_id: Модератор
+        statuses:
+          pending: Ожидание
+          confirmed: Подтверждено
+          refused: Отклонено
       reasons:
         unban: 'Разблокировка учетной записи'
         trusted_trader: 'Стать доверенным торговцем'

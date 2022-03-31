@@ -89,9 +89,10 @@ ActiveRecord::Schema.define(version: 2022_03_30_113941) do
     t.bigint "subject_id"
     t.jsonb "subject_changes", default: {}, null: false
     t.jsonb "state", default: {}, null: false
-    t.bigint "member_id", null: false
+    t.bigint "member_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_versions_on_member_id"
     t.index ["subject_type", "subject_id"], name: "index_versions_on_subject"
   end
 

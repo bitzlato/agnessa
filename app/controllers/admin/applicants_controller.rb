@@ -1,7 +1,8 @@
 class Admin::ApplicantsController < Admin::ResourcesController
   def show
-    versions = record.versions.with_blocked.includes(:subject)
-    render locals: { record: record, versions: versions }
+    applicant_versions = record.versions.with_blocked.ordered
+    verifications_versions = record.verifications_versions.ordered
+    render locals: { record: record, applicant_versions: applicant_versions, verifications_versions: verifications_versions }
   end
 
   def block

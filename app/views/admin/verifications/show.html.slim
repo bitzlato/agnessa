@@ -8,6 +8,7 @@ h1 Заявка на верификацию #{verification.id}
 .row
   .col-6
     = link_to 'Подтвердить', confirm_admin_verification_path(verification), method: :post, class: 'btn btn-success', method: { confirm: 'Подтверждаем заявку?' }
+    = render partial: 'verifications_history', locals: {versions: verification.versions.ordered}
   .col-6
     = simple_form_for verification, url: refuse_admin_verification_path(verification), method: :post do |f|
       = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 15, multiple: true }, label: 'Причины', required: true
