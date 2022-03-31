@@ -1,5 +1,7 @@
 ru:
   activerecord:
+    models:
+      applicant: Аппликант
     errors:
       models:
         verification:
@@ -25,3 +27,26 @@ ru:
         last_name: Фамилия
         password: Пароль
         password_confirmation: Подтверждение пароля
+      verification:
+        status: Статус
+        member_id: Модератор
+        statuses:
+          pending: Ожидание
+          confirmed: Подтверждено
+          refused: Отклонено
+      log_record:
+        action: Действие
+        verification: Заявка
+        moderator_id: Модератор
+        created_at: Дата
+        actions:
+          creation: Создание заявки
+          confirm: Подтверждение заявки
+          refuse: Отклонение заявки
+          block: Блокировка аппликанта
+          unblock: Разблокировка аппликанта
+      reasons:
+        unban: 'Разблокировка учетной записи'
+        trusted_trader: 'Стать доверенным торговцем'
+        restore: 'Восстановление утерянного аккаунта'
+        other: 'Другое'
