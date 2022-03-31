@@ -25,6 +25,7 @@
         = account.secret
         br
         = link_to 'создать новый', recreate_secret_admin_account_path, method: :post, 'data-confirm': "Точно создать новый секрет?", class: 'btn btn-success'
+    br
     .card
       .card-header
         | Описание для формы
@@ -33,13 +34,18 @@
           = f.error_notification
           = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
+          div Доступные переменные:
+          ul
+            -account.interpolate_hash.keys.each do |field|
+              li %{#{field}}
+          br
           .form-inputs
-            = f.input :form_description, label: 'HTML', input_html: {rows: 12}
+            = f.input :form_description, label: false, input_html: {rows: 12}
 
           .form-actions
             = f.button :submit, class: 'btn btn-success', value: 'Сохранить'
           hr
-            pre =raw account.form_description_interpolated
+            div =raw account.form_description_interpolated
 
 br
 
