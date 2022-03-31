@@ -31,9 +31,6 @@
         | Описание для формы
       .card-body
         = simple_form_for(account, url: admin_account_path) do |f|
-          = f.error_notification
-          = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-
           div Доступные переменные:
           ul
             -account.interpolate_hash.each do |key, value|
