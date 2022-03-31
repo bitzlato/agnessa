@@ -35,6 +35,6 @@ class Admin::AccountsController < Admin::ApplicationController
   private
 
   def account_params
-    params.require(:account).permit(:subdomain, :verification_callback_url, :return_url, :email_from)
+    params.require(:account).permit(:subdomain, :verification_callback_url, :return_url, :email_from, :form_description)
   end
 end
