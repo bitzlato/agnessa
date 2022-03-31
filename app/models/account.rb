@@ -24,6 +24,10 @@ class Account < ApplicationRecord
     subdomain + '.' + Rails.application.routes.default_url_options.fetch(:host)
   end
 
+  def form_description_interpolated
+    Interpolation.interpolate form_description, { email_from: email_from, name: name, subdomain: subdomain }
+  end
+
   private
 
   def set_secret
