@@ -36,8 +36,8 @@
 
           div Доступные переменные:
           ul
-            -account.interpolate_hash.keys.each do |field|
-              li %{#{field}}
+            -account.interpolate_hash.each do |key, value|
+              li %{#{key}} => #{value}
           br
           .form-inputs
             = f.input :form_description, label: false, input_html: {rows: 12}
