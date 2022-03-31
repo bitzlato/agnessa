@@ -9,4 +9,8 @@ class Applicant < ApplicationRecord
     # TODO Добавить ФИО из последней одобренной заявки, если нет одобренной то из последней заявки вообще
     "##{external_id}"
   end
+
+  def full_name
+    "#{object.first_name} #{object.last_name}"
+  end
 end
