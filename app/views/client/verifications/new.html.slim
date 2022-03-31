@@ -27,7 +27,7 @@
       .row
         .col-md-12
           .alert.alert-warning role='alert'
-            = raw I18n.t 'instruction.text', host: current_account.host
+            = raw verification.account.form_description_interpolated
       .row
         .col-md-12
           = f.file_field :documents, multiple: true, accept: Rails.configuration.application.document_formats
