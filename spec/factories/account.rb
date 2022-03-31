@@ -4,6 +4,7 @@ FactoryBot.define do
     sequence(:subdomain) { |i| "subdomain#{i}" }
     sequence(:email_from) { |i| "noreply#{i}@client.com" }
 
+    form_description { '%{email_from} %{sumdomain} %{name}'}
     # sequence(:verification_callback_url) { |i| "test#{i}.test.test" }
   end
 end
