@@ -25,6 +25,21 @@
         = account.secret
         br
         = link_to 'создать новый', recreate_secret_admin_account_path, method: :post, 'data-confirm': "Точно создать новый секрет?", class: 'btn btn-success'
+    .card
+      .card-header
+        | Описание для формы
+      .card-body
+        = simple_form_for(account, url: admin_account_path) do |f|
+          = f.error_notification
+          = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+          .form-inputs
+            = f.input :form_description, label: 'HTML', input_html: {rows: 12}
+
+          .form-actions
+            = f.button :submit, class: 'btn btn-success', value: 'Сохранить'
+          hr
+            pre =raw account.form_description
 
 br
 
