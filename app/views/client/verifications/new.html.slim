@@ -30,7 +30,7 @@
             = raw I18n.t 'instruction.text', host: current_account.host
       .row
         .col-md-12
-          = f.file_field :documents, multiple: true, accept: Rails.configuration.application.document_formats, hint: "До #{Rails.configuration.application.max_upload_file_size} кб"
+          = f.file_field :documents, multiple: true, accept: Rails.configuration.application.document_formats
           small.form-text.text-muted  ="До #{Rails.configuration.application.max_upload_file_size/1024/1024} мб"
           div style='color: red;'
             = f.error :documents
