@@ -14,6 +14,7 @@ ru:
       new:
         title:  'Заявка на верификацию аккаунта #%{account_id} в %{org}'
       created:
+        title: 'Принята заявка #%{id}'
         message: '<div ng-show="vm.submited" style="text-align: justify; font-size: 1em;" class="ng-binding">
                     <br><h2 style="text-align: center; margin-top: -17px;" class="ng-binding">Благодарим за подачу заявки!</h2><br> 
                         Администрация сервиса рассмотрит Вашу заявку так быстро, насколько это возможно. В случае одобрения - верифицированы будут все Ваши аккаунты в сервисах.<br>

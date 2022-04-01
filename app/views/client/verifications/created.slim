@@ -1,6 +1,6 @@
 .row.justify-content-center.instruction
   .jumbotron
-    .alert.alert-warning Принята заявка ##{verification.id}
+    .alert.alert-warning = t '.title', id: verification.id
     .row
       .col-md-12
         div= raw t '.message'
