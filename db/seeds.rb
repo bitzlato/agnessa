@@ -12,13 +12,15 @@ account = Account.
   create_with(name: 'test', secret: 'secret', verification_callback_url: 'http://test.test.test', email_from: 'noreply@client.com', form_description: '%{email_from} %{sumdomain} %{name}').
   find_or_create_by!(subdomain: 'test')
 
-account.members.create_with(login: 'test', password: 'test', role: 'superadmin').
-  find_or_create_by!(login: 'test')
+user = User.create_with(password: 'test').find_or_create_by!(email: 'test@test.test')
+
+account.members.create_with(role: 'superadmin').
+  find_or_create_by!(user: user)
 
 applicant = account.applicants.find_or_create_by!(external_id: 'test')
 
 applicant.verifications.create({
-  name: 'test', last_name: 'test', legacy_verification_id: 'test', country: 'ru', passport_data: 'test',
+  name: 'test', last_name: 'test', legacy_verification_id: 'test', country: 'ru', document_number: 'test',
   reason: :unban, email: 'test@test.test', status: :init,
   documents: [Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')))]
 })
