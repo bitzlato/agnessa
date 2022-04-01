@@ -15,7 +15,6 @@ require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
-require 'lib/interpolation'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -63,6 +62,5 @@ module Agnessa
       "#{Rails.root}/app/decorators",
     ]
 
-    config.eager_load_paths << Rails.root.join('lib')
   end
 end
