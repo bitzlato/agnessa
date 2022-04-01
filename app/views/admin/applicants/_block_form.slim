@@ -1,4 +1,4 @@
 - if applicant.blocked?
-  = link_to 'разблокировать аппликанта', unblock_admin_applicant_path(applicant), method: :post, 'data-confirm': 'Точно разблокировать?', class: 'btn btn-primary'
+  = link_to t('.block'), unblock_admin_applicant_path(applicant), method: :post, 'data-confirm': 'Точно разблокировать?', class: 'btn btn-primary'
 - else
-  = link_to 'заблокировать аппликанта', block_admin_applicant_path(applicant), method: :post, 'data-confirm': 'Точно заблокировать?', class: 'btn btn-danger'
+  = link_to t('.unblock'), block_admin_applicant_path(applicant), method: :post, 'data-confirm': 'Точно заблокировать?', class: 'btn btn-danger'

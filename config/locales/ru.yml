@@ -7,6 +7,12 @@ ru:
     summary:
       title: 'Сводка'
 
+  admin:
+    applicants:
+      block_form:
+        block:  заблокировать аппликанта
+        unblock: разблокировать аппликанта
+
   helpers:
     download_without_size: Скачать %{ext}
     download_with_size: Скачать %{ext} (%{size})
