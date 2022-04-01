@@ -60,7 +60,7 @@ module Agnessa
       "#{Rails.root}/app/services",
       "#{Rails.root}/app/uploaders",
       "#{Rails.root}/app/decorators",
-      "#{Rails.root}/lib",
+      "#{Rails.root}/app/lib",
     ]
 
   end
