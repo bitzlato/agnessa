@@ -15,7 +15,7 @@
         - members.each do |member|
           tr
             td = member.role
-            td = member.login
+            td = member.email
             td = member.active_at
             td = link_to 'Show', admin_member_path(member)
             td = link_to 'Edit', edit_admin_member_path(member)

@@ -27,7 +27,7 @@ class Account < ApplicationRecord
 
 
   def form_description_interpolated
-    Interpolation.interpolate form_description, interpolate_hash
+    ::Interpolation.interpolate form_description, interpolate_hash
   end
 
   def interpolate_hash
