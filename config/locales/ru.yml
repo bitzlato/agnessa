@@ -35,6 +35,11 @@ ru:
     pending: 'Ожидают проверки'
     refused: 'Отклоненные'
     confirmed: 'Подтвержденные'
+  reason:
+    unban: Разбан
+    trusted_trader: Доверенный продавец
+    restore: Восстановление аккаунта
+    other: Другое
 
   shared:
     navbar:
