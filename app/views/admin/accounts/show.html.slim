@@ -2,7 +2,7 @@
   .col-6
     .card
       .card-header
-        | Настройки
+        = t('.settings')
       .card-body
         = simple_form_for(account, url: admin_account_path) do |f|
           = f.error_notification
@@ -15,20 +15,20 @@
             = f.input :return_url
 
           .form-actions
-            = f.button :submit, class: 'btn btn-success', value: 'Сохранить'
+            = f.button :submit, class: 'btn btn-success', value: t('.save')
 
   .col-6
     .card
       .card-header
-        | Секрет
+        = t('.secret')
       .card-body
         = account.secret
         br
-        = link_to 'создать новый', recreate_secret_admin_account_path, method: :post, 'data-confirm': "Точно создать новый секрет?", class: 'btn btn-success'
+        = link_to t('.create_new'), recreate_secret_admin_account_path, method: :post, 'data-confirm': t('.create_new_confirm'), class: 'btn btn-success'
     br
     .card
       .card-header
-        | Описание для формы
+        = t('.form_description')
       .card-body
         = simple_form_for(account, url: admin_account_path) do |f|
           div Доступные переменные:
@@ -40,7 +40,7 @@
             = f.input :form_description, label: false, input_html: {rows: 12}
 
           .form-actions
-            = f.button :submit, class: 'btn btn-success', value: 'Сохранить'
+            = f.button :submit, class: 'btn btn-success', value:  t('.save')
           hr
             div =raw account.form_description_interpolated
 
@@ -50,7 +50,7 @@ br
   .col-6
     .card
       .card-header
-        | Проверка отправки уведомлений
+        = t('.callback_test_tile')
       .card-body
         = simple_form_for :data, url: verification_callback_test_admin_account_path, html: { id: "verification_callback_form" }, remote: true do |f|
           = f.input :external_id, input_html: { value: '123' }, label: :external_id, required: true
@@ -59,13 +59,13 @@ br
           = f.input :email, input_html: { value: 'test@test.test' }, label: :email, required: true
           = f.input :status, collection: Verification::STATUSES, label: :status, selected: Verification::STATUSES.first, include_blank: false
 
-          = f.button :submit, class: 'btn btn-success', value: 'Отправить'
+          = f.button :submit, class: 'btn btn-success', value: t('.send')
       .card-footer#verification_callback_result
 
   .col-6
     .card
       .card-header
-        | Пример уведомления
+        = t('.notification_example')
       .card-body
         pre
           | Content-Type: application/json

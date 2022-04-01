@@ -1,9 +1,9 @@
 .row.justify-content-center.instruction
   .jumbotron
-    .alert.alert-warning Принята заявка ##{verification.id}
+    .alert.alert-warning = t '.title', id: verification.id
     .row
       .col-md-12
-        div= raw I18n.t 'instruction.success.text'
+        div= raw t '.message'
     - if current_account.return_url.present?
       .row
         .col-md-12
