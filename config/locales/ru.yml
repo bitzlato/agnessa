@@ -9,6 +9,19 @@ ru:
 
 
   admin:
+    accounts:
+      show:
+        settings: Настройки
+        secret: Секрет
+        form_description: Описание для формы
+        available_variables: Доступные переменные
+        callback_test_tile: Проверка отправки уведомлений
+        notification_example: Пример уведомления
+        save: Сохранить
+        send: Отправить
+        create_new: Создать новый
+        create_new_confirm: Точно создать новый секрет?
+
     verifications:
       show:
         confirm: 'Подтвердить'
