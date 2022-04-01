@@ -34,7 +34,7 @@ ru:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Please review the problems below:"
+      default_message: "Пожалуйста устраните следующие ошибки:"
     # Examples
     # labels:
     #   defaults:

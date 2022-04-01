@@ -2,6 +2,7 @@ class Account < ApplicationRecord
   has_many :applicants
   has_many :verifications, through: :applicants
   has_many :members
+  has_many :users, through: :members
 
   validates :name, :secret, :email_from, presence: true
   validates :subdomain, presence: true, uniqueness: true

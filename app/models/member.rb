@@ -1,17 +1,12 @@
 class Member < ApplicationRecord
   belongs_to :account
+  belongs_to :user
 
-  validates :login, :account, presence: true
-  validates :login, uniqueness: {scope: :account}
-
-  has_secure_password
+  validates :account, :user, presence: true
+  validates :user, uniqueness: {scope: :account}
 
   enum role: {
     moderator: 0,
     superadmin: 1
   }
-
-  def to_s
-    login
-  end
 end
