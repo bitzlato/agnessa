@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_081801) do
+ActiveRecord::Schema.define(version: 2022_03_31_111319) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
@@ -24,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_03_30_081801) do
     t.string "verification_callback_url"
     t.string "email_from"
     t.string "return_url"
+    t.text "form_description"
     t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
   end
 
@@ -33,21 +35,23 @@ ActiveRecord::Schema.define(version: 2022_03_30_081801) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "blocked", default: false, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "last_confirmed_verification_id"
+    t.datetime "confirmed_at"
     t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
     t.index ["account_id"], name: "index_applicants_on_account_id"
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "email"
-    t.string "login", null: false
-    t.datetime "active_at"
-    t.string "password_digest"
     t.integer "role", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "account_id", null: false
-    t.index ["account_id", "login"], name: "index_members_on_account_id_and_login", unique: true
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_members_on_account_id"
+    t.index ["user_id", "account_id"], name: "index_members_on_user_id_and_account_id", unique: true
+    t.index ["user_id"], name: "index_members_on_user_id"
   end
 
   create_table "review_result_labels", force: :cascade do |t|
@@ -57,6 +61,16 @@ ActiveRecord::Schema.define(version: 2022_03_30_081801) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "label_ru"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.citext "email", null: false
+    t.string "password_digest", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "verifications", force: :cascade do |t|
@@ -96,5 +110,6 @@ ActiveRecord::Schema.define(version: 2022_03_30_081801) do
 
   add_foreign_key "applicants", "accounts"
   add_foreign_key "members", "accounts"
+  add_foreign_key "members", "users"
   add_foreign_key "verifications", "applicants"
 end

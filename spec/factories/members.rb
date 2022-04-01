@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :member do
     association :account
-    sequence(:login) { |i| "login_#{i}" }
+    association :user
     role { "moderator" }
-    password { SecureRandom.hex(3) }
   end
 end
