@@ -1,0 +1,59 @@
+
+ru:
+  activerecord:
+    models:
+      accounts: Аккаунты
+      applicants: Аппликанты
+      members: Пользователи
+      review_result_labels: Результаты верификации
+      verifications: Верификации
+      versions: Версии
+    attributes:
+      account:
+        created_at: Создано
+        name: Название организации
+        secret: Секретный ключ организации
+        verification_callback_url:
+        email_from:
+        return_url:
+        form_description: Описание формы
+      applicant:
+        account: Аккаунт
+        account_id: Аккаунт ID
+        external_id: Внешний ID
+        created_at: Создано
+        blocked: Заблокирован
+        first_name: Имя
+        last_name: Фамилия
+        last_confirmed_verification: Последняя одобренная заявка
+        confirmed_at: Время одобрения
+      member:
+        email: Электронная почта
+        login: Логин
+        role: Роль
+        created_at: Создано
+        account: Аккаунт
+      review_result_label:
+        label: Метка
+        label_ru: Метка на русском
+        description: Описание
+        final: Окончательный
+      verification:
+        created_at: Создано
+        applicant: Аппликант
+        country: Страна
+        legacy_verification_id: Легаси ID
+        status: Статус
+        comment: Комментарий
+        documents: Документы
+        raw_changebot: Легаси JSON
+        reason: Причина обращения
+        name: Имя
+        last_name: Фамилия
+        document_number: Номер документа
+        moderator: Модератор
+        email: Почта пользователя
+        user_comment: Комментарий для пользователя
+        moderator_comment: Комментарий для модератора
+        review_result_labels: Результаты проверки
+        external: Внешний ID
