@@ -1,5 +1,5 @@
-= link_to '&larr; назад в аппликанты'.html_safe, admin_applicants_path
-h1 Аппликат ##{record.id}
+= link_to "&larr; назад в аппликанты".html_safe, admin_applicants_path
+h1 #{record.model_name.human} ##{record.id}
 .row
   .col-md-6
     = render 'attributes', item: record

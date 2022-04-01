@@ -1,4 +1,4 @@
 - verifications = applicant.verifications.order('created_at DESC').decorate
 hr
-h3 Список верификаций
+h3 =t('.title')
 = render 'table', items: verifications if verifications.count.positive?

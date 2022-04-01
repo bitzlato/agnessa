@@ -7,11 +7,20 @@ ru:
     summary:
       title: 'Сводка'
 
+
   admin:
+    verifications:
+      show:
+        confirm: 'Подтвердить'
+        comfirm_alert:  'Подтверждаем заявку?'
+        refuse: 'Отклонить'
+
     applicants:
       block_form:
         block:  заблокировать аппликанта
         unblock: разблокировать аппликанта
+      verifications:
+        title: Список верификаций
 
   helpers:
     download_without_size: Скачать %{ext}
