@@ -2,7 +2,7 @@
 ul.nav.nav-pills.mb-3
   - status_from_query = request.query_parameters.fetch(:q, {}).fetch(:status_eq, nil)
   li.nav-item
-    = link_to t('.all'), url_for(q: request.query_parameters.fetch(:q, {}).except(:status_eq)), class: active_class('nav-link', status_from_query.nil?)
+    = link_to t('status.all'), url_for(q: request.query_parameters.fetch(:q, {}).except(:status_eq)), class: active_class('nav-link', status_from_query.nil?)
   - Verification::STATUSES.each do |status|
     -url = url_for(q: request.query_parameters.fetch(:q, {}).merge(status_eq: status))
     -klass = active_class('nav-link', status_from_query == status.to_s)
