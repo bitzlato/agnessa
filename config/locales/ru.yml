@@ -30,6 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 ru:
+  status:
+    all: 'Все'
+    pending: 'Ожидают проверки'
+    refused: 'Отклоненные'
+    confirmed: 'Подтвержденные'
+
   shared:
     navbar:
       verifications: 'Заявки на верификацию'

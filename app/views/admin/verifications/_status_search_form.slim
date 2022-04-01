@@ -7,4 +7,4 @@ ul.nav.nav-pills.mb-3
     -url = url_for(q: request.query_parameters.fetch(:q, {}).merge(status_eq: status))
     -klass = active_class('nav-link', status_from_query == status.to_s)
     li.nav-item
-      = link_to status, url, class: klass
+      = link_to t("status.#{status}"), url, class: klass
