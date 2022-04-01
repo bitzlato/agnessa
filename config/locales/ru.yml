@@ -4,6 +4,8 @@ ru:
   application:
     index:
       total_records: 'Всего записей: %{count}'
+    summary:
+      title: 'Сводка'
 
   helpers:
     download_without_size: Скачать %{ext}
@@ -20,10 +22,10 @@ ru:
     to: До
 
   status:
-    all: 'Все'
-    pending: 'Ожидают проверки'
-    refused: 'Отклоненные'
-    confirmed: 'Подтвержденные'
+    all: Все
+    pending: Ожидает
+    refused: Отклонено
+    confirmed: Подтверждено
   reason:
     unban: Разбан
     trusted_trader: Доверенный продавец
