@@ -1,64 +1,148 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 ru:
+  titles:
+    application: Агнесса
+  application:
+    index:
+      total_records: 'Всего записей: %{count}'
+    summary:
+      title: 'Сводка'
+
+  client:
+    verifications:
+      blocked:
+        message: Для вашего аккаунта подача заявок была заблокирована
+      new:
+        title:  'Заявка на верификацию аккаунта #%{account_id} в %{org}'
+      created:
+        title: 'Принята заявка #%{id}'
+        message: '<div ng-show="vm.submited" style="text-align: justify; font-size: 1em;" class="ng-binding">
+                    <br><h2 style="text-align: center; margin-top: -17px;" class="ng-binding">Благодарим за подачу заявки!</h2><br> 
+                        Администрация сервиса рассмотрит Вашу заявку так быстро, насколько это возможно. В случае одобрения - верифицированы будут все Ваши аккаунты в сервисах.<br>
+                        В случае отказа - Вы получите соответствующее уведомление в течении 24-х часов.
+                        <a href="https://support.bitzlato.com" class="ng-binding">Служба поддержки</a>
+                </div>'
+
+  admin:
+    accounts:
+      verification_callback_test:
+        result: 'Результат'
+        status: 'Статус'
+      show:
+        settings: Настройки
+        secret: Секрет
+        form_description: Описание для формы
+        available_variables: Доступные переменные
+        callback_test_tile: Проверка отправки уведомлений
+        notification_example: Пример уведомления
+        save: Сохранить
+        send: Отправить
+        create_new: Создать новый
+        create_new_confirm: Точно создать новый секрет?
+
+    verifications:
+      show:
+        confirm: 'Подтвердить'
+        comfirm_alert:  'Подтверждаем заявку?'
+        refuse: 'Отклонить'
+
+    applicants:
+      block_form:
+        block:  заблокировать аппликанта
+        unblock: разблокировать аппликанта
+      verifications:
+        title: Список верификаций
+
+  helpers:
+    download_without_size: Скачать %{ext}
+    download_with_size: Скачать %{ext} (%{size})
+    disable_with: Понеслась..
+    no_divergence: Нет расхождений
+    trades: Сделки (%{count})
+    no_trades: Нет сделок
+    platform_assets: Активы платформы
+    platform_revenues: Доходы платформы
+    member_liabilities: Обязательства
+    total_delta: Разница общаяя
+    from_including: Начиная с (включительно)
+    to: До
+
+  status:
+    all: Все
+    pending: Ожидает
+    refused: Отклонено
+    confirmed: Подтверждено
+  reason:
+    unban: Разбан
+    trusted_trader: Доверенный продавец
+    restore: Восстановление аккаунта
+    other: Другое
+
+  shared:
+    navbar:
+      verifications: 'Заявки на верификацию'
+      applicants: 'Аппликанты'
+      verification_new: 'Заявка от пользователя'
+      settings: 'Настройки'
+      exit: 'Выйти'
+      admins: 'Администраторы'
+      review_result_labels: 'Статусы верификаций'
+      profile: 'Профиль организации'
+
+  ## поисковые формы
+  simple_form:
+    placeholders:
+      defaults:
+        created_at_gteq: ''
+        created_at_lt: ''
+        legacy_verification_id_cont: '1234567'
+        document_number_cont: '777 888888'
+        name_or_last_name_cont: 'Griogriy Ivanov'
+        first_name_or_last_name_cont: 'Griogriy Ivanov'
+    hints:
+      defaults:
+        created_at_gteq: ''
+        created_at_lt: ''
+        legacy_verification_id_cont: ''
+        document_number_cont: 'Номер пасспорта'
+        name_or_last_name_cont: 'На английском'
+        first_name_or_last_name_cont: 'На английском'
+    labels:
+      defaults:
+        created_at_gteq: 'Создано после:'
+        created_at_lt: 'Создано до:'
+        legacy_verification_id_cont: 'ID содержит:'
+        document_number_cont: 'Номер паспорта содержит:'
+        name_or_last_name_cont: 'Имя\Фамилия содержит:'
+        first_name_or_last_name_cont: 'Имя\Фамилия содержит:'
+
+
+
+  activerecord:
+    errors:
+      models:
+        verification:
+          attributes:
+            email:
+              invalid: Неверный формат электронной почты
+              blank: Не указана почта
+            reason:
+              blank: 'Причина обращения не выбрана'
+            name:
+              blank: 'Имя не указано'
+            last_name:
+              blank: 'Фамилия не указана'
+            document_number:
+              blank: 'Серия и номер не указан'
+            documents:
+              blank: 'Документы не были прикреплены'
+      messages:
+        record_invalid: 'Возникли ошибки: %{errors}'
   attributes:
     reasons:
       unban: 'Разблокировка учетной записи'
       trusted_trader: 'Стать доверенным торговцем'
       restore: 'Восстановление утерянного аккаунта'
       other: 'Другое'
-
-  instruction:
-    success:
-      text: '<div ng-show="vm.submited" style="text-align: justify; font-size: 1em;" class="ng-binding">
-                    <br><h2 style="text-align: center; margin-top: -17px;" class="ng-binding">Благодарим за подачу заявки!</h2><br> 
-                        Администрация сервиса рассмотрит Вашу заявку так быстро, насколько это возможно. В случае одобрения - верифицированы будут все Ваши аккаунты в сервисах Bitzlato.<br>
-                        В случае отказа - Вы получите соответствующее уведомление в течении 24-х часов.
-                        <a href="https://support.bitzlato.com" class="ng-binding">Служба поддержки</a>
-                </div>'
-
-    title: 'Заявка на верификацию аккаунта #%{account_id} в %{org}'
-    text: '<p class="instructions__paragraph ng-binding" style="text-align: left;">
-                     Пожалуйста, прикрепите 3 файла:<br>
-                    <b>1)</b> Фото вашего паспорта или ID карты на фоне данного сайта.<br>
-                    <b>2)</b> Селфи (фото вашего лица) рядом с удостоверением личности. Используйте форматы JPG, JPEG, PNG.<br>
-                    <b>3)</b> MP4/MOV видео на котором видно Вас. При записи видео необходимо сказать фразу "Для верификации в Bitzlato. С условиями сервиса ознакомлен." Помимо этого, Ваш паспорт должен находится рядом с лицом во время записи видео.
-                    <b class="ng-binding">Помимо этого, на этом же видео необходимо снять сайт %{host}. Рекомендуем воспользоваться возможностью переключения фронтальной и задней камеры. Учтите, что обязательно должен быть виден адрес %{host}.</b>
-                    <p class="taboList ng-binding" style="text-align: left;">
-                    Примите во внимание, что:<br>
-                    - Запрещается использовать графические редакторы.<br>
-                    - Необходимая информация должна быть отчетливо видна.<br>
-                    - Используйте естественное освещение при записи видео.<br>
-                    - В случае необходимости служба поддержки может запросить дополнительную информацию, например - фото карты на фоне данного сайта.'
   period: Период
   income:
     total:

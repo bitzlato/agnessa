@@ -27,10 +27,10 @@ class VerificationDecorator < ApplicationDecorator
   end
 
   def status
-    h.content_tag(:span, object.status, class: CSS_STATUS_CLASSES[object.status])
+    h.content_tag(:span, I18n.t(object.status, scope: :status), class: CSS_STATUS_CLASSES[object.status])
   end
 
   def reason
-    h.content_tag(:span, object.reason, class: CSS_REASON_CLASSES[object.reason])
+    h.content_tag(:span, I18n.t(object.reason, scope: :reason), class: CSS_REASON_CLASSES[object.reason])
   end
 end
