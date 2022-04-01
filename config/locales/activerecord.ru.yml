@@ -2,12 +2,20 @@
 ru:
   activerecord:
     models:
-      accounts: Аккаунты
-      applicants: Аппликанты
-      members: Пользователи
-      review_result_labels: Результаты верификации
-      verifications: Верификации
-      versions: Версии
+      account:
+        one: Аккаунт
+        many: Аккаунты
+      applicant:
+        one: Аппликант
+        many: Аппликанты
+      member:
+        one: Пользователь
+        many: Пользователи
+      verification:
+        one: Верификация
+        many: Верификации
+      version:  Версии
+      review_result_label: Результаты верификации
     attributes:
       account:
         created_at: Создано
