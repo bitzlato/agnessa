@@ -7,9 +7,15 @@ ru:
     summary:
       title: 'Сводка'
 
-
+  client:
+    verifications:
+      blocked:
+        message: Для вашего аккаунта подача заявок была заблокирована
   admin:
     accounts:
+      verification_callback_test:
+        result: 'Результат'
+        status: 'Статус'
       show:
         settings: Настройки
         secret: Секрет
