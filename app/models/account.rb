@@ -28,6 +28,8 @@ class Account < ApplicationRecord
 
   def form_description_interpolated
     Interpolation.interpolate form_description, interpolate_hash
+  rescue
+    ''
   end
 
   def interpolate_hash
