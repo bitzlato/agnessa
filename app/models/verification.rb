@@ -41,7 +41,7 @@ class Verification < ApplicationRecord
     end
   end
 
-  def refuse(user: nil, labels: [], user_comment: nil, moderator_comment: nil)
+  def refuse!(user: nil, labels: [], user_comment: nil, moderator_comment: nil)
     update!(
       status:               :refused,
       user_comment:         user_comment,
