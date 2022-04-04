@@ -36,16 +36,16 @@ class Verification < ApplicationRecord
 
   def confirm!(user: nil)
     ActiveRecord::Base.transaction do
-      update! status: :confirmed, moderator: user
+      update! status: :confirmed, moderator: user.member
       applicant.update! confirmed_at: Time.now, last_name: last_name, first_name: name, last_confirmed_verification_id: id
     end
   end
 
-  def refuse(user: nil, labels: [], user_comment: nil, moderator_comment: nil)
+  def refuse!(user: nil, labels: [], user_comment: nil, moderator_comment: nil)
     update!(
       status:               :refused,
       user_comment:         user_comment,
-      moderator:            user,
+      moderator:            user.member,
       moderator_comment:    moderator_comment,
       review_result_labels: labels
     )
