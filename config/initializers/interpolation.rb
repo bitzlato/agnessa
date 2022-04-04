@@ -1,1 +1,1 @@
-require 'lib/interpolation'
+require 'interpolation'
