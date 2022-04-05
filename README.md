@@ -19,6 +19,8 @@ rails db:setup
 - AGNESSA_REDIS_URL - url for redis
 - AGNESSA_SIDEKIQ_AUTH_USER - auth for sidekiq web
 - AGNESSA_SIDEKIQ_AUTH_PASSWORD - auth for sidekiq web
+- AGNESSA_BARONG_HOST - host for barong api
+- AGNESSA_LEGACY_VERIFICATION_HOST - host for server changebot urls
 
 # SMTP setup:
 
