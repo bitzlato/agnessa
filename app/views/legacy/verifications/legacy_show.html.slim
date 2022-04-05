@@ -1,0 +1,5 @@
+javascript:
+  var hash = window.location.hash
+  data = hash.split('/')
+  id = data.pop();
+  window.location.replace('/verifications/'+id)
