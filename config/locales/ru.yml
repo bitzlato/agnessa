@@ -41,7 +41,7 @@ ru:
 
     verifications:
       duplicates:
-        dup_documents: 'Найдены дупликаты по пасспорту: %{count} шт'
+        dup_documents: 'Найдены дупликаты по паспорту: %{count} шт'
         dup_names: 'Найдены дупликаты по имени: %{count} шт'
         dup_emails: 'Найдены дупликаты по email: %{count} шт'
       show:
@@ -107,7 +107,7 @@ ru:
         created_at_gteq: ''
         created_at_lt: ''
         legacy_verification_id_cont: ''
-        document_number_cont: 'Номер пасспорта'
+        document_number_cont: 'Номер паспорта'
         name_or_last_name_cont: 'На английском'
         first_name_or_last_name_cont: 'На английском'
     labels:
