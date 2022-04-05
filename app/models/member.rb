@@ -9,4 +9,8 @@ class Member < ApplicationRecord
     moderator: 0,
     superadmin: 1
   }
+
+  def to_s
+    user.email
+  end
 end
