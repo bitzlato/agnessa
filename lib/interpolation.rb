@@ -10,6 +10,7 @@ module Interpolation
 
     def interpolate(string, values)
       raise ArgumentError.new('Interpolation values must be a Hash.') unless values.kind_of?(Hash)
+      return '' if string.nil?
       interpolate_hash(string, values)
     end
 
