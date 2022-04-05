@@ -27,15 +27,15 @@ class Admin::VerificationsController < Admin::ResourcesController
   private
 
   def dup_documents
-    Verification.where(document_number: verification.document_number)
+    Verification.where(document_number: verification.document_number).where.not(id: verification.id)
   end
 
   def dup_names
-    Verification.where(name: verification.name).where(last_name: verification.last_name)
+    Verification.where(name: verification.name).where(last_name: verification.last_name).where.not(id: verification.id)
   end
 
   def dup_emails
-    Verification.where(email: verification.email)
+    Verification.where(email: verification.email).where.not(id: verification.id)
   end
 
   def verification

@@ -60,7 +60,7 @@ class VerificationDecorator < ApplicationDecorator
   private
 
   def duplicate_field(scope, field, path)
-    if scope.count > 1
+    if scope.count > 0
       h.link_to h.content_tag(:span, field, class: DUPLICATE_CLASSES[true]), path, target: '_blank'
     else
       field
@@ -68,14 +68,14 @@ class VerificationDecorator < ApplicationDecorator
   end
 
   def dup_documents
-    @dup_documents ||= Verification.where(document_number: verification.document_number)
+    @dup_documents ||= Verification.where(document_number: object.document_number).where.not(id: object.id)
   end
 
   def dup_names
-    @dup_names ||= Verification.where(name: verification.name).where(last_name: verification.last_name)
+    @dup_names ||= Verification.where(name: object.name).where(last_name: object.last_name).where.not(id: object.id)
   end
 
   def dup_emails
-    @πdup_emails ||= Verification.where(email: verification.email)
+    @dup_emails ||= Verification.where(email: object.email).where.not(id: object.id)
   end
 end
