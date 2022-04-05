@@ -12,8 +12,20 @@ module PublicConstraint
   end
 end
 
+module LegacyConstraint
+  def self.matches?(request)
+    legacy_verification_host = ENV.fetch('AGNESSA_LEGACY_VERIFICATION_HOST')
+    legacy_verification_host.present? and request.host == legacy_verification_host
+  end
+end
+
 Rails.application.routes.draw do
   default_url_options Rails.configuration.application.default_url_options.symbolize_keys
+
+  scope as: :legacy, module: :legacy, constraints: LegacyConstraint do
+    get '/' => 'verifications#legacy_show'
+    resources :verifications, only: [:show]
+  end
 
   scope as: :public, module: :public, subdomain: '', constraints: PublicConstraint do
     root to: 'landing#index'
