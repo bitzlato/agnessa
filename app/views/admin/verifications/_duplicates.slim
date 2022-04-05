@@ -1,0 +1,10 @@
+.row
+   .col-4
+      h3 =t('.dup_documents', count: dup_documents.count)
+      = render 'table', items: dup_documents, columns: VerificationDecorator.short_columns
+   .col-4
+      h3 = t('.dup_names', count: dup_names.count)
+      = render 'table', items: dup_names, columns: VerificationDecorator.short_columns
+   .col-4
+      h3 = t('.dup_emails', count: dup_emails.count)
+      = render 'table', items: dup_emails, columns: VerificationDecorator.short_columns

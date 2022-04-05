@@ -13,6 +13,10 @@ class VerificationDecorator < ApplicationDecorator
     %i[id created_at country status reason name last_name document_number moderator]
   end
 
+  def self.short_columns
+    %i[country status reason name last_name document_number]
+  end
+
   CSS_STATUS_CLASSES = { 'pending' => 'badge badge-muted',
                          'refused' => 'badge badge-warning',
                          'confirmed' => 'badge badge-success', }
@@ -33,4 +37,5 @@ class VerificationDecorator < ApplicationDecorator
   def reason
     h.content_tag(:span, I18n.t(object.reason, scope: :reason), class: CSS_REASON_CLASSES[object.reason])
   end
+
 end

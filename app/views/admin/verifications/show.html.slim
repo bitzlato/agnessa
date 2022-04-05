@@ -5,6 +5,7 @@ h1 #{verification.model_name.human} #{verification.id}
     = render 'attributes', item: verification
   .col-md-6
     = render 'documents', verification: verification
+=render partial: 'duplicates', locals: { dup_documents: dup_documents, dup_emails: dup_emails, dup_names: dup_names }
 .row
   .col-6
     = link_to t('.confirm'), confirm_admin_verification_path(verification), method: :post, class: 'btn btn-success', method: { confirm: t('.confirm_alert') }

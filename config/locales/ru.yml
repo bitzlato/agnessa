@@ -40,6 +40,10 @@ ru:
         create_new_confirm: Точно создать новый секрет?
 
     verifications:
+      duplicates:
+        dup_documents: 'Найдены дупликаты по пасспорту: %{count} шт'
+        dup_names: 'Найдены дупликаты по имени: %{count} шт'
+        dup_emails: 'Найдены дупликаты по email: %{count} шт'
       show:
         confirm: 'Подтвердить'
         comfirm_alert:  'Подтверждаем заявку?'
