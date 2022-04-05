@@ -4,8 +4,6 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, uniqueness: true
 
-  belongs_to :member
-
   def to_s
     login
   end
