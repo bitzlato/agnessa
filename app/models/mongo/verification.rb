@@ -27,15 +27,14 @@ class Mongo::Verification
     field '__v', type: Integer
 
 
-    def postgres_export
+    # Mongo::Verification.all.no_timeout.map{ |verification| verification.import_to_postgres }
+    def import_to_postgres
         return if ::Verification.find_by(legacy_verification_id:  self['_id'])
 
         pg_verifcation = ::Verification.new legacy_verification_id: self['_id']
-
         account = Account.first
-        applicant = account.applicants.find_or_create_by!(external_id: v.legacy_verification_id)
+        applicant = account.applicants.find_or_create_by!(external_id: pg_verifcation.legacy_verification_id)
         pg_verifcation.applicant_id = applicant.id
-
         if self.status == 'new'
             pg_verifcation.status = 'pending'
         else
@@ -43,7 +42,6 @@ class Mongo::Verification
         end
         pg_verifcation.raw_changebot = self
         pg_verifcation.documents = []
-
         raw = pg_verifcation.raw_changebot
 
         case raw['cause']
@@ -56,36 +54,12 @@ class Mongo::Verification
         when 'restoring'
             pg_verifcation.reason = 'restore'
         end
-
         pg_verifcation.document_number = raw['passportData']
         pg_verifcation.name = raw['name']
         pg_verifcation.last_name = raw['lastName']
         pg_verifcation.created_at = raw['created']
         pg_verifcation.updated_at = raw['lastUpdate']
         pg_verifcation.comment = raw['comment']
-
-
-        grid_fs = Mongoid::GridFs
-
-        self['files'].each do |file_object|
-            begin
-            filename = [Digest::MD5.hexdigest(File.basename(file_object['filename'])), File.extname(file_object['filename'])]
-            tempfile = Tempfile.new filename, binary: true
-
-            fs = grid_fs.get(file_object['file'])
-            fs.each { |chunk| tempfile.write chunk.force_encoding(Encoding::UTF_8) }
-
-            uploader = DocumentUploader.new pg_verifcation,'documents'
-            uploader.store! tempfile
-            pg_verifcation.documents << uploader
-
-            tempfile.close
-            tempfile.unlink
-            rescue StandardError => e
-                p e
-            end
-        end
-        pg_verifcation.save
-        p pg_verifcation
+        pg_verifcation.save(validate: false)
     end
 end

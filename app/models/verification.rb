@@ -22,7 +22,7 @@ class Verification < ApplicationRecord
   validates :status, presence: true, inclusion: { in: STATUSES }
 
   REASONS = %w[unban trusted_trader restore other]
-  validates :restore, presence: true, inclusion: { in: REASONS }, if: :refused?
+  validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
 
   after_update :send_notification_after_status_change
 
@@ -55,34 +55,39 @@ class Verification < ApplicationRecord
     update!(status: :pending, moderator_id: user)
   end
 
-  def self.export_details
-    self.find_each do |verification|
-      raw = verification.raw_changebot
 
-      case raw['cause']
-      when 'trusted'
-        verification.reason = 'trusted_trader'
-      when 'other'
-        verification.reason = 'other'
-      when 'unlocking'
-        verification.reason = 'unban'
-      when 'restoring'
-        verification.reason = 'restore'
+  def self.import_documents_from_mongo
+    self.find_each do |verification|
+      mongo_verification = Mongo::Verification.where('_id': verification.legacy_verification_id).last
+
+      next if mongo_verification.nil?
+      # next if verification.documents != []
+
+      grid_fs = Mongoid::GridFs
+      mongo_verification['files'].each do |file_object|
+        begin
+          filename = [Digest::MD5.hexdigest(File.basename(file_object['filename'])), File.extname(file_object['filename'])]
+          tempfile = Tempfile.new filename, binary: true
+
+          fs = grid_fs.get(file_object['file'])
+          fs.each { |chunk| tempfile.write chunk.force_encoding(Encoding::UTF_8) }
+
+          uploader = DocumentUploader.new verification,'documents'
+          uploader.store! tempfile
+          verification.documents << uploader
+
+          tempfile.close
+          tempfile.unlink
+        rescue StandardError => e
+          p e
+        end
       end
 
-      verification.document_number = raw['passportData']
-      verification.name = raw['name']
-      verification.last_name = raw['lastName']
-      verification.created_at = raw['created']
-      verification.updated_at = raw['lastUpdate']
-      verification.comment = raw['comment']
-
-      verification.save
+      verification.save(validate: false)
     end
   end
 
   private
-
 
   def validate_labels
     review_result_labels.each do |label|
