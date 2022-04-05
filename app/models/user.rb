@@ -5,6 +5,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   def to_s
-    login
+    email
   end
 end
