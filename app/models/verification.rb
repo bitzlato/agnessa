@@ -1,12 +1,12 @@
 class Verification < ApplicationRecord
   attr_accessor :external_id
 
-  has_paper_trail
   mount_uploaders :documents, DocumentUploader
 
   belongs_to :moderator, class_name: 'Member', required: false
   belongs_to :applicant
   has_one :account, through: :applicant
+  has_many :log_records
 
   before_validation on: :create do
     self.applicant ||= client.applicants.find_or_create_by!(external_id: external_id)
@@ -25,6 +25,7 @@ class Verification < ApplicationRecord
   validates :restore, presence: true, inclusion: { in: REASONS }, if: :refused?
 
   after_update :send_notification_after_status_change
+  after_create :log_creation
 
   def legacy_created
     raw_changebot['created'].to_datetime.to_i * 1000 rescue nil
@@ -34,25 +35,29 @@ class Verification < ApplicationRecord
     status == 'refused'
   end
 
-  def confirm!(user: nil)
+  def confirm!(member: nil)
     ActiveRecord::Base.transaction do
-      update! status: :confirmed, moderator: user
+      update! status: :confirmed, moderator: member
       applicant.update! confirmed_at: Time.now, last_name: last_name, first_name: name, last_confirmed_verification_id: id
+      log_records.create!(applicant: applicant, action: 'confirm', member: member)
     end
   end
 
-  def refuse!(user: nil, labels: [], user_comment: nil, moderator_comment: nil)
-    update!(
-      status:               :refused,
-      user_comment:         user_comment,
-      moderator:            user,
-      moderator_comment:    moderator_comment,
-      review_result_labels: labels
-    )
+  def refuse!(member: nil, labels: [], user_comment: nil, moderator_comment: nil)
+    ActiveRecord::Base.transaction do
+      update!(
+        status:               :refused,
+        user_comment:         user_comment,
+        moderator:            member,
+        moderator_comment:    moderator_comment,
+        review_result_labels: labels
+      )
+      log_records.create!(applicant: applicant, action: 'refuse', member: member)
+    end
   end
 
-  def reset!(user: nil)
-    update!(status: :pending, moderator_id: user)
+  def reset!(member: nil)
+    update!(status: :pending, moderator: member)
   end
 
   def self.export_details
@@ -83,6 +88,9 @@ class Verification < ApplicationRecord
 
   private
 
+  def log_creation
+    log_records.create!(applicant: applicant, action: 'create')
+  end
 
   def validate_labels
     review_result_labels.each do |label|
