@@ -36,7 +36,7 @@ class Verification < ApplicationRecord
 
   def confirm!(user: nil)
     ActiveRecord::Base.transaction do
-      update! status: :confirmed, moderator: user.member
+      update! status: :confirmed, moderator: user
       applicant.update! confirmed_at: Time.now, last_name: last_name, first_name: name, last_confirmed_verification_id: id
     end
   end
@@ -45,7 +45,7 @@ class Verification < ApplicationRecord
     update!(
       status:               :refused,
       user_comment:         user_comment,
-      moderator:            user.member,
+      moderator:            user,
       moderator_comment:    moderator_comment,
       review_result_labels: labels
     )
