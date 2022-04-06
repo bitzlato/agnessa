@@ -31,6 +31,7 @@ ru:
         created_at: Создано
         blocked: Заблокирован
         first_name: Имя
+        patronymic: Отчество
         last_name: Фамилия
         last_confirmed_verification: Последняя одобренная заявка
         confirmed_at: Время одобрения
@@ -47,7 +48,7 @@ ru:
         final: Окончательный
       verification:
         created_at: Создано
-        applicant: Аппликант
+        applicant: Заявитель
         country: Страна
         legacy_verification_id: Легаси ID
         status: Статус
@@ -57,6 +58,7 @@ ru:
         reason: Причина обращения
         name: Имя
         last_name: Фамилия
+        patronymic: Отчество
         document_number: Номер документа
         moderator: Модератор
         email: Почта пользователя

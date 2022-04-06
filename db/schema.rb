@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_075518) do
+ActiveRecord::Schema.define(version: 2022_04_06_172201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 2022_04_05_075518) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "verification_callback_url"
-    t.string "email_from"
     t.string "return_url"
+    t.string "email_from"
     t.text "form_description"
     t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
   end
@@ -103,10 +103,11 @@ ActiveRecord::Schema.define(version: 2022_04_05_075518) do
     t.string "document_number"
     t.integer "moderator_id"
     t.string "comment"
-    t.string "email"
+    t.citext "email"
     t.text "user_comment"
     t.text "moderator_comment"
     t.json "review_result_labels", default: []
+    t.string "patronymic"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
   end
 

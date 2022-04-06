@@ -1,7 +1,15 @@
 module ApplicationHelper
 
+  STATUS_CLASSES = { 'pending' => 'badge badge-muted',
+                         'refused' => 'badge badge-warning',
+                         'confirmed' => 'badge badge-success', }
+
   # TODO Вынести в Uploader
   VIDEO_EXTS = %w[.mp4 .mov]
+
+  def status_badge(status)
+    content_tag(:span, t(status, scope: :status), class: STATUS_CLASSES[status])
+  end
 
   def sort_column(column, title)
     sort_link q, column, title
