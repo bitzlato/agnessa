@@ -35,6 +35,7 @@ module ApplicationHelper
   end
 
   def sort_column(column, title)
+    return column unless defined? q
     sort_link q, column, title
   end
 

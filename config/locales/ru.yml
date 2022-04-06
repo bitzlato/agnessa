@@ -86,9 +86,7 @@ ru:
     navbar:
       verifications: 'Заявки'
       applicants: 'Заявители'
-      verification_new: 'Заявка'
-      verification_new_long: 'Заявка от пользователя'
-      verification_new_short: 'Заявка от пользователя (короткая)'
+      verification_new: 'Тестовая заявка'
       settings: 'Настройки'
       exit: 'Выйти'
       admins: 'Администраторы'

@@ -1,20 +1,21 @@
-table.table.table-striped.table-hover.table-narrow
-  thead.thead-dark
+table.table.table-striped.table-hover.table-narrow.table-sm
+  thead.thead-light
     tr
-      th class='text-right'= t('activerecord.attributes.log_record.action')
+      th= t('activerecord.attributes.log_record.action')
       - unless record.is_a?(Verification)
-        th class='text-right'= t('activerecord.attributes.log_record.verification')
-      th class='text-right' = t('activerecord.attributes.log_record.moderator_id')
-      th class='text-right' = t('activerecord.attributes.log_record.created_at')
-  - record.log_records.ordered.each do |v|
-    tr
-      td class='text-right'
-        = t "activerecord.attributes.log_record.actions.#{v.action}"
-      - unless record.is_a?(Verification)
-        td class='text-right'
-          - if v.verification.present?
-            = link_to v.verification.id, admin_verification_path(v.verification)
-      td class='text-right'
-        = v.member
-      td class='text-right'
-        = I18n.l v.created_at
+        th= t('activerecord.attributes.log_record.verification')
+      th= t('activerecord.attributes.log_record.moderator_id')
+      th= t('activerecord.attributes.log_record.created_at')
+  tbody
+    - record.log_records.ordered.each do |log_record|
+      tr
+        td
+          = t "activerecord.attributes.log_record.actions.#{log_record.action}"
+        - unless record.is_a?(Verification)
+          td
+            - if log_record.verification.present?
+              = link_to log_record.verification.id, admin_verification_path(log_record.verification)
+        td
+          = log_record.member
+        td
+          = l log_record.created_at, format: :long
