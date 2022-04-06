@@ -1,5 +1,10 @@
-= link_to '&larr; назад в заявки'.html_safe
-h1 #{verification.model_name.human} #{verification.id}
+.mb-2
+  = link_to '&larr; назад в заявки'.html_safe
+h1 
+  = verification.model_name.human
+  span.ml-1= '#' + verification.id.to_s
+  span.text-muted.text-small.ml-2= l item.created_at, format: :long
+
 .row
   .col-md-6
     = render 'attributes', item: verification, similar_documents: similar_documents, similar_names: similar_names, similar_emails: similar_emails
@@ -8,7 +13,6 @@ h1 #{verification.model_name.human} #{verification.id}
 .row
   .col-6
     = link_to t('.confirm'), confirm_admin_verification_path(verification), method: :post, class: 'btn btn-success', method: { confirm: t('.confirm_alert') }
-    = render partial: 'logs', locals: {record: verification}
   .col-6
     = simple_form_for verification, url: refuse_admin_verification_path(verification), method: :post do |f|
       = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 15, multiple: true }, required: true
@@ -17,3 +21,5 @@ h1 #{verification.model_name.human} #{verification.id}
       = f.button :submit, t('.refuse'), class: 'btn btn-danger align-right'
     br
     = render partial: 'admin/applicants/block_form', locals: {applicant: verification.applicant}
+hr
+= render partial: 'log', locals: {record: verification}

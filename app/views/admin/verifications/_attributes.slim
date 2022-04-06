@@ -1,12 +1,6 @@
 - item = item.decorate unless item.respond_to?(:decorated?) && item.decorated?
 table.table.table-striped.table-hover.table-narrow
     tr
-      th.text-right title=:created_at
-        = item.class.human_attribute_name :created_at
-      td.text-left
-        = item.created_at
-
-    tr
       th.text-right title=:status
         = item.class.human_attribute_name :status
       td.text-left
