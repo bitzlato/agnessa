@@ -128,6 +128,8 @@ gem 'faraday', '~> 2.0'
 gem 'request_store'
 gem 'validate_url', '~> 1.0.4'
 gem "gravatarify", "~> 3.1"
+gem 'sorcery'
+gem 'virtus'
 
 gem "rails-i18n", "~> 7.0"
 

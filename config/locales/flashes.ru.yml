@@ -1,0 +1,16 @@
+ru:
+  flashes:
+    not_authenticated: Нет публичного доступа к данному ресурсу. Предтавьтесь.
+    welcome: Добро пожаловать, %{name}!
+    wrong_credentials: Неверный логин и пароль
+    logout: До свидания!
+    you_are_registered: Вы уже зарегистрированы, помочь восстановить доступ?
+    password_resets:
+      update:
+        notice: Пароль восстановлен
+    profile:
+      update:
+        notice: Профиль обновлён
+    users:
+      create:
+        notice: Поздравляю, вы зарегистрированы! Можете установить свой пароль в профиле
