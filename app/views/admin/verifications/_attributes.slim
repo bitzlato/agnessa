@@ -1,60 +1,54 @@
-- item = item.decorate unless item.respond_to?(:decorated?) && item.decorated?
+- verification = verification.decorate unless verification.respond_to?(:decorated?) && verification.decorated?
 table.table.table-striped.table-hover.table-narrow
     tr
       th.text-right title=:status
-        = item.class.human_attribute_name :status
-      td.text-left
-          = item.status
-
+        = verification.class.human_attribute_name :status
+      td
+          = verification.status
     tr
       th.text-right title=:reason
-        = item.class.human_attribute_name :reason
-      td.text-left
-        = item.reason
+        = verification.class.human_attribute_name :reason
+      td
+        = verification.reason
 
     tr class=warining_table_class(nil, similar_documents.any?)
       th.text-right title=:document_number
-          = item.class.human_attribute_name :document_number
-      td.text-left
+          = verification.class.human_attribute_name :document_number
+      td
         ul.list-unstyled
-          li = item.document_number
+          li = verification.document_number
           - if similar_documents.any?
-            li =link_to t('.dup_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
+            li =link_to t('.dup_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': verification.document_number), target: '_blank'
 
     tr class=warining_table_class(nil, similar_names.any?)
-      th.text-right title=:name
-        = item.class.human_attribute_name :name
-      td.text-left
+      th.text-right title=:full_name
+        = verification.class.human_attribute_name :full_name
+      td
         ul.list-unstyled
-          li  = item.name
+          li= verification.full_name
           - if similar_names.any?
-            li  = link_to t('.dup_names', count: similar_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
-
-    tr class=warining_table_class(nil, similar_names.any?)
-      th.text-right title=:last_name
-        = item.class.human_attribute_name :last_name
-      td.text-left
-        ul.list-unstyled
-          li.list-unstyled = item.last_name
-          - if similar_names.any?
-            li= link_to t('.dup_names', count: similar_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
+            li
+              = link_to t('.dup_names', count: similar_names.count), 
+                admin_verifications_path('q[name_eq]': verification.name, 'q[last_name_eq]': verification.last_name), 
+                target: '_blank'
 
     tr class=warining_table_class(nil, similar_emails.any?)
       th.text-right' title=:email
-        = item.class.human_attribute_name :email
-      td.text-left
+        = verification.class.human_attribute_name :email
+      td
         ul.list-unstyled
-          li = item.email
+          li = verification.email
           - if similar_emails.any?
-            li = link_to t('.dup_emails', count: similar_emails.count), admin_verifications_path('q[email_eq]': item.email), target: '_blank'
+            li = link_to t('.dup_emails', count: similar_emails.count), admin_verifications_path('q[email_eq]': verification.email), target: '_blank'
     tr
       th.text-right title=:applicant
-        = item.class.human_attribute_name :applicant
-      td.text-left
-        = link_to item.applicant, admin_applicant_path(item.applicant), target: '_blank'
+        = verification.class.human_attribute_name :applicant
+      td
+        = link_to verification.applicant, admin_applicant_path(verification.applicant), target: '_blank'
 
-    tr
-      th.text-right title=:legacy_verification_id
-        = item.class.human_attribute_name :legacy_verification_id
-      td.text-left
-        = item.legacy_verification_id
+    - if verification.legacy_verification_id.present?
+      tr
+        th.text-right title=:legacy_verification_id
+          = verification.class.human_attribute_name :legacy_verification_id
+        td
+          = verification.legacy_verification_id

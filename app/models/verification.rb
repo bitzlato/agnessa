@@ -3,6 +3,8 @@ class Verification < ApplicationRecord
 
   attr_accessor :external_id
 
+  alias_attribute :first_name, :name
+
   mount_uploaders :documents, DocumentUploader
 
   belongs_to :moderator, class_name: 'Member', required: false
@@ -12,6 +14,11 @@ class Verification < ApplicationRecord
 
   before_validation on: :create do
     self.applicant ||= client.applicants.find_or_create_by!(external_id: external_id)
+  end
+
+  before_create do
+    self.first_name = first_name.to_s.upcase
+    self.last_name = last_name.to_s.upcase
   end
 
   validates :country, :name, :last_name, :document_number, :documents, :reason, presence: true, on: :create
@@ -33,6 +40,10 @@ class Verification < ApplicationRecord
     raw_changebot['created'].to_datetime.to_i * 1000 rescue nil
   end
 
+  def full_name
+    [name, last_name].join(' ')
+  end
+
   def refused?
     status == 'refused'
   end
@@ -40,7 +51,7 @@ class Verification < ApplicationRecord
   def confirm!(member: nil)
     ActiveRecord::Base.transaction do
       update! status: :confirmed, moderator: member
-      applicant.update! confirmed_at: Time.now, last_name: last_name, first_name: name, last_confirmed_verification_id: id
+      applicant.update! confirmed_at: Time.now, last_name: last_name, first_name: name, patronymic: patronymic, last_confirmed_verification_id: id
       log_records.create!(applicant: applicant, action: 'confirm', member: member)
     end
   end
