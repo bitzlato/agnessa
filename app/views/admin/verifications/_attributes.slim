@@ -1,19 +1,14 @@
 - verification = verification.decorate unless verification.respond_to?(:decorated?) && verification.decorated?
 table.table.table-striped.table-hover.table-narrow
     tr
-      th.text-right title=:status
-        = verification.class.human_attribute_name :status
-      td
-          = verification.status
+      th.text-right= verification.class.human_attribute_name :status
+      td= verification.status
     tr
-      th.text-right title=:reason
-        = verification.class.human_attribute_name :reason
-      td
-        = verification.reason
+      th.text-right= verification.class.human_attribute_name :reason
+      td= verification.reason
 
     tr class=warining_table_class(nil, similar_documents.any?)
-      th.text-right title=:document_number
-          = verification.class.human_attribute_name :document_number
+      th.text-right= verification.class.human_attribute_name :document_number
       td
         ul.list-unstyled
           li = verification.document_number
@@ -21,8 +16,7 @@ table.table.table-striped.table-hover.table-narrow
             li =link_to t('.dup_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': verification.document_number), target: '_blank'
 
     tr class=warining_table_class(nil, similar_names.any?)
-      th.text-right title=:full_name
-        = verification.class.human_attribute_name :full_name
+      th.text-right= verification.class.human_attribute_name :full_name
       td
         ul.list-unstyled
           li= verification.full_name
@@ -33,22 +27,18 @@ table.table.table-striped.table-hover.table-narrow
                 target: '_blank'
 
     tr class=warining_table_class(nil, similar_emails.any?)
-      th.text-right' title=:email
-        = verification.class.human_attribute_name :email
+      th.text-right= verification.class.human_attribute_name :email
       td
         ul.list-unstyled
           li = verification.email
           - if similar_emails.any?
             li = link_to t('.dup_emails', count: similar_emails.count), admin_verifications_path('q[email_eq]': verification.email), target: '_blank'
     tr
-      th.text-right title=:applicant
-        = verification.class.human_attribute_name :applicant
+      th.text-right= verification.class.human_attribute_name :applicant
       td
         = link_to verification.applicant, admin_applicant_path(verification.applicant), target: '_blank'
 
     - if verification.legacy_verification_id.present?
       tr
-        th.text-right title=:legacy_verification_id
-          = verification.class.human_attribute_name :legacy_verification_id
-        td
-          = verification.legacy_verification_id
+        th.text-right= verification.class.human_attribute_name :legacy_verification_id
+        td= verification.legacy_verification_id

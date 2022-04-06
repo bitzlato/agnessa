@@ -62,7 +62,7 @@ ru:
         patronymic: Отчество
         document_number: Номер документа
         moderator: Модератор
-        email: Почта пользователя
+        email: Почта
         user_comment: Комментарий для пользователя
         moderator_comment: Комментарий для модератора
         review_result_labels: Результаты проверки
