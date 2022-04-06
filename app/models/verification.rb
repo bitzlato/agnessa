@@ -78,7 +78,7 @@ class Verification < ApplicationRecord
 
           tempfile.close
           tempfile.unlink
-        rescue StandardError => e
+        rescue CarrierWave::IntegrityError => e
           p e
         end
       end
