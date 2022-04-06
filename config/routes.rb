@@ -67,6 +67,8 @@ Rails.application.routes.draw do
           resources :verifications, only: [:new, :create]
         end
       end
+
+      get 'v/:encoded_external_id', to: 'verifications#new', as: :short_new_verification
     end
   end
 
