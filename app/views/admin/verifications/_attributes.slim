@@ -38,7 +38,7 @@ table.table.table-striped.table-hover.table-narrow
       td
         = link_to verification.applicant, admin_applicant_path(verification.applicant), target: '_blank'
 
-    - if verification.legacy_verification_id.present?
+    - if verification.object.legacy_verification_id.present?
       tr
         th.text-right= verification.class.human_attribute_name :legacy_verification_id
         td= verification.legacy_verification_id
