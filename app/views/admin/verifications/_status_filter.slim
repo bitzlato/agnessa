@@ -1,0 +1,11 @@
+ul.nav.nav-pills.mb-3
+  - status_from_query = request.query_parameters.fetch(:q, {}).fetch(:status_eq, nil)
+  - Verification::STATUSES.each do |status|
+    -url = admin_verifications_path(q: request.query_parameters.fetch(:q, {}).merge(status_eq: status))
+    - klass = active_class('nav-link', status_from_query == status.to_s)
+    li.nav-item
+      = link_to url, class: klass do
+        = title_with_counter t("status.#{status}"), current_account.verifications.by_status(status).count
+  li.nav-item
+    = link_to admin_verifications_path(q: request.query_parameters.fetch(:q, {}).except(:status_eq)), class: active_class('nav-link', status_from_query.nil?) do
+      = title_with_counter t('status.all'), current_account.verifications.count

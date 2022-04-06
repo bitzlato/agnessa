@@ -21,6 +21,7 @@ class Verification < ApplicationRecord
     self.last_name = last_name.to_s.upcase
   end
 
+
   validates :country, :name, :last_name, :document_number, :documents, :reason, presence: true, on: :create
   validates :email, presence: true, email: true
 
@@ -29,6 +30,12 @@ class Verification < ApplicationRecord
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
+
+  scope :by_status, ->(status) { where status: status }
+  STATUSES.each do |status|
+    scope status, -> { by_status status }
+  end
+
 
   REASONS = %w[unban trusted_trader restore other]
   validates :restore, presence: true, inclusion: { in: REASONS }, if: :refused?

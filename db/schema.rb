@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_172201) do
+ActiveRecord::Schema.define(version: 2022_04_06_173651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(version: 2022_04_06_172201) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "blocked", default: false, null: false
-    t.string "first_name"
-    t.string "last_name"
+    t.citext "first_name"
+    t.citext "last_name"
     t.bigint "last_confirmed_verification_id"
     t.datetime "confirmed_at"
+    t.citext "patronymic"
     t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
     t.index ["account_id"], name: "index_applicants_on_account_id"
   end
@@ -98,8 +99,8 @@ ActiveRecord::Schema.define(version: 2022_04_06_172201) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "reason"
-    t.string "name"
-    t.string "last_name"
+    t.citext "name"
+    t.citext "last_name"
     t.string "document_number"
     t.integer "moderator_id"
     t.string "comment"
@@ -107,7 +108,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_172201) do
     t.text "user_comment"
     t.text "moderator_comment"
     t.json "review_result_labels", default: []
-    t.string "patronymic"
+    t.citext "patronymic"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
   end
 
