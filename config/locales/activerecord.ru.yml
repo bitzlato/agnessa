@@ -12,9 +12,8 @@ ru:
         one: Пользователь
         many: Пользователи
       verification:
-        one: Верификация
-        many: Верификации
-      version:  Версии
+        one: Заявка
+        many: Заявки
       review_result_label: Результаты верификации
     attributes:
       account:
