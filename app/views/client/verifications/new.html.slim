@@ -35,6 +35,6 @@
                      as: :file,
                      input_html: { multiple: true, accept: Rails.configuration.application.document_formats },
                      label: "Документы",
-                     hint: "До #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
+                     hint: "Размер файла:  От #{number_to_human_size(Rails.configuration.application.min_upload_file_size)} до #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
       br
       = f.submit class: 'btn btn-bg btn-primary'
