@@ -1,5 +1,7 @@
 class Verification < ApplicationRecord
-  strip_attributes
+  strip_attributes replace_newlines: true, collapse_spaces: true
+  # Strip off all spaces and keep only alphabetic and numeric characters
+  strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
 
   attr_accessor :external_id
 
@@ -19,8 +21,9 @@ class Verification < ApplicationRecord
   before_create do
     self.first_name = first_name.to_s.upcase
     self.last_name = last_name.to_s.upcase
+    self.patronymic = patronymic.to_s.upcase
+    self.document_number = document_number.to_s.upcase
   end
-
 
   validates :country, :name, :last_name, :document_number, :documents, :reason, presence: true, on: :create
   validates :email, presence: true, email: true
