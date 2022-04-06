@@ -85,7 +85,7 @@ ru:
   shared:
     navbar:
       verifications: 'Заявки на верификацию'
-      applicants: 'Аппликанты'
+      applicants: 'Заявители'
       verification_new: 'Заявка от пользователя'
       verification_new_long: 'Заявка от пользователя'
       verification_new_short: 'Заявка от пользователя (короткая)'

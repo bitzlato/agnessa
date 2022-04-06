@@ -6,8 +6,8 @@ ru:
         one: Аккаунт
         many: Аккаунты
       applicant:
-        one: Аппликант
-        many: Аппликанты
+        one: Заявитель
+        many: Заявители
       member:
         one: Пользователь
         many: Пользователи
