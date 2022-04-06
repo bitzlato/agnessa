@@ -26,25 +26,6 @@ class VerificationDecorator < ApplicationDecorator
                          'restore' => 'badge badge-info',
                          'other' => 'badge badge-mute', }
 
-  DUPLICATE_CLASSES = { true => 'badge badge-warning',
-                        false => 'badge badge-info', }
-
-  def document_number_dup
-    duplicate_field(dup_documents, object.document_number, h.admin_verifications_path('q[document_number_eq]': object.last_name))
-  end
-
-  def name_dup
-    duplicate_field(dup_names, object.name, h.admin_verifications_path('q[name_eq]': object.last_name))
-  end
-
-  def last_name_dup
-    duplicate_field(dup_names, object.last_name, h.admin_verifications_path('q[last_name_eq]': object.last_name))
-  end
-
-  def email_dup
-    duplicate_field(dup_emails, object.email, h.admin_verifications_path('q[email_eq]': object.email))
-  end
-
   def external_id
     h.content_tag(:code, object.applicant.external_id)
   end
@@ -65,17 +46,5 @@ class VerificationDecorator < ApplicationDecorator
     else
       field
     end
-  end
-
-  def dup_documents
-    @dup_documents ||= Verification.where(document_number: object.document_number).where.not(id: object.id)
-  end
-
-  def dup_names
-    @dup_names ||= Verification.where(name: object.name).where(last_name: object.last_name).where.not(id: object.id)
-  end
-
-  def dup_emails
-    @dup_emails ||= Verification.where(email: object.email).where.not(id: object.id)
   end
 end
