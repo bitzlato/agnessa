@@ -47,10 +47,6 @@ ru:
         description: Описание
         final: Окончательный
       verification:
-        name_dup: Имя
-        last_name_dup: Фамилия
-        email_dup: Почта пользователя
-        document_number_dup: Номер документа
         created_at: Создано
         applicant: Аппликант
         country: Страна
