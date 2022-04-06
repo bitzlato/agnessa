@@ -9,6 +9,7 @@ class Account < ApplicationRecord
   validates :verification_callback_url, url: true, if: :verification_callback_url?
   validates :email_from, email: true
   validates :return_url, url: true, if: :return_url?
+  validates :subdomain, exclusion: Rails.configuration.application.reserved_subdomains
 
   before_validation :set_secret, on: :create
   before_validation :downcase_subdomain

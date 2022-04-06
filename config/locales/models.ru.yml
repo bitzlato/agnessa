@@ -45,6 +45,14 @@ ru:
           refuse: Отклонение заявки
           block: Блокировка аппликанта
           unblock: Разблокировка аппликанта
+      account:
+        name: Ваше Имя
+        last_name: Ваша Фамилия
+        verification_callback_url: API URL для получений уведомлени о статусе верификации
+        email_from: Email с которого отправляются уведомления
+        return_url: Адрес возврата на сайт после подачи заявки
+        subdomain: Поддомен
+        document_number: Номер документа
       reasons:
         unban: 'Разблокировка учетной записи'
         trusted_trader: 'Стать доверенным торговцем'
