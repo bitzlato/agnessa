@@ -33,7 +33,17 @@ end
 set :rbenv_type, :user
 set :rbenv_ruby, File.read('.ruby-version').strip
 
+set :nvm_node, File.read('.nvmrc').strip
+set :nvm_map_bins, %w[node npm yarn rake]
+
 set :conditionally_migrate, true # Only attempt migration if db/migrate changed - not related to Webpacker, but a nice thing
+
+set :assets_dependencies,
+    %w[
+      app/assets lib/assets vendor/assets app/javascript
+      yarn.lock Gemfile.lock config/routes.rb config/initializers/assets.rb
+      .semver
+    ]
 
 set :db_local_clean, false
 set :db_remote_clean, true
