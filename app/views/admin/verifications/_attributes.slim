@@ -5,11 +5,7 @@ table.table.table-striped.table-hover.table-narrow
         = item.class.human_attribute_name :created_at
       td.text-left
         = item.created_at
-    tr
-      th.text-right title=:legacy_verification_id
-        = item.class.human_attribute_name :legacy_verification_id
-      td.text-left
-        = item.legacy_verification_id
+
     tr
       th.text-right title=:status
         = item.class.human_attribute_name :status
@@ -25,10 +21,10 @@ table.table.table-striped.table-hover.table-narrow
       th.text-right title=:document_number
           = item.class.human_attribute_name :document_number
       td.text-left
-        ul
-          li.list-unstyled = item.document_number
+        ul.list-unstyled
+          li = item.document_number
           - if similar_documents.any?
-            li.list-unstyled =link_to t('.dup_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
+            li =link_to t('.dup_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
 
     tr class=warining_table_class(nil, similar_names.any?)
       th.text-right title=:name
@@ -60,3 +56,9 @@ table.table.table-striped.table-hover.table-narrow
         = item.class.human_attribute_name :applicant
       td.text-left
         = link_to item.applicant, admin_applicant_path(item.applicant), target: '_blank'
+
+    tr
+      th.text-right title=:legacy_verification_id
+        = item.class.human_attribute_name :legacy_verification_id
+      td.text-left
+        = item.legacy_verification_id
