@@ -55,4 +55,4 @@ table.table.table-striped.table-hover.table-narrow
       th.text-right title=:applicant
         = item.class.human_attribute_name :applicant
       td.text-left
-        = item.applicant
+        = link_to item.applicant, admin_applicant_path(item.applicant), target: '_blank'
