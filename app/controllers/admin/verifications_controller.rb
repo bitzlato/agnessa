@@ -31,7 +31,7 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   def dup_names
-    Verification.where(name: verification.name).where(last_name: verification.last_name).where.not(id: verification.id)
+    Verification.where(name: verification.name, last_name: verification.last_name).where.not(id: verification.id)
   end
 
   def dup_emails
