@@ -17,6 +17,7 @@ table.table.table-striped.table-hover.table-narrow
         = item.class.human_attribute_name :reason
       td.text-left
         = item.reason
+
     tr class=warining_table_class(nil, similar_documents.any?)
       th.text-right title=:document_number
           = item.class.human_attribute_name :document_number
@@ -43,6 +44,7 @@ table.table.table-striped.table-hover.table-narrow
           li.list-unstyled = item.last_name
           - if similar_names.any?
             li= link_to t('.dup_names', count: similar_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
+
     tr class=warining_table_class(nil, similar_emails.any?)
       th.text-right' title=:email
         = item.class.human_attribute_name :email
