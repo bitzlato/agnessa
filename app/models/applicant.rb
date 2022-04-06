@@ -1,4 +1,6 @@
 class Applicant < ApplicationRecord
+  strip_attributes
+
   belongs_to :account
   has_many :verifications
   has_many :log_records
