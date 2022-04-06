@@ -2,8 +2,8 @@
   = link_to '&larr; назад в заявки'.html_safe
 h1 
   = verification.model_name.human
-  span.ml-1= '#' + verification.id.to_s
-  span.text-muted.text-small.ml-2= l verification.created_at, format: :long
+  span.ml-2= '#' + verification.id.to_s
+  small.text-muted.ml-2= l verification.created_at, format: :long
 
 .row
   .col-md-6
