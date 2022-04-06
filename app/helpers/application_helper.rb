@@ -1,8 +1,7 @@
 module ApplicationHelper
-
-  STATUS_CLASSES = { 'pending' => 'badge badge-muted',
-                         'refused' => 'badge badge-warning',
-                         'confirmed' => 'badge badge-success', }
+  STATUS_CLASSES = { 'pending' => 'badge badge-warning',
+                     'refused' => 'badge badge-secondary',
+                     'confirmed' => 'badge badge-success' }
 
   # TODO Вынести в Uploader
   VIDEO_EXTS = %w[.mp4 .mov]
