@@ -2,7 +2,7 @@
 h1 #{verification.model_name.human} #{verification.id}
 .row
   .col-md-6
-    = render 'attributes', item: verification, dup_documents: dup_documents, dup_names: dup_names, dup_emails: dup_emails
+    = render 'attributes', item: verification, similar_documents: similar_documents, similar_names: similar_names, similar_emails: similar_emails
   .col-md-6
     = render 'documents', verification: verification
 .row
