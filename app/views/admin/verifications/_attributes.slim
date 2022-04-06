@@ -34,14 +34,7 @@ table.table.table-striped.table-hover.table-narrow
           li  = item.name
           - if dup_names.any?
             li  = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
-      tr
-      th.text-right title=:last_name
-        = item.class.human_attribute_name :last_name
-      td.text-right
-        ul.list-unstyled
-          li = item.last_name
-          - if dup_names.any?
-            li = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
+
     tr
       th.text-right title=:last_name
         = item.class.human_attribute_name :last_name
