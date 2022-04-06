@@ -1,11 +1,15 @@
 - item = item.decorate unless item.respond_to?(:decorated?) && item.decorated?
 table.table.table-striped.table-hover.table-narrow
     tr
+      th.text-right title=:created_at
+        = item.class.human_attribute_name :created_at
+      td.text-left
+        = item.created_at
+    tr
       th.text-right title=:legacy_verification_id
         = item.class.human_attribute_name :legacy_verification_id
       td.text-left
-        => item.legacy_verification_id
-
+        = item.legacy_verification_id
     tr
       th.text-right title=:status
         = item.class.human_attribute_name :status
@@ -16,41 +20,41 @@ table.table.table-striped.table-hover.table-narrow
       th.text-right title=:reason
         = item.class.human_attribute_name :reason
       td.text-left
-        => item.reason
-    tr class=warining_table_class(nil, dup_documents.any?)
+        = item.reason
+    tr class=warining_table_class(nil, similar_documents.any?)
       th.text-right title=:document_number
           = item.class.human_attribute_name :document_number
       td.text-left
         ul
           li.list-unstyled = item.document_number
-          - if dup_documents.any?
-            li.list-unstyled =link_to t('.dup_documents', count: dup_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
+          - if similar_documents.any?
+            li.list-unstyled =link_to t('.dup_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
 
-    tr class=warining_table_class(nil, dup_names.any?)
+    tr class=warining_table_class(nil, similar_names.any?)
       th.text-right title=:name
         = item.class.human_attribute_name :name
       td.text-left
         ul.list-unstyled
           li  = item.name
-          - if dup_names.any?
-            li  = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
+          - if similar_names.any?
+            li  = link_to t('.dup_names', count: similar_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
 
-    tr class=warining_table_class(nil, dup_names.any?)
+    tr class=warining_table_class(nil, similar_names.any?)
       th.text-right title=:last_name
         = item.class.human_attribute_name :last_name
       td.text-left
         ul.list-unstyled
           li.list-unstyled = item.last_name
-          - if dup_names.any?
-            li= link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
-    tr class=warining_table_class(nil, dup_emails.any?)
+          - if similar_names.any?
+            li= link_to t('.dup_names', count: similar_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
+    tr class=warining_table_class(nil, similar_emails.any?)
       th.text-right' title=:email
         = item.class.human_attribute_name :email
       td.text-left
         ul.list-unstyled
           li = item.email
-          - if dup_emails.any?
-            li = link_to t('.dup_emails', count: dup_emails.count), admin_verifications_path('q[email_eq]': item.email), target: '_blank'
+          - if similar_emails.any?
+            li = link_to t('.dup_emails', count: similar_emails.count), admin_verifications_path('q[email_eq]': item.email), target: '_blank'
     tr
       th.text-right title=:applicant
         = item.class.human_attribute_name :applicant
