@@ -35,6 +35,8 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   def dup_emails
+    return Verification.none if verification.email.nil?
+
     Verification.where(email: verification.email).where.not(id: verification.id)
   end
 

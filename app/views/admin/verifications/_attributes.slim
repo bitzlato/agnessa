@@ -50,7 +50,7 @@ table.table.table-striped.table-hover.table-narrow
         ul.list-unstyled
           li = item.email
           - if dup_emails.any?
-            li = link_to t('.dup_emails', count: dup_names.count), admin_verifications_path('q[email_eq]': item.email), target: '_blank'
+            li = link_to t('.dup_emails', count: dup_emails.count), admin_verifications_path('q[email_eq]': item.email), target: '_blank'
     tr
       th.text-right title=:applicant
         = item.class.human_attribute_name :applicant
