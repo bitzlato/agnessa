@@ -57,6 +57,7 @@ ru:
         raw_changebot: Легаси JSON
         reason: Причина обращения
         name: Имя
+        full_name: ФИО
         last_name: Фамилия
         patronymic: Отчество
         document_number: Номер документа
