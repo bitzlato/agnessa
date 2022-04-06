@@ -2,7 +2,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   storage :file
 
   def size_range
-    1000..Rails.configuration.application.max_upload_file_size
+    Rails.configuration.application.min_upload_file_size..Rails.configuration.application.max_upload_file_size
   end
 
   # Override the directory where uploaded files will be stored.
