@@ -42,9 +42,9 @@ ru:
 
     verifications:
       attributes:
-        dup_documents: 'Найдены дупликаты по документы: %{count} шт'
-        dup_names: 'Найдены дупликаты по имени: %{count} шт'
-        dup_emails: 'Найдены дупликаты по email: %{count} шт'
+        dup_documents: 'Найдены совпадения: %{count} шт'
+        dup_names: 'Найдены совпадения: %{count} шт'
+        dup_emails: 'Найдены совпадения: %{count} шт'
       show:
         confirm: 'Подтвердить'
         comfirm_alert:  'Подтверждаем заявку?'
