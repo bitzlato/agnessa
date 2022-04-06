@@ -13,6 +13,7 @@ ru:
         message: Для вашего аккаунта подача заявок была заблокирована
       new:
         title:  'Заявка на верификацию аккаунта #%{account_id} в %{org}'
+        from_to_size:  'Размер файла:  От %{from} до %{to}'
       created:
         title: 'Принята заявка #%{id}'
         message: '<div ng-show="vm.submited" style="text-align: justify; font-size: 1em;" class="ng-binding">
