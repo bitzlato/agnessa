@@ -16,6 +16,7 @@ default:  &settings
   max_upload_file_size: <%= 100.megabytes %>
   country_priority: ['RU', 'KZ', 'BY', 'UA']
   document_formats: 'image/png,image/gif,image/jpeg,image/webp,image/*,video/mp4,video/mov'
+  reserved_subdomains: ['www', 'api']
 
 development:
   <<: *settings
