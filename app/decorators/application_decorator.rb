@@ -34,7 +34,7 @@ class ApplicationDecorator < Draper::Decorator
     return time.iso8601 if h.request.format.xlsx?
 
     h.content_tag :span, class: 'text-nowrap' do
-      I18n.l time
+      I18n.l time, format: :long
     end
   end
 end
