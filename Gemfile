@@ -87,6 +87,8 @@ group :deploy do
   gem 'capistrano-shell', require: false
   gem 'capistrano-rails-console', require: false
   gem 'capistrano-systemd-multiservice', github: 'brandymint/capistrano-systemd-multiservice', require: false
+  gem 'capistrano-nvm', require: false
+  gem 'capistrano-yarn', require: false
   gem 'capistrano-tasks', github: 'brandymint/capistrano-tasks', require: false
   gem 'capistrano-git-with-submodules'
   gem 'bugsnag-capistrano', require: false
