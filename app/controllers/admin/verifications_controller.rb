@@ -1,7 +1,10 @@
 class Admin::VerificationsController < Admin::ResourcesController
 
   def show
-    render locals: { verification: verification }
+    render locals: { verification: verification,
+                     dup_documents: dup_documents,
+                     dup_names: dup_names,
+                     dup_emails: dup_emails }
   end
 
   def update
@@ -22,6 +25,18 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   private
+
+  def dup_documents
+    Verification.where(document_number: verification.document_number).where.not(id: verification.id)
+  end
+
+  def dup_names
+    Verification.where(name: verification.name, last_name: verification.last_name).where.not(id: verification.id)
+  end
+
+  def dup_emails
+    Verification.where(email: verification.email).where.not(id: verification.id)
+  end
 
   def verification
     @verification ||= Verification.find(params[:id])
