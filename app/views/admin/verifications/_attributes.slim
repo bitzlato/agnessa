@@ -1,0 +1,8 @@
+table.table
+  tr
+  th Номер документа
+  td
+    div = item.document_number
+  / - if dup_documents.any?
+  / p = Есть еще заявки с
+  / = link_to "таким документами #[docuemnts.count] шт", admin_verificationc_path(q: {document_number_eq: ...)
