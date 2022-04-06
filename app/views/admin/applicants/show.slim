@@ -4,6 +4,6 @@ h1 #{record.model_name.human} ##{record.id}
   .col-md-6
     = render 'attributes', item: record
   .col-md-6
-    = render partial: 'logs', locals: {record: record}
+    = render partial: 'log', locals: {record: record}
 = render partial: 'admin/applicants/block_form', locals: {applicant: record}
 = render partial: 'verifications', locals: {applicant: record}
