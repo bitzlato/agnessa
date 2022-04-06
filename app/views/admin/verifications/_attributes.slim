@@ -3,24 +3,24 @@ table.table.table-striped.table-hover.table-narrow
     tr
       th.text-right title=:legacy_verification_id
         = item.class.human_attribute_name :legacy_verification_id
-      td.text-right
+      td.text-left
         => item.legacy_verification_id
 
     tr
       th.text-right title=:status
         = item.class.human_attribute_name :status
-      td.text-right
+      td.text-left
           = item.status
 
     tr
       th.text-right title=:reason
         = item.class.human_attribute_name :reason
-      td.text-right
+      td.text-left
         => item.reason
     tr class=warining_table_class(nil, dup_documents.any?)
       th.text-right title=:document_number
           = item.class.human_attribute_name :document_number
-      td.text-right
+      td.text-left
         ul
           li.list-unstyled = item.document_number
           - if dup_documents.any?
@@ -29,7 +29,7 @@ table.table.table-striped.table-hover.table-narrow
     tr class=warining_table_class(nil, dup_names.any?)
       th.text-right title=:name
         = item.class.human_attribute_name :name
-      td.text-right
+      td.text-left
         ul.list-unstyled
           li  = item.name
           - if dup_names.any?
@@ -38,7 +38,7 @@ table.table.table-striped.table-hover.table-narrow
     tr class=warining_table_class(nil, dup_names.any?)
       th.text-right title=:last_name
         = item.class.human_attribute_name :last_name
-      td.text-right
+      td.text-left
         ul.list-unstyled
           li.list-unstyled = item.last_name
           - if dup_names.any?
@@ -46,7 +46,7 @@ table.table.table-striped.table-hover.table-narrow
     tr class=warining_table_class(nil, dup_emails.any?)
       th.text-right' title=:email
         = item.class.human_attribute_name :email
-      td.text-right
+      td.text-left
         ul.list-unstyled
           li = item.email
           - if dup_emails.any?
@@ -54,5 +54,5 @@ table.table.table-striped.table-hover.table-narrow
     tr
       th.text-right title=:applicant
         = item.class.human_attribute_name :applicant
-      td.text-right
+      td.text-left
         = item.applicant
