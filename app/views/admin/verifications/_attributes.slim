@@ -21,43 +21,43 @@ table.table.table-striped.table-hover.table-narrow
       th.text-right title=:document_number
           = item.class.human_attribute_name :document_number
       td.text-right
-        = item.document_number
+        ul
+          li.list-unstyled = item.document_number
         - if dup_documents.any?
-          br
-          =link_to t('.dup_documents', count: dup_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
+          li.list-unstyled =link_to t('.dup_documents', count: dup_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
 
     tr
       th.text-right title=:name
         = item.class.human_attribute_name :name
       td.text-right
-        = item.name
+        ul
+          li.list-unstyled  = item.name
         - if dup_names.any?
-          br
-          = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
+          li.list-unstyled  = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
     tr
       th.text-right title=:last_name
         = item.class.human_attribute_name :last_name
       td.text-right
-        = item.last_name
-        - if dup_names.any?
-          br
-            = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
+        ul
+          li.list-unstyled = item.last_name
+          - if dup_names.any?
+            li.list-unstyled = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
     tr
       th.text-right title=:last_name
         = item.class.human_attribute_name :last_name
       td.text-right
-        = item.last_name
+        ul
+          li.list-unstyled = item.last_name
         - if dup_names.any?
-          br
-          = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
+          li.list-unstyled = link_to t('.dup_names', count: dup_names.count), admin_verifications_path('q[name_eq]': item.name, 'q[last_name_eq]': item.last_name), target: '_blank'
     tr
       th.text-right' title=:email
         = item.class.human_attribute_name :email
       td.text-right
-        = item.email
+        ul
+          li.list-unstyled = item.email
         - if dup_emails.any?
-          br
-          = link_to t('.dup_emails', count: dup_names.count), admin_verifications_path('q[email_eq]': item.email), target: '_blank'
+          li.list-unstyled = link_to t('.dup_emails', count: dup_names.count), admin_verifications_path('q[email_eq]': item.email), target: '_blank'
     tr
       th.text-right title=:applicant
         = item.class.human_attribute_name :applicant
