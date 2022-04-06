@@ -36,4 +36,8 @@ module ApplicationHelper
   def active_class(css_classes, flag)
     flag ? "#{css_classes} active" : css_classes
   end
+
+  def warining_table_class(css_classes, flag)
+    flag ? "#{css_classes} table-warning" : css_classes
+  end
 end

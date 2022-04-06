@@ -2,9 +2,9 @@ class Admin::VerificationsController < Admin::ResourcesController
 
   def show
     render locals: { verification: verification,
-                     dup_documents: dup_documents,
-                     dup_names: dup_names,
-                     dup_emails: dup_emails }
+                     similar_documents: similar_documents,
+                     similar_names: similar_names,
+                     similar_emails: similar_emails }
   end
 
   def update
@@ -26,15 +26,17 @@ class Admin::VerificationsController < Admin::ResourcesController
 
   private
 
-  def dup_documents
+  def similar_documents
     Verification.where(document_number: verification.document_number).where.not(id: verification.id)
   end
 
-  def dup_names
+  def similar_names
     Verification.where(name: verification.name, last_name: verification.last_name).where.not(id: verification.id)
   end
 
-  def dup_emails
+  def similar_emails
+    return Verification.none if verification.email.nil?
+
     Verification.where(email: verification.email).where.not(id: verification.id)
   end
 
