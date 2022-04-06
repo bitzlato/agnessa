@@ -5,5 +5,5 @@ class LogRecord < ApplicationRecord
 
   validates :applicant, :action, presence: true
 
-  scope :ordered, ->(){ order(created_at: :desc) }
+  scope :ordered, -> { order(created_at: :desc) }
 end
