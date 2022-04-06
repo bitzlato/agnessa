@@ -1,10 +1,9 @@
-= render 'time_form' do |f|
+.mb-4
+  = render 'status_filter'
+
+= search_form_for [:admin, q] do |f|
   .row
-    .col-md-4
-      = f.input :legacy_verification_id_cont
-    .col-md-4
-      = f.input :name_or_last_name_cont
-    .col-md-4
-      = f.input :document_number_cont
-br
-= render 'status_search_form'
+    .col-md-9
+      = f.input ApplicationHelper::VERIFICATION_QUERY, label: false, as: :search, hint: t('.query_hint'), placeholder: t('.query_placeholder')
+    .col-md-3
+      = f.button :submit, class: 'btn btn-primary'

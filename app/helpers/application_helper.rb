@@ -10,6 +10,30 @@ module ApplicationHelper
     content_tag(:span, t(status, scope: :status), class: STATUS_CLASSES[status])
   end
 
+  VERIFICATION_QUERY = :legacy_verification_id_or_document_number_or_name_or_last_name_or_patronymic_or_email_cont
+
+  def hightlight_verification_field(value)
+    return middot if value.blank?
+    query = params.dig(:q, VERIFICATION_QUERY)
+    return value unless query.present?
+    highlight value, Regexp.new(query, true)
+  end
+
+  def middot
+    content_tag :div, '&middot;'.html_safe, class: 'text-muted'
+  end
+
+  def title_with_counter(title, count, hide_zero: true, css_class: nil)
+    buffer = ''
+    buffer += title
+
+    buffer += ' '
+    text = hide_zero && count.to_i.zero? ? '' : count.to_s
+    buffer += content_tag(:span, "(#{text})", class: css_class, data: { title_counter: true, count: count.to_i }) if count > 0
+
+    buffer.html_safe
+  end
+
   def sort_column(column, title)
     sort_link q, column, title
   end

@@ -1,5 +1,5 @@
 .mb-2
-  = link_to '&larr; назад в заявки'.html_safe
+  = link_to '&larr; назад в заявки'.html_safe, admin_verifications_path
 h1 
   = verification.model_name.human
   span.ml-2= '#' + verification.id.to_s

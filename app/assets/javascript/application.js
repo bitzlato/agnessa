@@ -8,8 +8,18 @@
 // require selectize.js
 // require simple_form_extension
 // require simple_form_extension/selectize
+//= require nprogress/nprogress
 //= require_tree ./elements
 //= require_tree ./extra
+
+document.addEventListener('turbolinks:click', function() {
+  NProgress.start();
+});
+
+document.addEventListener('turbolinks:render', function() {
+  NProgress.done();
+  NProgress.remove();
+});
 
 document.addEventListener("turbolinks:load", function() {
   const verification_callback_form = document.querySelector("#verification_callback_form");
@@ -27,7 +37,7 @@ document.addEventListener("turbolinks:load", function() {
       verification_callback_form_result.innerHTML = "<p>ERROR</p>";
     });
   }
-  
+
 //   $('[data-toggle="tooltip"]').tooltip()
 //   $('.datetimepicker').datetimepicker({
 //      format: 'YYYY-MM-DD HH:mm'
