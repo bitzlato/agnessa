@@ -2,20 +2,12 @@ module UserAuthSupport
   extend ActiveSupport::Concern
 
   included do
-    before_action :basic_auth
 
-    attr_reader :current_user
-    helper_method :current_user
+    before_action :require_login
 
-    private
-
-    def basic_auth
-      authenticate_or_request_with_http_basic do |user, password|
-        user = User.find_by_email(user)
-        if user && user.authenticate(password)
-          @current_user = user
-        end
-      end
+    def not_authenticated
+      flash_alert! :not_authenticated
+      redirect_to new_public_session_url
     end
   end
 end

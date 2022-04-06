@@ -1,0 +1,10 @@
+.mt-4
+  = render partial: 'public/sessions/nav', locals: {active: :signup}
+
+  = simple_form_for user, url: public_users_url do |f|
+    = f.input :email, autofocus: true, required: true
+    / - if Settings.use_captcha
+    /   = recaptcha_tags
+    .row.mt-3
+      .col-md-6
+        = f.button :submit, class: 'btn-primary', data: { disable_with: t('helpers.disable_with') }

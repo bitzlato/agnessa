@@ -1,0 +1,6 @@
+- if message.present?
+  .alert.alert-warning.mt-4.mb-2= message
+
+.mt-4
+  = render partial: 'nav', locals: {active: :signin}
+  = render partial: 'form', locals: {user_session: user_session}
