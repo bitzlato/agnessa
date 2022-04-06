@@ -2,4 +2,5 @@ ru:
   admin:
     verifications:
       index_form:
-        search_hint: Поиск по ФИО, email или номеру документа
+        query_hint: Поиск по ФИО, email или номеру документа
+        query_placeholder: Ivanov
