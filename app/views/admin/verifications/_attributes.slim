@@ -23,8 +23,8 @@ table.table.table-striped.table-hover.table-narrow
       td.text-right
         ul
           li.list-unstyled = item.document_number
-        - if dup_documents.any?
-          li.list-unstyled =link_to t('.dup_documents', count: dup_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
+          - if dup_documents.any?
+            li.list-unstyled =link_to t('.dup_documents', count: dup_documents.count), admin_verifications_path('q[document_number_eq]': item.document_number), target: '_blank'
 
     tr
       th.text-right title=:name
