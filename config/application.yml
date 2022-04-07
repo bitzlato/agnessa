@@ -13,7 +13,7 @@ default:  &settings
     host: <%= ENV.fetch('AGNESSA_HOST', 'localhost') %>
 
   min_upload_file_size:  <%= 100.kilobytes %>
-  max_upload_file_size: <%= 100.megabytes %>
+  max_upload_file_size: <%= 10.megabytes %>
   country_priority: ['RU', 'KZ', 'BY', 'UA']
   document_content_types: 
     - image/png
