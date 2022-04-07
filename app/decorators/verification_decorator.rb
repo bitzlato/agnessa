@@ -10,7 +10,12 @@ class VerificationDecorator < ApplicationDecorator
   end
 
   def self.table_columns
-    %i[id created_at full_name document_number email country status reason]
+    %i[preview_image id created_at full_name document_number email country status reason]
+  end
+
+  def preview_image
+    return h.middot unless object.preview_image
+    h.image_tag object.preview_image.thumb.url
   end
 
   def external_id
