@@ -66,13 +66,13 @@ class Verification < ApplicationRecord
     end
   end
 
-  def refuse!(member: nil, labels: [], user_comment: nil, moderator_comment: nil)
+  def refuse!(member: nil, labels: [], public_comment: nil, private_comment: nil)
     ActiveRecord::Base.transaction do
       update!(
         status:               :refused,
-        user_comment:         user_comment,
+        public_comment:       public_comment,
         moderator:            member,
-        moderator_comment:    moderator_comment,
+        private_comment:      private_comment,
         review_result_labels: labels
       )
       log_records.create!(applicant: applicant, action: 'refuse', member: member)

@@ -18,9 +18,9 @@ class Admin::VerificationsController < Admin::ResourcesController
 
   def refuse
     verification.refuse!(member: current_member,
-                        labels: verification_params[:review_result_labels],
-                        user_comment: verification_params[:user_comment],
-                        moderator_comment: verification_params[:moderator_comment])
+                         labels: verification_params[:review_result_labels],
+                         public_comment: verification_params[:public_comment],
+                         private_comment: verification_params[:private_comment])
     redirect_to admin_verification_path(verification), notice: 'Отвергнуто'
   end
 
@@ -45,6 +45,6 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   def verification_params
-    params.require(:verification).permit( :user_comment, :moderator_comment, :review_result_labels => [])
+    params.require(:verification).permit( :public_comment, :private_comment, :review_result_labels => [])
   end
 end
