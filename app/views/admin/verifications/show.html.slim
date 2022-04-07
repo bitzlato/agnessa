@@ -1,8 +1,13 @@
-= link_to '&larr; назад в заявки'.html_safe
-h1 #{verification.model_name.human} #{verification.id}
+.mb-2
+  = link_to '&larr; назад в заявки'.html_safe, admin_verifications_path
+h1 
+  = verification.model_name.human
+  span.ml-2= '#' + verification.id.to_s
+  small.text-muted.ml-2= l verification.created_at, format: :long
+
 .row
   .col-md-6
-    = render 'attributes', item: verification
+    = render 'attributes', verification: verification, similar_documents: similar_documents, similar_names: similar_names, similar_emails: similar_emails
   .col-md-6
     = render 'documents', verification: verification
 .row
@@ -16,3 +21,5 @@ h1 #{verification.model_name.human} #{verification.id}
       = f.button :submit, t('.refuse'), class: 'btn btn-danger align-right'
     br
     = render partial: 'admin/applicants/block_form', locals: {applicant: verification.applicant}
+hr
+= render partial: 'log', locals: {record: verification}

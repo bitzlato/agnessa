@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_31_111319) do
+ActiveRecord::Schema.define(version: 2022_04_06_173651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 2022_03_31_111319) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "verification_callback_url"
-    t.string "email_from"
     t.string "return_url"
+    t.string "email_from"
     t.text "form_description"
     t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
   end
@@ -35,12 +35,25 @@ ActiveRecord::Schema.define(version: 2022_03_31_111319) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "blocked", default: false, null: false
-    t.string "first_name"
-    t.string "last_name"
+    t.citext "first_name"
+    t.citext "last_name"
     t.bigint "last_confirmed_verification_id"
     t.datetime "confirmed_at"
+    t.citext "patronymic"
     t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
     t.index ["account_id"], name: "index_applicants_on_account_id"
+  end
+
+  create_table "log_records", force: :cascade do |t|
+    t.bigint "applicant_id", null: false
+    t.bigint "verification_id"
+    t.bigint "member_id"
+    t.string "action", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["applicant_id"], name: "index_log_records_on_applicant_id"
+    t.index ["member_id"], name: "index_log_records_on_member_id"
+    t.index ["verification_id"], name: "index_log_records_on_verification_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -86,29 +99,22 @@ ActiveRecord::Schema.define(version: 2022_03_31_111319) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "reason"
-    t.string "name"
-    t.string "last_name"
+    t.citext "name"
+    t.citext "last_name"
     t.string "document_number"
     t.integer "moderator_id"
     t.string "comment"
-    t.string "email"
+    t.citext "email"
     t.text "user_comment"
     t.text "moderator_comment"
     t.json "review_result_labels", default: []
+    t.citext "patronymic"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
   end
 
-  create_table "versions", force: :cascade do |t|
-    t.string "item_type", null: false
-    t.bigint "item_id", null: false
-    t.string "event", null: false
-    t.string "whodunnit"
-    t.text "object"
-    t.datetime "created_at"
-    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-  end
-
   add_foreign_key "applicants", "accounts"
+  add_foreign_key "log_records", "applicants"
+  add_foreign_key "log_records", "verifications"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
   add_foreign_key "verifications", "applicants"

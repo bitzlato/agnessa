@@ -29,6 +29,7 @@ gem 'bcrypt'
 gem 'email_validator'
 gem 'invisible_captcha'
 gem 'active_link_to'
+gem 'strip_attributes'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -42,7 +43,6 @@ gem 'active_link_to'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'bugsnag'
-gem 'paper_trail', '>= 12.0.0'
 gem 'jwt', github: 'jwt/ruby-jwt'
 gem 'jwt-multisig', '~> 1.0.0'
 gem 'jwt-rack', '~> 0.1.0', require: false
@@ -87,6 +87,8 @@ group :deploy do
   gem 'capistrano-shell', require: false
   gem 'capistrano-rails-console', require: false
   gem 'capistrano-systemd-multiservice', github: 'brandymint/capistrano-systemd-multiservice', require: false
+  gem 'capistrano-nvm', require: false
+  gem 'capistrano-yarn', require: false
   gem 'capistrano-tasks', github: 'brandymint/capistrano-tasks', require: false
   gem 'capistrano-git-with-submodules'
   gem 'bugsnag-capistrano', require: false

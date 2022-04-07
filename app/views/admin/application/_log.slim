@@ -1,0 +1,21 @@
+table.table.table-striped.table-hover.table-narrow.table-sm
+  thead.thead-light
+    tr
+      th= t('activerecord.attributes.log_record.action')
+      - unless record.is_a?(Verification)
+        th= t('activerecord.attributes.log_record.verification')
+      th= t('activerecord.attributes.log_record.moderator_id')
+      th= t('activerecord.attributes.log_record.created_at')
+  tbody
+    - record.log_records.ordered.each do |log_record|
+      tr
+        td
+          = t "activerecord.attributes.log_record.actions.#{log_record.action}"
+        - unless record.is_a?(Verification)
+          td
+            - if log_record.verification.present?
+              = link_to log_record.verification.id, admin_verification_path(log_record.verification)
+        td
+          = log_record.member
+        td
+          = l log_record.created_at, format: :long

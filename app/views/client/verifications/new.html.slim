@@ -6,35 +6,41 @@
       .row
         .col-md-12
           div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-        .col-md-12
+      .row
+      .row
+        .col-4
+          = f.input :name
+        .col-4
+          = f.input :last_name
+        .col-4
+          = f.input :patronymic
+      .row
+        .col-4
+          = f.input :country, as: :country, priority: Rails.configuration.application.country_priority
+        .col-4
+          = f.input :document_number
+      .row
+        .col-6
           = f.input :reason, 
             include_blank: false, 
             collection: Verification::REASONS,
             label_method: lambda { |item| t("attributes.reasons.#{item}") }
-      .row
-        .col-6
-          = f.input :country, as: :country, priority: Rails.configuration.application.country_priority
-        .col-6
-          = f.input :document_number
-      .row
-        .col-6
-          = f.input :name
-        .col-6
-          = f.input :last_name
         .col-6
           = f.input :email, as: :email
 
       .row
-        .col-md-12
-          .alert.alert-warning role='alert'
-            = raw verification.account.form_description_interpolated
-      .row
-        .col-md-12
+        .col-6
           = f.input :documents,
                      wrapper: :vertical_file,
                      as: :file,
                      input_html: { multiple: true, accept: Rails.configuration.application.document_formats },
                      label: "Документы",
-                     hint: "До #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
-      br
-      = f.submit class: 'btn btn-bg btn-primary'
+                     hint: t('.from_to_size', from: number_to_human_size(Rails.configuration.application.min_upload_file_size), to: number_to_human_size(Rails.configuration.application.max_upload_file_size))
+      .row
+        .col-12
+          .text-center
+            = f.submit class: 'btn btn-lg btn-primary'
+      .row.mt-4
+        .col-md-12
+          .alert.alert-warning role='alert'
+            = raw verification.account.form_description_interpolated

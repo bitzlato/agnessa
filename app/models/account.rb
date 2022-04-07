@@ -3,12 +3,14 @@ class Account < ApplicationRecord
   has_many :verifications, through: :applicants
   has_many :members
   has_many :users, through: :members
+  has_many :log_records, through: :applicants
 
   validates :name, :secret, :email_from, presence: true
   validates :subdomain, presence: true, uniqueness: true
   validates :verification_callback_url, url: true, if: :verification_callback_url?
   validates :email_from, email: true
   validates :return_url, url: true, if: :return_url?
+  validates :subdomain, exclusion: Rails.configuration.application.reserved_subdomains
 
   before_validation :set_secret, on: :create
   before_validation :downcase_subdomain

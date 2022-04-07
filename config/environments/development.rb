@@ -14,6 +14,7 @@ Rails.application.configure do
   config.eager_load = false
 
   config.hosts << /.*\.?#{ENV.fetch('AGNESSA_HOST')}/ if ENV.key? 'AGNESSA_HOST'
+  config.hosts << /.*\.?#{ENV.fetch('AGNESSA_LEGACY_VERIFICATION_HOST')}/ if ENV.key? 'AGNESSA_LEGACY_VERIFICATION_HOST'
   # Show full error reports.
   config.consider_all_requests_local = true
 
