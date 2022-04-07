@@ -1,9 +1,9 @@
-require 'carrierwave/processing/rmagick'
+require 'carrierwave/processing/mini_magick'
 class DocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::BombShelter
   include CarrierWave::Video
   include CarrierWave::Video::Thumbnailer
-  include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
   include SecureUniqueFilename
 
   storage :file

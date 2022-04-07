@@ -427,7 +427,6 @@ GEM
     request_store (1.5.1)
       rack (>= 1.4)
     rexml (3.2.5)
-    rmagick (4.2.5)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -616,6 +615,7 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen (~> 3.3)
+  mini_magick (~> 4.11)
   mini_racer (~> 0.4.0)
   mongoid
   mongoid-grid_fs
@@ -629,7 +629,6 @@ DEPENDENCIES
   ransack!
   redactor-rails!
   request_store
-  rmagick (~> 4.2)
   rspec-grape
   rspec-rails (~> 4.0.2)
   rspec-sidekiq
