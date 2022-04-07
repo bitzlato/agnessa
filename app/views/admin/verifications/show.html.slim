@@ -16,8 +16,8 @@ h1
   .col-6
     = simple_form_for verification, url: refuse_admin_verification_path(verification), method: :post do |f|
       = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 15, multiple: true }, required: true
-      = f.input :user_comment, as: :text, required: true
-      = f.input :moderator_comment, as: :text, required: false
+      = f.input :public_comment, as: :text, required: true
+      = f.input :private_comment, as: :text, required: false
       = f.button :submit, t('.refuse'), class: 'btn btn-danger align-right'
     br
     = render partial: 'admin/applicants/block_form', locals: {applicant: verification.applicant}
