@@ -39,12 +39,15 @@ class Verification < ApplicationRecord
     scope status, -> { by_status status }
   end
 
-
   REASONS = %w[unban trusted_trader restore other]
   validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
 
   after_update :send_notification_after_status_change
   after_create :log_creation
+
+  def preview_image
+    @preview_image ||= documents.first
+  end
 
   def legacy_created
     raw_changebot['created'].to_datetime.to_i * 1000 rescue nil

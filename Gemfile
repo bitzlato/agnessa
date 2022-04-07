@@ -130,3 +130,5 @@ gem 'validate_url', '~> 1.0.4'
 gem "gravatarify", "~> 3.1"
 
 gem "rails-i18n", "~> 7.0"
+
+gem "carrierwave-video-thumbnailer", "~> 0.1.4"
