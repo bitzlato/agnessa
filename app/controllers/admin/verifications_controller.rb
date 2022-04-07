@@ -8,7 +8,14 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   def update
-    render locals: { verification: verification }
+    case params[:commit]
+    when 'refuse'
+      refuse
+    when 'confirm'
+      confirm
+    else
+      raise 'WTF'
+    end
   end
 
   def confirm
