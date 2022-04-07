@@ -1,10 +1,9 @@
 require 'carrierwave/processing/mini_magick'
 class DocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::BombShelter
-  include CarrierWave::Video
   include CarrierWave::Video::Thumbnailer
   include CarrierWave::MiniMagick
-  include SecureUniqueFilename
+  # include SecureUniqueFilename
 
   storage :file
 
@@ -31,16 +30,12 @@ class DocumentUploader < CarrierWave::Uploader::Base
     file.extension.downcase
   end
 
-  def mime_type
-    MIME::Types.type_for(file.file).first.content_type
+  def video?(_version = nil)
+    content_type.include? 'video'
   end
 
-  def video?
-    mime_type.include? 'video'
-  end
-
-  def image?
-    mime_type.include? 'image'
+  def image?(_version = nil)
+    content_type.include? 'image'
   end
 
   def content_type_allowlist
@@ -51,5 +46,11 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  private
+
+  def protect_from_image_bomb!(new_file)
+    super new_file if image?
   end
 end
