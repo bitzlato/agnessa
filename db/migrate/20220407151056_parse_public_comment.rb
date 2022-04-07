@@ -4,7 +4,7 @@ class ParsePublicComment < ActiveRecord::Migration[6.1]
       comment = v.raw_changebot['comment']
       next if comment.blank?
 
-      p v.update_columns public_comment: comment
+      v.update_columns public_comment: comment
     end
   end
 end
