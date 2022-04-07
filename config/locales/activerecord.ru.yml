@@ -1,4 +1,3 @@
-
 ru:
   activerecord:
     models:
@@ -16,6 +15,27 @@ ru:
         many: Заявки
       review_result_label: Результаты верификации
     attributes:
+      user:
+        first_name: Имя
+        last_name: Фамилия
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+      log_record:
+        action: Действие
+        verification: Заявка
+        moderator_id: Модератор
+        created_at: Дата
+        actions:
+          creation: Создание заявки
+          confirm: Подтверждение заявки
+          refuse: Отклонение заявки
+          block: Блокировка аппликанта
+          unblock: Разблокировка аппликанта
+      reasons:
+        unban: 'Разблокировка учетной записи'
+        trusted_trader: 'Стать доверенным торговцем'
+        restore: 'Восстановление утерянного аккаунта'
+        other: 'Другое'
       account:
         created_at: Создано
         name: Название организации
@@ -67,3 +87,27 @@ ru:
         moderator_comment: Комментарий для модератора
         review_result_labels: Результаты проверки
         external: Внешний ID
+        member_id: Модератор
+        statuses:
+          pending: Ожидание
+          confirmed: Подтверждено
+          refused: Отклонено
+    errors:
+      models:
+        verification:
+          attributes:
+            email:
+              invalid: Неверный формат электронной почты
+              blank: Не указана почта
+            reason:
+              blank: 'Причина обращения не выбрана'
+            name:
+              blank: 'Имя не указано'
+            last_name:
+              blank: 'Фамилия не указана'
+            document_number:
+              blank: 'Серия и номер не указан'
+            documents:
+              blank: 'Документы не были прикреплены'
+      messages:
+        record_invalid: 'Возникли ошибки: %{errors}'
