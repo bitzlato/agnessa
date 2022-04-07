@@ -135,4 +135,4 @@ gem "carrierwave-video-thumbnailer", "~> 0.1.4"
 
 gem "carrierwave-i18n", "~> 0.2.0"
 
-gem "rmagick", "~> 4.2"
+gem "mini_magick", "~> 4.11"
