@@ -13,7 +13,7 @@ table.table.table-striped.table-hover.table-narrow
         ul.list-unstyled
           li = verification.document_number
           - if similar_documents.any?
-            li =link_to t('.dup_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': verification.document_number), target: '_blank'
+            li =link_to t('.dup_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': verification['document_number']), target: '_blank'
 
     tr class=warining_table_class(nil, similar_names.any?)
       th.text-right= verification.class.human_attribute_name :full_name
