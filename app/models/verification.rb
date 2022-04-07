@@ -61,7 +61,8 @@ class Verification < ApplicationRecord
   def confirm!(member: nil)
     ActiveRecord::Base.transaction do
       update! status: :confirmed, moderator: member
-      applicant.update! confirmed_at: Time.now, last_name: last_name, first_name: name, patronymic: patronymic, last_confirmed_verification_id: id
+      emails = applicant.emails << self.email
+      applicant.update! emails: emails, confirmed_at: Time.now, last_name: last_name, first_name: name, patronymic: patronymic, last_confirmed_verification_id: id
       log_records.create!(applicant: applicant, action: 'confirm', member: member)
     end
   end
