@@ -58,6 +58,10 @@ module ApplicationHelper
     flag ? "#{css_classes} active" : css_classes
   end
 
+  def bg_warning_class(flag)
+    flag ? "border border-warning" : ''
+  end
+
   def warining_table_class(css_classes, flag)
     flag ? "#{css_classes} table-warning" : css_classes
   end
