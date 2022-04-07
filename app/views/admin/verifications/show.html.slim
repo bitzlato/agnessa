@@ -22,11 +22,10 @@
       .col-6
         = f.input :public_comment, as: :text, required: true
         = f.input :private_comment, as: :text, required: false
-        .mb-2
-          - unless verification.confirmed?
-            = f.submit :confirm, class: 'btn btn-success', data: { confirm: t('are_you_sure?') }   
-          - unless verification.refused?
-            = f.submit :refuse, class: 'btn btn-secondary', data: { confirm: t('are_you_sure?') }
+        - unless verification.confirmed?
+          .mr-2= f.submit :confirm, class: 'btn btn-success', data: { confirm: t('are_you_sure?') }   
+        - unless verification.refused?
+          .mt-2= f.submit :refuse, class: 'btn btn-secondary', data: { confirm: t('are_you_sure?') }
 
 = render partial: 'log', locals: {record: verification}
 
