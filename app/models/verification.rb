@@ -41,7 +41,7 @@ class Verification < ApplicationRecord
 
 
   REASONS = %w[unban trusted_trader restore other]
-  validates :restore, presence: true, inclusion: { in: REASONS }, if: :refused?
+  validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
 
   after_update :send_notification_after_status_change
   after_create :log_creation
@@ -67,6 +67,7 @@ class Verification < ApplicationRecord
   end
 
   def refuse!(member: nil, labels: [], public_comment: nil, private_comment: nil)
+    labels = labels.excluding([""])
     ActiveRecord::Base.transaction do
       update!(
         status:               :refused,
