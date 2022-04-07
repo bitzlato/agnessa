@@ -1,10 +1,11 @@
 class Admin::VerificationsController < Admin::ResourcesController
 
+  helper_method :similar_emails
+  helper_method :similar_names
+  helper_method :similar_documents
+
   def show
-    render locals: { verification: verification,
-                     similar_documents: similar_documents,
-                     similar_names: similar_names,
-                     similar_emails: similar_emails }
+    render locals: { verification: verification }
   end
 
   def update
@@ -21,6 +22,8 @@ class Admin::VerificationsController < Admin::ResourcesController
   def confirm
     verification.confirm!(member: current_member)
     redirect_to admin_verification_path(verification), notice: 'Подтверждено'
+  rescue ActiveRecord::RecordInvalid => err
+    render :show, locals: { verification: err.record } if err.record.is_a? Verification
   end
 
   def refuse
@@ -29,6 +32,8 @@ class Admin::VerificationsController < Admin::ResourcesController
                          public_comment: verification_params[:public_comment],
                          private_comment: verification_params[:private_comment])
     redirect_to admin_verification_path(verification), notice: 'Отвергнуто'
+  rescue ActiveRecord::RecordInvalid => err
+    render :show, locals: { verification: err.record } if err.record.is_a? Verification
   end
 
   private
