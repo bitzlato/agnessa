@@ -42,3 +42,13 @@ table.table.table-striped.table-hover.table-narrow
       tr
         th.text-right= verification.class.human_attribute_name :legacy_verification_id
         td= verification.legacy_verification_id
+
+    - if verification.object.private_comment.present?
+      tr
+        th.text-right= verification.class.human_attribute_name :private_comment
+        td= verification.private_comment
+
+    - if verification.object.public_comment.present?
+      tr
+        th.text-right= verification.class.human_attribute_name :public_comment
+        td= verification.public_comment
