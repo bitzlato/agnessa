@@ -17,6 +17,16 @@ module ApplicationHelper
     highlight value, Regexp.new(query, true)
   end
 
+  def warning
+    '⚠️'.html_safe
+  end
+
+  def warning_flag(flag)
+    content_tag :span, class: 'mr-1' do
+      warning
+    end if flag
+  end
+
   def middot
     content_tag :div, '&middot;'.html_safe, class: 'text-muted'
   end
