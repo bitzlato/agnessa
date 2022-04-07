@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_07_104828) do
+ActiveRecord::Schema.define(version: 2022_04_07_151056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_04_07_104828) do
     t.bigint "last_confirmed_verification_id"
     t.datetime "confirmed_at"
     t.citext "patronymic"
+    t.jsonb "emails", default: [], null: false
     t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
     t.index ["account_id"], name: "index_applicants_on_account_id"
   end
