@@ -1,5 +1,5 @@
 - verification.documents.each do |document|
-  .card style='width: 120px'
+  .card.shadow-sm.mb-5.rounded style='width: 120px'
     -# = tag.video(tag.source(src: url), controls: 'controls')
     = link_to document.url, target: '_blank'
       = image_tag document.thumb.url, style: 'max-width: 120px; max-height: 100px', class: 'card-img-top'
