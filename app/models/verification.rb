@@ -61,8 +61,12 @@ class Verification < ApplicationRecord
     status == 'refused'
   end
 
+  def confirmed?
+    status == 'confirmed'
+  end
+
   def confirm!(member: nil)
-    ActiveRecord::Base.transaction do
+    transaction do
       update! status: :confirmed, moderator: member
       emails = applicant.emails << self.email
       applicant.update! emails: emails, confirmed_at: Time.now, last_name: last_name, first_name: name, patronymic: patronymic, last_confirmed_verification_id: id
