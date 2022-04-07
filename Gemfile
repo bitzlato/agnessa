@@ -132,3 +132,5 @@ gem "gravatarify", "~> 3.1"
 gem "rails-i18n", "~> 7.0"
 
 gem "carrierwave-video-thumbnailer", "~> 0.1.4"
+
+gem "carrierwave-i18n", "~> 0.2.0"
