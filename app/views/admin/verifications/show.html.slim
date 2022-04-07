@@ -1,25 +1,33 @@
-.mb-2
-  = link_to '&larr; назад в заявки'.html_safe, admin_verifications_path
-h1 
-  = verification.model_name.human
-  span.ml-2= '#' + verification.id.to_s
-  small.text-muted.ml-2= l verification.created_at, format: :long
+- verification = verification.decorate
 
-.row
-  .col-md-6
-    = render 'attributes', verification: verification, similar_documents: similar_documents, similar_names: similar_names, similar_emails: similar_emails
-  .col-md-6
-    = render 'documents', verification: verification
-.row
-  .col-6
-    = link_to t('.confirm'), confirm_admin_verification_path(verification), method: :post, class: 'btn btn-success', method: { confirm: t('.confirm_alert') }
-  .col-6
-    = simple_form_for verification, url: refuse_admin_verification_path(verification), method: :post do |f|
-      = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 15, multiple: true }, required: true
-      = f.input :public_comment, as: :text, required: true
-      = f.input :private_comment, as: :text, required: false
-      = f.button :submit, t('.refuse'), class: 'btn btn-danger align-right'
-    br
-    = render partial: 'admin/applicants/block_form', locals: {applicant: verification.applicant}
-hr
+.mb-2
+  nav aria-label="breadcrumb"
+    ol.breadcrumb
+      li.breadcrumb-item= link_to 'Все заявки'
+      li.breadcrumb-item.active
+        = link_to 'Заявка #' + verification.id.to_s
+        span.ml-4= verification.status
+
+= render 'header', verification: verification, similar_emails: similar_emails, similar_names: similar_names, similar_documents: similar_documents
+.mt-4
+= render 'documents', verification: verification
+
+.mt-2
+  = simple_form_for [:admin, verification] do |f|
+    .row
+      .col-6
+        = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 15, multiple: true }, required: true
+      .col-6
+        = f.input :public_comment, as: :text, required: true
+        = f.input :private_comment, as: :text, required: false
+        - unless verification.confirmed?
+          .mr-2= f.submit :confirm, class: 'btn btn-success', data: { confirm: t('are_you_sure?') }   
+        - unless verification.refused?
+          .mt-2= f.submit :refuse, class: 'btn btn-secondary', data: { confirm: t('are_you_sure?') }
+
 = render partial: 'log', locals: {record: verification}
+
+- if verification.object.legacy_verification_id.present?
+  .text-muted
+    = verification.class.human_attribute_name :legacy_verification_id
+    span.ml-2= verification.legacy_verification_id

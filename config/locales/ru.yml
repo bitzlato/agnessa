@@ -1,4 +1,5 @@
 ru:
+  are_you_sure?: Уверен?
   titles:
     application: Агнесса
   application:
@@ -22,54 +23,6 @@ ru:
                         В случае отказа - Вы получите соответствующее уведомление в течении 24-х часов.
                         <a href="https://support.bitzlato.com" class="ng-binding">Служба поддержки</a>
                 </div>'
-
-  admin:
-    accounts:
-      verification_callback_test:
-        result: 'Результат'
-        status: 'Статус'
-      show:
-        settings: Настройки
-        secret: Секрет
-        form_description: Описание для формы
-        available_variables: Доступные переменные
-        callback_test_tile: Проверка отправки уведомлений
-        notification_example: Пример уведомления
-        save: Сохранить
-        send: Отправить
-        create_new: Создать новый
-        create_new_confirm: Точно создать новый секрет?
-
-    verifications:
-      attributes:
-        dup_documents: 'Найдены совпадения: %{count} шт'
-        dup_names: 'Найдены совпадения: %{count} шт'
-        dup_emails: 'Найдены совпадения: %{count} шт'
-      show:
-        confirm: 'Подтвердить'
-        comfirm_alert:  'Подтверждаем заявку?'
-        refuse: 'Отклонить'
-
-    applicants:
-      block_form:
-        block:  заблокировать аппликанта
-        unblock: разблокировать аппликанта
-      verifications:
-        title: Список верификаций
-
-  helpers:
-    download_without_size: Скачать %{ext}
-    download_with_size: Скачать %{ext} (%{size})
-    disable_with: Понеслась..
-    no_divergence: Нет расхождений
-    trades: Сделки (%{count})
-    no_trades: Нет сделок
-    platform_assets: Активы платформы
-    platform_revenues: Доходы платформы
-    member_liabilities: Обязательства
-    total_delta: Разница общаяя
-    from_including: Начиная с (включительно)
-    to: До
 
   status:
     all: Все
