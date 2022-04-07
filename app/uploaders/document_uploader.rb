@@ -3,6 +3,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::BombShelter
   include CarrierWave::Video::Thumbnailer
   include CarrierWave::RMagick
+  include SecureUniqueFilename
 
   storage :file
 
