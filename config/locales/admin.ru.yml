@@ -4,3 +4,7 @@ ru:
       index_form:
         query_hint: Поиск по ФИО, email или номеру документа
         query_placeholder: Ivanov
+    applicants:
+      index_form:
+        query_hint: Поиск по ФИО, external_id
+        query_placeholder: Ivanov
