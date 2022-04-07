@@ -1,5 +1,7 @@
-table.table.table-striped.table-hover.table-narrow
-  tr.thead-dark
-  - verification.documents.each do |document|
-    tr
-      th =image_or_video document.url
+.row
+  .col-md-12
+    - verification.documents.each do |document|
+      .card.float-left.shadow-sm.mb-5.rounded style='width: 120px'
+        -# = tag.video(tag.source(src: url), controls: 'controls')
+        = link_to document.url, target: '_blank'
+          = image_tag document.thumb.url, style: 'max-width: 120px; max-height: 100px', class: 'card-img-top'
