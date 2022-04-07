@@ -83,8 +83,8 @@ ru:
         document_number: Номер документа
         moderator: Модератор
         email: Почта
-        user_comment: Комментарий для пользователя
-        moderator_comment: Комментарий для модератора
+        public_comment: Публичный комментарий
+        private_comment: Приватный комментарий
         review_result_labels: Результаты проверки
         external: Внешний ID
         member_id: Модератор
