@@ -3,12 +3,10 @@
 .mb-2
   nav aria-label="breadcrumb"
     ol.breadcrumb
-      li.breadcrumb-item= link_to 'Заявки'
+      li.breadcrumb-item= link_to 'Все заявки'
       li.breadcrumb-item.active
-        = link_to '#' + verification.id.to_s
-        = ' от ' 
-        = verification.created_at
-        span.ml-2= verification.status
+        = link_to 'Заявка #' + verification.id.to_s
+        span.ml-4= verification.status
 
 = render 'header', verification: verification, similar_emails: similar_emails, similar_names: similar_names, similar_documents: similar_documents
 .mt-4

@@ -28,6 +28,9 @@ class Verification < ApplicationRecord
   validates :country, :name, :last_name, :document_number, :documents, :reason, presence: true, on: :create
   validates :email, presence: true, email: true
 
+  validates :review_result_labels, presence: true, if: :refused?
+  validates :review_result_labels, absence: true, if: :confirmed?
+
   validate :validate_labels
   validate :validate_not_blocked_applicant, on: :create
 
@@ -63,6 +66,10 @@ class Verification < ApplicationRecord
 
   def confirmed?
     status == 'confirmed'
+  end
+
+  def pending?
+    status == 'pending'
   end
 
   def confirm!(member: nil)
