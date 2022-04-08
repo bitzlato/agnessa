@@ -27,6 +27,7 @@ class Mongo::Verification
     field '__v', type: Integer
 
 
+    # Verification.where(status: 'pending').destroy_all
     # Mongo::Verification.all.no_timeout.map{ |verification| verification.import_to_postgres }
     def import_to_postgres
         return if ::Verification.find_by(legacy_verification_id:  self['_id'])
@@ -42,6 +43,10 @@ class Mongo::Verification
         end
         pg_verifcation.raw_changebot = self
         pg_verifcation.documents = []
+        pg_verifcation.public_comment = self.comment
+        emails = Array(emails).map(&:downcase).compact.uniq
+        pg_verifcation.email = emails.last
+        applicant.emails = emails
         raw = pg_verifcation.raw_changebot
 
         case raw['cause']
@@ -61,5 +66,6 @@ class Mongo::Verification
         pg_verifcation.updated_at = raw['lastUpdate']
         pg_verifcation.comment = raw['comment']
         pg_verifcation.save(validate: false)
+        applicant.save(validate: false)
     end
 end

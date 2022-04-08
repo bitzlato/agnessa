@@ -10,9 +10,9 @@ class Verification < ApplicationRecord
   mount_uploaders :documents, DocumentUploader
 
   belongs_to :moderator, class_name: 'Member', required: false
-  belongs_to :applicant
+  belongs_to :applicant, dependent: :destroy
   has_one :account, through: :applicant
-  has_many :log_records
+  has_many :log_records, dependent: :destroy
 
   before_validation on: :create do
     self.applicant ||= client.applicants.find_or_create_by!(external_id: external_id)
@@ -83,6 +83,43 @@ class Verification < ApplicationRecord
 
   def reset!(member: nil)
     update!(status: :pending, moderator: member)
+  end
+
+
+  def self.update_pending
+    Verification.where(status: 'pending').find_each do |pg_verifcation|
+      mongo_verification = Mongo::Verification.where('_id': pg_verifcation.legacy_verification_id).last
+      next if mongo_verification.nil?
+
+      if mongo_verification.status == 'new'
+        pg_verifcation.status = 'pending'
+      else
+        pg_verifcation.status = status
+      end
+
+      pg_verifcation.raw_changebot = mongo_verification
+      pg_verifcation.public_comment = mongo_verification.comment
+      emails = Array(emails).map(&:downcase).compact.uniq
+      pg_verifcation.email = emails.last
+      raw = pg_verifcation.raw_changebot
+      case raw['cause']
+      when 'trusted'
+        pg_verifcation.reason = 'trusted_trader'
+      when 'other'
+        pg_verifcation.reason = 'other'
+      when 'unlocking'
+        pg_verifcation.reason = 'unban'
+      when 'restoring'
+        pg_verifcation.reason = 'restore'
+      end
+      pg_verifcation.document_number = raw['passportData']
+      pg_verifcation.name = raw['name']
+      pg_verifcation.last_name = raw['lastName']
+      pg_verifcation.created_at = raw['created']
+      pg_verifcation.updated_at = raw['lastUpdate']
+      pg_verifcation.comment = raw['comment']
+      pg_verifcation.save(validate: false)
+    end
   end
 
   def self.import_documents_from_mongo
