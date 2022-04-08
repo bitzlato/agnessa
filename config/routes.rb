@@ -30,6 +30,14 @@ Rails.application.routes.draw do
   scope as: :public, module: :public, subdomain: '', constraints: PublicConstraint do
     root to: 'landing#index'
     mount Sidekiq::Web => "/sidekiq"
+
+    resources :users, only: %i[new create]
+    resources :sessions, only: %i[new create] do
+      collection do
+        delete :destroy
+      end
+    end
+    resources :password_resets, only: %i[new create edit update]
   end
 
   scope module: :user, subdomain: '', constraints: PublicConstraint do

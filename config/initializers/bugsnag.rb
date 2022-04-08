@@ -1,10 +1,13 @@
 if defined? Bugsnag
+  require 'bugsnag/middleware/sorcery_user'
+
   Bugsnag.configure do |config|
     config.app_version = AppVersion.format('%M.%m.%p')
 
     config.notify_release_stages = %w[production staging]
     config.send_code = true
     config.send_environment = true
+    config.middleware.insert_before(Bugsnag::Middleware::Callbacks, Bugsnag::Middleware::SorceryUser) if defined?(Sorcery)
   end
 
   Bugsnag.before_notify_callbacks << lambda do |report|
