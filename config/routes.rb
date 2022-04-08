@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   scope constraints: ClientConstraint do
     get ENV.fetch('USERS_PATH','users.json'), to: 'legacy_verifications#index'
+    mount ClientApi => '/'
 
     scope as: :admin, module: :admin do
       resources :applicants, only: [:index, :show] do

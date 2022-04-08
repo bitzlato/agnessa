@@ -260,6 +260,8 @@ GEM
     execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     faraday (2.2.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
@@ -628,6 +630,7 @@ DEPENDENCIES
   email_validator
   execjs
   factory_bot
+  faker
   faraday (~> 2.0)
   foreman
   grape (~> 1.6)

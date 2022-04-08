@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_060206) do
+ActiveRecord::Schema.define(version: 2022_04_08_143753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_04_08_060206) do
     t.string "email_from"
     t.string "return_url"
     t.text "form_description"
+    t.jsonb "api_jwk"
     t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
   end
 
