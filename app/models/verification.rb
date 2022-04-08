@@ -14,10 +14,6 @@ class Verification < ApplicationRecord
   has_one :account, through: :applicant
   has_many :log_records
 
-  before_validation on: :create do
-    self.applicant ||= client.applicants.find_or_create_by!(external_id: external_id)
-  end
-
   before_create do
     self.first_name = first_name.to_s.upcase
     self.last_name = last_name.to_s.upcase
@@ -82,14 +78,13 @@ class Verification < ApplicationRecord
   end
 
   def refuse!(member: nil, labels: [], public_comment: nil, private_comment: nil)
-    labels = labels.excluding([""])
-    ActiveRecord::Base.transaction do
+    transaction do
       update!(
         status:               :refused,
         public_comment:       public_comment,
-        moderator:            member,
         private_comment:      private_comment,
-        review_result_labels: labels
+        moderator:            member,
+        review_result_labels: labels.map(&:presence).compact
       )
       log_records.create!(applicant: applicant, action: 'refuse', member: member)
     end
