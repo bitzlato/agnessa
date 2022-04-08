@@ -27,7 +27,6 @@ class Mongo::Verification
     field '__v', type: Integer
 
 
-    # Verification.where(status: 'pending').destroy_all
     # Mongo::Verification.all.no_timeout.map{ |verification| verification.import_to_postgres }
     def import_to_postgres
         return if ::Verification.find_by(legacy_verification_id:  self['_id'])

@@ -94,7 +94,7 @@ class Verification < ApplicationRecord
       if mongo_verification.status == 'new'
         pg_verifcation.status = 'pending'
       else
-        pg_verifcation.status = status
+        pg_verifcation.status = mongo_verification.status
       end
 
       pg_verifcation.raw_changebot = mongo_verification
