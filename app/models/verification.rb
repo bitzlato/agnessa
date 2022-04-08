@@ -102,7 +102,7 @@ class Verification < ApplicationRecord
   private
 
   def log_creation
-    log_records.create!(applicant: applicant, action: 'create', created_at: created_atmongo)
+    log_records.create!(applicant: applicant, action: 'create', created_at: created_at)
   end
 
   def validate_labels
