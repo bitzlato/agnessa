@@ -41,7 +41,7 @@ module ImportMongo
         next unless pg_verifcation.status == 'pending'
 
         #Аппликант
-        account = Account.first
+        account = Account.find_by(subdomain: 'bz')
         applicant = account.applicants.find_or_create_by!(external_id: pg_verifcation.legacy_verification_id)
         pg_verifcation.applicant_id = applicant.id
 
