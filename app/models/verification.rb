@@ -14,10 +14,10 @@ class Verification < ApplicationRecord
   has_one :account, through: :applicant
   has_many :log_records
 
-  before_create do
+  before_update do
     self.first_name = first_name.to_s.upcase
     self.last_name = last_name.to_s.upcase
-    self.patronymic = patronymic.to_s.upcase
+    self.patronymic = patronymic.to_s.upcase if patronymic.present?
     self.document_number = document_number.to_s.upcase
   end
 
