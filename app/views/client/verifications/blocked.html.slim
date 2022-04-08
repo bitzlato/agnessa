@@ -1,4 +1,4 @@
 .row.justify-content-center.instruction
   .jumbotron
     h1.mb-4
-      = t 'client.verifications.blocked.message', account_id: '#' + [external_id, current_account.id].join('/')
+      = t 'client.verifications.blocked.message', account_id: '#' + [external_id, applicant.id, current_account.id].join('/')
