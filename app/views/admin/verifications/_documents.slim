@@ -1,7 +1,7 @@
 .row
   .col-md-12
     - verification.documents.each do |document|
-      .card.float-left.shadow-sm.mb-5.rounded style='width: 120px'
+      .card.float-left.shadow-sm.mb-5.rounded style="width: #{DocumentUploader::THUMBNAIL_WIDTH}px"
         -# = tag.video(tag.source(src: url), controls: 'controls')
         = link_to document.url, target: '_blank'
-          = image_tag document.thumb.url, style: 'max-width: 120px; max-height: 100px', class: 'card-img-top'
+          = image_tag document.thumb.url, style: "max-width: #{DocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{DocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
