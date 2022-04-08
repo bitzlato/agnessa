@@ -3,7 +3,7 @@
 .mb-2
   nav aria-label="breadcrumb"
     ol.breadcrumb
-      li.breadcrumb-item= link_to 'Все заявки'
+      li.breadcrumb-item= link_to 'Все заявки', admin_verifications_path
       li.breadcrumb-item.active
         = link_to 'Заявка #' + verification.id.to_s
         span.ml-4= verification.status
