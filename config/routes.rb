@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :user, subdomain: '', constraints: PublicConstraint do
+    resources :accounts, only: [:index]
     resource :profile, only: [:show, :update], controller: 'profile'
   end
 

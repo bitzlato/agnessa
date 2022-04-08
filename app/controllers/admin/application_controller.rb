@@ -19,6 +19,8 @@ class Admin::ApplicationController < ApplicationController
   end
 
   def authorize_member
-    raise 'unauthorized member' unless current_member.present?
+    unless current_member.present?
+      redirect_to accounts_url, alert: t_flash(:not_authenticated)
+    end
   end
 end
