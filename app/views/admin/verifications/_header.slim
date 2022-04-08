@@ -1,8 +1,9 @@
 .row
   .col-md-2
     .text-muted= verification.class.human_attribute_name :created_at
-    div title=l(verification.object.created_at, format: :long)
-      = distance_of_time_in_words verification.object.created_at
+    div 
+      div= time_ago_in_words verification.object.created_at
+      small.text-muted=l(verification.object.created_at, format: :long)
   .col-md-2 
     .text-muted= verification.class.human_attribute_name :full_name
     ul.list-unstyled
