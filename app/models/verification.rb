@@ -1,4 +1,5 @@
 class Verification < ApplicationRecord
+  attr_accessor :disable_sidekiq
   strip_attributes replace_newlines: true, collapse_spaces: true
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
@@ -116,7 +117,7 @@ class Verification < ApplicationRecord
   end
 
   def send_notification_after_status_change
-    return unless legacy_verification_id.nil?
+    return if disable_sidekiq
     return unless saved_change_to_status?
 
     VerificationStatusNotifyJob.perform_async(id)

@@ -27,7 +27,7 @@ module ImportMongo
           p e
         end
       end
-
+      verification.disable_sidekiq = true
       verification.save(validate: false)
     end
   end
@@ -80,6 +80,8 @@ module ImportMongo
         pg_verifcation.last_name = raw['lastName']
         pg_verifcation.created_at = raw['created']
         pg_verifcation.updated_at = raw['lastUpdate']
+
+        pg_verifcation.disable_sidekiq = true
         pg_verifcation.save!(validate: false)
         applicant.save!(validate: false)
       end
