@@ -1,13 +1,27 @@
 ru:
-  verification:
-    success_sending: 'Данные отправлены'
-  helpers:
-    submit:
-      create: "Отправить"
-      update: "Отправить"
-    disable_with: 'Идет отправка...'
   simple_form:
+    placeholders:
+      defaults:
+        created_at_gteq: ''
+        created_at_lt: ''
+        legacy_verification_id_cont: '1234567'
+        document_number_cont: '777 888888'
+        name_or_last_name_or_patronymic_cont: 'Griogriy Ivanov'
+        first_name_or_last_name_or_patronymic_cont: 'Griogriy Ivanov'
+    hints:
+      defaults:
+        created_at_gteq: ''
+        created_at_lt: ''
+        legacy_verification_id_cont: ''
+        document_number_cont: 'Номер паспорта'
     labels:
+      defaults:
+        created_at_gteq: 'Создано после:'
+        created_at_lt: 'Создано до:'
+        legacy_verification_id_cont: 'ID содержит:'
+        document_number_cont: 'Номер паспорта содержит:'
+        name_or_last_name_or_patronymic_cont: 'Имя\Отчество\Фамилия содержит:'
+        first_name_or_last_name_or_patronymic_cont: 'Имя\Отчество\Фамилия содержит:'
       verification:
         country: 'Гражданство'
         reason: 'Причина обращения'

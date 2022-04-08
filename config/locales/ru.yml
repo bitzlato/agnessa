@@ -1,4 +1,6 @@
 ru:
+  verification:
+    success_sending: 'Данные отправлены'
   are_you_sure?: Уверен?
   titles:
     application: Агнесса
@@ -7,7 +9,6 @@ ru:
       total_records: 'Всего записей: %{count}'
     summary:
       title: 'Сводка'
-
   client:
     verifications:
       blocked:
@@ -46,53 +47,6 @@ ru:
       review_result_labels: 'Статусы верификаций'
       profile: 'Профиль организации'
 
-  ## поисковые формы
-  simple_form:
-    placeholders:
-      defaults:
-        created_at_gteq: ''
-        created_at_lt: ''
-        legacy_verification_id_cont: '1234567'
-        document_number_cont: '777 888888'
-        name_or_last_name_or_patronymic_cont: 'Griogriy Ivanov'
-        first_name_or_last_name_or_patronymic_cont: 'Griogriy Ivanov'
-    hints:
-      defaults:
-        created_at_gteq: ''
-        created_at_lt: ''
-        legacy_verification_id_cont: ''
-        document_number_cont: 'Номер паспорта'
-    labels:
-      defaults:
-        created_at_gteq: 'Создано после:'
-        created_at_lt: 'Создано до:'
-        legacy_verification_id_cont: 'ID содержит:'
-        document_number_cont: 'Номер паспорта содержит:'
-        name_or_last_name_or_patronymic_cont: 'Имя\Отчество\Фамилия содержит:'
-        first_name_or_last_name_or_patronymic_cont: 'Имя\Отчество\Фамилия содержит:'
-
-
-
-  activerecord:
-    errors:
-      models:
-        verification:
-          attributes:
-            email:
-              invalid: Неверный формат электронной почты
-              blank: Не указана почта
-            reason:
-              blank: 'Причина обращения не выбрана'
-            name:
-              blank: 'Имя не указано'
-            last_name:
-              blank: 'Фамилия не указана'
-            document_number:
-              blank: 'Серия и номер не указан'
-            documents:
-              blank: 'Документы не были прикреплены'
-      messages:
-        record_invalid: 'Возникли ошибки: %{errors}'
   attributes:
     reasons:
       unban: 'Разблокировка учетной записи'
@@ -165,3 +119,12 @@ ru:
         few: неверной длины (может быть длиной ровно %{count} символа)
         many: неверной длины (может быть длиной ровно %{count} символов)
         other: неверной длины (может быть длиной ровно %{count} символа)
+  user:
+    profile:
+      show:
+        title: Настройки пользователя
+    legacy:
+      verifications:
+        error:
+          title: Произошла непредвиденная ошибка
+          message: Пожалуйста, обратитесь в техподдержку

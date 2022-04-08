@@ -15,13 +15,30 @@ ru:
         send: Отправить
         create_new: Создать новый
         create_new_confirm: Точно создать новый секрет?
-
     verifications:
+      index_form:
+        query_hint: Поиск по ФИО, email или номеру документа
+        query_placeholder: Ivanov
+      attributes:
+        dup_documents: 'Найдены совпадения: %{count} шт'
+        dup_names: 'Найдены совпадения: %{count} шт'
+        dup_emails: 'Найдены совпадения: %{count} шт'
       show:
         confirm: 'Подтвердить'
-        comfirm_alert:  'Подтверждаем заявку?'
+        comfirm_alert: 'Подтверждаем заявку?'
         refuse: 'Отклонить'
-
+      header:
+        similar_documents: 'Найдены совпадения: %{count} шт'
+        similar_names: 'Найдены совпадения: %{count} шт'
+        similar_emails: 'Найдены совпадения: %{count} шт'
+        index_form:
+          query_hint: Поиск по ФИО, email или номеру документа
+          query_placeholder: Ivanov
+      block_form:
+        block: заблокировать аппликанта
+        unblock: разблокировать аппликанта
+      verifications:
+        title: Список верификаций
     applicants:
       index_form:
         query_hint: Поиск по ФИО, external_id
@@ -31,13 +48,3 @@ ru:
         unblock: Разблокировать
       verifications:
         title: Список верификаций
-    verifications:
-      show:
-        refuse: Отклонить
-      header:
-        similar_documents: 'Найдены совпадения: %{count} шт'
-        similar_names: 'Найдены совпадения: %{count} шт'
-        similar_emails: 'Найдены совпадения: %{count} шт'
-      index_form:
-        query_hint: Поиск по ФИО, email или номеру документа
-        query_placeholder: Ivanov
