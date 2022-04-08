@@ -14,7 +14,7 @@ class Verification < ApplicationRecord
   has_one :account, through: :applicant
   has_many :log_records, dependent: :destroy
 
-  before_update do
+  before_save do
     self.first_name = first_name.to_s.upcase
     self.last_name = last_name.to_s.upcase
     self.patronymic = patronymic.to_s.upcase if patronymic.present?
@@ -95,77 +95,14 @@ class Verification < ApplicationRecord
   end
 
 
-  def self.update_pending
-    Verification.where(status: 'pending').find_each do |pg_verifcation|
-      mongo_verification = Mongo::Verification.where('_id': pg_verifcation.legacy_verification_id).last
-      next if mongo_verification.nil?
 
-      if mongo_verification.status == 'new'
-        pg_verifcation.status = 'pending'
-      else
-        pg_verifcation.status = mongo_verification.status
-      end
 
-      pg_verifcation.raw_changebot = mongo_verification
-      pg_verifcation.public_comment = mongo_verification.comment
-      emails = Array(emails).map(&:downcase).compact.uniq
-      pg_verifcation.email = emails.last
-      raw = pg_verifcation.raw_changebot
-      case raw['cause']
-      when 'trusted'
-        pg_verifcation.reason = 'trusted_trader'
-      when 'other'
-        pg_verifcation.reason = 'other'
-      when 'unlocking'
-        pg_verifcation.reason = 'unban'
-      when 'restoring'
-        pg_verifcation.reason = 'restore'
-      end
-      pg_verifcation.document_number = raw['passportData']
-      pg_verifcation.name = raw['name']
-      pg_verifcation.last_name = raw['lastName']
-      pg_verifcation.created_at = raw['created']
-      pg_verifcation.updated_at = raw['lastUpdate']
-      pg_verifcation.comment = raw['comment']
-      pg_verifcation.save(validate: false)
-    end
-  end
 
-  def self.import_documents_from_mongo
-    Verification.all.find_each do |verification|
-      mongo_verification = Mongo::Verification.where('_id': verification.legacy_verification_id).last
-
-      next if mongo_verification.nil?
-      next if verification.documents != []
-
-      grid_fs = Mongoid::GridFs
-      mongo_verification['files'].each do |file_object|
-        begin
-          filename = [Digest::MD5.hexdigest(File.basename(file_object['filename'])), File.extname(file_object['filename'])]
-          tempfile = Tempfile.new filename, binary: true
-
-          fs = grid_fs.get(file_object['file'])
-          fs.each { |chunk| tempfile.write chunk.force_encoding(Encoding::UTF_8) }
-
-          uploader = DocumentUploader.new verification,'documents'
-          uploader.store! tempfile
-          verification.documents << uploader
-
-          tempfile.close
-          tempfile.unlink
-        rescue CarrierWave::IntegrityError => e
-          p e
-        end
-      end
-
-      verification.save(validate: false)
-    end
-  end
 
   private
 
   def log_creation
-    log_records.create!(applicant: applicant, action: 'create')
+    log_records.create!(applicant: applicant, action: 'create', created_at: created_at)
   end
 
   def validate_labels
@@ -179,7 +116,7 @@ class Verification < ApplicationRecord
   end
 
   def send_notification_after_status_change
-    return
+    return unless legacy_verification_id.nil?
     return unless saved_change_to_status?
 
     VerificationStatusNotifyJob.perform_async(id)
