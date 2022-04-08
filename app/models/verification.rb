@@ -123,11 +123,11 @@ class Verification < ApplicationRecord
   end
 
   def self.import_documents_from_mongo
-    self.find_each do |verification|
+    Verification.all.find_each do |verification|
       mongo_verification = Mongo::Verification.where('_id': verification.legacy_verification_id).last
 
       next if mongo_verification.nil?
-      # next if verification.documents != []
+      next if verification.documents != []
 
       grid_fs = Mongoid::GridFs
       mongo_verification['files'].each do |file_object|
