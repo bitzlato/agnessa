@@ -41,7 +41,7 @@ class Verification < ApplicationRecord
 
 
   REASONS = %w[unban trusted_trader restore other]
-  validates :restore, presence: true, inclusion: { in: REASONS }, if: :refused?
+  validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
 
   after_update :send_notification_after_status_change
   after_create :log_creation
@@ -61,12 +61,14 @@ class Verification < ApplicationRecord
   def confirm!(member: nil)
     ActiveRecord::Base.transaction do
       update! status: :confirmed, moderator: member
-      applicant.update! confirmed_at: Time.now, last_name: last_name, first_name: name, patronymic: patronymic, last_confirmed_verification_id: id
+      emails = applicant.emails << self.email
+      applicant.update! emails: emails, confirmed_at: Time.now, last_name: last_name, first_name: name, patronymic: patronymic, last_confirmed_verification_id: id
       log_records.create!(applicant: applicant, action: 'confirm', member: member)
     end
   end
 
   def refuse!(member: nil, labels: [], public_comment: nil, private_comment: nil)
+    labels = labels.excluding([""])
     ActiveRecord::Base.transaction do
       update!(
         status:               :refused,
