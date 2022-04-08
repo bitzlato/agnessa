@@ -102,7 +102,7 @@ class Verification < ApplicationRecord
   private
 
   def log_creation
-    log_records.create!(applicant: applicant, action: 'create', created_at: created_at)
+    log_records.create!(applicant: applicant, action: 'create', created_at: created_atmongo)
   end
 
   def validate_labels
@@ -124,7 +124,6 @@ class Verification < ApplicationRecord
   end
 
   def send_email_to_applicant
-    return
     case status
     when 'refused'
       VerificationMailer.refused(id).deliver_now
