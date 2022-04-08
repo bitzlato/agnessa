@@ -23,14 +23,14 @@ class Applicant < ApplicationRecord
   end
 
   def block! member=nil
-    ActiveRecord::Base.transaction do
+    transaction do
       update!(blocked: true)
       log_records.create!(action: 'block', member: member)
     end
   end
 
   def unblock! member=nil
-    ActiveRecord::Base.transaction do
+    transaction do
       update!(blocked: false)
       log_records.create!(action: 'unblock', member: member)
     end
