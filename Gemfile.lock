@@ -126,6 +126,10 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     ast (2.4.2)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.16)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
@@ -184,11 +188,16 @@ GEM
       activesupport (>= 3.2.0)
       carrierwave
       fastimage
+    carrierwave-i18n (0.2.0)
     carrierwave-mongoid (1.3.0)
       carrierwave (>= 0.8, < 3)
       mongoid (>= 3.0, < 8.0)
       mongoid-grid_fs (>= 1.3, < 3.0)
+    carrierwave-video-thumbnailer (0.1.4)
+      carrierwave
     coderay (1.1.3)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     countries (4.2.2)
@@ -207,6 +216,8 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     debug_inspector (1.1.0)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -348,6 +359,8 @@ GEM
       mime-types (>= 1.0, < 4.0)
       mongoid (>= 3.0, < 8.0)
     msgpack (1.4.5)
+    multi_json (1.15.0)
+    multi_xml (0.6.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.1)
@@ -359,6 +372,13 @@ GEM
     nokogiri (1.13.3)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
+    oauth (0.5.8)
+    oauth2 (1.4.9)
+      faraday (>= 0.17.3, < 3.0)
+      jwt (>= 1.0, < 3.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 3)
     orm_adapter (0.5.0)
     parallel (1.21.0)
     parser (3.1.1.0)
@@ -504,6 +524,10 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 5.0)
+    sorcery (0.16.3)
+      bcrypt (~> 3.1)
+      oauth (~> 0.5, >= 0.5.5)
+      oauth2 (~> 1.0, >= 0.8.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
     spring (4.0.0)
@@ -524,6 +548,7 @@ GEM
       activemodel (>= 3.0, < 7.0)
     temple (0.8.2)
     thor (1.2.1)
+    thread_safe (0.3.6)
     tilt (2.0.10)
     timecop (0.9.4)
     turbolinks (5.2.1)
@@ -541,6 +566,10 @@ GEM
     validate_url (1.0.13)
       activemodel (>= 3.0.0)
       public_suffix
+    virtus (2.0.0)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -589,7 +618,9 @@ DEPENDENCIES
   capistrano3-puma!
   carrierwave (~> 2.0)
   carrierwave-bombshelter (~> 0.2.2)
+  carrierwave-i18n (~> 0.2.0)
   carrierwave-mongoid
+  carrierwave-video-thumbnailer (~> 0.1.4)
   country_select
   database_cleaner
   dotenv-rails
@@ -610,6 +641,7 @@ DEPENDENCIES
   kaminari
   letter_opener
   listen (~> 3.3)
+  mini_magick (~> 4.11)
   mini_racer (~> 0.4.0)
   mongoid
   mongoid-grid_fs
@@ -637,6 +669,7 @@ DEPENDENCIES
   simple_form_fancy_uploads
   slackistrano
   slim-rails
+  sorcery
   spring
   strip_attributes
   sumsub-ruby-sdk (~> 0.1.3)!
@@ -645,6 +678,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier
   validate_url (~> 1.0.4)
+  virtus
   web-console (>= 4.1.0)
   webmock
   webpacker (~> 5.0)

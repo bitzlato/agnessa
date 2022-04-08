@@ -3,9 +3,6 @@ module ApplicationHelper
                      'refused' => 'badge badge-secondary',
                      'confirmed' => 'badge badge-success' }
 
-  # TODO Вынести в Uploader
-  VIDEO_EXTS = %w[.mp4 .mov]
-
   def status_badge(status)
     content_tag(:span, t(status, scope: :status), class: STATUS_CLASSES[status])
   end
@@ -18,6 +15,16 @@ module ApplicationHelper
     query = params.dig(:q, VERIFICATION_QUERY)
     return value unless query.present?
     highlight value, Regexp.new(query, true)
+  end
+
+  def warning
+    '⚠️'.html_safe
+  end
+
+  def warning_flag(flag)
+    content_tag :span, class: 'mr-1' do
+      warning
+    end if flag
   end
 
   def middot
@@ -57,17 +64,12 @@ module ApplicationHelper
     link_to ('&larr; ' + t('.back')).html_safe, url || root_path
   end
 
-  def image_or_video(url)
-    ext = File.extname(url).downcase
-    if VIDEO_EXTS.include? ext
-      tag.video(tag.source(src: url), controls: 'controls')
-    else
-      image_tag url
-    end
-  end
-
   def active_class(css_classes, flag)
     flag ? "#{css_classes} active" : css_classes
+  end
+
+  def bg_warning_class(flag)
+    flag ? "border border-warning" : ''
   end
 
   def warining_table_class(css_classes, flag)

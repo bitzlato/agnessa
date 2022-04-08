@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_secure_password
+  authenticates_with_sorcery!
 
   validates :email, presence: true
   validates :email, uniqueness: true

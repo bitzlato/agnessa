@@ -1,0 +1,17 @@
+ru:
+  helpers:
+    download_without_size: Скачать %{ext}
+    download_with_size: Скачать %{ext} (%{size})
+    no_divergence: Нет расхождений
+    trades: Сделки (%{count})
+    no_trades: Нет сделок
+    platform_assets: Активы платформы
+    platform_revenues: Доходы платформы
+    member_liabilities: Обязательства
+    total_delta: Разница общаяя
+    from_including: Начиная с (включительно)
+    to: До
+    submit:
+      create: "Отправить"
+      update: "Отправить"
+    disable_with: 'Идет отправка...'

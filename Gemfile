@@ -128,5 +128,13 @@ gem 'faraday', '~> 2.0'
 gem 'request_store'
 gem 'validate_url', '~> 1.0.4'
 gem "gravatarify", "~> 3.1"
+gem 'sorcery'
+gem 'virtus'
 
 gem "rails-i18n", "~> 7.0"
+
+gem "carrierwave-video-thumbnailer", "~> 0.1.4"
+
+gem "carrierwave-i18n", "~> 0.2.0"
+
+gem "mini_magick", "~> 4.11"

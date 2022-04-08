@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_07_104828) do
+ActiveRecord::Schema.define(version: 2022_04_08_060206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_04_07_104828) do
     t.bigint "last_confirmed_verification_id"
     t.datetime "confirmed_at"
     t.citext "patronymic"
+    t.jsonb "emails", default: [], null: false
     t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
     t.index ["account_id"], name: "index_applicants_on_account_id"
   end
@@ -78,12 +79,25 @@ ActiveRecord::Schema.define(version: 2022_04_07_104828) do
 
   create_table "users", force: :cascade do |t|
     t.citext "email", null: false
-    t.string "password_digest", null: false
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "crypted_password"
+    t.string "salt"
+    t.string "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
+    t.integer "access_count_to_reset_password_page", default: 0
+    t.integer "failed_logins_count", default: 0
+    t.datetime "lock_expires_at"
+    t.string "unlock_token"
+    t.string "remember_me_token"
+    t.datetime "remember_me_token_expires_at"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
+    t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
   create_table "verifications", force: :cascade do |t|
@@ -110,6 +124,7 @@ ActiveRecord::Schema.define(version: 2022_04_07_104828) do
     t.json "review_result_labels", default: []
     t.citext "patronymic"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
+    t.index ["legacy_verification_id"], name: "index_verifications_on_legacy_verification_id", unique: true
   end
 
   add_foreign_key "applicants", "accounts"

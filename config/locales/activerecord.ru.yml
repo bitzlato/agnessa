@@ -85,7 +85,7 @@ ru:
         email: Почта
         public_comment: Публичный комментарий
         private_comment: Приватный комментарий
-        review_result_labels: Результаты проверки
+        review_result_labels: Причина отказа
         external: Внешний ID
         member_id: Модератор
         statuses:

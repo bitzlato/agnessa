@@ -1,0 +1,9 @@
+h2= t '.title'
+hr
+= simple_form_for form, url: public_password_resets_url do |f|
+  = f.input :email,  autofocus: true
+  .row
+    .col-md-6
+      = f.button :submit, class: 'btn-primary', data: { disable_with: t('helpers.disable_with') }
+    .col-md-6
+      .float-right.mt-2= link_to t('.bethink'), new_public_session_url
