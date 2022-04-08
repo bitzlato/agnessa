@@ -15,7 +15,7 @@ class VerificationDecorator < ApplicationDecorator
 
   def preview_image
     return h.middot unless object.preview_image
-    h.image_tag object.preview_image.thumb.url
+    h.image_tag object.preview_image.thumb.url, style: 'max-height: 90px; max-width: 120px'
   end
 
   def external_id

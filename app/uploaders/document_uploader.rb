@@ -7,14 +7,17 @@ class DocumentUploader < CarrierWave::Uploader::Base
 
   storage :file
 
+  THUMBNAIL_WIDTH=160
+  THUMBNAIL_HEIGHT=120
+
   version :thumb do
-    process thumbnail: [{format: 'png', quality: 10, size: 120, strip: true, logger: Rails.logger}], if: :video?
+    process thumbnail: [{format: 'png', quality: 10, size: THUMBNAIL_WIDTH, strip: true, logger: Rails.logger}], if: :video?
 
     def full_filename for_file
       png_name for_file, version_name
     end
 
-    process resize_to_fit: [120, 90], if: :image?
+    process resize_to_fit: [THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT], if: :image?
     process convert: 'png', if: :image?
   end
 
