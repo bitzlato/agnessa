@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_07_151056) do
+ActiveRecord::Schema.define(version: 2022_04_08_060206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2022_04_07_151056) do
     t.json "review_result_labels", default: []
     t.citext "patronymic"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
+    t.index ["legacy_verification_id"], name: "index_verifications_on_legacy_verification_id", unique: true
   end
 
   add_foreign_key "applicants", "accounts"
