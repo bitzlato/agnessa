@@ -127,10 +127,10 @@ ActiveRecord::Schema.define(version: 2022_04_25_123317) do
     t.text "private_comment"
     t.json "review_result_labels", default: []
     t.citext "patronymic"
-    t.date "birth_date"
-    t.string "gender"
     t.string "remote_ip"
     t.string "user_agent"
+    t.date "birth_date"
+    t.string "gender"
     t.text "applicant_comment"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
