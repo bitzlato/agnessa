@@ -1,4 +1,6 @@
 default:  &settings
+  mailer_defaults:
+    from: <%= ENV.fetch('AGNESSA_REPLY_FROM', 'reply@localhost') %>
   smtp:
     user_name: <%= ENV.fetch('SMTP_USERNAME', '') %>
     password: <%= ENV.fetch('SMTP_PASSWORD', '') %>
