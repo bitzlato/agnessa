@@ -12,7 +12,7 @@ ru:
   client:
     verifications:
       blocked:
-        message: Для вашего аккаунта подача заявок была заблокирована
+        message: Для вашего аккаунта (%{account_id}) подача заявок была заблокирована
       new:
         title:  'Заявка на верификацию аккаунта #%{account_id} в %{org}'
         from_to_size:  'Размер файла:  От %{from} до %{to}'
