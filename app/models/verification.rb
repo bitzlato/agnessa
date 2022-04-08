@@ -10,9 +10,9 @@ class Verification < ApplicationRecord
   mount_uploaders :documents, DocumentUploader
 
   belongs_to :moderator, class_name: 'Member', required: false
-  belongs_to :applicant, dependent: :destroy
+  belongs_to :applicant
   has_one :account, through: :applicant
-  has_many :log_records, dependent: :destroy
+  has_many :log_records
 
   before_save do
     self.first_name = first_name.to_s.upcase
