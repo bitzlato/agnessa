@@ -9,7 +9,7 @@ class BarongClient
   end
 
   def client
-    Faraday.new(ENV.fetch('AGNESSA_BARONG_HOST')) do |conn|
+    Faraday.new(ENV.fetch('AGNESSA_BARONG_API_ROOT_URL')) do |conn|
       conn.response :json
       conn.adapter Faraday.default_adapter
       conn.options.open_timeout = OPEN_TIMEOUT
