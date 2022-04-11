@@ -21,7 +21,7 @@ rails db:setup
 - AGNESSA_SIDEKIQ_AUTH_PASSWORD - auth for sidekiq web
 - AGNESSA_BARONG_HOST - host for barong api
 - AGNESSA_LEGACY_VERIFICATION_HOST - host for server changebot urls
-
+- AGNESSA_LOCK_EXTERNAL_VERIFICATIONS - do we lock old external verification?
 # SMTP setup:
 
 For sending emails on production, set this env variables:

@@ -256,6 +256,8 @@ GEM
       dry-logic (~> 1.0, >= 1.0.2)
     email_validator (2.2.3)
       activemodel
+    env-tweaks (1.0.1)
+      activesupport (>= 3.0, < 7.0)
     erubi (1.10.0)
     execjs (2.8.1)
     factory_bot (6.2.0)
@@ -626,6 +628,7 @@ DEPENDENCIES
   dotenv-rails
   draper
   email_validator
+  env-tweaks
   execjs
   factory_bot
   faraday (~> 2.0)
