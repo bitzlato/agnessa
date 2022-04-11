@@ -6,7 +6,7 @@ class Legacy::VerificationsController < ApplicationController
   end
 
   def show
-    uid = BarongClient.new.get_uid_from_changebot_id(params[:id])
+    uid = BarongClient.instance.get_uid_from_changebot_id(params[:id])
     account = Account.first
     if uid.present? and account.present?
       encoded_external_id = VerificationUrlGenerator.generate_token(uid, account.secret)
