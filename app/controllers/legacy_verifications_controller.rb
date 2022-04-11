@@ -7,7 +7,7 @@ class LegacyVerificationsController < ApplicationController
       {
         id: v.legacy_external_id,
         status: v.status.to_s == 'confirmed' ? true : false,
-        comment: v.raw_changebot['comment'],
+        comment: v.external_json['comment'],
         time: v.legacy_created || (v.created_at.to_i * 1000)
 
       }

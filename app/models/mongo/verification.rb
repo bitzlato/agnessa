@@ -42,10 +42,10 @@ class Mongo::Verification
         else
             pg_verifcation.status = status
         end
-        pg_verifcation.raw_changebot = self
+        pg_verifcation.external_json = self
         pg_verifcation.documents = []
 
-        raw = pg_verifcation.raw_changebot
+        raw = pg_verifcation.external_json
 
         case raw['cause']
         when 'trusted'

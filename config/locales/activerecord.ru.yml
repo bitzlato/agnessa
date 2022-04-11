@@ -74,7 +74,7 @@ ru:
         status: Статус
         comment: Комментарий
         documents: Документы
-        raw_changebot: Легаси JSON
+        external_json: Легаси JSON
         reason: Причина обращения
         name: Имя
         full_name: ФИО

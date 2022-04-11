@@ -49,7 +49,7 @@ class Verification < ApplicationRecord
   end
 
   def legacy_created
-    raw_changebot['created'].to_datetime.to_i * 1000 rescue nil
+    external_json['created'].to_datetime.to_i * 1000 rescue nil
   end
 
   def full_name
@@ -96,7 +96,7 @@ class Verification < ApplicationRecord
 
   def self.export_details
     self.find_each do |verification|
-      raw = verification.raw_changebot
+      raw = verification.external_json
 
       case raw['cause']
       when 'trusted'
