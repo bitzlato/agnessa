@@ -8,7 +8,7 @@ module MongoImporter
         applicant = set_applicant(postgres_verification)
 
         prepare_status(postgres_verification, mongo_verification)
-        prepare_reason(postgres_verification, mongo_verification)
+        postgres_verification.reason = get_reason(mongo_verification)
         prepare_emails(postgres_verification, mongo_verification, applicant)
         prepare_attributes(postgres_verification, mongo_verification)
         prepare_documents(postgres_verification, mongo_verification) if enable_documents
@@ -74,16 +74,16 @@ module MongoImporter
       end
     end
 
-    def prepare_reason(postgres_verification, mongo_verification)
+    def get_reason(mongo_verification)
       case mongo_verification.cause
       when 'trusted'
-        postgres_verification.reason = 'trusted_trader'
+        'trusted_trader'
       when 'other'
-        postgres_verification.reason = 'other'
+        'other'
       when 'unlocking'
-        postgres_verification.reason = 'unban'
+        'unban'
       when 'restoring'
-        postgres_verification.reason = 'restore'
+        'restore'
       end
     end
 
