@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_060206) do
+ActiveRecord::Schema.define(version: 2022_04_11_090422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -103,12 +103,12 @@ ActiveRecord::Schema.define(version: 2022_04_08_060206) do
   create_table "verifications", force: :cascade do |t|
     t.bigint "applicant_id", null: false
     t.string "country", limit: 2
-    t.string "legacy_verification_id"
+    t.string "legacy_external_id"
     t.string "status", default: "pending", null: false
     t.string "commment"
     t.integer "kind"
     t.json "documents", default: []
-    t.json "raw_changebot", default: {}
+    t.json "external_json", default: {}
     t.json "params", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2022_04_08_060206) do
     t.json "review_result_labels", default: []
     t.citext "patronymic"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
-    t.index ["legacy_verification_id"], name: "index_verifications_on_legacy_verification_id", unique: true
+    t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
   end
 
   add_foreign_key "applicants", "accounts"

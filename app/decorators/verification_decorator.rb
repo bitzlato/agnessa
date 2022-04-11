@@ -6,7 +6,7 @@ class VerificationDecorator < ApplicationDecorator
   end
 
   def self.attributes
-    table_columns + %i[legacy_verification_id applicant external_id]
+    table_columns + %i[legacy_external_id applicant external_id]
   end
 
   def self.table_columns
@@ -34,8 +34,8 @@ class VerificationDecorator < ApplicationDecorator
     h.hightlight_verification_field object.email
   end
 
-  def legacy_verification_id
-    h.hightlight_verification_field object.legacy_verification_id
+  def legacy_external_id
+    h.hightlight_verification_field object.legacy_external_id
   end
 
   def document_number

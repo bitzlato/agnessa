@@ -28,12 +28,13 @@ class Mongo::Verification
 
 
     def postgres_export
-        return if ::Verification.find_by(legacy_verification_id:  self['_id'])
+        return if ::Verification.find_by(legacy_external_id:  self['_id'])
 
-        pg_verifcation = ::Verification.new legacy_verification_id: self['_id']
+        pg_verifcation = ::Verification.new legacy_external_id: self['_id']
+        pg_verifcation.legacy_id = self.id
 
         account = Account.first
-        applicant = account.applicants.find_or_create_by!(external_id: v.legacy_verification_id)
+        applicant = account.applicants.find_or_create_by!(external_id: v.legacy_external_id)
         pg_verifcation.applicant_id = applicant.id
 
         if self.status == 'new'
@@ -41,10 +42,10 @@ class Mongo::Verification
         else
             pg_verifcation.status = status
         end
-        pg_verifcation.raw_changebot = self
+        pg_verifcation.external_json = self
         pg_verifcation.documents = []
 
-        raw = pg_verifcation.raw_changebot
+        raw = pg_verifcation.external_json
 
         case raw['cause']
         when 'trusted'
@@ -58,7 +59,7 @@ class Mongo::Verification
         end
 
         pg_verifcation.document_number = raw['passportData']
-        pg_verifcation.name = raw['name']
+        pg_verifcation.first_name = raw['first_name']
         pg_verifcation.last_name = raw['lastName']
         pg_verifcation.created_at = raw['created']
         pg_verifcation.updated_at = raw['lastUpdate']
