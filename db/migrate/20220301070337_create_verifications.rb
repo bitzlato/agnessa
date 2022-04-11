@@ -9,7 +9,7 @@ class CreateVerifications < ActiveRecord::Migration[6.1]
       t.string :commment
       t.integer :kind
       t.json :documents, default: []
-      t.json :external_json, default: {}
+      t.json :raw_changebot, default: {}
       t.json :params, default: {}
       t.timestamps
     end
