@@ -10,7 +10,7 @@ set :repo_url, ENV.fetch('DEPLOY_REPO', `git remote -v | grep origin | head -1 |
 set :keep_releases, 10
 
 set :linked_files, [".env"]
-set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets secrets public/packs public/uploads]
+set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets secrets public/assets public/packs public/uploads]
 set :config_files, fetch(:linked_files)
 
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
