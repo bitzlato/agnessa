@@ -130,6 +130,7 @@ gem 'validate_url', '~> 1.0.4'
 gem "gravatarify", "~> 3.1"
 gem 'sorcery'
 gem 'virtus'
+gem 'ruby-progressbar'
 
 gem "rails-i18n", "~> 7.0"
 
