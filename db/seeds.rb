@@ -20,7 +20,7 @@ account.members.create_with(role: 'superadmin').
 applicant = account.applicants.find_or_create_by!(external_id: 'test')
 
 applicant.verifications.create!({
-  name: 'test', last_name: 'test', legacy_verification_id: 'test', country: 'ru', document_number: 'test',
+  name: 'test', last_name: 'test', legacy_external_id: 'test', country: 'ru', document_number: 'test',
   reason: :unban, email: 'test@test.test', status: :pending,
   documents: [Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')))]
 })

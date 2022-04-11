@@ -27,7 +27,7 @@
 
 = render partial: 'log', locals: {record: verification}
 
-- if verification.object.legacy_verification_id.present?
+- if verification.object.legacy_external_id.present?
   .text-muted
-    = verification.class.human_attribute_name :legacy_verification_id
-    span.ml-2= verification.legacy_verification_id
+    = verification.class.human_attribute_name :legacy_external_id
+    span.ml-2= verification.legacy_external_id
