@@ -1,4 +1,6 @@
 class Verification < ApplicationRecord
+  attr_accessor :disable_sidekiq
+
   strip_attributes replace_newlines: true, collapse_spaces: true
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
@@ -14,7 +16,7 @@ class Verification < ApplicationRecord
   has_one :account, through: :applicant
   has_many :log_records
 
-  before_update do
+  before_save do
     self.first_name = first_name.to_s.upcase
     self.last_name = last_name.to_s.upcase
     self.patronymic = patronymic.to_s.upcase if patronymic.present?
@@ -123,7 +125,7 @@ class Verification < ApplicationRecord
   private
 
   def log_creation
-    log_records.create!(applicant: applicant, action: 'create')
+    log_records.create!(applicant: applicant, action: 'create', created_at: created_at)
   end
 
   def validate_labels
@@ -137,6 +139,7 @@ class Verification < ApplicationRecord
   end
 
   def send_notification_after_status_change
+    return if disable_sidekiq
     return unless saved_change_to_status?
 
     VerificationStatusNotifyJob.perform_async(id)
