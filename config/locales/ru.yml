@@ -123,11 +123,11 @@ ru:
     profile:
       show:
         title: Настройки пользователя
-    legacy:
-      verifications:
-        error:
-          title: Произошла непредвиденная ошибка
-          message: Пожалуйста, обратитесь в техподдержку
+  legacy:
+    verifications:
+      error:
+        title: Произошла непредвиденная ошибка
+        message: Пожалуйста, обратитесь в техподдержку
   public:
     sessions:
       form:
