@@ -3,7 +3,7 @@ class BarongClient
   TIMEOUT = 300 # waiting for response timeout in seconds
 
   def get_uid_from_changebot_id id
-    response = client.get("/api/v2/public/user_uid_by_changebot_id/#{id}")
+    response = client.get("/api/v2/barong/public/user_uid_by_changebot_id/#{id}")
     response.assert_success!
     response.body['uid']
   end
