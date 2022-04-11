@@ -24,7 +24,7 @@ class Verification < ApplicationRecord
   end
 
   validates :country, :name, :last_name, :document_number, :documents, :reason, presence: true, on: :create
-  validates :email, presence: true, email: true
+  validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?
   validates :review_result_labels, absence: true, if: :confirmed?

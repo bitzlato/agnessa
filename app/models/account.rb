@@ -8,7 +8,7 @@ class Account < ApplicationRecord
   validates :name, :secret, :email_from, presence: true
   validates :subdomain, presence: true, uniqueness: true
   validates :verification_callback_url, url: true, if: :verification_callback_url?
-  validates :email_from, email: true
+  validates :email_from, email: { mode: :strict }
   validates :return_url, url: true, if: :return_url?
   validates :subdomain, exclusion: Rails.configuration.application.reserved_subdomains
 
