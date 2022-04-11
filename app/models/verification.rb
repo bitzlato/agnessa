@@ -1,4 +1,6 @@
 class Verification < ApplicationRecord
+  attr_accessor :disable_notification
+
   strip_attributes replace_newlines: true, collapse_spaces: true
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
@@ -123,7 +125,7 @@ class Verification < ApplicationRecord
   private
 
   def log_creation
-    log_records.create!(applicant: applicant, action: 'create')
+    log_records.create!(applicant: applicant, action: 'create', created_at: created_at)
   end
 
   def validate_labels
@@ -137,6 +139,7 @@ class Verification < ApplicationRecord
   end
 
   def send_notification_after_status_change
+    return if disable_notification
     return unless saved_change_to_status?
 
     VerificationStatusNotifyJob.perform_async(id)
