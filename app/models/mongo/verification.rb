@@ -28,12 +28,12 @@ class Mongo::Verification
 
 
     def postgres_export
-        return if ::Verification.find_by(legacy_verification_id:  self['_id'])
+        return if ::Verification.find_by(legacy_external_id:  self['_id'])
 
-        pg_verifcation = ::Verification.new legacy_verification_id: self['_id']
+        pg_verifcation = ::Verification.new legacy_external_id: self['_id']
 
         account = Account.first
-        applicant = account.applicants.find_or_create_by!(external_id: v.legacy_verification_id)
+        applicant = account.applicants.find_or_create_by!(external_id: v.legacy_external_id)
         pg_verifcation.applicant_id = applicant.id
 
         if self.status == 'new'

@@ -5,7 +5,7 @@ class LegacyVerificationsController < ApplicationController
       order('created_at DESC').
       map do |v|
       {
-        id: v.legacy_verification_id,
+        id: v.legacy_external_id,
         status: v.status.to_s == 'confirmed' ? true : false,
         comment: v.raw_changebot['comment'],
         time: v.legacy_created || (v.created_at.to_i * 1000)
