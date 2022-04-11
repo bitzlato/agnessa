@@ -31,6 +31,7 @@ class Mongo::Verification
         return if ::Verification.find_by(legacy_external_id:  self['_id'])
 
         pg_verifcation = ::Verification.new legacy_external_id: self['_id']
+        pg_verifcation.legacy_id = self.id
 
         account = Account.first
         applicant = account.applicants.find_or_create_by!(external_id: v.legacy_external_id)
@@ -58,7 +59,7 @@ class Mongo::Verification
         end
 
         pg_verifcation.document_number = raw['passportData']
-        pg_verifcation.name = raw['name']
+        pg_verifcation.first_name = raw['first_name']
         pg_verifcation.last_name = raw['lastName']
         pg_verifcation.created_at = raw['created']
         pg_verifcation.updated_at = raw['lastUpdate']
