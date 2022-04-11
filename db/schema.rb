@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2022_04_11_090422) do
     t.text "private_comment"
     t.json "review_result_labels", default: []
     t.citext "patronymic"
+    t.string "legacy_id"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
   end
