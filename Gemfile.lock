@@ -659,6 +659,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.2)
   rspec-sidekiq
   rubocop
+  ruby-progressbar
   sass-rails (>= 6)
   sd_notify (~> 0.1.1)
   semver
