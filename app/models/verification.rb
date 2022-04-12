@@ -35,6 +35,8 @@ class Verification < ApplicationRecord
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
 
+  scope :by_reason, ->(reason) { where reason: reason }
+
   scope :by_status, ->(status) { where status: status }
   STATUSES.each do |status|
     scope status, -> { by_status status }
