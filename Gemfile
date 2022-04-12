@@ -131,6 +131,7 @@ gem "gravatarify", "~> 3.1"
 gem 'sorcery'
 gem 'virtus'
 gem 'ruby-progressbar'
+gem 'env-tweaks'
 
 gem "rails-i18n", "~> 7.0"
 
