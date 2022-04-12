@@ -14,6 +14,14 @@ module RescueErrors
     rescue_from ActionController::MissingFile,       with: :not_found
     rescue_from ActiveRecord::RecordNotFound,        with: :not_found
     rescue_from HumanizedError,                      with: :handle_humanized_error
+
+    def not_found(_exception = nil)
+      if request.format.html?
+        render 'not_found', status: :not_found, layout: 'simple', formats: [:html]
+      else
+        render plain: 'not found', status: :not_found, layout: nil, formats: [:text]
+      end
+    end
   end
 
   private
@@ -42,14 +50,6 @@ module RescueErrors
 
   def render_json_exception(exception, status: :unprocessable_entity)
     render json: [exception.message], status: status
-  end
-
-  def not_found(_exception = nil)
-    if request.format.html?
-      render 'not_found', status: :not_found, layout: 'simple', formats: [:html]
-    else
-      render plain: 'not found', status: :not_found, layout: nil, formats: [:text]
-    end
   end
 
   def not_authenticated(exception = nil)
