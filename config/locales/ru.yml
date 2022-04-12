@@ -53,6 +53,7 @@ ru:
       trusted_trader: 'Стать доверенным торговцем'
       restore: 'Восстановление утерянного аккаунта'
       other: 'Другое'
+      all: Все
   period: Период
   income:
     total:
