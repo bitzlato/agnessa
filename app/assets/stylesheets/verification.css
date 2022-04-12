@@ -2,6 +2,7 @@
     padding-top: 100px;
 }
 
-.file .btn-default .fileinput-exists, .file .btn-default .fileinput-new, .file  .form-control{
+.file .btn-default .fileinput-exists, .file .btn-default .fileinput-new, .file  .form-control, .file .input-group-addon {
     display: none;
 }
+

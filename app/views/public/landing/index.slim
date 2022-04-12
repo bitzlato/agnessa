@@ -1,5 +1,8 @@
-h1 Agnessa Publis Landing
-
-ul
-  - accounts.each do |account|
-    li= link_to account.name, admin_root_url(subdomain: account.subdomain)
+.container.px-3.py-3
+  .jumbotron
+    h1.display-4 Привет!
+    p.lead Я - Агнесса, KYC-Сервис. Я помогаю провести быструю идентификацию и узнать Вашего клиента.
+    hr.my-4
+    p Агнесса, пока, работает в закрытом режиме.
+    .mt-2
+      = link_to 'Вход для зарегистрированных', new_public_session_url, class: 'btn btn-primary btn-lg', role: :button

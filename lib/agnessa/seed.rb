@@ -26,7 +26,7 @@ module Agnessa
           logger.info "Label '#{label['label']} already exists"
           next
         end
-        ReviewResultLabel.create!(label: label['label'], final: label['final'], label_ru: label['label_ru'], description: label['description'] )
+        ReviewResultLabel.create!(label: label['label'], final: label['final'], label_ru: label['label_ru'], public_comment: label['public_comment'] )
       end
 
     end

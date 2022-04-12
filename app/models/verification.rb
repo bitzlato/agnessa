@@ -125,6 +125,10 @@ class Verification < ApplicationRecord
     end
   end
 
+  def review_result_labels_public_comments
+    ReviewResultLabel.where(label: review_result_labels).pluck(:public_comment)
+  end
+
   private
 
   def at_least_3_documents
@@ -139,6 +143,10 @@ class Verification < ApplicationRecord
     review_result_labels.each do |label|
       errors.add :labels, "Нет такого lable #{label}" unless ReviewResultLabel.exists?(label: label)
     end
+  end
+
+  def documents_file_name
+    ''
   end
 
   def validate_not_blocked_applicant

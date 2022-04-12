@@ -1,0 +1,15 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky-top[style="background-color: #e3f2fd;"]
+  .container
+    = render 'shared/brand'
+    button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navigation"]
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        - if logged_in?
+          li.nav-item.dropdown
+            = link_to t('.accounts'), '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', data: { toggle: 'dropdown' }, id: :accountsDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false
+            .dropdown-menu.dropdown-menu-right[aria-labelledby="accountsDropdown"]
+              - current_user.accounts.each do |account|
+                = link_to account.name, admin_root_url(subdomain: account.subdomain) , class: 'dropdown-item'
+      ul.navbar-nav.navbar-right
+        = render 'user_dropdown'
