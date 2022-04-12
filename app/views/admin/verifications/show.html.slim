@@ -16,7 +16,7 @@
   = simple_form_for [:admin, verification] do |f|
     .row
       .col-6
-        = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 15, multiple: true }, required: true
+        = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 16, multiple: true }, required: true
       .col-6
         = f.input :public_comment, as: :text, required: true
         = f.input :private_comment, as: :text, required: false
