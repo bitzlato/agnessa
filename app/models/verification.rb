@@ -31,6 +31,7 @@ class Verification < ApplicationRecord
 
   validate :validate_labels
   validate :validate_not_blocked_applicant, on: :create
+  validate :at_least_3_documents, on: :create
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
@@ -125,6 +126,10 @@ class Verification < ApplicationRecord
   end
 
   private
+
+  def at_least_3_documents
+    errors.add :documents, I18n.t('errors.messages.at_least_3_documents') if documents.count < 3
+  end
 
   def log_creation
     log_records.create!(applicant: applicant, action: 'create', created_at: created_at)

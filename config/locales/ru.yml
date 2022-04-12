@@ -84,6 +84,7 @@ ru:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      at_least_3_documents: необходимо прикрепить не менее 3 документов
       accepted: нужно подтвердить
       blank: не может быть пустым
       confirmation: не совпадает со значением поля %{attribute}
