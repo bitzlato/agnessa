@@ -80,6 +80,6 @@ Rails.application.routes.draw do
     end
   end
 
-  match '*anything', to: 'errors#not_found', via: %i[get post]
-  match '', to: 'errors#not_found', via: %i[get post]
+  match '*anything', to: 'application#not_found', via: %i[get post]
+  match '', to: 'application#not_found', via: %i[get post]
 end
