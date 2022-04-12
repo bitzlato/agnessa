@@ -22,7 +22,7 @@ applicant = account.applicants.find_or_create_by!(external_id: 'test')
 applicant.verifications.create!({
   name: 'test', last_name: 'test', legacy_external_id: 'test', country: 'ru', document_number: 'test',
   reason: :unban, email: 'test@test.test', status: :pending,
-  documents: [Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')))]
+  documents: [Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), "image/jpeg")]
 })
 
 Agnessa::Seed.new.seed_review_result_labels
