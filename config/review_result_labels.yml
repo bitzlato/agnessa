@@ -2,7 +2,7 @@ review_result_labels:
     - label: WRONG_FORMAT
       label_ru: 'Неверный формат'
       public_comment: 'Заявка не соответствует формату подачи документов.'
-    - label: CANT_SEE_URL_ADRESS
+    - label: CANT_SEE_URL_ADDRESS
       label_ru: 'Адрес сайта невиден'
       public_comment: 'Не удалось рассмотреть адрес сайта на видеозаписи'
     - label: BAD_PHOTO
