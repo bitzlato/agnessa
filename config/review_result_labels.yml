@@ -1,74 +1,50 @@
 review_result_labels:
-    - label: FORGERY
-      label_ru: 'ПОДДЕЛКА'
-      final: true
-      description: Forgery attempt has been made
-    - label: LOW_QUALITY
-      label_ru: 'НИЗКОЕ_КАЧЕСТВО'
-      final: false
-      description: Documents have low-quality that does not allow definitive conclusions to be made
-    - label: DOCUMENT_TEMPLATE
-      label_ru: 'СКАЧАНО ИЗ ИНТЕРНЕТА'
-      final: false
-      description: Documents supplied are templates, downloaded from internet
-    - label: SPAM
-      label_ru: 'СПАМ'
-      final: true
-      description: An applicant has been created by mistake or is just a spam user (irrelevant images were supplied)
-    - label: NOT_DOCUMENT
-      label_ru: 'НЕ ПОДХОДЯШИЕ ДОКУМЕНТЫ'
-      final: false
-      description: Documents supplied are not relevant for the verification procedure
-    - label: SELFIE_MISMATCH
-      label_ru: 'НЕВЕРНОЕ_СЕЛФИ'
-      final: true
-      description: A user photo (profile image) does not match a photo on the provided documents
-    - label: ID_INVALID
-      label_ru: 'НЕВАЛИДНЫЙ ДОКУМЕНТ'
-      final: false
-      description: A document that identifies a person (like a passport or an ID card) is not valid
-    - label: FOREIGNER
-      label_ru: 'ДОКУМЕНТЫ НЕ СООТВЕСТВУЮТ РЕГИОНУ'
-      final: true
-      description: When a client does not accept applicants from a different country or e.g. without a residence permit
-    - label: WRONG_USER_REGION
-      label_ru: 'НЕВЕРНЫЙ РЕГИОН'
-      final: true
-      description: When applicants from certain regions/countries are not allowed to be registered
-    - label: INCOMPLETE_DOCUMENT
-      label_ru: 'НЕВИДНО ДОКУМЕНТ'
-      final: false
-      description: Some information is missing from the document, or it's partially visible
-    - label: BLACKLIST
-      label_ru: 'ПОЛЬЗОВАТЕЛЬ В ЧС'
-      final: true
-      description: User is blacklisted
-    - label: UNSATISFACTORY_PHOTOS
-      label_ru: 'НЕУД. ФОТО'
-      final: false
-      description: There were problems with the photos, like poor quality or masked information
-    - label: CRIMINAL
-      label_ru: 'КРИМИНАЛ'
-      final: true
-      description: The user is involved in illegal actions
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    - label: WRONG_FORMAT
+      label_ru: 'Неверный формат'
+      public_comment: 'Заявка не соответствует формату подачи документов.'
+    - label: CANT_SEE_URL_ADDRESS
+      label_ru: 'Адрес сайта невиден'
+      public_comment: 'Не удалось рассмотреть адрес сайта на видеозаписи'
+    - label: BAD_PHOTO
+      label_ru: 'Плохое качество фото'
+      public_comment: 'Фотографии плохого качества'
+    - label: BAD_DOCUMENTS
+      label_ru: 'Часть документа скрыта'
+      public_comment: 'Часть документа скрыта'
+    - label: SOMEONE_ELSE_DOCUMENT
+      label_ru: 'Документы закреплены за другой записью'
+      public_comment: 'Документы уже закреплены за другой учетной записью'
+    - label: BAD_DOCUMENTS_WITH_FACE
+      label_ru: 'Фото документа на фоне лица плохого качества'
+      public_comment: 'Фото паспорта на фоне лица плохого качества'
+    - label: BAD_DOCUMENT_ON_VIDEO
+      label_ru: 'Данные паспорта на видеозаписи не читаемы'
+      public_comment: 'Данные паспорта на видеозаписи не читаемы'
+    - label: VIDEO_IS_MISSING
+      label_ru:  'Отсутствует видеозапись'
+      public_comment: 'В заявке отсутствует видеозапись'
+    - label: BAD_DOCUMENTS_WITH_SITE
+      label_ru:  'Фото паспорта на фоне сайта плохого качества'
+      public_comment: 'Фото паспорта на фоне сайта плохого качества'
+    - label: NO_DOCUMENTS_WITH_FACE
+      label_ru: 'Отсутствует фотография документа на фоне лица'
+      public_comment: 'Отсутствует фотография документа на фоне лица'
+    - label: NO_DOCUMENTS_WITH_SITE
+      label_ru: 'Отсутствует фотография документа на фоне сайта'
+      public_comment: 'Отсутствует фотография документа на фоне сайта'
+    - label: BAD_CONTROL_TEXT
+      label_ru: 'Некорректно произнесен контрольный текс.'
+      public_comment: 'Некорректно произнесен контрольный текст'
+    - label: BAD_DOCUMENT_ID
+      label_ru: 'ID документа не соответствует указанному в заявке, или отсутствует на фото'
+      public_comment: 'ID документа не соответствует указанному в заявке, или отсутствует на фото'
+    - label: BAD_VIDEO
+      label_ru: 'Битый файл видеозаписи'
+      public_comment: 'Битый файл видеозаписи'
+    - label: BLUR_DOCUMENTS
+      label_ru: 'Размыт текст документа'
+      public_comment: 'Размыт текст документа'
+    - label: EXPOSED_DOCUMENTS
+      label_ru: 'Засвечен текст документа'
+      public_comment: 'Засвечен текст документа'
 

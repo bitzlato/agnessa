@@ -124,6 +124,10 @@ class Verification < ApplicationRecord
     end
   end
 
+  def review_result_labels_public_comments
+    ReviewResultLabel.where(label: review_result_labels).pluck(:public_comment)
+  end
+
   private
 
   def log_creation
