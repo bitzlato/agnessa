@@ -140,3 +140,5 @@ gem "carrierwave-video-thumbnailer", "~> 0.1.4"
 gem "carrierwave-i18n", "~> 0.2.0"
 
 gem "mini_magick", "~> 4.11"
+
+gem "coffee-rails", "~> 5.0"
