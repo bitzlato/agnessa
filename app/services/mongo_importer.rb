@@ -1,7 +1,7 @@
 class MongoImporter
   def import_verifications(with_documents: false)
     bar = ProgressBar.create(title: "Items", starting_at: 0, total: Mongo::Verification.count)
-    Mongo::Verification.all.no_timeout.map do |mongo_verification|
+    back_sort_scope.each do |mongo_verification|
       begin
         verification = ::Verification.find_or_initialize_by(legacy_external_id: mongo_verification['_id'])
         verification.disable_notification = true
@@ -26,7 +26,7 @@ class MongoImporter
 
   def import_documents
     bar = ProgressBar.create(title: "Items", starting_at: 0, total: Mongo::Verification.count)
-    Mongo::Verification.collection.aggregate([{'$sort' => {'created' => -1}}], {allow_disk_use: true}).each do |mongo_verification|
+    back_sort_scope.each do |mongo_verification|
       verification = ::Verification.find_by(legacy_external_id: mongo_verification['_id'])
       if verification.present?
         import_verification_documents(verification, mongo_verification)
@@ -38,6 +38,10 @@ class MongoImporter
 
   private
 
+
+  def back_sort_scope
+    Mongo::Verification.collection.aggregate([{'$sort' => {'created' => -1}}], {allow_disk_use: true})
+  end
   def import_verification_documents(verification, mongo_verification)
     return if verification.documents.count == mongo_verification['files'].count
 
@@ -69,7 +73,9 @@ class MongoImporter
   end
 
   def get_applicant(mongo_verification)
-    account.applicants.find_or_create_by!(external_id: mongo_verification['_id'])
+    uid = barong_client.get_uid_from_changebot_id(mongo_verification['_id'])
+    external_id = uid.present? ? uid : "LEGACY_#{app.external_id}"
+    account.applicants.find_or_create_by!(external_id: external_id)
   end
 
   def get_status(mongo_verification)
@@ -116,5 +122,9 @@ class MongoImporter
 
   def grid_fs
     @grid_fs ||= Mongoid::GridFs
+  end
+
+  def barong_client
+    BarongClient.instance
   end
 end
