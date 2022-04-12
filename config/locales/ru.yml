@@ -35,6 +35,7 @@ ru:
     trusted_trader: Доверенный продавец
     restore: Восстановление аккаунта
     other: Другое
+    all: Все
 
   shared:
     navbar:
@@ -84,11 +85,11 @@ ru:
     profile:
       show:
         title: Настройки пользователя
-    legacy:
-      verifications:
-        error:
-          title: Произошла непредвиденная ошибка
-          message: Пожалуйста, обратитесь в техподдержку
+  legacy:
+    verifications:
+      error:
+        title: Произошла непредвиденная ошибка
+        message: Пожалуйста, обратитесь в техподдержку
   public:
     sessions:
       form:
