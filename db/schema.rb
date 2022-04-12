@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_11_090422) do
+ActiveRecord::Schema.define(version: 2022_04_12_084508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2022_04_11_090422) do
 
   create_table "review_result_labels", force: :cascade do |t|
     t.string "label"
-    t.text "description"
+    t.text "public_comment"
     t.boolean "final", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(version: 2022_04_11_090422) do
     t.text "private_comment"
     t.json "review_result_labels", default: []
     t.citext "patronymic"
-    t.string "legacy_id"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
   end
