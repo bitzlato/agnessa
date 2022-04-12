@@ -140,6 +140,10 @@ class Verification < ApplicationRecord
     end
   end
 
+  def documents_file_name
+    ''
+  end
+
   def validate_not_blocked_applicant
     errors.add :applicant_id, "Заблокированный аппликант #{applicant.external_id}" if applicant.blocked
   end
