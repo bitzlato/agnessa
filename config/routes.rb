@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   scope as: :legacy, module: :legacy, constraints: LegacyConstraint do
     get '/' => 'verifications#legacy_show'
+    get ENV.fetch('USERS_PATH','users.json'), to: 'verifications#index'
     resources :verifications, only: [:show]
   end
 
@@ -45,7 +46,6 @@ Rails.application.routes.draw do
   end
 
   scope constraints: ClientConstraint do
-    get ENV.fetch('USERS_PATH','users.json'), to: 'legacy_verifications#index'
 
     scope as: :admin, module: :admin do
       resources :applicants, only: [:index, :show] do
