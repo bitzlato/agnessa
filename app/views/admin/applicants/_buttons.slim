@@ -1,6 +1,6 @@
 .mt-2
   - if applicant.blocked?
+    .mb-2= t '.applicant_blocked'
     = link_to t('.unblock'), unblock_admin_applicant_path(applicant), method: :post, 'data-confirm': 'Точно разблокировать?', class: 'btn btn-primary'
   - else
-    .mb-2= t '.applicant_blocked'
     = link_to t('.block'), block_admin_applicant_path(applicant), method: :post, 'data-confirm': 'Точно заблокировать?', class: 'btn btn-secondary'
