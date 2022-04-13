@@ -1,9 +1,8 @@
 $(document).ready(function() {
 
-    const FORM_QUERY='#verification_review_result_labels'
 
     addLabelsToPublicComment = function () {
-        var selected = $(`${FORM_QUERY} option:selected`);
+        var selected = $(`#verification_review_result_labels option:selected`);
 
         var textarea =  $("#verification_public_comment");
         textarea.val('');
@@ -14,7 +13,7 @@ $(document).ready(function() {
     }
 
 
-    $(`${FORM_QUERY}`).change(function() {
+    $(`#verification_review_result_labels`).change(function() {
         addLabelsToPublicComment()
     })
 });
