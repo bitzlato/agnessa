@@ -1,7 +1,7 @@
 class Verification < ApplicationRecord
   attr_accessor :disable_notification
 
-  strip_attributes replace_newlines: true, collapse_spaces: true
+  strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
 
