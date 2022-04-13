@@ -9,6 +9,7 @@
 // require simple_form_extension
 // require simple_form_extension/selectize
 //= require nprogress/nprogress
+//= require refuse
 //= require_tree ./elements
 //= require_tree ./extra
 
