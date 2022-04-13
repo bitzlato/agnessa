@@ -38,7 +38,8 @@
                      as: :file,
                      input_html: { multiple: true, accept: Rails.configuration.application.document_content_types.join(',') },
                      label: "Документы",
-                     hint: t('.from_to_size', from: number_to_human_size(Rails.configuration.application.min_upload_file_size), to: number_to_human_size(Rails.configuration.application.max_upload_file_size))
+                     hint: t('.document_hint', from: number_to_human_size(Rails.configuration.application.min_upload_file_size), to: number_to_human_size(Rails.configuration.application.max_upload_file_size), amount: Rails.configuration.application.min_upload_files_amount).html_safe
+
       .row
         .col-12
           .text-center
