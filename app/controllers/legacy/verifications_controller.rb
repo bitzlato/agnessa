@@ -1,6 +1,23 @@
 class Legacy::VerificationsController < ApplicationController
   layout 'legacy'
 
+  def index
+    account = Account.find_by_subdomain!('bz')
+    verifications = account.verifications.
+      all.
+      order('created_at DESC').
+      map do |v|
+      {
+        id: v.legacy_external_id,
+        status: v.status.to_s == 'confirmed' ? true : false,
+        comment: v.external_json['comment'],
+        time: v.legacy_created || (v.created_at.to_i * 1000)
+      }
+    end
+
+    render json: verifications
+  end
+
   def legacy_show
     render locals: {}
   end
