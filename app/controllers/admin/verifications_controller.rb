@@ -9,7 +9,7 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   def update
-    if ENV.true?('AGNESSA_LOCK_EXTERNAL_VERIFICATIONS') and verification.object.legacy_external_id.present?
+    if ENV.true?('AGNESSA_LOCK_EXTERNAL_VERIFICATIONS') and verification.legacy_external_id.present?
       raise HumanizedError, :cant_edit_legacy_verification
     end
 
