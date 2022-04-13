@@ -1,8 +1,9 @@
 class MongoImporter
   def import_verifications(with_documents: false)
     bar = ProgressBar.create(title: "Items", starting_at: 0, total: Mongo::Verification.count)
-    Mongo::Verification.all.no_timeout.map do |mongo_verification|
-      begin
+    back_sort_scope.each do |mongo_verification|
+      puts mongo_verification['created']
+      # begin
         verification = ::Verification.find_or_initialize_by(legacy_external_id: mongo_verification['_id'])
         verification.disable_notification = true
         applicant = get_applicant(mongo_verification)
@@ -17,16 +18,16 @@ class MongoImporter
 
         applicant.save!(validate: false)
         verification.save!(validate: false)
-      rescue
-        Bugsnag.notify(StandardError.new("Cant Import Verification with id: #{mongo_verification['_id']}"))
-      end
+      # rescue
+      #   Bugsnag.notify(StandardError.new("Cant Import Verification with id: #{mongo_verification['_id']}"))
+      # end
       bar.increment
     end
   end
 
   def import_documents
     bar = ProgressBar.create(title: "Items", starting_at: 0, total: Mongo::Verification.count)
-    Mongo::Verification.collection.aggregate([{'$sort' => {'created' => -1}}], {allow_disk_use: true}).each do |mongo_verification|
+    back_sort_scope.each do |mongo_verification|
       verification = ::Verification.find_by(legacy_external_id: mongo_verification['_id'])
       if verification.present?
         import_verification_documents(verification, mongo_verification)
@@ -37,6 +38,11 @@ class MongoImporter
   end
 
   private
+
+
+  def back_sort_scope
+    Mongo::Verification.collection.aggregate([{'$sort' => {'created' => -1}}], {allow_disk_use: true})
+  end
 
   def import_verification_documents(verification, mongo_verification)
     return if verification.documents.count == mongo_verification['files'].count
@@ -69,20 +75,27 @@ class MongoImporter
   end
 
   def get_applicant(mongo_verification)
-    account.applicants.find_or_create_by!(external_id: mongo_verification['_id'])
+    uid = barong_client.get_uid_from_changebot_id(mongo_verification['_id'])
+    external_id = uid.present? ? uid : "LEGACY_#{mongo_verification['_id']}"
+    account.applicants.find_or_create_by!(external_id: external_id)
   end
 
+  def barong_client
+    @barong_client ||= BarongClient.instance
+  end
+
+
   def get_status(mongo_verification)
-    case mongo_verification.status
+    case mongo_verification['status']
     when 'new'
       'pending'
     else
-      mongo_verification.status
+      mongo_verification['status']
     end
   end
 
   def get_reason(mongo_verification)
-    case mongo_verification.cause
+    case mongo_verification['cause']
     when 'trusted'
       'trusted_trader'
     when 'other'
@@ -97,21 +110,21 @@ class MongoImporter
   def get_attributes(mongo_verification)
     {
       external_json: mongo_verification,
-      document_number:  mongo_verification.passportData,
-      first_name:  mongo_verification.name,
-      last_name:  mongo_verification.lastName,
-      created_at:  mongo_verification.created,
-      updated_at:  mongo_verification.lastUpdate,
-      public_comment:  mongo_verification.comment,
+      document_number:  mongo_verification['passportData'],
+      first_name:  mongo_verification['name'],
+      last_name:  mongo_verification['lastName'],
+      created_at:  mongo_verification['created'],
+      updated_at:  mongo_verification['lastUpdate'],
+      public_comment:  mongo_verification['comment'],
     }
   end
 
   def get_last_email(mongo_verification)
-    Array(mongo_verification.emails).map(&:downcase).compact.uniq.last
+    Array(mongo_verification['emails']).map(&:downcase).compact.uniq.last
   end
 
   def get_emails(mongo_verification)
-    Array(mongo_verification.emails).map(&:downcase).compact.uniq
+    Array(mongo_verification['emails']).map(&:downcase).compact.uniq
   end
 
   def grid_fs
