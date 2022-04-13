@@ -3,7 +3,7 @@ class MongoImporter
     bar = ProgressBar.create(title: "Items", starting_at: 0, total: Mongo::Verification.count)
     back_sort_scope.each do |mongo_verification|
       puts mongo_verification['created']
-      # begin
+      begin
         verification = ::Verification.find_or_initialize_by(legacy_external_id: mongo_verification['_id'])
         verification.disable_notification = true
         applicant = get_applicant(mongo_verification)
@@ -18,9 +18,9 @@ class MongoImporter
 
         applicant.save!(validate: false)
         verification.save!(validate: false)
-      # rescue
-      #   Bugsnag.notify(StandardError.new("Cant Import Verification with id: #{mongo_verification['_id']}"))
-      # end
+      rescue
+        Bugsnag.notify(StandardError.new("Cant Import Verification with id: #{mongo_verification['_id']}"))
+      end
       bar.increment
     end
   end
