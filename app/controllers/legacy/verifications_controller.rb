@@ -8,7 +8,7 @@ class Legacy::VerificationsController < ApplicationController
       order('created_at DESC').
       map do |v|
       {
-        id: v.legacy_external_id,
+        id:  v.legacy_external_id || v.applicant.legacy_external_id,
         status: v.status.to_s == 'confirmed' ? true : false,
         comment: v.external_json['comment'],
         time: v.legacy_created || (v.created_at.to_i * 1000)
