@@ -9,24 +9,26 @@
       .row
       .row
         .col-4
-          = f.input :name
+          = f.input :name, required: true
         .col-4
-          = f.input :last_name
+          = f.input :last_name, required: true
         .col-4
           = f.input :patronymic
       .row
         .col-4
-          = f.input :country, as: :country, priority: Rails.configuration.application.country_priority
+          = f.input :country, as: :country,
+                  priority: Rails.configuration.application.country_priority,
+                  required: true
         .col-4
-          = f.input :document_number
+          = f.input :document_number, required: true
       .row
         .col-6
-          = f.input :reason, 
-            include_blank: false, 
+          = f.input :reason,
+            include_blank: false,
             collection: Verification::REASONS,
             label_method: lambda { |item| t("attributes.reasons.#{item}") }
         .col-6
-          = f.input :email, as: :email
+          = f.input :email, as: :email, required: true
 
       .row
         .col-6
@@ -40,7 +42,7 @@
       .row
         .col-12
           .text-center
-            = f.submit class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }
+            = f.submit class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }, disabled: true
       .row.mt-4
         .col-md-12
           .alert.alert-warning role='alert'
