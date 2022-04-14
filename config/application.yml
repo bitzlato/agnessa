@@ -24,6 +24,7 @@ default:  &settings
     - image/jpeg
     - image/webp
     - video/mp4
+    - video/quicktime
     - video/mov
   reserved_subdomains: ['www', 'api', 'stage', 'staging']
 
