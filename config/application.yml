@@ -14,8 +14,8 @@ default:  &settings
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
     host: <%= ENV.fetch('AGNESSA_HOST', 'localhost') %>
 
-  min_upload_file_size:  <%= 1.kilobytes %>
-  max_upload_file_size: <%= 100.megabytes %>
+  min_upload_file_size: <%= 50.kilobytes %>
+  max_upload_file_size: <%= 10.megabytes %>
   min_upload_files_amount: 3
   country_priority: ['RU', 'KZ', 'BY', 'UA']
   document_content_types: 
