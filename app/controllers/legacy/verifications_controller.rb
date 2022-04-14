@@ -5,7 +5,7 @@ class Legacy::VerificationsController < ApplicationController
     account = Account.find_by_subdomain!('bz')
     verifications = account.verifications.
       all.
-      order('created_at DESC').
+      order('created_at ASC').
       map do |v|
       {
         id:  v.legacy_external_id || v.applicant.legacy_external_id,
