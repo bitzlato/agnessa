@@ -2,7 +2,7 @@
   .jumbotron
     h1.mb-4 
       = t '.title', account_id: verification.external_id, org: current_account.public_name
-    = simple_form_for verification, url: form_path, html: { multipart: true } do |f|
+    = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
       .row
         .col-md-12
           div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
@@ -36,6 +36,7 @@
           = f.input :documents,
                      wrapper: :vertical_file,
                      as: :file,
+                     required: true,
                      input_html: { multiple: true, accept: Rails.configuration.application.document_content_types.join(',') },
                      label: "Документы",
                      hint: t('.document_hint', from: number_to_human_size(Rails.configuration.application.min_upload_file_size), to: number_to_human_size(Rails.configuration.application.max_upload_file_size), amount: Rails.configuration.application.min_upload_files_amount).html_safe
@@ -43,7 +44,7 @@
       .row
         .col-12
           .text-center
-            = f.submit class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }, disabled: true
+            = f.submit class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }
       .row.mt-4
         .col-md-12
           .alert.alert-warning role='alert'
