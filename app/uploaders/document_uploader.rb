@@ -26,6 +26,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   def size_range
+    return [0..100.megabytes] if $import
     Rails.configuration.application.min_upload_file_size..Rails.configuration.application.max_upload_file_size
   end
 

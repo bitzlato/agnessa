@@ -26,6 +26,7 @@ class MongoImporter
   end
 
   def import_documents
+    $import = true
     bar = ProgressBar.create(title: "Items", starting_at: 0, total: Mongo::Verification.count)
     back_sort_scope.each do |mongo_verification|
       verification = ::Verification.find_by(legacy_external_id: mongo_verification['_id'])
