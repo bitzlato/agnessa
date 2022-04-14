@@ -10,7 +10,7 @@ class BarongClient
 
   def get_uid_from_changebot_id id
     response = client.get(uri.path + "/public/user_uid_by_changebot_id/#{id}")
-    response.assert_success!
+    # response.assert_success!
     response.body['uid']
   end
 
