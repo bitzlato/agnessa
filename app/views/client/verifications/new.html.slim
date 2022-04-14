@@ -1,7 +1,7 @@
 .row.justify-content-center.instruction
   .jumbotron
     h1.mb-4 
-      = t '.title', account_id: verification.external_id, org: current_account.public_name
+      = t '.title', account_id: verification.applicant.external_id, org: current_account.public_name
     = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
       .row
         .col-md-12
