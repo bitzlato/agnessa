@@ -25,7 +25,7 @@ class Admin::VerificationsController < Admin::ResourcesController
 
   def confirm
     verification.confirm!(member: current_member)
-    redirect_to admin_verification_path(verification), notice: 'Подтверждено'
+    next_pending notice: 'Подтверждено'
   rescue ActiveRecord::RecordInvalid => err
     raise err unless err.record.is_a? Verification
     err.record.restore_status!
@@ -37,7 +37,7 @@ class Admin::VerificationsController < Admin::ResourcesController
                          labels: verification_params[:review_result_labels],
                          public_comment: verification_params[:public_comment],
                          private_comment: verification_params[:private_comment])
-    redirect_to admin_verification_path(verification), notice: 'Отвергнуто'
+    next_pending notice: 'Отвергнуто'
   rescue ActiveRecord::RecordInvalid => err
     raise err unless err.record.is_a? Verification
     err.record.restore_status!
@@ -45,6 +45,15 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   private
+
+  def next_pending(notice: nil)
+    last_pending = Verification.pending.last
+    if last_pending
+      redirect_to admin_verification_path(last_pending), notice: notice
+    else
+      redirect_to admin_verifications_path, notice: notice
+    end
+  end
 
   def similar_documents
     Verification.where(document_number: verification.document_number).where.not(id: verification.id)
