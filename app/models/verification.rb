@@ -1,6 +1,4 @@
 class Verification < ApplicationRecord
-  attr_accessor :disable_notification
-
   strip_attributes replace_newlines: true, collapse_spaces: true
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
@@ -51,7 +49,6 @@ class Verification < ApplicationRecord
   REASONS = %w[unban trusted_trader restore other]
   validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
 
-  after_update :send_notification_after_status_change
   after_create :log_creation
 
   def preview_image
@@ -85,6 +82,8 @@ class Verification < ApplicationRecord
       applicant.update! emails: emails, confirmed_at: Time.now, last_name: last_name, first_name: name, patronymic: patronymic, last_confirmed_verification_id: id
       log_records.create!(applicant: applicant, action: 'confirm', member: member)
     end
+    VerificationMailer.confirmed(id).deliver_now
+    VerificationStatusNotifyJob.perform_async(id)
   end
 
   def refuse!(member: nil, labels: [], public_comment: nil, private_comment: nil)
@@ -98,6 +97,8 @@ class Verification < ApplicationRecord
       )
       log_records.create!(applicant: applicant, action: 'refuse', member: member)
     end
+    VerificationMailer.refused(id).deliver_now
+    VerificationStatusNotifyJob.perform_async(id)
   end
 
   def reset!(member: nil)
@@ -160,22 +161,5 @@ class Verification < ApplicationRecord
 
   def validate_not_blocked_applicant
     errors.add :applicant_id, "Заблокированный аппликант #{applicant.external_id}" if applicant.blocked
-  end
-
-  def send_notification_after_status_change
-    return if disable_notification
-    return unless saved_change_to_status?
-
-    VerificationStatusNotifyJob.perform_async(id)
-    send_email_to_applicant
-  end
-
-  def send_email_to_applicant
-    case status
-    when 'refused'
-      VerificationMailer.refused(id).deliver_now
-    when 'confirmed'
-      VerificationMailer.confirmed(id).deliver_now
-    end
   end
 end
