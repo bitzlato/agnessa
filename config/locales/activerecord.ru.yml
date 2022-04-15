@@ -77,6 +77,7 @@ ru:
         external_json: Легаси JSON
         reason: Причина обращения
         name: Имя
+        send_from: Локация отправителя
         full_name: ФИО
         last_name: Фамилия
         patronymic: Отчество
