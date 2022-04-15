@@ -11,7 +11,7 @@ class Legacy::VerificationsController < ApplicationController
           id: id,
           status: v.status.to_s == 'confirmed' ? true : false,
           comment: v.external_json['comment'].to_s,
-          time: v.legacy_created || (v.created_at.to_i * 1000)
+          time: v.legacy_created || (v.updated_at.to_i * 1000)
         }
       end
     end
