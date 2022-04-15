@@ -16,6 +16,15 @@
           = f.input :patronymic
       .row
         .col-4
+          = f.input :birth_date, required: true, input_html: {class: 'datetimepicker'}
+        .col-4
+          = f.input :gender,
+                  collection: Verification::GENDERS,
+                  label_method: lambda { |item| t("attributes.genders.#{item}") },
+                  required: true
+
+      .row
+        .col-4
           = f.input :country, as: :country,
                   priority: Rails.configuration.application.country_priority,
                   required: true
