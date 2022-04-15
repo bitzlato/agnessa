@@ -18,7 +18,7 @@
       .col-6
         = f.input :review_result_labels, collection: ReviewResultLabel.options_for_select, input_html: { size: 16, multiple: true }, required: true
       .col-6
-        = f.input :public_comment, as: :text, required: true
+        = f.input :public_comment, as: :text, required: true, input_html: { rows: 10}
         = f.input :private_comment, as: :text, required: false
         - unless verification.confirmed?
           .mr-2= f.submit :confirm, class: 'btn btn-success', data: { confirm: t('are_you_sure?') }
