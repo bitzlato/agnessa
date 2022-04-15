@@ -15,6 +15,12 @@
           = link_to t('.similar_names', count: similar_names.count), 
             admin_verifications_path('q[name_eq]': verification.name, 'q[last_name_eq]': verification.last_name), 
             target: '_blank'
+      -if verification.birth_date
+        br
+        .text-muted= verification.class.human_attribute_name :birth_date
+        ul.list-unstyled
+          li
+            = verification.birth_date
   .col-md-2
     .text-muted= verification.class.human_attribute_name :document_number
     ul.list-unstyled
