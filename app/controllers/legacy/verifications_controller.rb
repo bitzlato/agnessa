@@ -16,7 +16,7 @@ class Legacy::VerificationsController < ApplicationController
       end
     end
 
-    render json: result.values
+    render json: result.values.sort_by{|v| v[:time]}.reverse
   end
 
   def legacy_show
