@@ -53,7 +53,7 @@ class Verification < ApplicationRecord
     @preview_image ||= documents.first
   end
 
-  def send_from
+  def send_from_city
     place = Geocoder.search(ip).first
     if place.city
       [place.country, place.region, place.city].join(', ')
