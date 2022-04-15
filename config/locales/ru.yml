@@ -1,4 +1,7 @@
 ru:
+  date:
+    formats:
+      datepicker: YYYY-MM-DD
   verification:
     success_sending: 'Данные отправлены'
   are_you_sure?: Уверен?
