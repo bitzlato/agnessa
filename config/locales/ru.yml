@@ -49,6 +49,9 @@ ru:
       profile: 'Профиль организации'
 
   attributes:
+    genders:
+      male: Мужчина
+      female: Женщина
     reasons:
       unban: 'Разблокировка учетной записи'
       trusted_trader: 'Стать доверенным торговцем'
