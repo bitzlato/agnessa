@@ -1,6 +1,4 @@
-$(document).ready(function() {
-
-
+document.addEventListener("turbolinks:load", function() {
     addLabelsToPublicComment = function () {
         var selected = $(`#verification_review_result_labels option:selected`);
 
@@ -12,10 +10,7 @@ $(document).ready(function() {
         });
     }
 
-
-    $(`#verification_review_result_labels`).change(function() {
-        addLabelsToPublicComment()
-    })
+    $('#verification_review_result_labels').change(addLabelsToPublicComment)
 });
 
 
