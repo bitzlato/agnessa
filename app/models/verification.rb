@@ -37,7 +37,7 @@ class Verification < ApplicationRecord
   validates :status, presence: true, inclusion: { in: STATUSES }
 
   GENDERS = %w[male female]
-  validates :gender, inclusion: { in: GENDERS }
+  validates :gender, inclusion: { in: GENDERS }, allow_blank: true
 
   scope :by_reason, ->(reason) { where reason: reason }
 
