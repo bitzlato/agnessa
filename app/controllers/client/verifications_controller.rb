@@ -1,7 +1,7 @@
 class Client::VerificationsController < Client::ApplicationController
   layout 'verification'
 
-  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :last_name, :patronymic, :email, :document_number, {documents: []}].freeze
+  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {documents: []}].freeze
 
   helper_method :form_path, :external_id
 

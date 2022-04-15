@@ -31,6 +31,9 @@ ru:
           refuse: Отклонение заявки
           block: Блокировка аппликанта
           unblock: Разблокировка аппликанта
+      genders:
+        male: Мужчина
+        female: Женщина
       reasons:
         unban: 'Разблокировка учетной записи'
         trusted_trader: 'Стать доверенным торговцем'
@@ -79,6 +82,8 @@ ru:
         reason: Причина обращения
         name: Имя
         full_name: ФИО
+        gender: Пол
+        birth_date: Дата рождения
         last_name: Фамилия
         patronymic: Отчество
         document_number: Номер документа

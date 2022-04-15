@@ -10,6 +10,8 @@ FactoryBot.define do
     sequence(:legacy_external_id) { |i| "legacy_id_#{i}" }
     sequence(:reason) { |i| Verification::REASONS.sample }
     sequence(:email) { |i| "email#{i}@domain.com" }
+    sequence(:gender) { |i| Verification::GENDERS.sample }
+    birth_date { 19.years.ago }
 
     applicant_comment { Faker::Quotes::Shakespeare.as_you_like_it_quote }
 
