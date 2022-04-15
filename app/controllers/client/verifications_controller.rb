@@ -30,6 +30,7 @@ class Client::VerificationsController < Client::ApplicationController
 
   def applicant
     uid = BarongClient.instance.get_uid_from_changebot_id(external_id)
+    raise HumanizedError, :invalid_barong_uid unless uid.present?
     @applicant ||= current_account.applicants.find_or_create_by!(external_id: uid)
     @applicant.update_column(:legacy_external_id, external_id)
     @applicant
