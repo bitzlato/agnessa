@@ -16,7 +16,7 @@
           = f.input :patronymic
       .row
         .col-4
-          = f.input :birth_date, required: true, input_html: {class: 'datetimepicker'}
+          = f.input :birth_date, as: :date_picker, required: true
         .col-4
           = f.input :gender,
                   collection: Verification::GENDERS,

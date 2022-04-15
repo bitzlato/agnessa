@@ -30,6 +30,8 @@ class Verification < ApplicationRecord
   validates :review_result_labels, absence: true, if: :confirmed?
 
   validate :validate_labels
+
+  validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
   validate :at_least_3_documents, on: :create
 
@@ -135,7 +137,7 @@ class Verification < ApplicationRecord
   private
 
   def over_18_years_old
-    errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_d
+    errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
   end
 
   def at_least_3_documents
