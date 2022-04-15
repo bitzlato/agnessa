@@ -6,7 +6,7 @@ class Legacy::VerificationsController < ApplicationController
     result = {}
     account.verifications.all.order('created_at ASC').each do |v|
       id = v.legacy_external_id || v.applicant.legacy_external_id
-      if id.present?
+      if id.present? and id.starts_with?('id_')
         result[id] = {
           id: id,
           status: v.status.to_s == 'confirmed' ? true : false,
