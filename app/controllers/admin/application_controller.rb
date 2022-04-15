@@ -8,6 +8,11 @@ class Admin::ApplicationController < ApplicationController
   helper_method :current_member
   attr_accessor :current_member
 
+  before_action do
+    # Чтобы на ноутбуках dashbard не был кривым
+    @container = :fluid
+  end
+
   def current_account
     RequestStore.store[:current_account]
   end
