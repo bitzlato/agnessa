@@ -32,6 +32,7 @@ class Verification < ApplicationRecord
   validate :validate_labels
   validate :validate_not_blocked_applicant, on: :create
   validate :at_least_3_documents, on: :create
+  validate :applicant_comment_restore_info, on: :create
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
@@ -130,6 +131,10 @@ class Verification < ApplicationRecord
   end
 
   private
+
+  def applicant_comment_restore_info
+    errors.add :applicant_comment, I18n.t('errors.messages.applicant_comment_restore_info') if applicant_comment.blank? && reason == 'restore'
+  end
 
   def at_least_3_documents
     errors.add :documents, I18n.t('errors.messages.at_least_3_documents') if documents.count < 3

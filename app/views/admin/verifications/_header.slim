@@ -34,6 +34,12 @@
   .col-md-2
     .text-muted= verification.class.human_attribute_name :reason
     .badge.badge-info= verification.reason
+    br
+    br
+    .text-muted= verification.class.human_attribute_name :applicant_comment
+    = verification.applicant_comment
+
+
   .col-md-2
     .text-muted= verification.class.human_attribute_name :applicant
     = link_to verification.applicant, admin_applicant_path(verification.applicant)

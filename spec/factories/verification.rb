@@ -11,6 +11,8 @@ FactoryBot.define do
     sequence(:reason) { |i| Verification::REASONS.sample }
     sequence(:email) { |i| "email#{i}@domain.com" }
 
+    applicant_comment { Faker::Quotes::Shakespeare.as_you_like_it_quote }
+
     documents { [
       Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),
       Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),

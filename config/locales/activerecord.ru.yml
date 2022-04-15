@@ -67,6 +67,7 @@ ru:
         description: Описание
         final: Окончательный
       verification:
+        applicant_comment: Дополнительная информация
         created_at: Создано
         applicant: Заявитель
         country: Страна

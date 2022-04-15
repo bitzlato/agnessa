@@ -3,6 +3,7 @@ ru:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      applicant_comment_restore_info: необходимо указать информацию о прошлых аккаунтах, при восстановлении
       at_least_3_documents: необходимо прикрепить не менее 3 документов
       accepted: нужно подтвердить
       blank: не может быть пустым

@@ -14,6 +14,7 @@ ru:
       blocked:
         message: Для вашего аккаунта (%{account_id}) подача заявок была заблокирована
       new:
+        applicant_comment_placeholder: Комментарий, информация об утерянном аккаунте, почта, прошлый ID...
         title:  'Заявка на верификацию аккаунта #%{account_id} в %{org}'
         document_hint:  'Размер файла:  От %{from} до %{to} <br> Минимальное количество файлов:  %{amount}'
       created:
