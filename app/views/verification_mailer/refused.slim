@@ -2,9 +2,5 @@ h2 Добрый день!
 
 p Уважаемый #{@verification.last_name} #{@verification.name}, вы не прошли верификацию у #{@account.name}.
 
-p Комментарий: #{@verification.public_comment}
-
-p Причичины отказа:
-ul
-  -@verification.review_result_labels_public_comments.each do |comment|
-    li =comment
+p Комментарий:
+pre = @verification.public_comment
