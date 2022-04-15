@@ -23,18 +23,23 @@ class Verification < ApplicationRecord
     self.document_number = document_number.to_s.upcase
   end
 
-  validates :country, :name, :last_name, :document_number, :documents, :reason, presence: true, on: :create
+  validates :country, :name, :last_name, :gender, :birth_date, :document_number, :documents, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?
   validates :review_result_labels, absence: true, if: :confirmed?
 
   validate :validate_labels
+
+  validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
   validate :at_least_3_documents, on: :create
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
+
+  GENDERS = %w[male female]
+  validates :gender, inclusion: { in: GENDERS }
 
   scope :by_reason, ->(reason) { where reason: reason }
 
@@ -130,6 +135,10 @@ class Verification < ApplicationRecord
   end
 
   private
+
+  def over_18_years_old
+    errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
+  end
 
   def at_least_3_documents
     errors.add :documents, I18n.t('errors.messages.at_least_3_documents') if documents.count < 3

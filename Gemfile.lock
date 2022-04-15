@@ -140,6 +140,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.10.3)
       msgpack (~> 1.2)
+    bootstrap3-datetimepicker-rails (4.17.47)
+      momentjs-rails (>= 2.8.1)
     bson (4.12.1)
     bugsnag (6.24.2)
       concurrent-ruby (~> 1.0)
@@ -358,6 +360,8 @@ GEM
     mini_racer (0.4.0)
       libv8-node (~> 15.14.0.0)
     minitest (5.15.0)
+    momentjs-rails (2.29.1.1)
+      railties (>= 3.1)
     mongo (2.16.0)
       bson (>= 4.8.2, < 5.0.0)
     mongoid (7.3.3)
@@ -513,6 +517,11 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    simple_form-datetimepicker (0.0.3)
+      bootstrap3-datetimepicker-rails
+      coffee-rails
+      momentjs-rails
+      rails (>= 5.0.0)
     simple_form_extension (1.4.18)
       rails (>= 3.1)
       redactor-rails
@@ -677,6 +686,7 @@ DEPENDENCIES
   semver2 (~> 3.4)
   sidekiq (~> 6.4.1)
   simple_form (~> 5.1)
+  simple_form-datetimepicker
   simple_form_extension (~> 1.4)
   simple_form_fancy_uploads
   slackistrano
