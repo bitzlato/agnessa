@@ -1,7 +1,7 @@
 class Client::VerificationsController < Client::ApplicationController
   layout 'verification'
 
-  PERMITTED_ATTRIBUTES = [:name, :reason, :country, :last_name, :patronymic, :email, :document_number, {documents: []}].freeze
+  PERMITTED_ATTRIBUTES = [:name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {documents: []}].freeze
 
   helper_method :form_path, :external_id
 
@@ -30,8 +30,10 @@ class Client::VerificationsController < Client::ApplicationController
 
   def applicant
     uid = BarongClient.instance.get_uid_from_changebot_id(external_id)
-    applicant_external_id = uid.present? ? uid : "LEGACY_#{external_id}"
-    @applicant ||= current_account.applicants.find_or_create_by!(external_id: applicant_external_id)
+    raise HumanizedError, :invalid_barong_uid unless uid.present?
+    @applicant ||= current_account.applicants.find_or_create_by!(external_id: uid)
+    @applicant.update_column(:legacy_external_id, external_id)
+    @applicant
   end
 
   def external_id

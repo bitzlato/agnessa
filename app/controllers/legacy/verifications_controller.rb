@@ -3,19 +3,24 @@ class Legacy::VerificationsController < ApplicationController
 
   def index
     account = Account.find_by_subdomain!('bz')
-    verifications = account.verifications.
-      all.
-      order('created_at DESC').
-      map do |v|
-      {
-        id: v.legacy_external_id,
-        status: v.status.to_s == 'confirmed' ? true : false,
-        comment: v.external_json['comment'],
-        time: v.legacy_created || (v.created_at.to_i * 1000)
-      }
+    result = {}
+    account.verifications.all.order('created_at ASC').each do |v|
+      id = v.legacy_external_id || v.applicant.legacy_external_id
+      time = v.legacy_created || (v.updated_at.to_i * 1000)
+
+      # TODO: change to sql scope
+      days_ago = 3.days.ago.to_i * 1000
+      if id.present? and id.starts_with?('id_') and time > days_ago
+        result[id] = {
+          id: id,
+          status: v.status.to_s == 'confirmed' ? true : false,
+          comment: v.external_json['comment'].to_s,
+          time: time
+        }
+      end
     end
 
-    render json: verifications
+    render json: result.values.sort_by{|v| v[:time]}.reverse
   end
 
   def legacy_show

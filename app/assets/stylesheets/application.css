@@ -17,3 +17,7 @@
 th .sort_link  {
     color: #fff !important;
 }
+
+.modal-footer {
+  justify-content: flex-start;
+}

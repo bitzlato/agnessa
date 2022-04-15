@@ -1,4 +1,12 @@
 ru:
+  date:
+    formats:
+      date_picker: '%Y-%m-%d'
+      date_picker_js: 'YYYY-MM-DD'
+  time:
+    formats:
+      date_picker: '%Y-%m-%d %I:%M:%S %p'
+      date_picker_js: 'YYYY-MM-DD hh:mm:ss'
   verification:
     success_sending: 'Данные отправлены'
   are_you_sure?: Уверен?
@@ -15,7 +23,7 @@ ru:
         message: Для вашего аккаунта (%{account_id}) подача заявок была заблокирована
       new:
         title:  'Заявка на верификацию аккаунта #%{account_id} в %{org}'
-        from_to_size:  'Размер файла:  От %{from} до %{to}'
+        document_hint:  'Размер файла:  От %{from} до %{to} <br> Минимальное количество файлов:  %{amount}'
       created:
         title: 'Принята заявка #%{id}'
         message: '<div ng-show="vm.submited" style="text-align: justify; font-size: 1em;" class="ng-binding">
@@ -49,6 +57,9 @@ ru:
       profile: 'Профиль организации'
 
   attributes:
+    genders:
+      male: Мужчина
+      female: Женщина
     reasons:
       unban: 'Разблокировка учетной записи'
       trusted_trader: 'Стать доверенным торговцем'

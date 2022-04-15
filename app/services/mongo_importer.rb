@@ -5,7 +5,6 @@ class MongoImporter
       puts mongo_verification['created']
       begin
         verification = ::Verification.find_or_initialize_by(legacy_external_id: mongo_verification['_id'])
-        verification.disable_notification = true
         applicant = get_applicant(mongo_verification)
         verification.applicant = applicant
         verification.status = get_status(mongo_verification)
@@ -26,6 +25,7 @@ class MongoImporter
   end
 
   def import_documents
+    $import = true
     bar = ProgressBar.create(title: "Items", starting_at: 0, total: Mongo::Verification.count)
     back_sort_scope.each do |mongo_verification|
       verification = ::Verification.find_by(legacy_external_id: mongo_verification['_id'])

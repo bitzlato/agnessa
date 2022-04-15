@@ -16,6 +16,7 @@ default:  &settings
 
   min_upload_file_size:  <%= 50.kilobytes %>
   max_upload_file_size: <%= 10.megabytes %>
+  min_upload_files_amount: 3
   country_priority: ['RU', 'KZ', 'BY', 'UA']
   document_content_types: 
     - image/png
@@ -23,8 +24,9 @@ default:  &settings
     - image/jpeg
     - image/webp
     - video/mp4
+    - video/quicktime
     - video/mov
-  reserved_subdomains: ['www', 'api']
+  reserved_subdomains: ['www', 'api', 'stage', 'staging']
 
 development:
   <<: *settings

@@ -1,0 +1,13 @@
+.modal.fade id="document_modal_#{index}"
+  .modal-dialog.modal-lg role="document"
+    .modal-content
+      .modal-body
+        - if document.image?
+          img src="#{document.url}" style="max-width: 100%;"
+        - if document.video?
+          video src="#{document.url}" controls="controls"  style="max-width: 100%;"
+      .modal-footer
+        div = verification.full_name
+        div = verification.document_number
+        div =< verification.birth_date
+        div =< t("activerecord.attributes.genders.#{verification.gender}")
