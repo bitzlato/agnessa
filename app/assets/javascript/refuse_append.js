@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+$(document).ready(function() {
 
 
     addLabelsToPublicComment = function () {
@@ -12,7 +12,10 @@ document.addEventListener("turbolinks:load", function() {
         });
     }
 
-    $('#verification_review_result_labels').change(addLabelsToPublicComment)
+
+    $(`#verification_review_result_labels`).change(function() {
+        addLabelsToPublicComment()
+    })
 });
 
 
