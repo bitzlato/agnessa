@@ -10,7 +10,7 @@ class Legacy::VerificationsController < ApplicationController
 
       # TODO: change to sql scope
       days_ago = 3.days.ago.to_i * 1000
-      if id.present? and id.starts_with?('id_') and time > days_ago
+      if id.present? and id.starts_with?('id_') and time > days_ago and !v.pending?
         result[id] = {
           id: id,
           status: v.status.to_s == 'confirmed' ? true : false,
