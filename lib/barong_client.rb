@@ -8,10 +8,20 @@ class BarongClient
     @uri = URI api_root_url
   end
 
-  def get_uid_from_changebot_id id
+  def get_barong_uid_from_changebot_id id
     response = client.get(uri.path + "/public/user_uid_by_changebot_id/#{id}")
     response.assert_success!
     response.body['uid']
+  rescue URI::InvalidURIError
+    nil
+  end
+
+  def get_p2pid_from_barong_uid id
+    response = client.get(uri.path + "/public/user_uid_by_changebot_id/#{id}")
+    response.assert_success!
+    response.body['p2p_user_id']
+  rescue URI::InvalidURIError
+    nil
   end
 
   private

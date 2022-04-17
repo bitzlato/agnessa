@@ -29,13 +29,15 @@ class Legacy::VerificationsController < ApplicationController
 
   def show
     account = Account.find_by_subdomain('bz')
-    if account.present?
-      encoded_external_id = VerificationUrlGenerator.generate_token(params[:id], account.secret)
+    uid = BarongClient.instance.get_barong_uid_from_changebot_id(params[:id])
+    if uid.present? and account.present?
+      encoded_external_id = VerificationUrlGenerator.generate_token(uid, account.secret)
       url_options = Rails.configuration.application.default_url_options.symbolize_keys
       url_options[:subdomain] = account.subdomain
       redirect_to new_client_verification_url(encoded_external_id, url_options)
     else
-      render :error
+      Bugsnag.notify(StandardError.new("Unknown Changebot Id: #{params[:id]}"))
+      raise HumanizedError, :invalid_barong_uid
     end
   end
 end
