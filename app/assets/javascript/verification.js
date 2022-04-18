@@ -1,4 +1,3 @@
-//= require turbolinks
 //= require moment
 //= require simple_form-datetimepicker
 
@@ -11,8 +10,7 @@ const toggleVisibleApplicantComment = function () {
         applicantComment.hide();
     }
 }
-
-document.addEventListener("turbolinks:load", function() {
+$( document ).ready(function() {
     toggleVisibleApplicantComment();
     $('[data-verification-reason]').change(toggleVisibleApplicantComment);
 });
