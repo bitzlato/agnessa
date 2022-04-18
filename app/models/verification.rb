@@ -32,7 +32,7 @@ class Verification < ApplicationRecord
   validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
   validate :at_least_3_documents, on: :create
-  validate :applicant_comment_restore_info, on: :create
+  validates :applicant_comment, presence: true, if: :restore?
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
@@ -138,10 +138,6 @@ class Verification < ApplicationRecord
 
   private
 
-  def applicant_comment_restore_info
-    errors.add :applicant_comment, I18n.t('errors.messages.applicant_comment_restore_info') if applicant_comment.blank? && reason == 'restore'
-  end
-  
   def over_18_years_old
     errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
   end
