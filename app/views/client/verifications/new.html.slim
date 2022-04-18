@@ -38,6 +38,9 @@
             label_method: lambda { |item| t("attributes.reasons.#{item}") }
         .col-6
           = f.input :email, as: :email, required: true
+      .row
+        .col-12
+           = f.input :applicant_comment, as: :text, required: false, placeholder: t('.applicant_comment_placeholder')
 
       .row
         .col-6

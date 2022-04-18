@@ -271,6 +271,8 @@ GEM
     execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     faraday (2.2.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
@@ -648,6 +650,7 @@ DEPENDENCIES
   env-tweaks
   execjs
   factory_bot
+  faker
   faraday (~> 2.0)
   foreman
   grape (~> 1.6)

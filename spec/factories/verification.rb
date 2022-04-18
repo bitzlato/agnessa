@@ -13,6 +13,8 @@ FactoryBot.define do
     sequence(:gender) { |i| Verification::GENDERS.sample }
     birth_date { 19.years.ago }
 
+    applicant_comment { Faker::Quotes::Shakespeare.as_you_like_it_quote }
+
     documents { [
       Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),
       Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),
