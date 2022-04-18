@@ -32,7 +32,7 @@ class Verification < ApplicationRecord
   validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
   validate :at_least_3_documents, on: :create
-  validates :applicant_comment, presence: true, if: :restore?
+  validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
