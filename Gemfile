@@ -68,6 +68,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'faker'
   gem 'timecop'
   gem 'rspec-sidekiq'
   gem 'database_cleaner'
