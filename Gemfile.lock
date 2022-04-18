@@ -142,7 +142,6 @@ GEM
       msgpack (~> 1.2)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
-    browser (5.1.0)
     bson (4.12.1)
     bugsnag (6.24.2)
       concurrent-ruby (~> 1.0)
@@ -284,7 +283,6 @@ GEM
       ffi (>= 1.0.0)
       rake
     foreman (0.87.2)
-    geocoder (1.7.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     grape (1.6.2)
@@ -620,7 +618,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.4)
-  browser
   bugsnag
   bugsnag-capistrano
   byebug
@@ -656,7 +653,6 @@ DEPENDENCIES
   faker
   faraday (~> 2.0)
   foreman
-  geocoder
   grape (~> 1.6)
   gravatarify (~> 3.1)
   i18n-debug

@@ -56,24 +56,6 @@ class Verification < ApplicationRecord
     @preview_image ||= documents.first
   end
 
-  def send_from_city
-    place = Geocoder.search(ip).first
-    if place.city
-      [place.country, place.region, place.city].join(', ')
-    else
-      return nil
-    end
-  end
-
-  def send_from_browser
-    browser = Browser.new(user_agent)
-    if browser.name != 'Unknown Browser'
-      [browser.name, browser.version, browser.platform.name].join(', ')
-    else
-      [browser.name].join(', ')
-    end
-  end
-
   def legacy_created
     external_json['created'].to_datetime.to_i * 1000 rescue nil
   end

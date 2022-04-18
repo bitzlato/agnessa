@@ -15,7 +15,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def create
-    verification = applicant.verifications.create! verification_params.merge(external_id: external_id, ip: request.remote_ip, user_agent: request.user_agent)
+    verification = applicant.verifications.create! verification_params.merge(external_id: external_id, remote_ip: request.remote_ip, user_agent: request.user_agent)
     render :created, locals: { verification: verification }
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification

@@ -81,7 +81,6 @@ ru:
         external_json: Легаси JSON
         reason: Причина обращения
         name: Имя
-        send_from: Локация отправителя
         full_name: ФИО
         gender: Пол
         birth_date: Дата рождения
