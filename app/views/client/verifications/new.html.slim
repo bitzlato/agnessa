@@ -9,27 +9,25 @@
       .row
       .row
         .col-4
-          = f.input :name, required: true
+          = f.input :name
         .col-4
-          = f.input :last_name, required: true
+          = f.input :last_name
         .col-4
           = f.input :patronymic
       .row
         .col-4
-          = f.input :birth_date, as: :date_picker, required: true
+          = f.input :birth_date, as: :date_picker
         .col-4
           = f.input :gender,
                   collection: Verification::GENDERS,
-                  label_method: lambda { |item| t("attributes.genders.#{item}") },
-                  required: true
+                  label_method: lambda { |item| t("attributes.genders.#{item}") }
 
       .row
         .col-4
           = f.input :country, as: :country,
-                  priority: Rails.configuration.application.country_priority,
-                  required: true
+                  priority: Rails.configuration.application.country_priority
         .col-4
-          = f.input :document_number, required: true
+          = f.input :document_number
       .row
         .col-6
           = f.input :reason,
@@ -37,10 +35,10 @@
             collection: Verification::REASONS,
             label_method: lambda { |item| t("attributes.reasons.#{item}") }
         .col-6
-          = f.input :email, as: :email, required: true
+          = f.input :email, as: :email
       .row
         .col-12
-           = f.input :applicant_comment, as: :text, required: false, placeholder: t('.applicant_comment_placeholder')
+           = f.input :applicant_comment, as: :text, placeholder: t('.applicant_comment_placeholder')
 
       .row
         .col-6
@@ -48,7 +46,6 @@
           = f.input :documents,
                      wrapper: :vertical_file,
                      as: :file,
-                     required: true,
                      input_html: { multiple: true, accept: Rails.configuration.application.document_content_types.join(',') },
                      label: "Документы",
                      hint: t('.document_hint', from: number_to_human_size(Rails.configuration.application.min_upload_file_size), to: number_to_human_size(Rails.configuration.application.max_upload_file_size), amount: Rails.configuration.application.min_upload_files_amount).html_safe
