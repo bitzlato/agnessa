@@ -47,9 +47,9 @@ class Admin::VerificationsController < Admin::ResourcesController
   private
 
   def redirect_to_next(reason:, notice: nil)
-    last_pending = Verification.pending.where(reason: reason).first
-    if last_pending
-      redirect_to admin_verification_path(last_pending), notice: notice
+    next_verification = Verification.pending.where(reason: reason).first
+    if next_verification
+      redirect_to admin_verification_path(next_verification), notice: notice
     else
       redirect_to admin_verifications_path, notice: notice
     end
