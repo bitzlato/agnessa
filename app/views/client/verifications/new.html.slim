@@ -33,7 +33,7 @@
           = f.input :reason,
             include_blank: false,
             collection: Verification::REASONS,
-            label_method: lambda { |item| t("attributes.reasons.#{item}") },
+            label_method: lambda { |reason| t(reason, scope: 'attributes.reasons') },
             input_html: { data: { 'verification-reason': true } }
         .col-6
           = f.input :email, as: :email
