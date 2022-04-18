@@ -1,15 +1,15 @@
+//= require turbolinks
 //= require moment
 //= require simple_form-datetimepicker
 
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
 
-    toggleVisibleApplicantComment = function () {
-        var applicantComment = $("#applicant-comment");
-        var selected = $(`#verification_reason`).val();
+        toggleVisibleApplicantComment = function () {
 
-        if (selected == 'restore') {
+        var applicantComment = $("[data-applilcant-comment]");
+
+        if (this.value == 'restore') {
             applicantComment.show();
-
         } else {
             applicantComment.hide();
         }
@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     toggleVisibleApplicantComment();
 
-    $('#verification_reason').change(toggleVisibleApplicantComment);
+    $('[data-verification-reason]').change(toggleVisibleApplicantComment);
 });
 
 
