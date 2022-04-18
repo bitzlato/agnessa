@@ -14,6 +14,8 @@ FactoryBot.define do
     birth_date { 19.years.ago }
 
     applicant_comment { Faker::Quotes::Shakespeare.as_you_like_it_quote }
+    remote_ip { Faker::Internet.ip_v4_address }
+    user_agent { Faker::Internet.user_agent }
 
     documents { [
       Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),
