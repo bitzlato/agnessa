@@ -10,6 +10,6 @@ class ReviewResultLabelDecorator < ApplicationDecorator
   end
 
   def self.table_columns
-    %i[id label label_ru description]
+    %i[id label label_ru public_comment]
   end
 end

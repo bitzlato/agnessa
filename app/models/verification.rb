@@ -1,5 +1,5 @@
 class Verification < ApplicationRecord
-  strip_attributes replace_newlines: true, collapse_spaces: true
+  strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
 
@@ -38,7 +38,7 @@ class Verification < ApplicationRecord
   validates :status, presence: true, inclusion: { in: STATUSES }
 
   GENDERS = %w[male female]
-  validates :gender, inclusion: { in: GENDERS }
+  validates :gender, inclusion: { in: GENDERS }, allow_blank: true
 
   scope :by_reason, ->(reason) { where reason: reason }
 
