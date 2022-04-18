@@ -2,7 +2,7 @@
 //= require simple_form-datetimepicker
 
 const toggleVisibleApplicantComment = function () {
-    var applicantComment = $("[data-applilcant-comment]");
+    var applicantComment = $("[data-applicant-comment]");
 
     if (this.value == 'restore') {
         applicantComment.show();
