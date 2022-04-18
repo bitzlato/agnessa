@@ -3,7 +3,9 @@ ru:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      applicant_comment_restore_info: необходимо указать информацию о прошлых аккаунтах, при восстановлении
       at_least_3_documents: необходимо прикрепить не менее 3 документов
+      over_18_years_old: необходимо иметь возраст от 18 лет
       accepted: нужно подтвердить
       blank: не может быть пустым
       confirmation: не совпадает со значением поля %{attribute}
@@ -42,3 +44,4 @@ ru:
         other: неверной длины (может быть длиной ровно %{count} символа)
     humanized_error:
       cant_edit_legacy_verification: Нельзя редактировать устаревшие записи
+      invalid_barong_uid: Эта страница верификации более не действительна, пожалуйста получите новую ссылку на верификацию или обратитесь в техподдержку

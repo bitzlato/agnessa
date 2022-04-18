@@ -8,6 +8,6 @@ class ReviewResultLabel < ApplicationRecord
 
 
   def self.options_for_select
-    ReviewResultLabel.all.map { |value| [value.label_ru, value.label]}
+    ReviewResultLabel.all.map { |value| [value.label_ru, value.label, {'data-public-comment': value.public_comment}]}
   end
 end

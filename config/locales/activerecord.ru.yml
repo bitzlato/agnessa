@@ -31,6 +31,9 @@ ru:
           refuse: Отклонение заявки
           block: Блокировка аппликанта
           unblock: Разблокировка аппликанта
+      genders:
+        male: Мужчина
+        female: Женщина
       reasons:
         unban: 'Разблокировка учетной записи'
         trusted_trader: 'Стать доверенным торговцем'
@@ -67,6 +70,7 @@ ru:
         description: Описание
         final: Окончательный
       verification:
+        applicant_comment: Дополнительная информация (об утерянном аккаунте)
         created_at: Создано
         applicant: Заявитель
         country: Страна
@@ -79,6 +83,8 @@ ru:
         name: Имя
         send_from: Локация отправителя
         full_name: ФИО
+        gender: Пол
+        birth_date: Дата рождения
         last_name: Фамилия
         patronymic: Отчество
         document_number: Номер документа

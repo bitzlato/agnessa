@@ -5,7 +5,6 @@ class MongoImporter
       puts mongo_verification['created']
       begin
         verification = ::Verification.find_or_initialize_by(legacy_external_id: mongo_verification['_id'])
-        verification.disable_notification = true
         applicant = get_applicant(mongo_verification)
         verification.applicant = applicant
         verification.status = get_status(mongo_verification)
