@@ -70,7 +70,7 @@ ru:
         description: Описание
         final: Окончательный
       verification:
-        applicant_comment: Дополнительная информация
+        applicant_comment: Дополнительная информация (об утерянном аккаунте)
         created_at: Создано
         applicant: Заявитель
         country: Страна
