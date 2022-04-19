@@ -7,7 +7,7 @@ module ApplicationHelper
     content_tag(:span, t(status, scope: :status), class: STATUS_CLASSES[status])
   end
 
-  VERIFICATION_QUERY = :applicant_legacy_external_id_or_legacy_external_id_or_document_number_or_name_or_last_name_or_patronymic_or_email_cont
+  VERIFICATION_QUERY = :applicant_legacy_external_id_or_applicant_external_id_or_legacy_external_id_or_document_number_or_name_or_last_name_or_patronymic_or_email_cont
   APPLICANT_QUERY = :first_name_or_last_name_or_patronymic_or_external_id_cont
 
   def hightlight_verification_field(value)
