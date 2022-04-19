@@ -1,5 +1,5 @@
 javascript:
-  var hash = window.location.hash
-  data = hash.split('/')
-  id = data.pop();
+  var href = window.location.href;
+  var data = href.split('_');
+  var id = data.pop();
   window.location.replace('/verifications/'+id)

@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   default_url_options Rails.configuration.application.default_url_options.symbolize_keys
 
   scope as: :legacy, module: :legacy, constraints: LegacyConstraint do
-    get '/' => 'verifications#legacy_show'
     get ENV.fetch('USERS_PATH','users.json'), to: 'verifications#index'
     resources :verifications, only: [:show]
+    get '*anything' => 'verifications#legacy_show'
   end
 
   scope as: :public, module: :public, subdomain: '', constraints: PublicConstraint do
