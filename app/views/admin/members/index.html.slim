@@ -5,8 +5,7 @@
       thead.thead-dark
         tr
           th Role
-          th Login
-          th Active at
+          th Email
           th
           th
           th
@@ -15,10 +14,9 @@
         - members.each do |member|
           tr
             td = member.role
-            td = member.email
-            td = member.active_at
+            td = member.user.email
             td = link_to 'Show', admin_member_path(member)
-            td = link_to 'Edit', edit_admin_member_path(member)
+            / td = link_to 'Edit', edit_admin_member_path(member)
             td = link_to 'Destroy',  admin_member_path(member), data: { confirm: 'Are you sure?' }, method: :delete
     br
-    = link_to 'New Admin user', new_admin_member_path
+    / = link_to 'New Admin user', new_admin_member_path

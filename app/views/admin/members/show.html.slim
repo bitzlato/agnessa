@@ -1,16 +1,12 @@
 p#notice = notice
 
 p
-  strong Login:
-  = member.login
+  strong User:
+  = member.user.email
 
 p
   strong Role:
   = member.role
 
-p
-  strong Active at:
-  = member.active_at
 
-
-=> link_to 'Edit', edit_admin_member_path(member)
+/ => link_to 'Edit', edit_admin_member_path(member)

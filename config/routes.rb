@@ -54,7 +54,7 @@ Rails.application.routes.draw do
       end
 
       root to: 'dashboard#index'
-      resources :members
+      resources :members, only: [:index, :show, :destroy]
       resources :review_result_labels
       resources :verifications do
         member  do
