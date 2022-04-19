@@ -1,5 +1,15 @@
 javascript:
-  var pathname = window.location.pathname;
-  var data = pathname.split('_');
-  var id = data.pop();
-  window.location.replace('/verifications/'+id)
+  var hash = window.location.hash
+  if (hash) {
+    var data = hash.split('/')
+    id = data.pop();
+    window.location.replace('/verifications/' + id)
+  } else {
+    var pathname = window.location.pathname;
+    var data = pathname.split('_');
+    var id = data.pop();
+    window.location.replace('/verifications/' + id)
+  }
+
+
+
