@@ -1,5 +1,5 @@
 javascript:
-  var href = window.location.href;
-  var data = href.split('_');
+  var pathname = window.location.pathname;
+  var data = pathname.split('_');
   var id = data.pop();
   window.location.replace('/verifications/'+id)
