@@ -42,6 +42,8 @@ class Legacy::VerificationsController < ApplicationController
   end
 
   def change_bot_id
-    "id_#{params[:id]}"
+    id = params[:id]
+    id = id.gsub('id', '').gsub('_', '').gsub('\\', '')
+    "id_#{id}"
   end
 end
