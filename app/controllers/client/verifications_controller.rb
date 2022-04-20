@@ -1,6 +1,8 @@
 class Client::VerificationsController < Client::ApplicationController
   layout 'verification'
 
+  skip_before_action :verify_authenticity_token
+
   PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {documents: []}].freeze
 
   helper_method :form_path, :external_id
