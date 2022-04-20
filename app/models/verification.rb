@@ -47,6 +47,8 @@ class Verification < ApplicationRecord
     scope status, -> { by_status status }
   end
 
+  scope :for_export, ->(){ where(status: %w(refused confirmed)).where("verifications.updated_at > ?", 3.days.ago) }
+
   REASONS = %w[unban trusted_trader restore other]
   validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
 
