@@ -8,7 +8,7 @@ class Operator::VerificationsController < Operator::ApplicationController
     if p2p_id.present?
       redirect_to client_short_new_verification_path(encoded_external_id: VerificationUrlGenerator.generate_token(extneral_id, current_account.secret))
     else
-      redirect_to :new_operator_verification, notice: 'Extneral ID не найден'
+      redirect_to :new_operator_verification, notice: 'Extneral ID пользователя не найден'
     end
   end
 
