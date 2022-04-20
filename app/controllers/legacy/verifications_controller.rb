@@ -4,20 +4,17 @@ class Legacy::VerificationsController < ApplicationController
   def index
     account = Account.find_by_subdomain!('bz')
     result = {}
-    account.verifications.all.order('created_at ASC').each do |v|
-      id = v.legacy_external_id || v.applicant.legacy_external_id
-      time = v.legacy_created || (v.updated_at.to_i * 1000)
+      account.verifications.includes(:applicant).for_export.order('verifications.created_at ASC').each do |v|
+      cleared_id = v.applicant.legacy_external_id.gsub('id_', '')
+      id = "id_#{cleared_id}"
+      time = v.updated_at.to_i * 1000
 
-      # TODO: change to sql scope
-      days_ago = 3.days.ago.to_i * 1000
-      if id.present? and id.starts_with?('id_') and time > days_ago and !v.pending?
-        result[id] = {
-          id: id,
-          status: v.status.to_s == 'confirmed' ? true : false,
-          comment: v.external_json['comment'].to_s,
-          time: time
-        }
-      end
+      result[id] = {
+        id: id,
+        status: v.status.to_s == 'confirmed' ? true : false,
+        comment: v.public_comment.to_s.strip,
+        time: time
+      }
     end
 
     render json: result.values.sort_by{|v| v[:time]}.reverse
