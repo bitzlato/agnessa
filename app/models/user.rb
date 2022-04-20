@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, uniqueness: true
 
+  validates_confirmation_of :password
+
   def to_s
     email
   end
