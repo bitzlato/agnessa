@@ -18,7 +18,7 @@ ru:
     verifications:
       index_form:
         query_hint: Поиск по ФИО, email или номеру документа
-        query_placeholder: Ivanov
+        query_placeholder:  Поиск по ФИО, email или номеру документа
       attributes:
         dup_documents: 'Найдены совпадения: %{count} шт'
         dup_names: 'Найдены совпадения: %{count} шт'
@@ -42,7 +42,7 @@ ru:
     applicants:
       index_form:
         query_hint: Поиск по ФИО, external_id
-        query_placeholder: Ivanov
+        query_placeholder: Поиск по ФИО, external_id
       buttons:
         block:  Заблокировать
         unblock: Разблокировать

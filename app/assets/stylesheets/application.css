@@ -21,3 +21,8 @@ th .sort_link  {
 .modal-footer {
   justify-content: flex-start;
 }
+
+
+.search-navbar input {
+    width: 500px !important;
+}
