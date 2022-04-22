@@ -2,7 +2,7 @@ class Admin::MembersController < Admin::ApplicationController
   # before_action :superadmin?
 
   def index
-    members = current_account.members
+    members = paginate current_account.members.active
     render locals: {members: members}
   end
 

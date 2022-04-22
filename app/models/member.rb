@@ -5,6 +5,9 @@ class Member < ApplicationRecord
   validates :account, :user, presence: true
   validates :user, uniqueness: {scope: :account}
 
+  scope :active, -> {where(archive: false)}
+  scope :archived, -> {where(archive: true)}
+
   def destroy
     update(archive: true)
   end

@@ -1,22 +1,20 @@
-.row
-  .col-12
-    .card
-    table.table.table-striped.table-narrow.table-hover
-      thead.thead-dark
-        tr
-          th Role
-          th Email
-          th
-          th
-          th
+h1 Пользователи
+.clearfix
+hr
+div.mb-2= t 'application.index.total_records', count: members.count
+table.table.table-striped.table-narrow.table-hover
+  thead.thead-dark
+    tr
+      th Role
+      th Email
+      th
 
-      tbody
-        - members.each do |member|
-          tr
-            td = member.role
-            td = member.user.email
-            td = link_to 'Show', admin_member_path(member)
-            / td = link_to 'Edit', edit_admin_member_path(member)
-            td = link_to 'Destroy',  admin_member_path(member), data: { confirm: 'Are you sure?' }, method: :delete
+  tbody
+    - members.each do |member|
+      tr is='dapi-tr'  data-href=url_for([:admin, member])
+        td = member.role
+        td = member.user.email
+        td = link_to  admin_member_path(member),  data: { confirm: 'Are you sure?' }, method: :delete do
+              i class="fa fa-trash-o"
     br
-    / = link_to 'New Admin user', new_admin_member_path
+= paginate members
