@@ -5,7 +5,7 @@ RSpec.describe Operator::VerificationsController, type: :controller do
   before do
     RequestStore.store[:current_account] = account
     allow(ENV).to receive(:fetch).with('AGNESSA_BARONG_API_ROOT_URL').and_return('http://example.com')
-    allow_any_instance_of(BarongClient).to receive(:get_p2pid_from_barong_uid).with('123').and_return(22)
+    allow_any_instance_of(BarongClient).to receive(:get_barong_uid_from_changebot_id).with('123').and_return(22)
   end
 
   describe 'new' do
