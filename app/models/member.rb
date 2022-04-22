@@ -5,6 +5,10 @@ class Member < ApplicationRecord
   validates :account, :user, presence: true
   validates :user, uniqueness: {scope: :account}
 
+  def destroy
+    update(archive: true)
+  end
+
   enum role: {
     moderator: 0,
     superadmin: 1

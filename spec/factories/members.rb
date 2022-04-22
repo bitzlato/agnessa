@@ -3,5 +3,6 @@ FactoryBot.define do
     association :account
     association :user
     role { "moderator" }
+    archive { false }
   end
 end
