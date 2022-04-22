@@ -3,10 +3,10 @@ class Operator::VerificationsController < Operator::ApplicationController
   end
 
   def create
-    extneral_id = verification_params[:external_id]
-    p2p_id = BarongClient.instance.get_p2pid_from_barong_uid(extneral_id)
-    if p2p_id.present?
-      redirect_to client_short_new_verification_path(encoded_external_id: VerificationUrlGenerator.generate_token(extneral_id, current_account.secret))
+    external_id = verification_params[:external_id]
+    barong_uid = BarongClient.instance.get_barong_uid_from_changebot_id(external_id)
+    if barong_uid.present?
+      redirect_to client_short_new_verification_path(encoded_external_id: VerificationUrlGenerator.generate_token(barong_uid, current_account.secret))
     else
       redirect_to :new_operator_verification, notice: 'Extneral ID пользователя не найден'
     end
