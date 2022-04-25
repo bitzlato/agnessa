@@ -54,14 +54,6 @@ module ApplicationHelper
     sort_link q, column, title
   end
 
-  def test_new_client_verification_url(short=false)
-    if short
-      client_short_new_verification_path(encoded_external_id: VerificationUrlGenerator.generate_token('test', current_account.secret))
-    else
-      new_client_verification_path(encoded_external_id: VerificationUrlGenerator.generate_token('test', current_account.secret))
-    end
-  end
-
   def hided_columns
     # TODO
     []
