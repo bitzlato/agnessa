@@ -1,0 +1,5 @@
+.container
+  = simple_form_for :verification, url: operator_verifications_url, method: :post do |f|
+    = f.input :external_id, as: :string, label: 'External ID (внешний ID пользователя)'
+    .mt-4
+    = f.submit 'Создать тестовую заявку'
