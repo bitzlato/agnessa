@@ -35,6 +35,11 @@ class Admin::MembersController < Admin::ApplicationController
     render :edit, locals: {member: member}
   end
 
+  def restore
+    member.restore!
+    redirect_to admin_members_url, notice: 'Admin user was successfully archived.'
+  end
+
   def archive
     member.archive!
     redirect_to admin_members_url, notice: 'Admin user was successfully archived.'
