@@ -3,6 +3,9 @@ FactoryBot.define do
     association :account
     association :user
     role { "moderator" }
-    archive { false }
+
+    trait :archived do
+      archived_at { Time.now }
+    end
   end
 end
