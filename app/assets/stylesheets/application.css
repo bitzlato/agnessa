@@ -21,3 +21,7 @@ th .sort_link  {
 .modal-footer {
   justify-content: flex-start;
 }
+
+.dev-background {
+    background-color: #EFEFEF;
+}

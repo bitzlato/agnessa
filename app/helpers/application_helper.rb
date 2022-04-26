@@ -74,4 +74,8 @@ module ApplicationHelper
   def warining_table_class(css_classes, flag)
     flag ? "#{css_classes} table-warning" : css_classes
   end
+
+  def dev_background_class
+    Rails.env.development? || Rails.env.staging? ? 'dev-background' : ''
+  end
 end
