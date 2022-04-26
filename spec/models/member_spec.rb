@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Member, type: :model do
   let(:member) { create(:member) }
 
-  describe :destroy do
+  describe :archive do
     it 'archived' do
-      member.destroy
-      expect(member.archive).to be_truthy
+      member.archive!
+      expect(member.archived_at).to be_truthy
     end
   end
 
