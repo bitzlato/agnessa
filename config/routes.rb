@@ -20,6 +20,13 @@ module LegacyConstraint
 end
 
 Rails.application.routes.draw do
+  concern :archivable do
+    member do
+      delete :archive
+      post :restore
+    end
+  end
+
   default_url_options Rails.configuration.application.default_url_options.symbolize_keys
 
   scope as: :legacy, module: :legacy, constraints: LegacyConstraint do
@@ -59,7 +66,9 @@ Rails.application.routes.draw do
       end
 
       root to: 'dashboard#index'
-      resources :members, only: [:index, :show, :destroy]
+      resources :members, only: [:index, :show, :destroy] do
+        concerns :archivable
+      end
       resources :review_result_labels
       resources :verifications do
         member  do
@@ -87,4 +96,6 @@ Rails.application.routes.draw do
 
   match '*anything', to: 'application#not_found', via: %i[get post]
   match '', to: 'application#not_found', via: %i[get post]
+
+
 end
