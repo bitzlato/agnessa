@@ -85,8 +85,8 @@ class Verification < ApplicationRecord
       applicant.update! emails: emails, confirmed_at: Time.now, last_name: last_name, first_name: name, patronymic: patronymic, last_confirmed_verification_id: id
       log_records.create!(applicant: applicant, action: 'confirm', member: member)
     end
-    VerificationMailer.confirmed(id).deliver_now
     VerificationStatusNotifyJob.perform_async(id)
+    VerificationMailer.confirmed(id).deliver_later
   end
 
   def refuse!(member: nil, labels: [], public_comment: nil, private_comment: nil)
@@ -100,8 +100,8 @@ class Verification < ApplicationRecord
       )
       log_records.create!(applicant: applicant, action: 'refuse', member: member)
     end
-    VerificationMailer.refused(id).deliver_now
     VerificationStatusNotifyJob.perform_async(id)
+    VerificationMailer.refused(id).deliver_later
   end
 
   def reset!(member: nil)
