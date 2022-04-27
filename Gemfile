@@ -30,6 +30,7 @@ gem 'bcrypt'
 gem 'email_validator'
 gem 'invisible_captcha'
 gem 'active_link_to'
+gem "font-awesome-rails"
 gem 'strip_attributes'
 
 # Use Redis adapter to run Action Cable in production

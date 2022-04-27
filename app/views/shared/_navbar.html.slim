@@ -19,7 +19,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
         li.nav-item.dropdown
           = link_to t('.settings'), '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', data: { toggle: 'dropdown' }, id: :navbarDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false
           .dropdown-menu.dropdown-menu-right[aria-labelledby="navbarDropdown"]
-            = link_to t('.admins'), admin_members_path, class: 'dropdown-item'
+            = link_to t('.users'), admin_members_path, class: 'dropdown-item'
             = link_to t('.review_result_labels'), admin_review_result_labels_path, class: 'dropdown-item'
             = link_to t('.profile'), admin_account_path, class: 'dropdown-item'
         = render 'user_dropdown'

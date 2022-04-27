@@ -53,7 +53,7 @@ ru:
       verification_new: 'Тестовая заявка'
       settings: 'Настройки'
       exit: 'Выйти'
-      admins: 'Администраторы'
+      users: 'Пользователи'
       review_result_labels: 'Статусы верификаций'
       profile: 'Профиль организации'
 
