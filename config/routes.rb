@@ -66,7 +66,7 @@ Rails.application.routes.draw do
       end
 
       root to: 'dashboard#index'
-      resources :members, only: [:index, :show, :destroy] do
+      resources :members, only: [:index, :show] do
         concerns :archivable
       end
       resources :review_result_labels

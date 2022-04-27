@@ -37,17 +37,12 @@ class Admin::MembersController < Admin::ApplicationController
 
   def restore
     member.restore!
-    redirect_to admin_members_url, notice: 'Admin user was successfully archived.'
+    redirect_to admin_member_url(member), notice: 'Admin user was successfully archived.'
   end
 
   def archive
     member.archive!
-    redirect_to admin_members_url, notice: 'Admin user was successfully archived.'
-  end
-
-  def destroy
-    member.destroy!
-    redirect_to admin_members_url, notice: "Admin user was successfully destroyed."
+    redirect_to admin_member_url(member), notice: 'Admin user was successfully archived.'
   end
 
   private
@@ -57,6 +52,6 @@ class Admin::MembersController < Admin::ApplicationController
   end
 
   def admin_user_params
-    params.require(:member).permit(:login, :password, :password_confirmation, :role)
+    params.require(:member).permit(:role)
   end
 end
