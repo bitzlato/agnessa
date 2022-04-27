@@ -7,10 +7,10 @@ class Member < ApplicationRecord
   validates :account, :user, presence: true
   validates :user, uniqueness: {scope: :account}
 
-  enum role: {
-    moderator: 0,
-    superadmin: 1
-  }
+
+  ROLES = %w[operator admin].freeze
+  validates :role, presence: true, inclusion: { in: ROLES }
+
 
   def to_s
     user.email
