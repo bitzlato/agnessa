@@ -22,6 +22,7 @@ RSpec.configure do |config|
   # config.include StubHelper
   # config.include RequestHelper
   config.include FactoryBot::Syntax::Methods
+  config.include Sorcery::TestHelpers::Rails::Controller
 
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

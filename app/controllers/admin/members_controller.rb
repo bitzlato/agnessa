@@ -2,7 +2,7 @@ class Admin::MembersController < Admin::ApplicationController
   # before_action :superadmin?
 
   def index
-    members = current_account.members
+    members = paginate current_account.members.order('archived_at desc')
     render locals: {members: members}
   end
 
@@ -33,6 +33,16 @@ class Admin::MembersController < Admin::ApplicationController
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Member
     render :edit, locals: {member: member}
+  end
+
+  def restore
+    member.restore!
+    redirect_to admin_members_url, notice: 'Admin user was successfully archived.'
+  end
+
+  def archive
+    member.archive!
+    redirect_to admin_members_url, notice: 'Admin user was successfully archived.'
   end
 
   def destroy

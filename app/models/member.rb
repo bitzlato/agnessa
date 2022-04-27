@@ -1,4 +1,6 @@
 class Member < ApplicationRecord
+  include Archivable
+
   belongs_to :account
   belongs_to :user
 
