@@ -7,20 +7,12 @@ table.table.table-striped.table-narrow.table-hover
     tr
       th Role
       th Email
-      th
 
   tbody
     - members.each do |member|
       tr is='dapi-tr'  data-href=url_for([:admin, member])
         td = member.role
         td = member.user.email
-        td
-          -if member.archived?
-            = link_to restore_admin_member_path(member), data: { confirm: 'Are you sure?' }, method: :post do
-              i class="fa fa-cloud-upload"
-          -else
-            = link_to  archive_admin_member_path(member),  data: { confirm: 'Are you sure?' }, method: :delete do
-              i class="fa fa-trash-o"
 
     br
 = paginate members
