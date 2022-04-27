@@ -59,7 +59,7 @@ end
 
 set :bugsnag_api_key, ENV['BUGSNAG_API_KEY']
 set :app_version, `semver`.strip
-set :assets_roles, []
+set :assets_roles, ['app']
 set :init_system, :systemd
 set :systemd_mailer_role, :mailer
 
