@@ -1,6 +1,8 @@
 class Admin::ApplicationController < ApplicationController
   include UserAuthSupport
+  include PaginationSupport
   before_action :authorize_member
+  before_action :active_member
 
   layout 'fluid'
 
@@ -25,5 +27,9 @@ class Admin::ApplicationController < ApplicationController
 
   def authorize_member
     raise 'unauthorized member' unless current_member.present?
+  end
+
+  def active_member
+    raise 'archived member' if current_member.archived?
   end
 end

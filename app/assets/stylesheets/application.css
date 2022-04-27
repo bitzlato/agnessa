@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require nprogress/nprogress
+ *= require font-awesome
  *= require_self
  */
 
@@ -24,4 +25,9 @@ th .sort_link  {
 
 .dev-background {
     background-color: #EFEFEF;
+}
+
+.search-navbar input {
+    min-width: 500px  !important;
+    max-width: 700px  !important;
 }

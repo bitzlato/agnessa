@@ -1,6 +1,0 @@
-= search_form_for [:admin, q] do |f|
-  .row
-    .col-md-9
-      = f.input ApplicationHelper::APPLICANT_QUERY, label: false, as: :search, hint: t('.query_hint'), placeholder: t('.query_placeholder')
-    .col-md-3
-      = f.button :submit, class: 'btn btn-primary'
