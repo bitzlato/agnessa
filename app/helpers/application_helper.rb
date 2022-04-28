@@ -74,4 +74,13 @@ module ApplicationHelper
   def warining_table_class(css_classes, flag)
     flag ? "#{css_classes} table-warning" : css_classes
   end
+
+  def duration_of_interval_in_words(duration)
+    duration = ActiveSupport::Duration.build(duration) unless duration.is_a?(ActiveSupport::Duration)
+    duration.parts.map do |k, v|
+      if v > 0
+        "#{v.to_i} #{t(k.to_s.singularize, scope: 'datetime.prompts')}"
+      end
+    end.compact.join(', ')
+  end
 end

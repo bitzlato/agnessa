@@ -81,6 +81,8 @@ Rails.application.routes.draw do
         post :recreate_secret
         post :verification_callback_test
       end
+
+      resource :operator_statistics, only: [:show]
     end
 
     scope as: :client, module: :client do

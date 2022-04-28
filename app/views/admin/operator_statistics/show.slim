@@ -1,0 +1,23 @@
+h2 Статистика операторов
+
+ul.nav.nav-pills.mb-3
+  - Member::STATISTICS_PERIODS.each do |period|
+    li.nav-item
+      = active_link_to duration_of_interval_in_words(period.to_i), admin_operator_statistics_path(period: period.to_i), class: 'nav-link', active: :exact
+  li.nav-item
+    = active_link_to 'Все время', admin_operator_statistics_path, class: 'nav-link', active: :exact
+
+table.table.table-striped.table-hover.table-narrow
+  thead.thead-dark
+    tr
+      th Оператор
+      th Минимальное время
+      th Среднее время
+      th Максимальное время
+  tbody
+  - members.each do |member|
+    tr
+      td= member.user.email
+      td= duration_of_interval_in_words(member.min_period)
+      td= duration_of_interval_in_words(member.avg_period)
+      td= duration_of_interval_in_words(member.max_period)
