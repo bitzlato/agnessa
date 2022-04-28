@@ -51,6 +51,7 @@ ru:
       verifications: 'Заявки'
       applicants: 'Заявители'
       verification_new: 'Тестовая заявка'
+      operator_statistics: 'Статистика операторов'
       settings: 'Настройки'
       exit: 'Выйти'
       users: 'Пользователи'
