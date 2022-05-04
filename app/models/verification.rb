@@ -78,7 +78,7 @@ class Verification < ApplicationRecord
     status == 'pending'
   end
 
-  def confirm!(member: nil)
+  def confirm!(member: nil, send_email: true)
     transaction do
       update! status: :confirmed, moderator: member
       emails = applicant.emails << self.email
@@ -86,10 +86,10 @@ class Verification < ApplicationRecord
       log_records.create!(applicant: applicant, action: 'confirm', member: member)
     end
     VerificationStatusNotifyJob.perform_async(id)
-    VerificationMailer.confirmed(id).deliver_later
+    VerificationMailer.confirmed(id).deliver_later if send_email
   end
 
-  def refuse!(member: nil, labels: [], public_comment: nil, private_comment: nil)
+  def refuse!(member: nil, labels: [], public_comment: nil, private_comment: nil, send_email: true)
     transaction do
       update!(
         status:               :refused,
@@ -101,7 +101,7 @@ class Verification < ApplicationRecord
       log_records.create!(applicant: applicant, action: 'refuse', member: member)
     end
     VerificationStatusNotifyJob.perform_async(id)
-    VerificationMailer.refused(id).deliver_later
+    VerificationMailer.refused(id).deliver_later if send_email
   end
 
   def reset!(member: nil)
