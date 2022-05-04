@@ -5,16 +5,18 @@ class Legacy::VerificationsController < ApplicationController
     account = Account.find_by_subdomain!('bz')
     result = {}
       account.verifications.includes(:applicant).for_export.order('verifications.created_at ASC').each do |v|
-      cleared_id = v.applicant.legacy_external_id.gsub('id_', '')
-      id = "id_#{cleared_id}"
-      time = v.updated_at.to_i * 1000
+        next if v.applicant.legacy_external_id.nil?
 
-      result[id] = {
-        id: id,
-        status: v.status.to_s == 'confirmed' ? true : false,
-        comment: v.public_comment.to_s.strip,
-        time: time
-      }
+        cleared_id = v.applicant.legacy_external_id.gsub('id_', '')
+        id = "id_#{cleared_id}"
+        time = v.updated_at.to_i * 1000
+
+        result[id] = {
+          id: id,
+          status: v.status.to_s == 'confirmed' ? true : false,
+          comment: v.public_comment.to_s.strip,
+          time: time
+        }
     end
 
     render json: result.values.sort_by{|v| v[:time]}.reverse
