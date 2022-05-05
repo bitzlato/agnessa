@@ -8,7 +8,7 @@ production:
 
 staging:
   <<: *default
-  url: <%= ENV.fetch('AGNESSA_DATABASE_URL' ) %>
+  url: <%= ENV.fetch('AGNESSA_DATABASE_URL','' ) %>
 
 development:
   <<: *default
