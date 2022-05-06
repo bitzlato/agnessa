@@ -28,7 +28,7 @@ class ClientApi < Grape::API
       applicant = current_account.applicants.find_by_external_id!(params[:id])
       {
         first_name: applicant.first_name,
-        last_name: applicant.first_name,
+        last_name: applicant.last_name,
         patronymic: applicant.patronymic,
         emails: applicant.emails,
         confirmed_at: applicant.confirmed_at
