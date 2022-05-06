@@ -14,6 +14,7 @@ end
 
 module LegacyConstraint
   def self.matches?(request)
+    return false unless ENV.key?('AGNESSA_LEGACY_VERIFICATION_HOST')
     legacy_verification_host = ENV.fetch('AGNESSA_LEGACY_VERIFICATION_HOST')
     legacy_verification_host.present? and request.host == legacy_verification_host
   end
