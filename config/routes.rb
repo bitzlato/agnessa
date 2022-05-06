@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   end
 
   scope constraints: ClientConstraint do
+    mount ClientApi => '/'
 
     namespace :operator do
       resources :verifications, only: [:create, :new]
