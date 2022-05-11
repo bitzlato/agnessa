@@ -10,6 +10,8 @@ class Operator::VerificationsController < Operator::ApplicationController
     else
       redirect_to :new_operator_verification, notice: 'Extneral ID пользователя не найден'
     end
+  rescue StandardError => e
+    redirect_to :new_operator_verification, notice: 'Extneral ID пользователя не найден'
   end
 
   private
