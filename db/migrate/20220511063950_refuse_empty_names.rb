@@ -1,6 +1,6 @@
 class RefuseEmptyNames < ActiveRecord::Migration[6.1]
   def change
-    member = Member.find(3) if member.nil?
+    member = Member.first
     private_comment = 'Автоматически отклоненно. Пустые имя, фамилия, пасспортные данные.'
     public_comment = 'Фотография плохого качества'
 
