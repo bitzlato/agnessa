@@ -5,9 +5,6 @@
 module RescueErrors
   extend ActiveSupport::Concern
 
-  class UnauthorizedMember < StandardError; end;
-  class ArchivedMember < StandardError; end;
-
   included do
     # rescue_from ActionController::UnknownFormat,     with: :rescue_unknown_format
     # rescue_from Authority::SecurityViolation,        with: :rescue_security_violation
