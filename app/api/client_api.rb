@@ -9,7 +9,7 @@ class ClientApi < Grape::API
     end
 
     def jwt_token
-      request.headers['Authorization'].split.last
+      request.headers['Authorization']&.split&.last
     end
 
     def authenticate!
@@ -18,6 +18,10 @@ class ClientApi < Grape::API
       payload, _header = Agnessa::JWT.decode_and_verify!(jwt_token, current_account.api_jwt_public_key)
       return error!('401 Unauthorized', 401) unless payload.present?
     end
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    error! e.message, 404
   end
 
   resource :applicants do
