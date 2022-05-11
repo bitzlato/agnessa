@@ -37,12 +37,12 @@ class Admin::MembersController < Admin::ApplicationController
 
   def restore
     member.restore!
-    redirect_to admin_member_url(member), notice: 'Admin user was successfully archived.'
+    redirect_back fallback_location: admin_member_url(member), notice: 'Member was successfully restored.'
   end
 
   def archive
     member.archive!
-    redirect_to admin_member_url(member), notice: 'Admin user was successfully archived.'
+    redirect_back fallback_location: admin_member_url(member), notice: 'Member was successfully archived.'
   end
 
   private
