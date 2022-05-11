@@ -14,6 +14,7 @@ end
 
 module LegacyConstraint
   def self.matches?(request)
+    return false unless ENV.key?('AGNESSA_LEGACY_VERIFICATION_HOST')
     legacy_verification_host = ENV.fetch('AGNESSA_LEGACY_VERIFICATION_HOST')
     legacy_verification_host.present? and request.host == legacy_verification_host
   end
@@ -54,6 +55,7 @@ Rails.application.routes.draw do
   end
 
   scope constraints: ClientConstraint do
+    mount ClientApi => '/'
 
     namespace :operator do
       resources :verifications, only: [:create, :new]
@@ -81,6 +83,8 @@ Rails.application.routes.draw do
         post :recreate_secret
         post :verification_callback_test
       end
+
+      resource :operator_statistics, only: [:show]
     end
 
     scope as: :client, module: :client do
