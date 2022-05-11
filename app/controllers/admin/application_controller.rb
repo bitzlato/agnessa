@@ -26,10 +26,10 @@ class Admin::ApplicationController < ApplicationController
   end
 
   def authorize_member
-    raise UnauthorizedMember unless current_member.present?
+    raise HumanizedError, :unauthorized_member unless current_member.present?
   end
 
   def active_member
-    raise ArchivedMember if current_member.archived?
+    raise HumanizedError, :archived_member if current_member.archived?
   end
 end
