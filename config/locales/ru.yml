@@ -13,9 +13,6 @@ ru:
   titles:
     application: Агнесса
   application:
-    not_authorized:
-      title: Нет доступа
-      message: У вас нет доступа к этой странице
     index:
       total_records: 'Всего записей: %{count}'
     summary:
