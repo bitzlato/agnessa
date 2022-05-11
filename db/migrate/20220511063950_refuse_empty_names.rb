@@ -1,5 +1,5 @@
-class RefuseEmptyVerification
-  def refuse_empty(moderator: nil)
+class RefuseEmptyNames < ActiveRecord::Migration[6.1]
+  def change
     member = Member.find(3) if member.nil?
     private_comment = 'Автоматически отклоненно. Пустые имя, фамилия, пасспортные данные.'
     public_comment = 'Фотографии плохого качества'
