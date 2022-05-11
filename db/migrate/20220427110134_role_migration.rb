@@ -1,7 +1,7 @@
 class RoleMigration < ActiveRecord::Migration[6.1]
   def change
 
-    change_column :members, :role, :string
+    change_column :members, :role, :string, null: false, default: 'operator'
 
     Member.find_each do |member|
       case member.role
