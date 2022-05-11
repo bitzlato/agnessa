@@ -44,6 +44,10 @@ class Legacy::VerificationsController < ApplicationController
     end
   end
 
+  def legacy_root
+    redirect_to public_root_url(host: ENV.fetch('AGNESSA_HOST'))
+  end
+
   def change_bot_id
     id = params[:id]
     id = id.gsub('id', '').gsub('_', '').gsub('\\', '')
