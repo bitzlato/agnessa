@@ -23,7 +23,11 @@ class Legacy::VerificationsController < ApplicationController
   end
 
   def legacy_show
-    render locals: {}
+    respond_to do |format|
+      format.html
+    end
+  rescue ActionController::UnknownFormat
+    render(inline: 'Not Found', status: :unsupported_media_type)
   end
 
   def show
