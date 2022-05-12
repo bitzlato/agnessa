@@ -28,6 +28,8 @@ default:  &settings
     - video/mov
   reserved_subdomains: ['www', 'api', 'stage', 'staging']
 
+staging:
+  <<: *settings
 development:
   <<: *settings
 production:
