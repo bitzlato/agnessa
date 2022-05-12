@@ -9,7 +9,7 @@ class ClientApi < Grape::API
     end
 
     def jwt_token
-      request.headers['Authorization']&.split&.last
+      request.headers['Authorization'].split.last
     end
 
     def authenticate!
