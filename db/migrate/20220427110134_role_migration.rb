@@ -3,14 +3,7 @@ class RoleMigration < ActiveRecord::Migration[6.1]
 
     change_column :members, :role, :string, null: false, default: 'operator'
 
-    Member.find_each do |member|
-      case member.role
-      when '0'
-        member.update role: 'operator'
-      when '1'
-        member.update role: 'admin'
-      end
-    end
-
+    Member.where(role: '0').update_all role: 'operator'
+    Member.where(role: '1').update_all role: 'admin'
   end
 end
