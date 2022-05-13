@@ -15,4 +15,6 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+
+console.log('HEY YA!')
 import 'noty_flash'
