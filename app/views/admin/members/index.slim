@@ -8,12 +8,15 @@ table.table.table-striped.table-narrow.table-hover
       th Role
       th Email
       th
+      th
 
   tbody
     - members.each do |member|
-      tr is='dapi-tr'  data-href=url_for([:admin, member])
+      tr
         td = member.role
         td = member.user.email
+        td = link_to 'Редактировать', edit_admin_member_path(member)
+
         td
           - if member.archived?
             = link_to 'Восстановить пользователя', restore_admin_member_path(member), class: 'btn btn-sm btn-success', data: { confirm: 'Вы уверены?' }, method: :post
