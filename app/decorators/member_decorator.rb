@@ -6,7 +6,7 @@ class MemberDecorator < ApplicationDecorator
   end
 
   def self.table_columns
-    %i[role user archived_at]
+    %i[user role archived_at]
   end
 
 end
