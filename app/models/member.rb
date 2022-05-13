@@ -12,6 +12,14 @@ class Member < ApplicationRecord
   ROLES = %w[operator admin].freeze
   validates :role, presence: true, inclusion: { in: ROLES }
 
+  def operator?
+    role == 'role'
+  end
+
+  def admin?
+    role == 'admin'
+  end
+
   has_many :verifications, class_name: 'Verification', foreign_key: 'moderator_id'
 
   def to_s
