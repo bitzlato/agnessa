@@ -1,8 +1,5 @@
 ru:
   admin:
-    members:
-      show:
-        settings: Настройки
     accounts:
       verification_callback_test:
         result: 'Результат'
