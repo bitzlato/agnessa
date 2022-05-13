@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   scope as: :legacy, module: :legacy, constraints: LegacyConstraint do
     get ENV.fetch('USERS_PATH','users.json'), to: 'verifications#index'
     resources :verifications, only: [:show]
+    # get '/' => 'verifications#legacy_root'
     get '/' => 'verifications#legacy_show'
     get '*anything' => 'verifications#legacy_show'
   end

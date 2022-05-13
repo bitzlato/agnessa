@@ -20,6 +20,10 @@ class ClientApi < Grape::API
     end
   end
 
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    error! e.message, 404
+  end
+
   resource :applicants do
     desc 'Get Applicant Info'
     get '/:id' do
