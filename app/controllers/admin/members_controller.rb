@@ -21,7 +21,7 @@ class Admin::MembersController < Admin::ApplicationController
 
   def update
     member.update!(admin_user_params)
-    redirect_to edit_admin_member_url(member), notice: "Admin user was successfully updated."
+    redirect_back fallback_location: admin_members_url, notice: 'Member was successfully updated.'
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Member
     render :edit, locals: {member: member}
@@ -29,12 +29,12 @@ class Admin::MembersController < Admin::ApplicationController
 
   def restore
     member.restore!
-    redirect_back fallback_location: admin_member_url(member), notice: 'Member was successfully restored.'
+    redirect_back fallback_location: admin_members_url, notice: 'Member was successfully restored.'
   end
 
   def archive
     member.archive!
-    redirect_back fallback_location: admin_member_url(member), notice: 'Member was successfully archived.'
+    redirect_back fallback_location: admin_members_url, notice: 'Member was successfully archived.'
   end
 
   private
