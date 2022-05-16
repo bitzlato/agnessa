@@ -1,21 +1,20 @@
 .container
   h1 Пользователи
-  .clearfix
   hr
   div.mb-2= t 'application.index.total_records', count: members.count
   table.table.table-striped.table-narrow.table-hover
     thead.thead-dark
       tr
-        th Role
-        th Email
+        th Пользователь
+        th Роль
         th
         th
 
     tbody
       - members.each do |member|
         tr
+          td = member.label
           td = member.role
-          td = member.user.email
           td = link_to 'Редактировать', edit_admin_member_path(member)
 
           td
