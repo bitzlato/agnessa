@@ -1,8 +1,0 @@
-= simple_form_for(member, url: admin_member_path) do |f|
-
-  .form-inputs
-    = f.input :label, disabled: true
-    = f.input :role, collection: Member::ROLES, include_blank: false
-
-  .form-actions
-    = f.button :submit, 'Сохранить', class: 'btn btn-success'

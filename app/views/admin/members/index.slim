@@ -7,16 +7,14 @@
       tr
         th Пользователь
         th Роль
-        th
-        th
+        th Действия
 
     tbody
       - members.each do |member|
         tr
           td = member.label
-          td = member.role
-          td = link_to 'Редактировать', edit_admin_member_path(member)
-
+          td 
+            = render 'change_role', member: member
           td
             = render 'archive_button', member: member
       br
