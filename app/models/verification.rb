@@ -22,7 +22,7 @@ class Verification < ApplicationRecord
   end
 
   after_create do
-    self.update(number:  id.to_s)
+    self.update_column('number', id.to_s)
   end
 
   validates :number, uniqueness: true, on: :create
