@@ -68,6 +68,7 @@ if Gem.loaded_specs.key?('capistrano-sentry')
   after 'deploy:published', 'sentry:notice_deployment'
 end
 
+after 'deploy:updated', 'webpacker:precompile'
 after 'deploy:publishing', 'systemd:puma:reload-or-restart'
 after 'deploy:publishing', 'systemd:sidekiq:reload-or-restart'
 

@@ -95,6 +95,7 @@ group :deploy do
   gem 'capistrano-tasks', github: 'brandymint/capistrano-tasks', require: false
   gem 'capistrano-git-with-submodules'
   gem 'bugsnag-capistrano', require: false
+  gem 'capistrano-webpacker-precompile', require: false
   gem 'slackistrano', require: false
 end
 

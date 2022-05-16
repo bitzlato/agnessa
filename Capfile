@@ -30,6 +30,7 @@ require 'capistrano/rails/console'
 require 'slackistrano/capistrano'
 require 'capistrano/tasks'
 require 'capistrano/rails/assets'
+require "capistrano/webpacker/precompile"
 require 'capistrano/my'
 install_plugin Capistrano::My
 require 'capistrano/slackistrano' # My Custom Message
@@ -38,6 +39,7 @@ require 'capistrano/dotenv/tasks'
 require 'capistrano/dotenv'
 require 'bugsnag-capistrano' if Gem.loaded_specs.key?('bugsnag-capistrano')
 require 'capistrano/sentry' if Gem.loaded_specs.key?('capistrano-sentry')
+
 
 require 'capistrano/puma'
 install_plugin Capistrano::Puma
