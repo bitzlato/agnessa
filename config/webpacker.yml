@@ -83,6 +83,15 @@ test:
 staging:
   <<: *default
 
+  compile: false
+
+  # Extract and emit a css file
+  extract_css: true
+
+  # Cache manifest.json for performance
+  cache_manifest: true
+
+
 production:
   <<: *default
 
