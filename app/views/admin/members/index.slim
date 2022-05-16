@@ -1,26 +1,23 @@
-h1 Пользователи
-.clearfix
-hr
-div.mb-2= t 'application.index.total_records', count: members.count
-table.table.table-striped.table-narrow.table-hover
-  thead.thead-dark
-    tr
-      th Role
-      th Email
-      th
-      th
-
-  tbody
-    - members.each do |member|
+.container
+  h1 Пользователи
+  hr
+  div.mb-2= t 'application.index.total_records', count: members.count
+  table.table.table-striped.table-narrow.table-hover
+    thead.thead-dark
       tr
-        td = member.role
-        td = member.user.email
-        td = link_to 'Редактировать', edit_admin_member_path(member)
+        th Пользователь
+        th Роль
+        th
+        th
 
-        td
-          - if member.archived?
-            = link_to 'Восстановить пользователя', restore_admin_member_path(member), class: 'btn btn-sm btn-success', data: { confirm: 'Вы уверены?' }, method: :post
-          - else
-            = link_to 'Архивировать пользователя', archive_admin_member_path(member), class: 'btn btn-sm btn-danger', data: { confirm: 'Вы уверены?' }, method: :delete
-    br
-= paginate members
+    tbody
+      - members.each do |member|
+        tr
+          td = member.label
+          td = member.role
+          td = link_to 'Редактировать', edit_admin_member_path(member)
+
+          td
+            = render 'archive_button', member: member
+      br
+  = paginate members
