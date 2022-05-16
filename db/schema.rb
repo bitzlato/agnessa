@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2022_05_13_073228) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.integer "role", default: 0
+    t.string "role", default: "operator", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "account_id", null: false
@@ -127,11 +127,11 @@ ActiveRecord::Schema.define(version: 2022_05_13_073228) do
     t.text "private_comment"
     t.json "review_result_labels", default: []
     t.citext "patronymic"
-    t.string "remote_ip"
-    t.string "user_agent"
     t.date "birth_date"
     t.string "gender"
     t.text "applicant_comment"
+    t.string "remote_ip"
+    t.string "user_agent"
     t.string "number"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true

@@ -19,17 +19,9 @@ class Admin::MembersController < Admin::ApplicationController
     render locals: {member: member}
   end
 
-  def create
-    member = current.account.members.create!(admin_user_params)
-    redirect_to admin_member_url(member), notice: "Client user was successfully created."
-  rescue ActiveRecord::RecordInvalid => e
-    raise e unless e.record.is_a? Member
-    render :new, locals: {member: member}
-  end
-
   def update
     member.update!(admin_user_params)
-    redirect_to admin_member_url(member), notice: "Admin user was successfully updated."
+    redirect_back fallback_location: admin_members_url, notice: 'Member was successfully updated.'
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Member
     render :edit, locals: {member: member}
@@ -37,17 +29,12 @@ class Admin::MembersController < Admin::ApplicationController
 
   def restore
     member.restore!
-    redirect_to admin_members_url, notice: 'Admin user was successfully archived.'
+    redirect_back fallback_location: admin_members_url, notice: 'Member was successfully restored.'
   end
 
   def archive
     member.archive!
-    redirect_to admin_members_url, notice: 'Admin user was successfully archived.'
-  end
-
-  def destroy
-    member.destroy!
-    redirect_to admin_members_url, notice: "Admin user was successfully destroyed."
+    redirect_back fallback_location: admin_members_url, notice: 'Member was successfully archived.'
   end
 
   private
@@ -57,6 +44,6 @@ class Admin::MembersController < Admin::ApplicationController
   end
 
   def admin_user_params
-    params.require(:member).permit(:login, :password, :password_confirmation, :role)
+    params.require(:member).permit(:role)
   end
 end

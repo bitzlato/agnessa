@@ -1,0 +1,7 @@
+.btn-group.btn-group-sm role='group'
+  - css_class = member.admin? ? 'btn-outline-danger' : 'btn-outline-primary'
+  button[id='member_role_'+member.id.to_s type='button' class="btn #{css_class} dropdown-toggle"  data-toggle="dropdown" aria-expanded="false"]
+    = member.role
+  .dropdown-menu[aria-labelledby='member_role_'+member.id.to_s]
+    - Member::ROLES.each do |role|
+      = link_to role, admin_member_path(member, member: { role: role }), method: :put, class: member.role == role ? 'dropdown-item active' : 'dropdown-item'
