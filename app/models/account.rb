@@ -23,6 +23,10 @@ class Account < ApplicationRecord
     name
   end
 
+  def to_s
+    name
+  end
+
   def host
     subdomain + '.' + Rails.application.routes.default_url_options.fetch(:host)
   end
