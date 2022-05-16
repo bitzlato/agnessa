@@ -1,0 +1,4 @@
+- if member.archived?
+  = link_to 'Восстановить', restore_admin_member_path(member), class: 'btn btn-sm btn-success', data: { confirm: 'Вы уверены?' }, method: :post
+- else
+  = link_to 'Архивировать', archive_admin_member_path(member), class: 'btn btn-sm btn-secondary', data: { confirm: 'Вы уверены?' }, method: :delete
