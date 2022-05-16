@@ -4,8 +4,7 @@ default: &default
 
 production:
   <<: *default
-#  url: <%#= ENV.fetch('AGNESSA_DATABASE_URL', 'postgres://localhost/angessa_development' ) %>
-  database: agnessa_development
+  url: <%#= ENV.fetch('AGNESSA_DATABASE_URL', 'postgres://localhost/angessa_development' ) %>
 
 
 staging:
