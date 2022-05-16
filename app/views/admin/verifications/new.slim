@@ -1,0 +1,5 @@
+.container
+  = simple_form_for :verification, url: admin_verifications_url, method: :post do |f|
+    = f.input :external_id, as: :string, label: 'External ID (внешний ID пользователя)', required: true, hint: 'Например: ID3E573D762F', class: 'col-md-4'
+    .mt-4
+    = f.submit 'Создать тестовую заявку', class: 'btn btn-primary'

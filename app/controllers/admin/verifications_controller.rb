@@ -1,8 +1,24 @@
 class Admin::VerificationsController < Admin::ResourcesController
-
   helper_method :similar_emails
   helper_method :similar_names
   helper_method :similar_documents
+
+  def new
+  end
+
+  def create
+    external_id = params.require(:verification).permit(:external_id).fetch(:external_id, nil)
+    if external_id.blank?
+      redirect_to :new_admin_verification, notice: 'Укажите Extneral ID'
+    else
+     barong_uid = BarongClient.instance.get_barong_uid_from_changebot_id(external_id)
+      if barong_uid.present?
+        redirect_to client_short_new_verification_path(encoded_external_id: VerificationUrlGenerator.generate_token(barong_uid, current_account.secret))
+      else
+        redirect_to :new_admin_verification, notice: 'Extneral ID пользователя не найден'
+      end
+    end
+  end
 
   def show
     render locals: { verification: verification }
