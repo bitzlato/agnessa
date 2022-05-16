@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :member do
     association :account
     association :user
-    role { "moderator" }
+    role { 'operator' }
 
     trait :archived do
       archived_at { Time.now }

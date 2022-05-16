@@ -58,10 +58,6 @@ Rails.application.routes.draw do
   scope constraints: ClientConstraint do
     mount ClientApi => '/'
 
-    namespace :operator do
-      resources :verifications, only: [:create, :new]
-    end
-
     scope as: :admin, module: :admin do
       resources :applicants, only: [:index, :show] do
         post :block, on: :member
@@ -69,7 +65,7 @@ Rails.application.routes.draw do
       end
 
       root to: 'dashboard#index'
-      resources :members, only: [:index, :show, :destroy] do
+      resources :members, only: %i[index update] do
         concerns :archivable
       end
       resources :review_result_labels
