@@ -63,7 +63,7 @@ Rails.application.routes.draw do
         post :block, on: :member
         post :unblock, on: :member
       end
-
+      resources :log_records
       root to: 'dashboard#index'
       resources :members, only: %i[index update] do
         concerns :archivable
