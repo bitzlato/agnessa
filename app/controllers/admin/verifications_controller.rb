@@ -69,7 +69,11 @@ class Admin::VerificationsController < Admin::ResourcesController
     if next_verification
       redirect_to admin_verification_path(next_verification), notice: notice
     else
-      redirect_to admin_root_path, notice: notice
+      if is_admin?
+        redirect_to admin_verifications_path, notice: notice
+      else
+        redirect_to admin_root_path, notice: notice
+      end
     end
   end
 

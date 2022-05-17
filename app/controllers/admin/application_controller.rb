@@ -9,6 +9,8 @@ class Admin::ApplicationController < ApplicationController
 
   helper_method :current_account
   helper_method :current_member
+  helper_method :is_admin?
+  helper_method :is_operator?
   attr_accessor :current_member
 
   before_action do
@@ -18,6 +20,14 @@ class Admin::ApplicationController < ApplicationController
 
   def current_account
     RequestStore.store[:current_account]
+  end
+
+  def is_admin?
+    current_member.admin?
+  end
+
+  def is_operator?
+    current_member.operator?
   end
 
   private
