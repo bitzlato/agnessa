@@ -1,0 +1,22 @@
+table.table.table-striped.table-hover.table-narrow
+  thead.thead-dark
+    tr
+      th= t('activerecord.attributes.log_record.action')
+      th= t('activerecord.attributes.log_record.verification')
+      th= t('activerecord.attributes.log_record.full_name')
+      th= t('activerecord.attributes.log_record.document_number')
+      th= t('activerecord.attributes.log_record.moderator_id')
+      th= t('activerecord.attributes.log_record.created_at')
+  tbody
+    - items.each do |log_record|
+      tr
+        td= t "activerecord.attributes.log_record.actions.#{log_record.action}"
+        - if log_record.verification.present?
+          td= link_to log_record.verification.id, admin_verification_path(log_record.verification)
+          td= log_record.verification.full_name
+          td= log_record.verification.document_number
+        - else
+          td colspan=3
+            = middot
+        td= log_record.member
+        td= log_record.created_at
