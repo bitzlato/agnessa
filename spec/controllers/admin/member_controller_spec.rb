@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::MembersController, type: :controller do
   let(:account) { create(:account) }
-  let(:member) { create(:member, account: account) }
+  let(:member) { create(:member, :admin, account: account) }
   let(:archived_member) { create(:member, :archived, account: account) }
   before do
     @user = member.user

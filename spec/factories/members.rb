@@ -9,11 +9,11 @@ FactoryBot.define do
     end
 
     trait :admin do
-      role { 'admin '}
+      role { 'admin'}
     end
 
     trait :operator do
-      role { 'admin '}
+      role { 'operator'}
     end
   end
 end
