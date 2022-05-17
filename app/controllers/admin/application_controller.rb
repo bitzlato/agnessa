@@ -3,6 +3,7 @@ class Admin::ApplicationController < ApplicationController
   include PaginationSupport
   before_action :authorize_member
   before_action :active_member
+  before_action :admin_member
 
   layout 'fluid'
 
@@ -23,6 +24,10 @@ class Admin::ApplicationController < ApplicationController
 
   def current_member
     @current_member ||= current_account.members.find_by(user: current_user)
+  end
+
+  def admin_member
+    raise HumanizedError, :admin_member unless current_member.admin?
   end
 
   def authorize_member
