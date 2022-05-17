@@ -2,7 +2,7 @@ class LogRecordDecorator < ApplicationDecorator
   delegate_all
 
   def self.attributes
-    table_columns# + %i[legacy_external_id applicant external_id]
+    table_columns
   end
 
   def self.table_columns
