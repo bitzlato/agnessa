@@ -1,4 +1,6 @@
 class Admin::VerificationsController < Admin::ResourcesController
+  skip_before_action :admin_member, only: [:show, :new, :create, :update ]
+
   helper_method :similar_emails
   helper_method :similar_names
   helper_method :similar_documents
@@ -67,7 +69,7 @@ class Admin::VerificationsController < Admin::ResourcesController
     if next_verification
       redirect_to admin_verification_path(next_verification), notice: notice
     else
-      redirect_to admin_verifications_path, notice: notice
+      redirect_to admin_root_path, notice: notice
     end
   end
 
