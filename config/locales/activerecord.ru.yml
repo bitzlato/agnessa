@@ -25,6 +25,8 @@ ru:
         password_confirmation: Подтверждение пароля
       log_record:
         action: Действие
+        full_name: Полное имя
+        document_number: Номер документа
         verification: Заявка
         moderator_id: Модератор
         created_at: Дата
