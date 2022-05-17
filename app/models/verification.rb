@@ -25,7 +25,6 @@ class Verification < ApplicationRecord
     self.update_column('number', id.to_s)
   end
 
-  validates :number, uniqueness: true, on: :create
 
   validates :country, :name, :last_name, :gender, :birth_date, :document_number, :documents, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
