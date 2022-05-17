@@ -9,6 +9,7 @@ module ApplicationHelper
 
   VERIFICATION_QUERY = :number_or_applicant_legacy_external_id_or_applicant_external_id_or_legacy_external_id_or_document_number_or_name_or_last_name_or_patronymic_or_email_cont
   APPLICANT_QUERY = :first_name_or_last_name_or_patronymic_or_external_id_cont
+  LOG_RECORD_QUERY = :verification_number_or_verification_last_name_or_verification_name_or_verification_document_number_or_member_user_email_cont
 
   def hightlight_verification_field(value)
     return middot if value.blank?
