@@ -1,5 +1,6 @@
-h2 Заявки требующие внимания
-= render 'table', items: current_account.verifications.operators_scope(current_member).pending.limit(50).decorate
+h1 Заявки требующие внимания
+= render 'index_form'
+= render 'table', items: records
 
 h2 Журнал последних событий
 = render 'log', log_records: current_account.log_records.limit(20)
