@@ -1,0 +1,12 @@
+table.table.table-condensed.table-stripped
+  thead
+    tr
+      th Email
+      th
+  tbody
+    - invites.each do |invite|
+      tr
+        td= invite.email
+        td
+          = link_to admin_invite_url(invite), class: 'text-danger', method: :delete do
+            = icon 'ios-remove-circle'

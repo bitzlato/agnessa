@@ -8,12 +8,16 @@ ru:
         document_number_cont: '777 888888'
         name_or_last_name_or_patronymic_cont: 'Griogriy Ivanov'
         first_name_or_last_name_or_patronymic_cont: 'Griogriy Ivanov'
+      invite_form:
+        emails: "test@gmail.com\ntest2@gmail.com"
     hints:
       defaults:
         created_at_gteq: ''
         created_at_lt: ''
         legacy_external_id_cont: ''
         document_number_cont: 'Номер паспорта'
+      invite_form:
+        emails: Можно добавить множество адресов написав их построчно
     labels:
       defaults:
         created_at_gteq: 'Создано после:'
