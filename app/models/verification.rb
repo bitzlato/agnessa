@@ -58,9 +58,9 @@ class Verification < ApplicationRecord
   # Функция, которая не дает возможность оператору, получить заявку, которую он не должен получить
   def self.operators_scope(member)
     if member.operator?
-      all.where("status = 'pending' OR moderator_id = ?", member.id)
+      all.joins(:applicant).where("applicants.account_id = ? AND (status = 'pending' OR moderator_id = ?)", member.account_id, member.id)
     elsif member.admin?
-      self
+      all.joins(:applicant).where("applicants.account_id = ?", member.account_id)
     end
   end
 
