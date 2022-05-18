@@ -1,6 +1,9 @@
 h1 Заявки требующие внимания
 = render 'index_form'
-= render 'table', items: records
+-scoped_paginated_records = paginated_records.operators_scope(current_member)
+div.mb-2= t 'application.index.total_records', count: scoped_paginated_records.total_count
+= render 'table', items: scoped_paginated_records.decorate if scoped_paginated_records.count.positive?
+= paginate scoped_paginated_records
 
 h2 Журнал последних событий
 = render 'log', log_records: current_account.log_records.limit(20)

@@ -8,4 +8,4 @@ ul.nav.nav-pills.mb-3
         = title_with_counter t("reason.#{reason}"), statused_verifications.operators_scope(current_member).by_reason(reason).count
   li.nav-item
     = link_to admin_root_path(q: request.query_parameters.fetch(:q, {}).except(:reason_eq)), class: active_class('nav-link', status_from_query.nil?) do
-      = title_with_counter t('reason.all'), current_account.verifications.operators_scope(current_member).pending.count
+      = title_with_counter t('reason.all'), current_account.verifications.operators_scope(current_member).count
