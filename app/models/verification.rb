@@ -22,7 +22,7 @@ class Verification < ApplicationRecord
   end
 
   after_create do
-    self.update_column('number', id.to_s)
+    update_column('number', id.to_s)
   end
 
 
