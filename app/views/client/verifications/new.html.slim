@@ -2,6 +2,10 @@
   .jumbotron.col-12
     h1.mb-4 
       = t '.title', account_id: verification.applicant.external_id, org: current_account.public_name
+    .row.mt-4
+      .col-md-12
+        .alert.alert-warning role='alert'
+          = raw verification.account.form_description_interpolated
     = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
       .row
         .col-md-12
@@ -54,7 +58,3 @@
         .col-12
           .text-center
             = f.submit class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }
-      .row.mt-4
-        .col-md-12
-          .alert.alert-warning role='alert'
-            = raw verification.account.form_description_interpolated
