@@ -22,10 +22,6 @@ class Admin::ApplicationController < ApplicationController
     RequestStore.store[:current_account]
   end
 
-  def operator_verification_scope(scope)
-    # scope.pendding.
-  end
-
   def is_admin?
     current_member.admin?
   end

@@ -55,6 +55,11 @@ class Verification < ApplicationRecord
 
   after_create :log_creation
 
+  # Функция, которая не дает возможность оператору, получить заявку, которую он не должен получить
+  def self.operators_scope(member)
+    all.where("status = 'pending' OR moderator_id = ?", member.id)
+  end
+
   def preview_image
     @preview_image ||= documents.first
   end
