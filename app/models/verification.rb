@@ -56,7 +56,7 @@ class Verification < ApplicationRecord
   after_create :log_creation
 
   # Функция, которая не дает возможность current_member, получить заявку, которую он не должен получить
-  def self.current_member_scope(member)
+  def self.member_scope(member)
     if member.operator?
       all.joins(:applicant).where("applicants.account_id = ? AND (status = 'pending' OR moderator_id = ?)", member.account_id, member.id)
     elsif member.admin?

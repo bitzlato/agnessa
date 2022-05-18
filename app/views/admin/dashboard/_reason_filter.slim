@@ -5,7 +5,7 @@ ul.nav.nav-pills.mb-3
     - klass = active_class('nav-link', status_from_query == reason.to_s)
     li.nav-item
       = link_to url, class: klass do
-        = title_with_counter t("reason.#{reason}"), statused_verifications.current_member_scope(current_member).by_reason(reason).count
+        = title_with_counter t("reason.#{reason}"), statused_verifications.member_scope(current_member).by_reason(reason).count
   li.nav-item
     = link_to admin_root_path(q: request.query_parameters.fetch(:q, {}).except(:reason_eq)), class: active_class('nav-link', status_from_query.nil?) do
-      = title_with_counter t('reason.all'), current_account.verifications.current_member_scope(current_member).count
+      = title_with_counter t('reason.all'), current_account.verifications.member_scope(current_member).count
