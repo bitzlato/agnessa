@@ -92,7 +92,7 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   def verification
-    @verification ||= Verification.find(params[:id])
+    @verification ||= Verification.operators_scope(current_member).find(params[:id])
   end
 
   def verification_params

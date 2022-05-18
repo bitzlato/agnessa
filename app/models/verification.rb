@@ -57,7 +57,11 @@ class Verification < ApplicationRecord
 
   # Функция, которая не дает возможность оператору, получить заявку, которую он не должен получить
   def self.operators_scope(member)
-    all.where("status = 'pending' OR moderator_id = ?", member.id)
+    if member.operator?
+      all.where("status = 'pending' OR moderator_id = ?", member.id)
+    elsif member.admin?
+      self
+    end
   end
 
   def preview_image
