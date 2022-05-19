@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_13_073228) do
+ActiveRecord::Schema.define(version: 2022_05_18_074223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 2022_05_13_073228) do
     t.string "number"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
+    t.index ["number"], name: "index_verifications_on_number"
   end
 
   add_foreign_key "applicants", "accounts"

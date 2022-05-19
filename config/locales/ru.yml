@@ -63,6 +63,7 @@ ru:
       users: 'Пользователи'
       review_result_labels: 'Статусы верификаций'
       profile: 'Профиль организации'
+      log_records: 'Журнал событий'
 
   attributes:
     genders:
