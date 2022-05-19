@@ -53,7 +53,7 @@ ru:
   shared:
 
     navbar:
-      operators_desktop: 'Рабочий стол оператора'
+      desktop: 'Рабочий стол'
       verifications: 'Заявки'
       applicants: 'Заявители'
       verification_new: 'Тестовая заявка'
