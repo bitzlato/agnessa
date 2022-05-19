@@ -4,6 +4,10 @@ describe Verification do
   context 'verification' do
     let(:verification) { create :verification, document_number: 'A123 67' }
 
+    it 'number creates by id' do
+      expect(verification.number).to eq(verification.id.to_s)
+    end
+
     it 'notifies after status change' do
       expect(verification.confirm!)
       expect(VerificationStatusNotifyJob.jobs.size).to eq(1)

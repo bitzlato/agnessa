@@ -15,12 +15,16 @@ class Verification < ApplicationRecord
   has_many :log_records
 
   before_save do
-    self.number = id.to_s
     self.first_name = first_name.to_s.upcase
     self.last_name = last_name.to_s.upcase
     self.patronymic = patronymic.to_s.upcase if patronymic.present?
     self.document_number = document_number.to_s.upcase
   end
+
+  after_create do
+    update_column('number', id.to_s)
+  end
+
 
   validates :country, :name, :last_name, :gender, :birth_date, :document_number, :documents, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
