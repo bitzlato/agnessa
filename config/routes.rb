@@ -49,6 +49,9 @@ Rails.application.routes.draw do
       end
     end
     resources :password_resets, only: %i[new create edit update]
+    resources :invites, only: [] do
+      get :accept, on: :member
+    end
   end
 
   scope module: :user, subdomain: '', constraints: PublicConstraint do
@@ -65,7 +68,7 @@ Rails.application.routes.draw do
       end
       resources :log_records, only: %i[index]
       root to: 'dashboard#index'
-      resources :members, only: %i[index update] do
+      resources :members, only: %i[index update create] do
         concerns :archivable
       end
       resources :review_result_labels
@@ -82,6 +85,7 @@ Rails.application.routes.draw do
       end
 
       resource :operator_statistics, only: [:show]
+      resources :invites, only: [:destroy]
     end
 
     scope as: :client, module: :client do
