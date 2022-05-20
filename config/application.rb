@@ -62,5 +62,6 @@ module Agnessa
       "#{Rails.root}/app/decorators",
     ]
 
+    config.active_job.queue_adapter = :sidekiq
   end
 end

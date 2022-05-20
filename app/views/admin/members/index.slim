@@ -2,7 +2,7 @@
   h1 Пользователи
   hr
   div.mb-2= t 'application.index.total_records', count: members.count
-  table.table.table-striped.table-narrow.table-hover
+  table.table.table-striped.table-hover
     thead.thead-dark
       tr
         th Пользователь
@@ -19,3 +19,17 @@
             = render 'archive_button', member: member
       br
   = paginate members
+
+  hr
+  h2 Существующие приглашения
+  = render 'invited', invites: invited
+
+  hr
+  h2 Создание приглашений
+
+
+  = simple_form_for form, url: admin_members_url do |f|
+    = f.error_notification
+    = f.input :emails, as: :text, autofocus: true, input_html: { rows: 5, autosize: true }
+
+    = f.button :submit, class: 'btn-primary', data: { enableWhenChanged: true, disable_with: t('helpers.disable_with') }

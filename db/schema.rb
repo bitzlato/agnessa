@@ -48,6 +48,19 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.index ["account_id"], name: "index_applicants_on_account_id"
   end
 
+  create_table "invites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.integer "inviter_id", null: false
+    t.citext "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "token", null: false
+    t.index ["account_id"], name: "index_invites_on_account_id"
+    t.index ["email"], name: "index_invites_on_email", unique: true
+    t.index ["inviter_id"], name: "index_invites_on_inviter_id"
+    t.index ["token"], name: "index_invites_on_token", unique: true
+  end
+
   create_table "log_records", force: :cascade do |t|
     t.bigint "applicant_id", null: false
     t.bigint "verification_id"
@@ -129,13 +142,13 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.citext "patronymic"
     t.date "birth_date"
     t.string "gender"
-    t.text "applicant_comment"
     t.string "remote_ip"
     t.string "user_agent"
+    t.text "applicant_comment"
     t.string "number"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
-    t.index ["number"], name: "index_verifications_on_number"
+    t.index ["number"], name: "index_verifications_on_number", unique: true
   end
 
   add_foreign_key "applicants", "accounts"
