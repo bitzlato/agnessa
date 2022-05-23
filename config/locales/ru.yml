@@ -51,7 +51,7 @@ ru:
       verifications: 'Заявки'
       applicants: 'Заявители'
       verification_new: 'Тестовая заявка'
-      operator_statistics: 'Статистика операторов'
+      verification_statistics: 'Статистика заявок'
       settings: 'Настройки'
       exit: 'Выйти'
       users: 'Пользователи'
@@ -124,3 +124,9 @@ ru:
       new:
         bethink: Вспомнил! Войти
         title: Восстановление пароля
+  admin:
+    verification_statistics:
+      form:
+        group:
+          operator: Операторы
+          reason: Причины

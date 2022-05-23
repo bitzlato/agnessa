@@ -1,0 +1,9 @@
+ul.nav.nav-pills.mb-3
+  - [:operator, :reason].each do |group|
+    = active_link_to t(".group.#{group}"), admin_verification_statistics_path(group: group, period:86400), class: 'nav-link', active: form.group == group.to_s
+ul.nav.nav-pills.mb-3
+  - Member::STATISTICS_PERIODS.each do |period|
+    li.nav-item
+      = active_link_to duration_of_interval_in_words(period.to_i), admin_verification_statistics_path(group: form.group, period: period.to_i), class: 'nav-link', active: form.period == period.to_i
+  li.nav-item
+    = active_link_to 'Все время', admin_verification_statistics_path(group: form.group), class: 'nav-link', active: form.period == nil
