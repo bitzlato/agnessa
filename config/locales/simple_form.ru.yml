@@ -9,7 +9,7 @@ ru:
         name_or_last_name_or_patronymic_cont: 'Griogriy Ivanov'
         first_name_or_last_name_or_patronymic_cont: 'Griogriy Ivanov'
       invite_form:
-        emails: "test@gmail.com\ntest2@gmail.com"
+        emails: 'test@gmail.com'
     hints:
       defaults:
         created_at_gteq: ''
