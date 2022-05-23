@@ -84,7 +84,7 @@ Rails.application.routes.draw do
         post :verification_callback_test
       end
 
-      resource :operator_statistics, only: [:show]
+      resource :verification_statistics, only: [:show]
       resources :invites, only: [:destroy]
     end
 
