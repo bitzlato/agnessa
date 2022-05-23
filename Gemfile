@@ -126,6 +126,7 @@ gem 'carrierwave-bombshelter', '~> 0.2.2'
 gem 'country_select'
 gem 'simple_form_fancy_uploads'
 gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
+gem 'redis-namespace'
 gem 'sidekiq', '~> 6.4.1'
 gem 'faraday', '~> 2.0'
 gem 'request_store'
@@ -145,3 +146,5 @@ gem "carrierwave-i18n", "~> 0.2.0"
 gem "mini_magick", "~> 4.11"
 
 gem "coffee-rails", "~> 5.0"
+
+gem "nilify_blanks"

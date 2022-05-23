@@ -1,5 +1,7 @@
 class VerificationMailer < ApplicationMailer
   def confirmed(verification_id)
+    return if ENV.true?('AGNESSA_BLOCK_VERIFICATION_EMAILS')
+
     @verification = Verification.find(verification_id)
     @applicant = @verification.applicant
     @account = @applicant.account
@@ -7,6 +9,8 @@ class VerificationMailer < ApplicationMailer
   end
 
   def refused(verification_id)
+    return if ENV.true?('AGNESSA_BLOCK_VERIFICATION_EMAILS')
+
     @verification = Verification.find(verification_id)
     @applicant = @verification.applicant
     @account = @applicant.account

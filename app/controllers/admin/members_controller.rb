@@ -3,20 +3,20 @@ class Admin::MembersController < Admin::ApplicationController
 
   def index
     members = paginate current_account.members.order('archived_at desc')
-    render locals: {members: members}
+    form = InviteForm.new
+    invited = current_account.invites.ordered
+    render locals: {members: members, form: form, invited: invited}
   end
 
-  def show
-    render locals: {member: member}
-  end
-
-  def new
-    member = current_account.members.new
-    render locals: {member: member}
-  end
-
-  def edit
-    render locals: {member: member}
+  def create
+    if form.valid?
+      make_invites
+      flash_notice! :invited, count: form.emails_list.count
+      redirect_to admin_members_url
+    else
+      members = paginate current_account.members.order('archived_at desc')
+      render :index, locals: {members: members, form: form, invited: current_account.invites.ordered }
+    end
   end
 
   def update
@@ -38,6 +38,18 @@ class Admin::MembersController < Admin::ApplicationController
   end
 
   private
+
+  def form
+    @form ||= InviteForm.new params.require(:invite_form).permit(:emails)
+  end
+
+  def make_invites
+    BatchInviteJob.perform_later(
+      account_id: current_account.id,
+      inviter_id: current_user.id,
+      emails: form.emails_list
+    )
+  end
 
   def member
     @member ||= current_account.members.find(params[:id])

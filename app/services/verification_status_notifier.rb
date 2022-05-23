@@ -8,10 +8,12 @@ class VerificationStatusNotifier
     url = verification.account.verification_callback_url
     data = {
       external_id: verification.applicant.external_id,
-      applicant_id: verification.applicant.id,
       verification_id: verification.id,
-      email: verification.email,
-      status: verification.status
+      status: verification.status,
+      reason: verification.public_comment,
+      time: verification.updated_at.to_s(:iso8601),
+      # applicant_id: verification.applicant.id,
+      # email: verification.email,
     }
     notifier = self.new(url, data)
     notifier.perform
@@ -34,14 +36,14 @@ class VerificationStatusNotifier
   private
 
   def send_request
-    client.post('/') do |req|
+    client.post(url) do |req|
       req.body = data.to_json
       req.headers['Content-Type'] = 'application/json'
     end
   end
 
   def client
-    Faraday.new(url) do |conn|
+    Faraday.new do |conn|
       conn.adapter Faraday.default_adapter
       conn.options.open_timeout = OPEN_TIMEOUT
       conn.options.timeout = TIMEOUT
