@@ -14,6 +14,8 @@ class ApplicantDecorator < ApplicationDecorator
   end
 
   def external_id
-    h.content_tag(:code, object.external_id)
+    h.content_tag :code do
+      h.hightlight_verification_field object.external_id
+    end
   end
 end
