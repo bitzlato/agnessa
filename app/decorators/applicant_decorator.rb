@@ -12,4 +12,8 @@ class ApplicantDecorator < ApplicationDecorator
   def self.table_columns
     %i[id first_name last_name confirmed_at last_confirmed_verification_id account_id external_id created_at blocked]
   end
+
+  def external_id
+    h.content_tag(:code, object.external_id)
+  end
 end
