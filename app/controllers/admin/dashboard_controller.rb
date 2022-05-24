@@ -1,9 +1,18 @@
 class Admin::DashboardController < Admin::ApplicationController
-  include RansackSupport
+  def index
+    render locals: {
+      pending_verifications: pending_verifications,
+      paginated_records: paginate(q.result)
+    }
+  end
 
   private
 
-  def model_class
-    Verification
+  def pending_verifications
+    Verification.where(status: 'pending')
+  end
+
+  def q
+    pending_verifications.ransack params[:q]
   end
 end
