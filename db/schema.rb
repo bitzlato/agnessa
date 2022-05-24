@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_074223) do
+ActiveRecord::Schema.define(version: 2022_05_24_062435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.string "legacy_external_id"
     t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
     t.index ["account_id"], name: "index_applicants_on_account_id"
+  end
+
+  create_table "document_types", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "file_type"
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_document_types_on_account_id"
   end
 
   create_table "invites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -142,9 +151,9 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.citext "patronymic"
     t.date "birth_date"
     t.string "gender"
+    t.text "applicant_comment"
     t.string "remote_ip"
     t.string "user_agent"
-    t.text "applicant_comment"
     t.string "number"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
@@ -152,6 +161,7 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
   end
 
   add_foreign_key "applicants", "accounts"
+  add_foreign_key "document_types", "accounts"
   add_foreign_key "log_records", "applicants"
   add_foreign_key "log_records", "verifications"
   add_foreign_key "members", "accounts"
