@@ -1,4 +1,6 @@
 class Admin::VerificationsController < Admin::ResourcesController
+  skip_before_action :authorize_admin, only: [:show, :new, :create, :update ]
+
   helper_method :similar_emails
   helper_method :similar_names
   helper_method :similar_documents
@@ -67,7 +69,11 @@ class Admin::VerificationsController < Admin::ResourcesController
     if next_verification
       redirect_to admin_verification_path(next_verification), notice: notice
     else
-      redirect_to admin_verifications_path, notice: notice
+      if current_member.admin?
+        redirect_to admin_verifications_path, notice: notice
+      else
+        redirect_to admin_root_path, notice: notice
+      end
     end
   end
 
@@ -86,7 +92,7 @@ class Admin::VerificationsController < Admin::ResourcesController
   end
 
   def verification
-    @verification ||= Verification.find(params[:id])
+    @verification ||= Verification.member_scope(current_member).find(params[:id])
   end
 
   def verification_params

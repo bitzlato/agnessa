@@ -13,6 +13,10 @@ ru:
   titles:
     application: Агнесса
   application:
+    user_dropdown:
+      settings: 'Профиль пользователя'
+      exit: 'Выход'
+      signin: 'Войти'
     index:
       total_records: 'Всего записей: %{count}'
     summary:
@@ -47,7 +51,9 @@ ru:
     all: Все
 
   shared:
+
     navbar:
+      desktop: 'Рабочий стол'
       verifications: 'Заявки'
       applicants: 'Заявители'
       verification_new: 'Тестовая заявка'
