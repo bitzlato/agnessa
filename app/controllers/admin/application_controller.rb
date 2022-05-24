@@ -2,7 +2,6 @@ class Admin::ApplicationController < ApplicationController
   include UserAuthSupport
   include PaginationSupport
   before_action :authorize_member
-  before_action :authorize_admin
 
   layout 'fluid'
 
