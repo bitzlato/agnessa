@@ -17,6 +17,12 @@ class Account < ApplicationRecord
   before_validation :set_secret, on: :create
   before_validation :downcase_subdomain
 
+  after_create do
+    document_types << DocumentType.create(file_type: 'image', title: 'Селфи')
+    document_types << DocumentType.create(file_type: 'video', title: 'Селфи с паспортом')
+    document_types << DocumentType.create(file_type: 'image', title: 'ID')
+  end
+
   def recreate_secret!
     update_column(:secret, generate_secret)
   end
