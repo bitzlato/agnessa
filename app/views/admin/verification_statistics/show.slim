@@ -1,0 +1,26 @@
+h2 Статистика Заявок
+
+= render partial: 'form', locals: {form: form}
+
+table.table.table-striped.table-hover.table-narrow
+  thead.thead-dark
+    tr
+      - if form.group == 'operator'
+        th Оператор
+      - if form.group == 'reason'
+        th Причина
+      th Количество
+      th Минимальное время
+      th Среднее время
+      th Максимальное время
+  tbody
+  - result.each do |r|
+    tr
+      - if form.group == 'operator'
+        td= r.moderator.user.email
+      - if form.group == 'reason'
+        td= t("reason.#{r.reason}")
+      td= r.verifications_amount
+      td= number_to_machine_s(r.min_period)
+      td= number_to_machine_s(r.avg_period)
+      td= number_to_machine_s(r.max_period)
