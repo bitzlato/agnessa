@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_062435) do
+ActiveRecord::Schema.define(version: 2022_05_24_065820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 2022_05_24_062435) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
+  create_table "verification_documents", force: :cascade do |t|
+    t.bigint "verification_id", null: false
+    t.bigint "document_type_id", null: false
+    t.string "file"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_type_id"], name: "index_verification_documents_on_document_type_id"
+    t.index ["verification_id"], name: "index_verification_documents_on_verification_id"
+  end
+
   create_table "verifications", force: :cascade do |t|
     t.bigint "applicant_id", null: false
     t.string "country", limit: 2
@@ -166,5 +176,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_062435) do
   add_foreign_key "log_records", "verifications"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
+  add_foreign_key "verification_documents", "document_types"
+  add_foreign_key "verification_documents", "verifications"
   add_foreign_key "verifications", "applicants"
 end
