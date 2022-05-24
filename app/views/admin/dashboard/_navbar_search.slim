@@ -1,3 +1,0 @@
--content_for :navbar_search do
-  = search_form_for q, url: admin_verifications_path, class: 'form-inline 'do |f|
-    = f.input ApplicationHelper::VERIFICATION_QUERY, label: false, as: :search, placeholder: t('admin.verifications.index_form.query_placeholder')
