@@ -1,10 +1,11 @@
 ul.nav.nav-pills.mb-3
   - status_from_query = request.query_parameters.fetch(:q, {}).fetch(:reason_eq, nil)
+  - count = pending_verifications.count
+  li.nav-item
+    = link_to admin_root_path, class: active_class('nav-link', status_from_query.blank?) do
+      = title_with_counter 'Все', count
   - Verification::REASONS.each do |reason|
-    -url = admin_root_path(q: request.query_parameters.fetch(:q, {}).merge(reason_eq: reason))
-    - klass = active_class('nav-link', status_from_query == reason.to_s)
-    - count = statused_verifications.by_reason(reason).count
-    - if count > 0
-      li.nav-item
-        = link_to url, class: klass do
-          = title_with_counter t("reason.#{reason}"), count
+    - count = pending_verifications.by_reason(reason).count
+    li.nav-item
+      = link_to admin_root_path(q: request.query_parameters.fetch(:q, {}).merge(reason_eq: reason)), class: active_class('nav-link', status_from_query == reason.to_s) do
+        = title_with_counter t("reason.#{reason}"), count

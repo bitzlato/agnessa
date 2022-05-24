@@ -142,9 +142,9 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.citext "patronymic"
     t.date "birth_date"
     t.string "gender"
+    t.text "applicant_comment"
     t.string "remote_ip"
     t.string "user_agent"
-    t.text "applicant_comment"
     t.string "number"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
