@@ -3,9 +3,13 @@ ul.nav.nav-pills.mb-3
   - Verification::STATUSES.each do |status|
     -url = admin_root_path(q: request.query_parameters.fetch(:q, {}).merge(status_eq: status))
     - klass = active_class('nav-link', status_from_query == status.to_s)
+    - count =  current_account.verifications.member_scope(current_member).by_status(status).count
+    -if count > 0
+      li.nav-item
+        = link_to url, class: klass do
+          = title_with_counter t("status.#{status}"), count
+  -count_all = current_account.verifications.member_scope(current_member).count
+  -if count_all > 0
     li.nav-item
-      = link_to url, class: klass do
-        = title_with_counter t("status.#{status}"), current_account.verifications.member_scope(current_member).by_status(status).count
-  li.nav-item
-    = link_to admin_root_path(q: request.query_parameters.fetch(:q, {}).except(:status_eq)), class: active_class('nav-link', status_from_query.nil?) do
-      = title_with_counter t('status.all'), current_account.verifications.member_scope(current_member).count
+      = link_to admin_root_path(q: request.query_parameters.fetch(:q, {}).except(:status_eq)), class: active_class('nav-link', status_from_query.nil?) do
+        = title_with_counter t('status.all'), count_all
