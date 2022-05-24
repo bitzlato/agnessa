@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe DocumentType, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe :create do
+    it 'just create' do
+      document_type = create(:document_type)
+      expect(DocumentType.count).to eq(1)
+    end
+  end
 end
