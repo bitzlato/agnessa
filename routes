@@ -1,18 +1,37 @@
                                   Prefix Verb     URI Pattern                                                                                       Controller#Action
+                                  legacy GET      /users.json(.:format)                                                                             legacy/verifications#index
+                     legacy_verification GET      /verifications/:id(.:format)                                                                      legacy/verifications#show
+                                         GET      /                                                                                                 legacy/verifications#legacy_show
+                                         GET      /*anything(.:format)                                                                              legacy/verifications#legacy_show
                              public_root GET      /                                                                                                 public/landing#index {:subdomain=>""}
                       public_sidekiq_web          /sidekiq                                                                                          Sidekiq::Web {:subdomain=>""}
-                                         GET      /users.json(.:format)                                                                             legacy_verifications#index
+                            public_users POST     /users(.:format)                                                                                  public/users#create {:subdomain=>""}
+                         new_public_user GET      /users/new(.:format)                                                                              public/users#new {:subdomain=>""}
+                         public_sessions DELETE   /sessions(.:format)                                                                               public/sessions#destroy {:subdomain=>""}
+                                         POST     /sessions(.:format)                                                                               public/sessions#create {:subdomain=>""}
+                      new_public_session GET      /sessions/new(.:format)                                                                           public/sessions#new {:subdomain=>""}
+                  public_password_resets POST     /password_resets(.:format)                                                                        public/password_resets#create {:subdomain=>""}
+               new_public_password_reset GET      /password_resets/new(.:format)                                                                    public/password_resets#new {:subdomain=>""}
+              edit_public_password_reset GET      /password_resets/:id/edit(.:format)                                                               public/password_resets#edit {:subdomain=>""}
+                   public_password_reset PATCH    /password_resets/:id(.:format)                                                                    public/password_resets#update {:subdomain=>""}
+                                         PUT      /password_resets/:id(.:format)                                                                    public/password_resets#update {:subdomain=>""}
+                    accept_public_invite GET      /invites/:id/accept(.:format)                                                                     public/invites#accept {:subdomain=>""}
+                                 profile GET      /profile(.:format)                                                                                user/profile#show {:subdomain=>""}
+                                         PATCH    /profile(.:format)                                                                                user/profile#update {:subdomain=>""}
+                                         PUT      /profile(.:format)                                                                                user/profile#update {:subdomain=>""}
+                              client_api          /                                                                                                 ClientApi
+                   block_admin_applicant POST     /applicants/:id/block(.:format)                                                                   admin/applicants#block
+                 unblock_admin_applicant POST     /applicants/:id/unblock(.:format)                                                                 admin/applicants#unblock
                         admin_applicants GET      /applicants(.:format)                                                                             admin/applicants#index
                          admin_applicant GET      /applicants/:id(.:format)                                                                         admin/applicants#show
+                       admin_log_records GET      /log_records(.:format)                                                                            admin/log_records#index
                               admin_root GET      /                                                                                                 admin/dashboard#index
-                      admin_members GET      /members(.:format)                                                                           admin/members#index
-                                         POST     /members(.:format)                                                                           admin/members#create
-                   new_admin_member GET      /members/new(.:format)                                                                       admin/members#new
-                  edit_admin_member GET      /members/:id/edit(.:format)                                                                  admin/members#edit
-                       admin_member GET      /members/:id(.:format)                                                                       admin/members#show
-                                         PATCH    /members/:id(.:format)                                                                       admin/members#update
-                                         PUT      /members/:id(.:format)                                                                       admin/members#update
-                                         DELETE   /members/:id(.:format)                                                                       admin/members#destroy
+                    archive_admin_member DELETE   /members/:id/archive(.:format)                                                                    admin/members#archive
+                    restore_admin_member POST     /members/:id/restore(.:format)                                                                    admin/members#restore
+                           admin_members GET      /members(.:format)                                                                                admin/members#index
+                                         POST     /members(.:format)                                                                                admin/members#create
+                            admin_member PATCH    /members/:id(.:format)                                                                            admin/members#update
+                                         PUT      /members/:id(.:format)                                                                            admin/members#update
               admin_review_result_labels GET      /review_result_labels(.:format)                                                                   admin/review_result_labels#index
                                          POST     /review_result_labels(.:format)                                                                   admin/review_result_labels#create
            new_admin_review_result_label GET      /review_result_labels/new(.:format)                                                               admin/review_result_labels#new
@@ -31,15 +50,18 @@
                                          PATCH    /verifications/:id(.:format)                                                                      admin/verifications#update
                                          PUT      /verifications/:id(.:format)                                                                      admin/verifications#update
                                          DELETE   /verifications/:id(.:format)                                                                      admin/verifications#destroy
-            recreate_secret_admin_client POST     /client/recreate_secret(.:format)                                                                 admin/clients#recreate_secret
- verification_callback_test_admin_client POST     /client/verification_callback_test(.:format)                                                      admin/clients#verification_callback_test
-                            admin_client GET      /client(.:format)                                                                                 admin/clients#show
-                                         PATCH    /client(.:format)                                                                                 admin/clients#update
-                                         PUT      /client(.:format)                                                                                 admin/clients#update
+           recreate_secret_admin_account POST     /account/recreate_secret(.:format)                                                                admin/accounts#recreate_secret
+verification_callback_test_admin_account POST     /account/verification_callback_test(.:format)                                                     admin/accounts#verification_callback_test
+                           admin_account GET      /account(.:format)                                                                                admin/accounts#show
+                                         PATCH    /account(.:format)                                                                                admin/accounts#update
+                                         PUT      /account(.:format)                                                                                admin/accounts#update
+           admin_verification_statistics GET      /verification_statistics(.:format)                                                                admin/verification_statistics#show
+                            admin_invite DELETE   /invites/:id(.:format)                                                                            admin/invites#destroy
                     client_verifications POST     /applicants/:encoded_external_id/verifications(.:format)                                          client/verifications#create
                  new_client_verification GET      /applicants/:encoded_external_id/verifications/new(.:format)                                      client/verifications#new
-                                         GET|POST /*anything(.:format)                                                                              errors#not_found
-                                         GET|POST /                                                                                                 errors#not_found
+           client_short_new_verification GET      /v/:encoded_external_id(.:format)                                                                 client/verifications#new
+                                         GET|POST /*anything(.:format)                                                                              application#not_found
+                                         GET|POST /                                                                                                 application#not_found
            rails_postmark_inbound_emails POST     /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
               rails_relay_inbound_emails POST     /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
            rails_sendgrid_inbound_emails POST     /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                           action_mailbox/ingresses/sendgrid/inbound_emails#create
