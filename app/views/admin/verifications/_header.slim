@@ -28,7 +28,7 @@
         = warning_flag similar_documents.any?
         = verification.document_number
       - if similar_documents.any?
-        li =link_to t('.similar_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': verification['document_number']), target: '_blank'
+        li =link_to t('.similar_documents', count: similar_documents.count), universal_verification_path('q[document_number_eq]': verification['document_number']), target: '_blank'
   .col-md-2
     .text-muted= verification.class.human_attribute_name :email
     ul.list-unstyled
@@ -36,7 +36,7 @@
         = warning_flag similar_emails.any?
         = verification.email
       - if similar_emails.any?
-        li = link_to t('.similar_emails', count: similar_emails.count), admin_verifications_path('q[email_eq]': verification.email), target: '_blank'
+        li = link_to t('.similar_emails', count: similar_emails.count), universal_verification_path('q[email_eq]': verification.email), target: '_blank'
   .col-md-2
     .text-muted= verification.class.human_attribute_name :reason
     .badge.badge-info= verification.reason

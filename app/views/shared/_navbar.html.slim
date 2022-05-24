@@ -6,24 +6,31 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.mr-auto
         li.nav-item.mr-2.d-flex.align-items-center
-          =active_link_to admin_verifications_path(q: { status_eq: :pending }), class: 'my-lg-0 py-lg-0 nav-link' do
-            = title_with_counter t('.verifications'), current_account.verifications.pending.count
-        li.nav-item.mr-2.d-flex.align-items-center
-          = active_link_to admin_applicants_path, class: 'my-lg-0 py-lg-0 nav-link' do
-            = title_with_counter t('.applicants'), current_account.applicants.count
+          = active_link_to admin_root_path(q: { status_eq: :pending }), class: 'my-lg-0 py-lg-0 nav-link' do
+            = title_with_counter t('.desktop'), current_account.verifications.pending.count
+        - if current_member.admin?
+          li.nav-item.mr-2.d-flex.align-items-center
+            = active_link_to admin_verifications_path(q: { status_eq: :pending }), class: 'my-lg-0 py-lg-0 nav-link' do
+              = title_with_counter t('.verifications'), current_account.verifications.pending.count
+        -if current_member.admin?
+          li.nav-item.mr-2.d-flex.align-items-center
+            = active_link_to admin_applicants_path, class: 'my-lg-0 py-lg-0 nav-link' do
+              = title_with_counter t('.applicants'), current_account.applicants.count
         li.nav-item.mr-2.d-flex.align-items-center
           = link_to t('.verification_new'), new_admin_verification_path, class: 'my-lg-0 py-lg-0 nav-link'
-        li.nav-item.mr-2.d-flex.align-items-center
-          = link_to t('.verification_statistics'), admin_verification_statistics_path(period: 1.day.to_i), class: 'my-lg-0 py-lg-0 nav-link'
-        li.nav-item.mr-2.d-flex.align-items-center
-          = link_to t('.log_records'), admin_log_records_path, class: 'my-lg-0 py-lg-0 nav-link'
+        -if current_member.admin?
+          li.nav-item.mr-2.d-flex.align-items-center
+            = link_to t('.operator_statistics'), admin_operator_statistics_path(period: 1.day.to_i), class: 'my-lg-0 py-lg-0 nav-link'
+          li.nav-item.mr-2.d-flex.align-items-center
+            = link_to t('.log_records'), admin_log_records_path, class: 'my-lg-0 py-lg-0 nav-link'
         li.nav-item.search-navbar
           =content_for(:navbar_search)
       ul.navbar-nav.navbar-right
-        li.nav-item.dropdown
-          = link_to t('.settings'), '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', data: { toggle: 'dropdown' }, id: :navbarDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false
-          .dropdown-menu.dropdown-menu-right[aria-labelledby="navbarDropdown"]
-            = link_to t('.users'), admin_members_path, class: 'dropdown-item'
-            = link_to t('.review_result_labels'), admin_review_result_labels_path, class: 'dropdown-item'
-            = link_to t('.profile'), admin_account_path, class: 'dropdown-item'
+        - if current_member.admin?
+          li.nav-item.dropdown
+            = link_to t('.settings'), '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', data: { toggle: 'dropdown' }, id: :navbarDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false
+            .dropdown-menu.dropdown-menu-right[aria-labelledby="navbarDropdown"]
+              = link_to t('.users'), admin_members_path, class: 'dropdown-item'
+              = link_to t('.review_result_labels'), admin_review_result_labels_path, class: 'dropdown-item'
+              = link_to t('.profile'), admin_account_path, class: 'dropdown-item'
         = render 'user_dropdown'

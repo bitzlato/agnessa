@@ -2,6 +2,7 @@ class Admin::ApplicationController < ApplicationController
   include UserAuthSupport
   include PaginationSupport
   before_action :authorize_member
+  before_action :authorize_admin
 
   layout 'fluid'
 
@@ -22,6 +23,10 @@ class Admin::ApplicationController < ApplicationController
 
   def current_member
     @current_member ||= current_account.members.find_by(user: current_user)
+  end
+
+  def authorize_admin
+    raise HumanizedError, :authorize_admin unless current_member.admin?
   end
 
   def authorize_member
