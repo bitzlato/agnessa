@@ -61,16 +61,6 @@ class Verification < ApplicationRecord
 
   after_create :log_creation
 
-  # Метод который не дает возможность member, получить заявку, которую он не должен получить
-  def self.member_scope(member)
-    if member.operator?
-      # Ограничивает оператора и поиск
-      #all.joins(:applicant).where("applicants.account_id = ? AND (status = 'pending' OR moderator_id = ?)", member.account_id, member.id)
-      all.joins(:applicant).where("applicants.account_id = ?", member.account_id)
-    elsif member.admin?
-      all.joins(:applicant).where("applicants.account_id = ?", member.account_id)
-    end
-  end
 
   def preview_image
     @preview_image ||= documents.first
