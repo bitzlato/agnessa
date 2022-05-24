@@ -9,6 +9,8 @@ class Applicant < ApplicationRecord
   validates :last_confirmed_verification_id, :first_name, :last_name, presence: true, if: :confirmed_at?
   validates :external_id, presence: true, uniqueness: {scope: :account}
 
+  upsert_keys [:account_id, :external_id]
+
   before_update do
     self.emails = Array(self.emails).map(&:downcase).compact.uniq
   end
