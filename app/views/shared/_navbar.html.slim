@@ -8,10 +8,9 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
         li.nav-item.mr-2.d-flex.align-items-center
           = active_link_to admin_root_path(q: { status_eq: :pending }), class: 'my-lg-0 py-lg-0 nav-link' do
             = title_with_counter t('.desktop'), current_account.verifications.pending.count
-        - if current_member.admin?
-          li.nav-item.mr-2.d-flex.align-items-center
-            = active_link_to admin_verifications_path(q: { status_eq: :pending }), class: 'my-lg-0 py-lg-0 nav-link' do
-              = title_with_counter t('.verifications'), current_account.verifications.pending.count
+        li.nav-item.mr-2.d-flex.align-items-center
+          = active_link_to admin_verifications_path(q: { status_eq: :pending }), class: 'my-lg-0 py-lg-0 nav-link' do
+            = title_with_counter t('.verifications'), current_account.verifications.pending.count
         -if current_member.admin?
           li.nav-item.mr-2.d-flex.align-items-center
             = active_link_to admin_applicants_path, class: 'my-lg-0 py-lg-0 nav-link' do
