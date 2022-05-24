@@ -36,7 +36,7 @@ class Client::VerificationsController < Client::ApplicationController
       Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}"))
       raise HumanizedError, :invalid_barong_uid
     end
-    @applicant ||= current_account.applicants.upsert!(external_id: external_id)
+    @applicant ||= current_account.applicants.upsert!({external_id: external_id}, validate: false)
     @applicant.update_column(:legacy_external_id, p2p_id)
     @applicant
   end
