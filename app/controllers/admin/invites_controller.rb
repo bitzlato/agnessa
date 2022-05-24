@@ -1,4 +1,5 @@
 class Admin::InvitesController < Admin::ApplicationController
+  before_action :authorize_admin
   def destroy
     invite = current_account.invites.find(params[:id])
     invite.destroy!
