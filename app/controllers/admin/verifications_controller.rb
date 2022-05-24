@@ -1,5 +1,5 @@
 class Admin::VerificationsController < Admin::ResourcesController
-  skip_before_action :authorize_admin, only: [:show, :new, :create, :update ]
+  skip_before_action :authorize_admin, only: [:show, :index, :new, :create, :update ]
 
   helper_method :similar_emails
   helper_method :similar_names
