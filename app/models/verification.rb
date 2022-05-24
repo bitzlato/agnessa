@@ -61,9 +61,6 @@ class Verification < ApplicationRecord
 
   after_create :log_creation
 
-  def self.member_scope(member)
-    all.joins(:applicant).where("applicants.account_id = ?", member.account_id)
-  end
 
   def preview_image
     @preview_image ||= documents.first

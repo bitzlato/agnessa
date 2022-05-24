@@ -3,7 +3,7 @@ ul.nav.nav-pills.mb-3
   - Verification::REASONS.each do |reason|
     -url = admin_root_path(q: request.query_parameters.fetch(:q, {}).merge(reason_eq: reason))
     - klass = active_class('nav-link', status_from_query == reason.to_s)
-    - count = statused_verifications.member_scope(current_member).by_reason(reason).count
+    - count = statused_verifications.by_reason(reason).count
     - if count > 0
       li.nav-item
         = link_to url, class: klass do
