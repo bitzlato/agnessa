@@ -20,7 +20,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
           = link_to t('.verification_new'), new_admin_verification_path, class: 'my-lg-0 py-lg-0 nav-link'
         -if current_member.admin?
           li.nav-item.mr-2.d-flex.align-items-center
-            = link_to t('.operator_statistics'), admin_operator_statistics_path(period: 1.day.to_i), class: 'my-lg-0 py-lg-0 nav-link'
+            = link_to t('.operator_statistics'), admin_verification_statistics_path(period: 1.day.to_i), class: 'my-lg-0 py-lg-0 nav-link'
           li.nav-item.mr-2.d-flex.align-items-center
             = link_to t('.log_records'), admin_log_records_path, class: 'my-lg-0 py-lg-0 nav-link'
         li.nav-item.search-navbar
