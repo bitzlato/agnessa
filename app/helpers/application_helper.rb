@@ -84,4 +84,17 @@ module ApplicationHelper
       end
     end.compact.join(', ')
   end
+
+  def number_to_machine_s(number)
+    parts = [3600, 60]
+    buffer = number.to_i
+    res = []
+    parts.each do |p|
+      value, buffer = buffer.divmod(p)
+      res << value
+    end
+    res << buffer
+
+    res.map{|x| x.to_s.rjust(2, "0")}.join(":")
+  end
 end
