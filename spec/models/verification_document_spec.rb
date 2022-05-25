@@ -5,8 +5,8 @@ RSpec.describe VerificationDocument, type: :model do
 
 
   describe :create do
-    it 'archived' do
-      expect(verification_document).to be_truthy
+    it 'success create verification document' do
+      expect(verification_document.id).to be_truthy
     end
   end
 end
