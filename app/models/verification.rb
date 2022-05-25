@@ -13,6 +13,7 @@ class Verification < ApplicationRecord
   belongs_to :applicant
   has_one :account, through: :applicant
   has_many :log_records
+  has_many :verification_documents
 
   before_save do
     self.first_name = first_name.to_s.upcase
