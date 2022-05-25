@@ -1,6 +1,6 @@
 h1 Заявки требующие внимания
-= render 'index_form'
--scoped_paginated_records = paginated_records.member_scope(current_member)
-div.mb-2= t 'application.index.total_records', count: scoped_paginated_records.total_count
-= render 'table', items: scoped_paginated_records.decorate if scoped_paginated_records.count.positive?
-= paginate scoped_paginated_records
+.mb-4= render 'reason_filter', pending_verifications: pending_verifications
+
+div.mb-2= t 'application.index.total_records', count: paginated_records.total_count
+= render 'table', items: paginated_records.decorate if paginated_records.count.positive?
+= paginate paginated_records

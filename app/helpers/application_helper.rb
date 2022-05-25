@@ -11,14 +11,6 @@ module ApplicationHelper
   APPLICANT_QUERY = :first_name_or_last_name_or_patronymic_or_external_id_cont
   LOG_RECORD_QUERY = :verification_number_or_verification_last_name_or_verification_name_or_verification_document_number_or_member_user_email_cont
 
-  def universal_verification_path(q)
-    if current_member.admin?
-      admin_verifications_path(q)
-    elsif current_member.operator?
-      admin_root_path(q)
-    end
-  end
-
   def hightlight_verification_field(value)
     return middot if value.blank?
     query = params.dig(:q, VERIFICATION_QUERY)
@@ -28,13 +20,6 @@ module ApplicationHelper
 
   def warning
     '⚠️'.html_safe
-  end
-
-  def statused_verifications
-    status_from_query = request.query_parameters.fetch(:q, {}).fetch(:status_eq, nil)
-    scope = current_account.verifications
-
-    status_from_query.blank? ? scope : scope.by_status(status_from_query)
   end
 
   def warning_flag(flag)

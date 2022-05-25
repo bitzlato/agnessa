@@ -1,5 +1,5 @@
 class Admin::MembersController < Admin::ApplicationController
-  # before_action :superadmin?
+  before_action :authorize_admin
 
   def index
     members = paginate current_account.members.order('archived_at desc')

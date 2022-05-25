@@ -1,4 +1,6 @@
 class Admin::AccountsController < Admin::ApplicationController
+  before_action :authorize_admin
+
   def show
     render locals: {account: current_account}
   end

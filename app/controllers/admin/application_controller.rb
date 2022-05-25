@@ -2,12 +2,12 @@ class Admin::ApplicationController < ApplicationController
   include UserAuthSupport
   include PaginationSupport
   before_action :authorize_member
-  before_action :authorize_admin
 
   layout 'fluid'
 
   helper_method :current_account
   helper_method :current_member
+  helper_method :verification_q
   attr_accessor :current_member
 
   before_action do
@@ -17,6 +17,12 @@ class Admin::ApplicationController < ApplicationController
 
   def current_account
     RequestStore.store[:current_account]
+  end
+
+  def verification_q
+    qq = Verification.ransack(params[:q])
+    qq.sorts = 'created_at desc' if qq.sorts.empty?
+    qq
   end
 
   private
