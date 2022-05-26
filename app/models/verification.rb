@@ -27,7 +27,7 @@ class Verification < ApplicationRecord
   end
 
 
-  validates :country, :name, :last_name, :gender, :birth_date, :document_number, :documents, :reason, presence: true, on: :create
+  validates :country, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?
@@ -37,7 +37,7 @@ class Verification < ApplicationRecord
 
   validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
-  validate :at_least_3_documents, on: :create
+  # validate :at_least_3_documents, on: :create
   validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
 
   STATUSES = %w[pending refused confirmed]

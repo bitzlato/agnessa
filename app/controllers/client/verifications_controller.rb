@@ -12,7 +12,7 @@ class Client::VerificationsController < Client::ApplicationController
     if applicant.blocked?
       render :blocked, locals: {verification: verification, applicant: applicant }
     else
-      render locals: {verification: verification}
+      render locals: {verification: verification}, status: :bad_request
     end
   end
 
@@ -21,7 +21,7 @@ class Client::VerificationsController < Client::ApplicationController
     render :created, locals: { verification: verification }
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
-    render :new, locals: { verification: e.record }
+    render :new, locals: { verification: e.record }, status: :bad_request
   end
 
   private
