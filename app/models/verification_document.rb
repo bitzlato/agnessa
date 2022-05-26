@@ -5,13 +5,8 @@ class VerificationDocument < ApplicationRecord
   belongs_to :document_type
 
 
-  def content_type
-    case document_type.file_type
-    when 'video'
-      Rails.configuration.application.video_content_types
-    when 'image'
-      Rails.configuration.application.image_content_types
-    end
+  def content_types
+    document_type.content_types
   end
 
 end

@@ -42,7 +42,7 @@ class VerificationDocumentUploader < CarrierWave::Uploader::Base
   end
 
   def content_type_allowlist
-    model.content_type
+    model.content_types
   end
 
   # Override the directory where uploaded files will be stored.
