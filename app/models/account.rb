@@ -52,6 +52,10 @@ class Account < ApplicationRecord
     }
   end
 
+  def document_type_fields
+    document_types.map { |dt| dt.field_name }
+  end
+
   private
 
   def set_secret

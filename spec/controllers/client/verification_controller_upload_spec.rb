@@ -25,7 +25,10 @@ RSpec.describe Client::VerificationsController, type: :controller do
           last_name: verification_sample.last_name,
           patronymic: verification_sample.patronymic,
           email: verification_sample.email,
-          document_number: verification_sample.document_number
+          document_number: verification_sample.document_number,
+          document_type_1: '123',
+          document_type_2: '123',
+          document_type_3: '123'
         }
       }
       get :create, params: params

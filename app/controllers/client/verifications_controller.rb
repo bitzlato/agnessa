@@ -3,7 +3,7 @@ class Client::VerificationsController < Client::ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {documents: []}].freeze
+  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {documents: []}]
 
   helper_method :form_path, :external_id
 
@@ -17,7 +17,9 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def create
-    verification = applicant.verifications.create! verification_params.merge(external_id: external_id, remote_ip: request.remote_ip, user_agent: request.user_agent)
+    verification = applicant.verifications.create! verification_params.merge(external_id: external_id,
+                                                                             remote_ip: request.remote_ip,
+                                                                             user_agent: request.user_agent)
     render :created, locals: { verification: verification }
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
@@ -48,6 +50,6 @@ class Client::VerificationsController < Client::ApplicationController
   def verification_params
     params.
       require(:verification).
-      permit(*PERMITTED_ATTRIBUTES)
+      permit(*(PERMITTED_ATTRIBUTES.concat(current_account.document_type_fields)))
   end
 end
