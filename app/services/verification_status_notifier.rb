@@ -8,12 +8,12 @@ class VerificationStatusNotifier
     url = verification.account.verification_callback_url
     data = {
       external_id: verification.applicant.external_id,
+      applicant_id: verification.applicant.id,
+      email: verification.email,
       verification_id: verification.id,
       status: verification.status,
       reason: verification.public_comment,
-      time: verification.updated_at.to_s(:iso8601),
-      # applicant_id: verification.applicant.id,
-      # email: verification.email,
+      time: verification.updated_at.to_s(:iso8601)
     }
     notifier = self.new(url, data)
     notifier.perform
