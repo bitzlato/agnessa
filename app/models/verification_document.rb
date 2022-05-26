@@ -4,9 +4,5 @@ class VerificationDocument < ApplicationRecord
   belongs_to :verification
   belongs_to :document_type
 
-
-  def content_types
-    document_type.content_types
-  end
-
+  delegate :content_types, to: :document_type
 end

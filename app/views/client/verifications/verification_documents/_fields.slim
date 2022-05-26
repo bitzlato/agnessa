@@ -1,5 +1,5 @@
 / - raise
-- current_account.document_types.each do |document_type|
+- current_account.document_types.order('file_type DESC').each do |document_type|
   = f.input document_type.field_name,
           wrapper: :vertical_file,
           as: :file,

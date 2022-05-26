@@ -49,12 +49,13 @@ ActiveRecord::Schema.define(version: 2022_05_24_065820) do
   end
 
   create_table "document_types", force: :cascade do |t|
-    t.bigint "account_id", null: false
+    t.bigint "account_id"
     t.string "file_type"
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_document_types_on_account_id"
+    t.index ["title", "account_id"], name: "index_document_types_on_title_and_account_id", unique: true
   end
 
   create_table "invites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -127,8 +128,8 @@ ActiveRecord::Schema.define(version: 2022_05_24_065820) do
   end
 
   create_table "verification_documents", force: :cascade do |t|
-    t.bigint "verification_id", null: false
-    t.bigint "document_type_id", null: false
+    t.bigint "verification_id"
+    t.bigint "document_type_id"
     t.string "file"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

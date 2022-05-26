@@ -21,3 +21,4 @@ RSpec.describe Client::VerificationsController, type: :controller do
     end
   end
 end
+Fix
