@@ -1,6 +1,6 @@
 / - raise
 - current_account.document_types.each do |document_type|
-  = f.input :verification_documents,
+  = f.input "document_type_#{document_type.id}",
           wrapper: :vertical_file,
           as: :file,
           input_html: { accept: document_type.content_types.join(',') },
