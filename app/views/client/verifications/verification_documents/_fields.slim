@@ -1,0 +1,9 @@
+/ - raise
+- current_account.document_types.each do |document_type|
+  = f.input :verification_documents1,
+          wrapper: :vertical_file,
+          as: :file,
+          input_html: { accept: Rails.configuration.application.document_content_types.join(',') },
+          label: document_type.title
+          / hint: t('.document_hint', from: number_to_human_size(Rails.configuration.application.min_upload_file_size), to: number_to_human_size(Rails.configuration.application.max_upload_file_size), amount: Rails.configuration.application.min_upload_files_amount).html_safe
+
