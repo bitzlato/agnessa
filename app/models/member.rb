@@ -1,5 +1,4 @@
 class Member < ApplicationRecord
-  STATISTICS_PERIODS = [1.day, 1.month, 6.months]
   ROLES = %w[operator full_operator admin].freeze
 
   include Archivable
