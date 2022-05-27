@@ -12,10 +12,13 @@ class DocumentType < ApplicationRecord
   validates :title, uniqueness: {scope: [:account_id]}
 
   def content_types
-    if file_type == 'video'
+    case file_type
+    when 'video'
       Rails.configuration.application.video_content_types
-    else
+    when 'image'
       Rails.configuration.application.image_content_types
+    else
+      Rails.configuration.application.document_content_types
     end
   end
 
