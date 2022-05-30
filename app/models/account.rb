@@ -18,9 +18,9 @@ class Account < ApplicationRecord
   before_validation :downcase_subdomain
 
   after_create do
-    document_types << DocumentType.create(file_type: 'image', title: 'Селфи')
-    document_types << DocumentType.create(file_type: 'video', title: 'Селфи с паспортом')
-    document_types << DocumentType.create(file_type: 'image', title: 'ID')
+    document_types << DocumentType.create(file_type: 'image', title: 'Селфи с паспортом')
+    document_types << DocumentType.create(file_type: 'video', title: 'Видео селфи с паспортом')
+    document_types << DocumentType.create(file_type: 'image', title: 'Фотография документов')
   end
 
   def recreate_secret!
