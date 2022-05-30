@@ -4,6 +4,8 @@
                    as: :file,
                    value: :file_cache,
                    label: document.object.document_type.title,
-                   input_html: { accept: document.object.document_type.content_types.join(','), title: '123'}
+                   input_html: { accept: document.object.document_type.content_types.join(','), title: '123'},
+                   hint: t('.document_hint', from: number_to_human_size(Rails.configuration.application.min_upload_file_size), to: number_to_human_size(Rails.configuration.application.max_upload_file_size), amount: Rails.configuration.application.min_upload_files_amount).html_safe
+
   = document.input :file_cache, as: :hidden
   = document.input :document_type_id, as: :hidden
