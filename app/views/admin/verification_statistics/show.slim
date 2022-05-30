@@ -2,25 +2,33 @@ h2 Статистика Заявок
 
 = render partial: 'form', locals: {form: form}
 
-table.table.table-striped.table-hover.table-narrow
+table.table.table-striped.table-hover.table-narrow.table-bordered
   thead.thead-dark
     tr
-      - if form.group == 'operator'
-        th Оператор
-      - if form.group == 'reason'
-        th Причина
-      th Количество
-      th Минимальное время
-      th Среднее время
-      th Максимальное время
+      th
+        = 'Оператор' if form.subject_group == 'moderator_id'
+        = 'Причина' if form.subject_group == 'reason'
+      - dates.each do |d|
+        th colspan="4" = d.to_date
   tbody
-  - result.each do |r|
     tr
-      - if form.group == 'operator'
-        td= r.moderator.user.email
-      - if form.group == 'reason'
-        td= t("reason.#{r.reason}")
-      td= r.verifications_amount
-      td= number_to_machine_s(r.min_period)
-      td= number_to_machine_s(r.avg_period)
-      td= number_to_machine_s(r.max_period)
+      td
+      - dates.each do |d|
+        th Кол
+        th Мин
+        th Макс
+        th Сред
+  - subjects.each do |subject|
+    tr
+      td
+        - if form.subject_group == 'moderator_id'
+          = Member.find(subject).user
+        - if form.subject_group == 'reason'
+          = t("reason.#{subject}")
+      - dates.each do |d|
+        - item = result[subject][d]
+
+        td= item[:verifications_amount] if item
+        td= number_to_machine_s(item[:min_period]) if item
+        td= number_to_machine_s(item[:max_period]) if item
+        td= number_to_machine_s(item[:avg_period]) if item
