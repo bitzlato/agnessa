@@ -1,0 +1,21 @@
+.container
+  h2 Статусы верификаций
+  hr
+  div.mb-2= t 'application.index.total_records', count: labels.count
+  table.table.table-striped.table-hover
+    thead.thead-dark
+      tr
+        th ID
+        th Тэг
+        th Публичный комментарий
+        th Действия
+
+    tbody
+      - labels.each do |label|
+        tr
+          td = label.id
+          td = label.label
+          td = label.public_comment
+          td = label.label_ru
+      br
+  = paginate labels
