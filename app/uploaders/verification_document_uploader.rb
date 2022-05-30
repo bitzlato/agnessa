@@ -42,7 +42,6 @@ class VerificationDocumentUploader < CarrierWave::Uploader::Base
   end
 
   def content_type_allowlist
-    # Rails.configuration.application.document_content_types
     model.content_types
   end
 
