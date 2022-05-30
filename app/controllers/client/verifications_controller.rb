@@ -10,7 +10,7 @@ class Client::VerificationsController < Client::ApplicationController
   def new
     verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES).merge(external_id: external_id)
     if applicant.blocked?
-      render :blocked, locals: {verification: verification, applicant: applicant }
+      render :blocked, locals: {applicant: applicant }
     else
       render locals: {verification: verification}
     end
