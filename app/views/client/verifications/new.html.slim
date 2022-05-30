@@ -45,7 +45,8 @@
         .col-12
            = f.input :applicant_comment, as: :text, placeholder: t('.applicant_comment_placeholder')
       .row
-        = render partial: 'client/verifications/verification_documents/fields', locals: {verification: verification, f: f}
+        =f.simple_fields_for :verification_documents do |document|
+          = render 'document_field', document: document
       / .row
         / .col-12.col-sm-6
         /   = f.input :documents_cache, as: :hidden

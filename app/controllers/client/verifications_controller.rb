@@ -9,6 +9,11 @@ class Client::VerificationsController < Client::ApplicationController
 
   def new
     verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES).merge(external_id: external_id)
+
+    current_account.document_types.each do |document_type|
+      verification.verification_documents.new document_type: document_type
+    end
+
     if applicant.blocked?
       render :blocked, locals: {verification: verification, applicant: applicant }
     else
