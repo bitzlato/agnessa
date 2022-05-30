@@ -31,6 +31,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def applicant
+    raise HumanizedError, :no_external_id unless external_id.present?
     p2p_id = BarongClient.instance.get_p2pid_from_barong_uid(external_id)
     unless p2p_id.present?
       Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}"))
