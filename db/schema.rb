@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_065820) do
+ActiveRecord::Schema.define(version: 2022_05_30_165536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_065820) do
     t.string "status", default: "pending", null: false
     t.string "commment"
     t.integer "kind"
-    t.json "documents", default: []
+    t.json "legacy_documents", default: []
     t.json "external_json", default: {}
     t.json "params", default: {}
     t.datetime "created_at", precision: 6, null: false
