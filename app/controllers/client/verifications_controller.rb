@@ -55,6 +55,6 @@ class Client::VerificationsController < Client::ApplicationController
   def verification_params
     params.
       require(:verification).
-      permit(*(PERMITTED_ATTRIBUTES))
+      permit(*PERMITTED_ATTRIBUTES)
   end
 end
