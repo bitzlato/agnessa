@@ -1,5 +1,7 @@
 .col-lg-12
   = document.input :file,
-                    as: :file,
-                    label: document.object.document_type.title,
-                    input_html: { accept: document.object.document_type.content_types.join(',') }
+                   wrapper: :vertical_file,
+                   as: :file,
+                   label: document.object.document_type.title,
+                   input_html: { accept: document.object.document_type.content_types.join(',') }
+  = document.input :document_type_id, as: :hidden

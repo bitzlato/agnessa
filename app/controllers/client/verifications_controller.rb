@@ -3,7 +3,7 @@ class Client::VerificationsController < Client::ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:file, :document_type_id]}]
+  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file]}]
 
   helper_method :form_path, :external_id
 
@@ -55,6 +55,6 @@ class Client::VerificationsController < Client::ApplicationController
   def verification_params
     params.
       require(:verification).
-      permit(*(PERMITTED_ATTRIBUTES.concat(current_account.document_type_fields)))
+      permit(*(PERMITTED_ATTRIBUTES))
   end
 end
