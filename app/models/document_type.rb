@@ -5,9 +5,6 @@ class DocumentType < ApplicationRecord
   FILE_TYPES = %w[video image].freeze
   enum file_type: FILE_TYPES.each_with_object({}) { |e, a| a[e] = e }
 
-  def field_name
-    "document_type_#{id}"
-  end
 
   validates :title, presence: true
   validates :title, uniqueness: {scope: [:account_id]}
