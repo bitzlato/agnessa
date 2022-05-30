@@ -65,7 +65,7 @@ class Verification < ApplicationRecord
 
 
   def preview_image
-    @preview_image ||= legacy_documents.first
+    @preview_image ||= verification_documents.first&.file
   end
 
   def legacy_created
