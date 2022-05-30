@@ -1,4 +1,11 @@
 default:  &settings
+
+  id_types:
+    - passport
+    - id_card
+    - driver_license
+    - foreign_passport
+
   mailer_defaults:
     from: <%= ENV.fetch('AGNESSA_REPLY_FROM', 'reply@localhost') %>
   smtp:
