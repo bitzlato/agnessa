@@ -5,7 +5,7 @@ class DocumentType < ApplicationRecord
   enum file_type: FILE_TYPES.each_with_object({}) { |e, a| a[e] = e }
 
   def field_name
-    "document_type_#{id}".to_sym
+    "document_type_#{id}"
   end
 
   validates :title, presence: true
