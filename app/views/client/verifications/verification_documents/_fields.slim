@@ -7,6 +7,7 @@
                             as: :file,
                             input_html: { accept: new_document.document_type.content_types.join(',') },
                             label: new_document.document_type.title
+            = builder.input:document_type_id, as: :hidden, input_html: {value: document_type.id}
 
 
 
