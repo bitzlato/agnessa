@@ -3,7 +3,7 @@ class Client::VerificationsController < Client::ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file]}]
+  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache]}]
 
   helper_method :form_path, :external_id
 

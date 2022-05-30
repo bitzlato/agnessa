@@ -6,7 +6,9 @@ class VerificationDocument < ApplicationRecord
 
   delegate :content_types, to: :document_type
 
+  validates :file, presence: true
+
   def file_file_name
-    ''
+    file.filename
   end
 end

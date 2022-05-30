@@ -37,6 +37,7 @@ class Verification < ApplicationRecord
   validate :validate_labels
 
   validate :over_18_years_old, on: :create
+  validate :validate_documents, on: :create
   validate :validate_not_blocked_applicant, on: :create
   # validate :at_least_3_documents, on: :create
   validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
@@ -149,6 +150,12 @@ class Verification < ApplicationRecord
   end
 
   private
+
+  def validate_documents
+    document_type_ids = verification_documents.map{ |x| x.document_type_id }
+    account_document_types_ids = applicant.account.document_types.pluck(:id)
+    errors.add :verification_documents, I18n.t('errors.messages.wrong_verification_documents') if document_type_ids.sort != account_document_types_ids.sort
+  end
 
   def over_18_years_old
     errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
