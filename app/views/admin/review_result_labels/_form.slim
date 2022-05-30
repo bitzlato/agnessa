@@ -1,0 +1,5 @@
+= simple_form_for [:admin, label] do |f|
+  = f.input :label, required: true
+  = f.input :label_ru, required: true
+  = f.input :public_comment, required: true
+  = f.button :submit,  class: 'btn btn-success'
