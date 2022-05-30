@@ -1,5 +1,5 @@
 - current_account.document_types.order('file_type DESC').each do |document_type|
-    - new_document = VerificationDocument.new document_type: document_type
+    - new_document = verification.verification_documents.new document_type: document_type
     = f.simple_fields_for(:verification_documents, new_document) do |builder|
         .col-lg-12
             = builder.input :file,
