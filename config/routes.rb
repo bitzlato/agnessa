@@ -71,6 +71,9 @@ Rails.application.routes.draw do
       resources :members, only: %i[index update create] do
         concerns :archivable
       end
+      resources :countries, only: %i[index update create] do
+        concerns :archivable
+      end
       resources :review_result_labels
       resources :verifications do
         member  do

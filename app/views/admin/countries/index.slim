@@ -1,0 +1,19 @@
+h2 Страны
+hr
+div.mb-2= t 'application.index.total_records', count: countries.count
+table.table.table-striped.table-hover
+  thead.thead-dark
+    tr
+      th Code
+      th Название(RU)
+      th Название(EN)
+      th Действия
+
+  tbody
+    - countries.each do |country|
+      tr
+        td = country.code
+        td = country.title_ru
+        td = country.title_en
+        td
+          = render 'archive_button', member: country
