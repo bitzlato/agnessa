@@ -20,6 +20,9 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
           = link_to t('.operator_statistics'), admin_verification_statistics_path(f: {ago: 1.day.to_i}), class: 'my-lg-0 py-lg-0 nav-link'
         li.nav-item.mr-2.d-flex.align-items-center
           = link_to t('.log_records'), admin_log_records_path, class: 'my-lg-0 py-lg-0 nav-link'
+        - if current_member.admin?
+          li.nav-item.mr-2.d-flex.align-items-center
+            = link_to t('.countries'), admin_countries_path, class: 'my-lg-0 py-lg-0 nav-link'
         li.nav-item.search-navbar
           =content_for(:navbar_search)
       ul.navbar-nav.navbar-right

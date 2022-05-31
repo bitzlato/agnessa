@@ -64,6 +64,7 @@ ru:
       review_result_labels: 'Статусы верификаций'
       profile: 'Профиль организации'
       log_records: 'Журнал событий'
+      countries: 'Страны'
 
   attributes:
     genders:

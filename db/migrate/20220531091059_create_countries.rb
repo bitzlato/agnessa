@@ -6,6 +6,7 @@ class CreateCountries < ActiveRecord::Migration[6.1]
       t.string :title_en, null: false
       t.jsonb :id_types, default: []
 
+      t.timestamp :archived_at
       t.timestamps
     end
   end
