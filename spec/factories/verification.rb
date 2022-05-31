@@ -17,7 +17,15 @@ FactoryBot.define do
     remote_ip { Faker::Internet.ip_v4_address }
     user_agent { Faker::Internet.user_agent }
 
-    documents { [
+    verification_documents {
+      docs = []
+      applicant.account.document_types.each do |document_type|
+        docs << build(:verification_document, document_type.file_type.to_sym, document_type: document_type)
+      end
+      docs
+    }
+
+    legacy_documents { [
       Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),
       Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),
       Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg')
