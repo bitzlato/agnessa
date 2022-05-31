@@ -134,6 +134,9 @@ ru:
   admin:
     verification_statistics:
       form:
-        group:
-          operator: Операторы
+        subject_groups:
+          moderator_id: Операторы
           reason: Причины
+        date_groups:
+          day: День
+          month: Месяц

@@ -1,9 +1,13 @@
 ul.nav.nav-pills.mb-3
-  - [:operator, :reason].each do |group|
-    = active_link_to t(".group.#{group}"), admin_verification_statistics_path(group: group, period:86400), class: 'nav-link', active: form.group == group.to_s
+  - VerificationStatisticsForm::SUBJECTS.each do |subject_group|
+    = active_link_to t(".subject_groups.#{subject_group}"), admin_verification_statistics_path(f: form.attributes.merge(subject_group: subject_group)), class: 'nav-link', active: form.subject_group == subject_group.to_s
 ul.nav.nav-pills.mb-3
-  - Member::STATISTICS_PERIODS.each do |period|
+  - VerificationStatisticsForm::TIME_AGO_VALUES.each do |ago|
     li.nav-item
-      = active_link_to duration_of_interval_in_words(period.to_i), admin_verification_statistics_path(group: form.group, period: period.to_i), class: 'nav-link', active: form.period == period.to_i
+      = active_link_to duration_of_interval_in_words(ago.to_i), admin_verification_statistics_path(f: form.attributes.merge(ago: ago.to_i)), class: 'nav-link', active: form.ago == ago.to_i
   li.nav-item
-    = active_link_to 'Все время', admin_verification_statistics_path(group: form.group), class: 'nav-link', active: form.period == nil
+    = active_link_to 'Все время', admin_verification_statistics_path(f: form.attributes.merge(ago: nil).compact), class: 'nav-link', active: form.ago == nil
+ul.nav.nav-pills.mb-3
+  - VerificationStatisticsForm::DATE_GROUPS.each do |date_group|
+    li.nav-item
+      = active_link_to t(".date_groups.#{date_group}"), admin_verification_statistics_path(f: form.attributes.merge(date_group: date_group)), class: 'nav-link', active: form.date_group == date_group.to_s
