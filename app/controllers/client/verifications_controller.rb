@@ -15,9 +15,9 @@ class Client::VerificationsController < Client::ApplicationController
     end
 
     if applicant.blocked?
-      render :blocked, locals: {verification: verification, applicant: applicant }
+      render :blocked, locals: {verification: verification, applicant: applicant }, status: :bad_request
     else
-      render locals: {verification: verification}, status: :bad_request
+      render locals: {verification: verification}
     end
   end
 
