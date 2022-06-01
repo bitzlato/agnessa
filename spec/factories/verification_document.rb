@@ -1,8 +1,16 @@
 FactoryBot.define do
   factory :verification_document do
-    association :account
+    association :document_type
+    association :verification
 
-    sequence(:title) { |i| "DocumentType #{i}" }
-    sequence(:file_type) { ['video', 'image'].sample }
+    trait :video do
+      association :document_type, :video
+      file { Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/video.mp4')), 'video/mp4') }
+    end
+
+    trait :image do
+      association :document_type, :image
+      file { Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg') }
+    end
   end
 end

@@ -3,26 +3,31 @@ class Client::VerificationsController < Client::ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {documents: []}].freeze
+  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache]}]
 
   helper_method :form_path, :external_id
 
   def new
     applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
     verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
+    
+    current_account.document_types.each do |document_type|
+      verification.verification_documents.new document_type: document_type
+    end
     if applicant.blocked?
-      render :blocked, locals: {applicant: applicant }
+      render :blocked, locals: {applicant: applicant }, status: :bad_request
     else
       render locals: {verification: verification}
     end
   end
 
   def create
-    verification = applicant.verifications.create! verification_params.merge(remote_ip: request.remote_ip, user_agent: request.user_agent)
+    verification = applicant.verifications.create! verification_params.merge(remote_ip: request.remote_ip,
+                                                                             user_agent: request.user_agent)
     render :created, locals: { verification: verification }
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
-    render :new, locals: { verification: e.record }
+    render :new, locals: { verification: e.record }, status: :bad_request
   end
 
   private

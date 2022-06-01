@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_074223) do
+ActiveRecord::Schema.define(version: 2022_06_01_092006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.index ["account_id"], name: "index_applicants_on_account_id"
   end
 
+  create_table "document_types", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "file_type", null: false
+    t.string "title", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id", "title"], name: "index_document_types_on_account_id_and_title", unique: true
+    t.index ["account_id"], name: "index_document_types_on_account_id"
+  end
+
   create_table "invites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "inviter_id", null: false
@@ -80,7 +90,9 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.bigint "account_id", null: false
     t.bigint "user_id", null: false
     t.datetime "archived_at"
+    t.bigint "inviter_id"
     t.index ["account_id"], name: "index_members_on_account_id"
+    t.index ["inviter_id"], name: "index_members_on_inviter_id"
     t.index ["user_id", "account_id"], name: "index_members_on_user_id_and_account_id", unique: true
     t.index ["user_id"], name: "index_members_on_user_id"
   end
@@ -117,6 +129,16 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
+  create_table "verification_documents", force: :cascade do |t|
+    t.bigint "verification_id", null: false
+    t.bigint "document_type_id", null: false
+    t.string "file", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_type_id"], name: "index_verification_documents_on_document_type_id"
+    t.index ["verification_id"], name: "index_verification_documents_on_verification_id"
+  end
+
   create_table "verifications", force: :cascade do |t|
     t.bigint "applicant_id", null: false
     t.string "country", limit: 2
@@ -124,7 +146,7 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
     t.string "status", default: "pending", null: false
     t.string "commment"
     t.integer "kind"
-    t.json "documents", default: []
+    t.json "legacy_documents", default: []
     t.json "external_json", default: {}
     t.json "params", default: {}
     t.datetime "created_at", precision: 6, null: false
@@ -152,9 +174,13 @@ ActiveRecord::Schema.define(version: 2022_05_18_074223) do
   end
 
   add_foreign_key "applicants", "accounts"
+  add_foreign_key "document_types", "accounts"
   add_foreign_key "log_records", "applicants"
   add_foreign_key "log_records", "verifications"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
+  add_foreign_key "members", "users", column: "inviter_id"
+  add_foreign_key "verification_documents", "document_types"
+  add_foreign_key "verification_documents", "verifications"
   add_foreign_key "verifications", "applicants"
 end
