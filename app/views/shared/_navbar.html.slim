@@ -5,15 +5,16 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.mr-auto
-        li.nav-item.mr-2.d-flex.align-items-center
+        li.nav-item.mr-2.d-flex.align-items-center.text-nowrap
           = active_link_to admin_root_path, class: 'my-lg-0 py-lg-0 nav-link' do
             = title_with_counter t('.desktop'), current_account.verifications.pending.count
-        li.nav-item.mr-2.d-flex.align-items-center
-          = active_link_to admin_verifications_path(q: { status_eq: :pending }), class: 'my-lg-0 py-lg-0 nav-link' do
-            = title_with_counter t('.verifications'), current_account.verifications.pending.count
-        li.nav-item.mr-2.d-flex.align-items-center
-          = active_link_to admin_applicants_path, class: 'my-lg-0 py-lg-0 nav-link' do
-            = title_with_counter t('.applicants'), current_account.applicants.count
+        - if current_member.admin?
+          li.nav-item.mr-2.d-flex.align-items-center
+            = active_link_to admin_verifications_path(q: { status_eq: :pending }), class: 'my-lg-0 py-lg-0 nav-link' do
+              = t('.verifications')
+          li.nav-item.mr-2.d-flex.align-items-center
+            = active_link_to admin_applicants_path, class: 'my-lg-0 py-lg-0 nav-link' do
+              = t('.applicants')
         li.nav-item.mr-2.d-flex.align-items-center
           = link_to t('.verification_new'), new_admin_verification_path, class: 'my-lg-0 py-lg-0 nav-link'
         li.nav-item.mr-2.d-flex.align-items-center
