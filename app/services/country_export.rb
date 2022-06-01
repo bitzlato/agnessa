@@ -13,5 +13,7 @@ VE YE ZW].freeze
 
       Country.create iso_code: country.alpha2, title_ru: country.translations['ru'], title_en: country.translations['en']
     end
+
+    Country.create iso_code: 'OT', title_ru: 'Другая', title_en: 'Other'
   end
 end
