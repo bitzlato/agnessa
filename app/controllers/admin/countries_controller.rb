@@ -8,6 +8,10 @@ class Admin::CountriesController < Admin::ApplicationController
 
   def create; end
 
+  def edit
+    render locals: { country: country }
+  end
+
   def update
     country.update!(admin_country_params)
     redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully updated.'
@@ -43,6 +47,6 @@ class Admin::CountriesController < Admin::ApplicationController
   end
 
   def admin_country_params
-    params.require(:country).permit(:code, :title_ru, :title_en, { id_types: [] })
+    params.require(:country).permit(:iso_code, :title_ru, :title_en, { id_types: [] })
   end
 end

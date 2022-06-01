@@ -19,3 +19,6 @@ table.table.table-striped.table-hover.table-bordered
           td =render 'toggle_id_type', country: country, id_type: id_type
         td
           = render 'archive_button', country: country
+          br
+          = link_to 'Редактировать', edit_admin_country_path(country), class: 'btn btn-sm btn-secondary'
+
