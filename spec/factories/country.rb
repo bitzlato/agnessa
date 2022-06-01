@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :country do
-    code { Faker::Address.country_code }
+    iso_code { Faker::Address.country_code }
     title_ru { Faker::Address.country }
     title_en { Faker::Address.country }
     id_types { [] }
