@@ -12,6 +12,8 @@
 .idea
 .idea/*
 
+*.sql
+*.gz
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -45,7 +47,6 @@ yarn-debug.log*
 
 /config/credentials/development.key
 
-*.sql
 
 /public/packs
 /public/packs-test
