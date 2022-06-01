@@ -12,7 +12,7 @@ class Admin::CountriesController < Admin::ApplicationController
 
   def create
     country = Country.create! country_params
-    redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully updated.'
+    redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully created.'
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Country
     render :new, locals: { country: e.record }
