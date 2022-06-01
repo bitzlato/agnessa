@@ -1,0 +1,4 @@
+- if country.archived?
+  = link_to 'Восстановить', restore_admin_country_path(country), class: 'btn btn-sm btn-success', method: :post
+- else
+  = link_to 'Архивировать', archive_admin_country_path(country), class: 'btn btn-sm btn-secondary', method: :delete

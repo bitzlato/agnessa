@@ -1,4 +1,6 @@
 class Country < ApplicationRecord
+  include Archivable
+
   validates :title_en, :title_ru, :iso_code, presence: true
   validates :iso_code, uniqueness: true
 
