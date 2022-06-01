@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_30_165536) do
+ActiveRecord::Schema.define(version: 2022_05_31_091059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 2022_05_30_165536) do
     t.string "legacy_external_id"
     t.index ["account_id", "external_id"], name: "index_applicants_on_account_id_and_external_id", unique: true
     t.index ["account_id"], name: "index_applicants_on_account_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "code", null: false
+    t.string "title_ru", null: false
+    t.string "title_en", null: false
+    t.jsonb "id_types", default: []
+    t.datetime "archived_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["code"], name: "index_countries_on_code"
   end
 
   create_table "document_types", force: :cascade do |t|
