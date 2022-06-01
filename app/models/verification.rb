@@ -3,8 +3,6 @@ class Verification < ApplicationRecord
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
 
-  attr_accessor :external_id
-
   alias_attribute :first_name, :name
 
   mount_uploaders :legacy_documents, DocumentUploader

@@ -8,12 +8,12 @@ class Client::VerificationsController < Client::ApplicationController
   helper_method :form_path, :external_id
 
   def new
-    verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES).merge(external_id: external_id)
-
+    applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
+    verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
+    
     current_account.document_types.each do |document_type|
       verification.verification_documents.new document_type: document_type
     end
-
     if applicant.blocked?
       render :blocked, locals: {applicant: applicant }, status: :bad_request
     else
@@ -22,8 +22,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def create
-    verification = applicant.verifications.create! verification_params.merge(external_id: external_id,
-                                                                             remote_ip: request.remote_ip,
+    verification = applicant.verifications.create! verification_params.merge(remote_ip: request.remote_ip,
                                                                              user_agent: request.user_agent)
     render :created, locals: { verification: verification }
   rescue ActiveRecord::RecordInvalid => e
