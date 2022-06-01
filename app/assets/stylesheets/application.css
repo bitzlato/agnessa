@@ -49,3 +49,8 @@ code {
 .text-small {
   font-size: 80%;
 }
+
+.sticky-header {
+    position: sticky;
+    top: 65px;
+}
