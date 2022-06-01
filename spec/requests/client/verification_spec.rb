@@ -16,7 +16,7 @@ RSpec.describe Client::VerificationsController, :type => :request do
     it 'opens page with correct domain' do
       host!"#{account.subdomain}.localhost"
       get new_client_verification_path(encoded_external_id: external_id)
-      expect(account.applicants.last.external_id).to eq(applicant_id)
+      expect(account.applicants.count).to eq(0)
       expect(response.status).to eq(200)
     end
 
