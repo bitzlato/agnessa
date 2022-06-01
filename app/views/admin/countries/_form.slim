@@ -1,0 +1,5 @@
+= simple_form_for [:admin, country] do |f|
+  = f.input :iso_code, required: true
+  = f.input :title_ru, required: true
+  = f.input :title_en, required: true
+  = f.button :submit,  class: 'btn btn-success'
