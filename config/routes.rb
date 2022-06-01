@@ -74,8 +74,7 @@ Rails.application.routes.draw do
       resources :countries, only: %i[index edit update create new] do
         concerns :archivable
         member do
-          post :add_type
-          post :remove_type
+          post :toggle_id_type
         end
       end
       resources :review_result_labels

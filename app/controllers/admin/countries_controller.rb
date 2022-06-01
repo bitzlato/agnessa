@@ -2,7 +2,7 @@ class Admin::CountriesController < Admin::ApplicationController
   before_action :authorize_admin
 
   def index
-    countries = paginate Country.all # .order('archived_at desc')
+    countries = paginate Country.all.order('title_ru asc')
     render locals: { countries: countries }
   end
 
@@ -40,11 +40,11 @@ class Admin::CountriesController < Admin::ApplicationController
     redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully archived.'
   end
 
-  def add_type
+  def toggle_id_type
+    country.toggle_id_type(params[:id_type])
+    render locals: { country: country, id_type: params[:id_type] }
   end
 
-  def remove_type
-  end
 
   private
 

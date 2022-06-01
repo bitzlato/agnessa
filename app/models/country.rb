@@ -10,17 +10,12 @@ class Country < ApplicationRecord
     self.iso_code = iso_code.upcase
   end
 
-  def add_type(id_type)
-    return if id_types.include?(id_type)
-
-    update! id_types: id_types.append(id_type).uniq
+  def toggle_id_type(id_type)
+    if id_types.include?(id_type)
+      id_types.delete(id_type)
+      save!
+    else
+      update! id_types: id_types.append(id_type).uniq
+    end
   end
-
-  def remove_type(id_type)
-    return unless id_types.include?(id_type)
-
-    id_types.delete(id_type)
-    save!
-  end
-
 end

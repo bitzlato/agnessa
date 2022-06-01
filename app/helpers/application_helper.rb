@@ -32,6 +32,10 @@ module ApplicationHelper
     content_tag :div, '&middot;'.html_safe, class: 'text-muted'
   end
 
+  def toggle_emoji(status)
+    status ? '✅' : '❌'
+  end
+
   def title_with_counter(title, count, hide_zero: true, css_class: nil)
     buffer = ''
     buffer += title
