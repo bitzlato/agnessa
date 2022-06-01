@@ -4,7 +4,7 @@ div.mb-2= t 'application.index.total_records', count: countries.count
 table.table.table-striped.table-hover
   thead.thead-dark
     tr
-      th Code
+      th ISO-3166(alpha2)
       th Название(RU)
       th Название(EN)
       th Действия
@@ -12,8 +12,8 @@ table.table.table-striped.table-hover
   tbody
     - countries.each do |country|
       tr
-        td = country.code
+        td = country.iso_code
         td = country.title_ru
         td = country.title_en
         td
-          = render 'archive_button', member: country
+          / = render 'archive_button', member: country

@@ -28,6 +28,10 @@ class Admin::CountriesController < Admin::ApplicationController
 
   private
 
+  def per_page_default
+    500
+  end
+
   def country
     @country ||= Country.find(params[:id])
   end

@@ -1,8 +1,8 @@
 class Country < ApplicationRecord
-  validates :title_en, :title_ru, :code, presence: true
-  validates :code, uniqueness: true
+  validates :title_en, :title_ru, :iso_code, presence: true
+  validates :iso_code, uniqueness: true
 
   before_save do
-    self.code = code.upcase
+    self.iso_code = iso_code.upcase
   end
 end

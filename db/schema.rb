@@ -49,14 +49,24 @@ ActiveRecord::Schema.define(version: 2022_05_31_091059) do
   end
 
   create_table "countries", force: :cascade do |t|
-    t.string "code", null: false
+    t.string "iso_code", null: false
     t.string "title_ru", null: false
     t.string "title_en", null: false
-    t.jsonb "id_types", default: []
+    t.jsonb "id_types", default: [], null: false
     t.datetime "archived_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["code"], name: "index_countries_on_code"
+    t.index ["iso_code"], name: "index_countries_on_iso_code"
+  end
+
+  create_table "document_types", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "file_type", null: false
+    t.string "title", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id", "title"], name: "index_document_types_on_account_id_and_title", unique: true
+    t.index ["account_id"], name: "index_document_types_on_account_id"
   end
 
   create_table "invites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -128,6 +138,16 @@ ActiveRecord::Schema.define(version: 2022_05_31_091059) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
+  create_table "verification_documents", force: :cascade do |t|
+    t.bigint "verification_id", null: false
+    t.bigint "document_type_id", null: false
+    t.string "file", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_type_id"], name: "index_verification_documents_on_document_type_id"
+    t.index ["verification_id"], name: "index_verification_documents_on_verification_id"
+  end
+
   create_table "verifications", force: :cascade do |t|
     t.bigint "applicant_id", null: false
     t.string "country", limit: 2
@@ -135,7 +155,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_091059) do
     t.string "status", default: "pending", null: false
     t.string "commment"
     t.integer "kind"
-    t.json "documents", default: []
+    t.json "legacy_documents", default: []
     t.json "external_json", default: {}
     t.json "params", default: {}
     t.datetime "created_at", precision: 6, null: false
@@ -163,9 +183,12 @@ ActiveRecord::Schema.define(version: 2022_05_31_091059) do
   end
 
   add_foreign_key "applicants", "accounts"
+  add_foreign_key "document_types", "accounts"
   add_foreign_key "log_records", "applicants"
   add_foreign_key "log_records", "verifications"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
+  add_foreign_key "verification_documents", "document_types"
+  add_foreign_key "verification_documents", "verifications"
   add_foreign_key "verifications", "applicants"
 end
