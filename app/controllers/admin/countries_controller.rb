@@ -26,6 +26,12 @@ class Admin::CountriesController < Admin::ApplicationController
     redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully archived.'
   end
 
+  def add_type
+  end
+
+  def remove_type
+  end
+
   private
 
   def per_page_default

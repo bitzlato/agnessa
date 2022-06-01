@@ -73,6 +73,10 @@ Rails.application.routes.draw do
       end
       resources :countries, only: %i[index update create] do
         concerns :archivable
+        member do
+          post :add_type
+          post :remove_type
+        end
       end
       resources :review_result_labels
       resources :verifications do
