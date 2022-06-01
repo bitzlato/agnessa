@@ -6,14 +6,24 @@ class Admin::CountriesController < Admin::ApplicationController
     render locals: { countries: countries }
   end
 
-  def create; end
+  def new
+    render locals: { country: Country.new }
+  end
+
+  def create
+    country = Country.create! country_params
+    redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully updated.'
+  rescue ActiveRecord::RecordInvalid => e
+    raise e unless e.record.is_a? Country
+    render :new, locals: { country: e.record }
+  end
 
   def edit
     render locals: { country: country }
   end
 
   def update
-    country.update!(admin_country_params)
+    country.update!(country_params)
     redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully updated.'
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Country
@@ -46,7 +56,7 @@ class Admin::CountriesController < Admin::ApplicationController
     @country ||= Country.find(params[:id])
   end
 
-  def admin_country_params
+  def country_params
     params.require(:country).permit(:iso_code, :title_ru, :title_en, { id_types: [] })
   end
 end
