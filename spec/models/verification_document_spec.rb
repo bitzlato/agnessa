@@ -6,7 +6,6 @@ RSpec.describe VerificationDocument, type: :model do
 
   describe :create do
     it 'success create image verification document' do
-      expect(image_document.id).to be_truthy
     end
   end
 end
