@@ -6,15 +6,12 @@ class VerificationDocument < ApplicationRecord
 
   delegate :content_types, to: :document_type
   validates :file, presence: true
-  validate :account_document_type
 
   def file_file_name
     file.filename
   end
 
-  private
-
-  def account_document_type
+  before_create do
     account_document_types_ids = verification.account.document_types.pluck(:id)
 
     unless account_document_types_ids.include? document_type_id
