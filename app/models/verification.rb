@@ -36,6 +36,7 @@ class Verification < ApplicationRecord
 
   validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
+  validate :minimum_documents_amount, on: :create
   validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
 
   STATUSES = %w[pending refused confirmed]
@@ -132,6 +133,12 @@ class Verification < ApplicationRecord
 
   def over_18_years_old
     errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
+  end
+
+  def minimum_documents_amount
+    if verification_documents.size < account.document_types.size
+      errors.add :documents, I18n.t('errors.messages.minimum_documents_amount', amount: account.document_types.size)
+    end
   end
 
   def log_creation

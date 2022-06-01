@@ -17,15 +17,7 @@ class Account < ApplicationRecord
   before_validation :set_secret, on: :create
   before_validation :downcase_subdomain
 
-  after_create do
-    unless Rails.env.test?
-      document_types = [
-        DocumentType.create(file_type: 'image', title: 'Селфи с паспортом'),
-        DocumentType.create(file_type: 'video', title: 'Видео селфи с паспортом'),
-        DocumentType.create(file_type: 'image', title: 'Фотография документов')
-      ]
-    end
-  end
+  after_create :create_document_types
 
   def recreate_secret!
     update_column(:secret, generate_secret)
@@ -68,5 +60,15 @@ class Account < ApplicationRecord
 
   def downcase_subdomain
     self.subdomain = subdomain.downcase
+  end
+
+  def create_document_types
+    [
+      {file_type: 'image', title: 'Селфи с паспортом'},
+      {file_type: 'video', title: 'Видео селфи с паспортом'},
+      {file_type: 'image', title: 'Фотография документов'}
+    ].each do |el|
+      document_types.create!({file_type: el[:file_type], title: el[:title]})
+    end
   end
 end

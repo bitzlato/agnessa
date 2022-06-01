@@ -4,7 +4,7 @@ ru:
     format: "%{attribute} %{message}"
     messages:
       applicant_comment_restore_info: необходимо указать информацию о прошлых аккаунтах, при восстановлении
-      at_least_3_documents: необходимо прикрепить не менее 3 документов
+      minimum_documents_amount: необходимое количество документов - %{amount}
       wrong_verification_documents: Документы не соотвествуют данному аккаунту
       over_18_years_old: необходимо иметь возраст от 18 лет
       accepted: нужно подтвердить

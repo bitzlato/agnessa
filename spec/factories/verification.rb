@@ -18,11 +18,9 @@ FactoryBot.define do
     user_agent { Faker::Internet.user_agent }
 
     verification_documents {
-      docs = []
-      applicant.account.document_types.each do |document_type|
-        docs << build(:verification_document, document_type.file_type.to_sym, document_type: document_type)
+      applicant.account.document_types.map do |document_type|
+        build(:verification_document, document_type.file_type.to_sym, document_type: document_type)
       end
-      docs
     }
 
     legacy_documents { [
