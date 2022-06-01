@@ -6,7 +6,8 @@ table.table.table-striped.table-hover
     tr
       th ISO-3166(alpha2)
       th Название(RU)
-      th Название(EN)
+      - Rails.configuration.application.id_types.each do |id_type|
+        th.bg-success =id_type
       th Действия
 
   tbody
@@ -14,6 +15,7 @@ table.table.table-striped.table-hover
       tr
         td = country.iso_code
         td = country.title_ru
-        td = country.title_en
+        - Rails.configuration.application.id_types.each do |id_type|
+          td = country.id_types.include? id_type
         td
           = render 'archive_button', country: country
