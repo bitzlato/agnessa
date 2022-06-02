@@ -16,6 +16,7 @@
       tr
         th Пользователь
         th Роль
+        th Пригласил
         th Действия
 
     tbody
@@ -24,6 +25,8 @@
           td = member.label
           td 
             = render 'change_role', member: member
+          td
+            = member.inviter
           td
             = render 'archive_button', member: member
       br

@@ -8,7 +8,7 @@ class InviteAcceptor
 
   def accept!
     invite.with_lock do
-      invite.account.members.create(user: user)
+      invite.account.members.create(user: user, inviter: invite.inviter)
       invite.delete
     end
     user

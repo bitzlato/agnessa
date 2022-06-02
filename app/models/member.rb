@@ -5,6 +5,7 @@ class Member < ApplicationRecord
 
   belongs_to :account
   belongs_to :user
+  belongs_to :inviter, optional: true, class_name: 'User'
 
   has_many :verifications, class_name: 'Verification', foreign_key: 'moderator_id'
 
