@@ -1,5 +1,5 @@
 require 'carrierwave/processing/mini_magick'
-class DocumentUploader < CarrierWave::Uploader::Base
+class VerificationDocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::BombShelter
   include CarrierWave::Video::Thumbnailer
   include CarrierWave::MiniMagick
@@ -26,7 +26,6 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   def size_range
-    return [0..100.megabytes] if $import
     Rails.configuration.application.min_upload_file_size..Rails.configuration.application.max_upload_file_size
   end
 
@@ -43,14 +42,13 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   def content_type_allowlist
-    Rails.configuration.application.document_content_types
+    model.content_types
   end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    "uploads/#{model.class.to_s.underscore}/documents/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   private

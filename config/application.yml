@@ -33,6 +33,15 @@ default:  &settings
     - video/mp4
     - video/quicktime
     - video/mov
+  video_content_types:
+    - video/mp4
+    - video/quicktime
+    - video/mov
+  image_content_types:
+    - image/png
+    - image/gif
+    - image/jpeg
+    - image/webp
   reserved_subdomains: ['www', 'api', 'stage', 'staging']
 
 staging:

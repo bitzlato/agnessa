@@ -5,6 +5,7 @@ class Account < ApplicationRecord
   has_many :users, through: :members
   has_many :log_records, through: :applicants
   has_many :invites
+  has_many :document_types
 
   validates :name, :secret, :email_from, presence: true
   validates :subdomain, presence: true, uniqueness: true
@@ -15,6 +16,8 @@ class Account < ApplicationRecord
 
   before_validation :set_secret, on: :create
   before_validation :downcase_subdomain
+
+  after_create :create_document_types
 
   def recreate_secret!
     update_column(:secret, generate_secret)
@@ -57,5 +60,15 @@ class Account < ApplicationRecord
 
   def downcase_subdomain
     self.subdomain = subdomain.downcase
+  end
+
+  def create_document_types
+    [
+      {file_type: 'image', title: 'Селфи с паспортом'},
+      {file_type: 'video', title: 'Видео селфи с паспортом'},
+      {file_type: 'image', title: 'Фотография документов'}
+    ].each do |el|
+      document_types.create!({file_type: el[:file_type], title: el[:title]})
+    end
   end
 end

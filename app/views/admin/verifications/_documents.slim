@@ -1,7 +1,7 @@
 .row
   .col-md-12
-    - if verification.documents.any?
-      - verification.documents.each_with_index do |document, i|
+    - if verification.document_files.any?
+      - verification.document_files.each_with_index do |document, i|
         .card.float-left.shadow-sm.mb-5.rounded style="width: #{DocumentUploader::THUMBNAIL_WIDTH}px"
           -# = tag.video(tag.source(src: url), controls: 'controls')
           = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{i}"

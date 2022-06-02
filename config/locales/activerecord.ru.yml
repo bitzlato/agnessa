@@ -74,6 +74,8 @@ ru:
         label_ru: Метка на русском
         description: Описание
         final: Окончательный
+      verification_document:
+        file: Файл
       verification:
         applicant_comment: Дополнительная информация (об утерянном аккаунте)
         created_at: Создано

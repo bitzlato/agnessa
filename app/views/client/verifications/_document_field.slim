@@ -1,0 +1,11 @@
+.col-lg-12
+  = document.input :file,
+                   wrapper: :vertical_file,
+                   as: :file,
+                   value: :file_cache,
+                   label: document.object.document_type.title,
+                   input_html: { accept: document.object.document_type.content_types.join(',')},
+                   hint: document_file_hint
+
+  = document.input :file_cache, as: :hidden
+  = document.input :document_type_id, as: :hidden
