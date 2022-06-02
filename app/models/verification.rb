@@ -136,7 +136,7 @@ class Verification < ApplicationRecord
   end
 
   def minimum_documents_amount
-    if verification_documents.size < account.document_types.size
+    if verification_documents.size < account.document_types.available.size
       errors.add :documents, I18n.t('errors.messages.minimum_documents_amount', amount: account.document_types.size)
     end
   end

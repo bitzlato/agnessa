@@ -5,6 +5,7 @@ class DocumentType < ApplicationRecord
   FILE_TYPES = %w[video image].freeze
   enum file_type: FILE_TYPES.each_with_object({}) { |e, a| a[e] = e }
 
+  scope :available, -> { where(active: true) }
 
   validates :title, presence: true
   validates :title, uniqueness: {scope: [:account_id]}

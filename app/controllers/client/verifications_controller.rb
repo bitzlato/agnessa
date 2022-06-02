@@ -10,8 +10,8 @@ class Client::VerificationsController < Client::ApplicationController
   def new
     applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
     verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
-    
-    current_account.document_types.each do |document_type|
+
+    current_account.document_types.available.each do |document_type|
       verification.verification_documents.new document_type: document_type
     end
     if applicant.blocked?
