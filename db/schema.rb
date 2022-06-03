@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_31_091059) do
+ActiveRecord::Schema.define(version: 2022_06_02_135156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_091059) do
     t.string "iso_code", null: false
     t.string "title_ru", null: false
     t.string "title_en", null: false
-    t.jsonb "id_types", default: [], null: false
+    t.jsonb "available_documents", default: [], null: false
     t.datetime "archived_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_091059) do
     t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: true
     t.index ["account_id", "title"], name: "index_document_types_on_account_id_and_title", unique: true
     t.index ["account_id"], name: "index_document_types_on_account_id"
   end
@@ -101,7 +102,9 @@ ActiveRecord::Schema.define(version: 2022_05_31_091059) do
     t.bigint "account_id", null: false
     t.bigint "user_id", null: false
     t.datetime "archived_at"
+    t.bigint "inviter_id"
     t.index ["account_id"], name: "index_members_on_account_id"
+    t.index ["inviter_id"], name: "index_members_on_inviter_id"
     t.index ["user_id", "account_id"], name: "index_members_on_user_id_and_account_id", unique: true
     t.index ["user_id"], name: "index_members_on_user_id"
   end
@@ -188,6 +191,7 @@ ActiveRecord::Schema.define(version: 2022_05_31_091059) do
   add_foreign_key "log_records", "verifications"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
+  add_foreign_key "members", "users", column: "inviter_id"
   add_foreign_key "verification_documents", "document_types"
   add_foreign_key "verification_documents", "verifications"
   add_foreign_key "verifications", "applicants"

@@ -32,7 +32,7 @@ module ApplicationHelper
     content_tag :div, '&middot;'.html_safe, class: 'text-muted'
   end
 
-  def toggle_emoji(status)
+  def status_icon(status)
     status ? '✅' : '❌'
   end
 

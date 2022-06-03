@@ -4,7 +4,7 @@ class CreateCountries < ActiveRecord::Migration[6.1]
       t.string :iso_code, null: false, uniq: true, index: true
       t.string :title_ru, null: false, uniq: true
       t.string :title_en, null: false, uniq: true
-      t.jsonb :id_types,null: false, default: []
+      t.jsonb :available_documents, null: false, default: []
 
       t.timestamp :archived_at
       t.timestamps

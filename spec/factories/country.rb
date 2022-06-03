@@ -3,10 +3,10 @@ FactoryBot.define do
     iso_code { Faker::Address.country_code }
     title_ru { Faker::Address.country }
     title_en { Faker::Address.country }
-    id_types { [] }
+    available_documents { [] }
 
     trait :full_types do
-      id_types { Rails.configuration.application.id_types }
+      available_documents { Rails.configuration.application.available_documents }
     end
   end
 end

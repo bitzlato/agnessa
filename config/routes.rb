@@ -71,7 +71,7 @@ Rails.application.routes.draw do
       resources :members, only: %i[index update create] do
         concerns :archivable
       end
-      resources :countries, only: %i[index edit update create new] do
+      resources :countries, except: %w[delete] do
         concerns :archivable
         member do
           post :toggle_id_type

@@ -1,3 +1,4 @@
-= link_to toggle_emoji(country.id_types.include?(id_type)), toggle_id_type_admin_country_path(country, id_type: id_type), class: 'btn btn-sm', remote: :true, method: :post
-
-
+/ = link_to status_icon(country.available_documents.include?(id_type)), toggle_id_type_admin_country_path(country, id_type: id_type), class: 'btn btn-sm', remote: :true, method: :post
+= link_to status_icon(country.available_documents.include?(document)),
+          admin_country_path(country),
+          method: :put, remote: true

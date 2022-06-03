@@ -8,7 +8,7 @@ table.table.table-striped.table-hover.table-bordered
     tr
       th ISO-3166
       th Название(RU)
-      - Rails.configuration.application.id_types.each do |id_type|
+      - Rails.configuration.application.available_documents.each do |id_type|
         th.bg-success =id_type
       th Действия
 
@@ -17,9 +17,9 @@ table.table.table-striped.table-hover.table-bordered
       tr
         td = country.iso_code
         td = country.title_ru
-        - Rails.configuration.application.id_types.each do |id_type|
-          td id="country#{country.id}-#{id_type}"
-            = render 'toggle_id_type', country: country, id_type: id_type
+        - Rails.configuration.application.available_documents.each do |document|
+          td id="country#{country.id}-#{document}"
+            = render 'toggle_id_type', country: country, document: document
         td
           = render 'archive_button', country: country
           br

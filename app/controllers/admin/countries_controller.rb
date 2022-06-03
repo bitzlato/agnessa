@@ -41,7 +41,7 @@ class Admin::CountriesController < Admin::ApplicationController
   end
 
   def toggle_id_type
-    country.toggle_id_type(params[:id_type])
+    country.toggle_id_type!(params[:id_type])
     render locals: { country: country, id_type: params[:id_type] }
   end
 
@@ -56,7 +56,11 @@ class Admin::CountriesController < Admin::ApplicationController
     @country ||= Country.find(params[:id])
   end
 
+  def document_params
+    params.permit(:document)
+  end
+
   def country_params
-    params.require(:country).permit(:iso_code, :title_ru, :title_en, { id_types: [] })
+    params.require(:country).permit(:iso_code, :title_ru, :title_en, { available_documents: [] })
   end
 end
