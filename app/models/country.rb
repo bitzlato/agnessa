@@ -10,12 +10,11 @@ class Country < ApplicationRecord
     self.iso_code = iso_code.upcase
   end
 
-  def toggle_id_type!(id_type)
-    if available_documents.include?(id_type)
-      available_documents.delete(id_type)
-      save!
+  def document= val
+    if self.available_documents.include?(val)
+      self.available_documents.delete(val)
     else
-      update! available_documents: id_types.append(id_type).uniq
+      self.available_documents = self.available_documents.append(val).uniq
     end
   end
 end
