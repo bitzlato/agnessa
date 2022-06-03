@@ -65,5 +65,5 @@ jobs:
         cache: 'yarn'
     - run: yarn install
     - run: bundle install
-    - run: ./bin/rails db:create db:migrate RAILS_ENV=test
+    - run: bundle exec rake db:create db:migrate RAILS_ENV=test
     - run: bundle exec rspec
