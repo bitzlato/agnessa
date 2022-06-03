@@ -19,7 +19,7 @@ table.table.table-striped.table-hover.table-bordered
         td = country.title_ru
         - Rails.configuration.application.available_documents.each do |document|
           td id="country#{country.id}-#{document}"
-            = render 'toggle_id_type', country: country, document: document
+            = render 'document_status', country: country, document: document
         td
           = render 'archive_button', country: country
           br
