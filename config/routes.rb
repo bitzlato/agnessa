@@ -73,9 +73,6 @@ Rails.application.routes.draw do
       end
       resources :countries, except: %w[delete] do
         concerns :archivable
-        member do
-          post :toggle_id_type
-        end
       end
       resources :review_result_labels
       resources :verifications do
