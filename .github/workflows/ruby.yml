@@ -17,8 +17,8 @@ jobs:
   rspec:
     env:
       RAILS_ENV: test
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: runner
+      POSTGRES_USER: runner
     runs-on: ubuntu-latest
     strategy:
       matrix:
