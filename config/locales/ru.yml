@@ -28,7 +28,8 @@ ru:
       new:
         applicant_comment_placeholder: Комментарий, информация об утерянном аккаунте, почта, прошлый ID...
         title:  'Заявка на верификацию аккаунта %{account_id} в %{org}'
-        document_hint:  'Размер файла:  От %{from} до %{to} <br> Минимальное количество файлов:  %{amount}'
+      document_field:
+        document_hint:  'Размер файла:  От %{from} до %{to}'
       created:
         title: 'Принята заявка #%{id}'
         message: '<div ng-show="vm.submited" style="text-align: justify; font-size: 1em;" class="ng-binding">

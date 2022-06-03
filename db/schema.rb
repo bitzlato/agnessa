@@ -191,7 +191,6 @@ ActiveRecord::Schema.define(version: 2022_06_02_135156) do
   add_foreign_key "log_records", "verifications"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
-  add_foreign_key "members", "users", column: "inviter_id"
   add_foreign_key "verification_documents", "document_types"
   add_foreign_key "verification_documents", "verifications"
   add_foreign_key "verifications", "applicants"

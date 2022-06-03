@@ -17,8 +17,8 @@ jobs:
   rspec:
     env:
       RAILS_ENV: test
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: runner
+      POSTGRES_USER: runner
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -48,9 +48,12 @@ jobs:
           --health-retries 5
         env:
           # required
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: runner
+          POSTGRES_PASSWORD: runner
     steps:
     - uses: actions/checkout@v2
+    - name: Install ffmpegthumbnailer
+      run: sudo apt-get install -y ffmpegthumbnailer
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:

@@ -47,13 +47,18 @@ module ApplicationHelper
     buffer.html_safe
   end
 
+  def document_file_hint
+    t('client.verifications.document_field.document_hint', from: number_to_human_size(Rails.configuration.application.min_upload_file_size),
+                                                           to: number_to_human_size(Rails.configuration.application.max_upload_file_size),
+                                                           amount: Rails.configuration.application.min_upload_files_amount).html_safe
+  end
+
   def sort_column(column, title)
     return column unless defined? q
     sort_link q, column, title
   end
 
   def hided_columns
-    # TODO
     []
   end
 

@@ -5,12 +5,14 @@ class Verification < ApplicationRecord
 
   alias_attribute :first_name, :name
 
-  mount_uploaders :documents, DocumentUploader
+  mount_uploaders :legacy_documents, DocumentUploader
 
   belongs_to :moderator, class_name: 'Member', required: false
   belongs_to :applicant
   has_one :account, through: :applicant
   has_many :log_records
+  has_many :verification_documents, inverse_of: 'verification'
+  accepts_nested_attributes_for :verification_documents
 
   before_save do
     self.first_name = first_name.to_s.upcase
@@ -24,7 +26,7 @@ class Verification < ApplicationRecord
   end
 
 
-  validates :country, :name, :last_name, :gender, :birth_date, :document_number, :documents, :reason, presence: true, on: :create
+  validates :country, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?
@@ -34,7 +36,7 @@ class Verification < ApplicationRecord
 
   validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
-  validate :at_least_3_documents, on: :create
+  validate :minimum_documents_amount, on: :create
   validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
 
   STATUSES = %w[pending refused confirmed]
@@ -61,7 +63,7 @@ class Verification < ApplicationRecord
 
 
   def preview_image
-    @preview_image ||= documents.first
+    @preview_image ||= verification_documents.first&.file || legacy_documents.first
   end
 
   def legacy_created
@@ -114,31 +116,14 @@ class Verification < ApplicationRecord
     update!(status: :pending, moderator: member)
   end
 
-  def self.export_details
-    self.find_each do |verification|
-      raw = verification.external_json
-
-      case raw['cause']
-      when 'trusted'
-        verification.reason = 'trusted_trader'
-      when 'other'
-        verification.reason = 'other'
-      when 'unlocking'
-        verification.reason = 'unban'
-      when 'restoring'
-        verification.reason = 'restore'
-      end
-
-      verification.document_number = raw['passportData']
-      verification.name = raw['name']
-      verification.last_name = raw['lastName']
-      verification.created_at = raw['created']
-      verification.updated_at = raw['lastUpdate']
-      verification.comment = raw['comment']
-
-      verification.save
-    end
+  def document_files
+    legacy_documents + verification_documents_files
   end
+
+  def verification_documents_files
+    verification_documents.map{ |x| x.file}
+  end
+
 
   def review_result_labels_public_comments
     ReviewResultLabel.where(label: review_result_labels).pluck(:public_comment)
@@ -150,8 +135,10 @@ class Verification < ApplicationRecord
     errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
   end
 
-  def at_least_3_documents
-    errors.add :documents, I18n.t('errors.messages.at_least_3_documents') if documents.count < 3
+  def minimum_documents_amount
+    if verification_documents.size < account.document_types.available.size
+      errors.add :documents, I18n.t('errors.messages.minimum_documents_amount', amount: account.document_types.size)
+    end
   end
 
   def log_creation
