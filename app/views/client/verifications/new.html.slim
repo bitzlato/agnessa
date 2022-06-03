@@ -46,7 +46,8 @@
           = f.input :applicant_comment, as: :text, placeholder: t('.applicant_comment_placeholder')
       .row
         = f.simple_fields_for :verification_documents do |document|
-          = render 'document_field', document: document
+          .col-4
+            = render 'document_field', document: document
       .row
         .col-12
           .text-center
