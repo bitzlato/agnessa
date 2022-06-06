@@ -2,7 +2,7 @@ import sys
 from deepface import DeepFace
 
 # VGG-Face, Facenet, OpenFace, DeepFace, DeepID, Dlib or Ensemble
-model_name='VGG-Face'
+model_name='Facenet512'
 
 # detector_backend (string): set face detector backend as retinaface, mtcnn, opencv, ssd or dlib
 detector_backend = 'opencv'
