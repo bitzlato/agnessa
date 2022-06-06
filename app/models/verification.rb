@@ -5,7 +5,6 @@ class Verification < ApplicationRecord
 
   alias_attribute :first_name, :name
 
-  mount_uploaders :legacy_documents, DocumentUploader
 
   belongs_to :moderator, class_name: 'Member', required: false
   belongs_to :applicant
@@ -63,7 +62,7 @@ class Verification < ApplicationRecord
 
 
   def preview_image
-    @preview_image ||= verification_documents.first&.file || legacy_documents.first
+    @preview_image ||= verification_documents.first&.file
   end
 
   def legacy_created
@@ -117,13 +116,8 @@ class Verification < ApplicationRecord
   end
 
   def document_files
-    legacy_documents + verification_documents_files
-  end
-
-  def verification_documents_files
     verification_documents.map{ |x| x.file}
   end
-
 
   def review_result_labels_public_comments
     ReviewResultLabel.where(label: review_result_labels).pluck(:public_comment)

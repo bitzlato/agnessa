@@ -187,7 +187,7 @@ CREATE TABLE public.countries (
     iso_code character varying NOT NULL,
     title_ru character varying NOT NULL,
     title_en character varying NOT NULL,
-    id_types jsonb DEFAULT '[]'::jsonb NOT NULL,
+    available_documents jsonb DEFAULT '[]'::jsonb NOT NULL,
     archived_at timestamp without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
@@ -464,7 +464,6 @@ CREATE TABLE public.verifications (
     status character varying DEFAULT 'pending'::character varying NOT NULL,
     commment character varying,
     kind integer,
-    legacy_documents json DEFAULT '[]'::json,
     external_json json DEFAULT '{}'::json,
     params json DEFAULT '{}'::json,
     created_at timestamp(6) without time zone NOT NULL,
@@ -1009,6 +1008,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20220531091059'),
 ('20220601092006'),
 ('20220602065948'),
-('20220602135156');
+('20220602135156'),
+('20220606074737');
 
 
