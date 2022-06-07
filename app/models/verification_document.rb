@@ -34,7 +34,7 @@ class VerificationDocument < ApplicationRecord
 
   def update_vector
     if document_type.image?
-      vector = ImageVectorizer.perform(file.path)
+      vector = ImageVectorizer.new(file.path).perform
       self.update_column(:vector, vector)
     end
   end
