@@ -2,10 +2,10 @@
   .col-md-12
     - if verification.document_files.any?
       - verification.document_files.each_with_index do |document, i|
-        .card.float-left.shadow-sm.mb-5.rounded style="width: #{DocumentUploader::THUMBNAIL_WIDTH}px"
+        .card.float-left.shadow-sm.mb-5.rounded style="width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px"
           -# = tag.video(tag.source(src: url), controls: 'controls')
           = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{i}"
-            = image_tag document.thumb.url, style: "max-width: #{DocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{DocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
+            = image_tag document.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
         = render partial: 'document_modal', locals: {verification: verification, document: document, index: i}
     - else
       p= t 'no_documents_uploaded'

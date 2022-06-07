@@ -22,11 +22,5 @@ FactoryBot.define do
         build(:verification_document, document_type.file_type.to_sym, document_type: document_type)
       end
     }
-
-    legacy_documents { [
-      Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),
-      Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg'),
-      Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg')
-    ] }
   end
 end
