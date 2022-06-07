@@ -1,6 +1,7 @@
 default:  &settings
 
-  id_types:
+  exclude_country_codes: ["AF", "AL", "DZ", "BD", "BO", "MM", "BI", "CF", "GN", "GW", "CU", "KP", "GH", "GW", "HT", "IR", "IQ", "LB", "LY", "ML", "MM", "NI", "PK", "QA", "SA", "SO", "SS", "SD", "SY", "TN", "UG", "US", "VU", "VE", "YE", "ZW"]
+  available_documents:
     - passport
     - id_card
     - driver_license

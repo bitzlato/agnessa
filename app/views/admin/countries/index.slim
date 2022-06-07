@@ -1,0 +1,27 @@
+h2 Страны
+hr
+div
+  div.mb-2.pull-left = t 'application.index.total_records', count: countries.count
+  div.pull-right =link_to 'Новая страна', new_admin_country_path, class: 'btn btn-sm btn-secondary'
+table.table.table-striped.table-hover.table-bordered
+  thead.thead-dark.sticky-header
+    tr
+      th ISO-3166
+      th Название(RU)
+      - Rails.configuration.application.available_documents.each do |id_type|
+        th.bg-success =id_type
+      th Действия
+
+  tbody
+    - countries.each do |country|
+      tr
+        td = country.iso_code
+        td = country.title_ru
+        - Rails.configuration.application.available_documents.each do |document|
+          td id="country#{country.id}-#{document}"
+            = render 'document_status', country: country, document: document
+        td
+          = render 'archive_button', country: country
+          br
+          = link_to 'Редактировать', edit_admin_country_path(country), class: 'btn btn-sm btn-secondary'
+
