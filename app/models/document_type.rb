@@ -1,6 +1,6 @@
 class DocumentType < ApplicationRecord
   belongs_to :account
-  has_many :documents
+  has_many :verification_documents
 
   FILE_TYPES = %w[video image].freeze
   enum file_type: FILE_TYPES.each_with_object({}) { |e, a| a[e] = e }

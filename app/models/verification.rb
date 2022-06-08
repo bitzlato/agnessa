@@ -115,10 +115,6 @@ class Verification < ApplicationRecord
     update!(status: :pending, moderator: member)
   end
 
-  def document_files
-    verification_documents.map{ |x| x.file}
-  end
-
   def review_result_labels_public_comments
     ReviewResultLabel.where(label: review_result_labels).pluck(:public_comment)
   end

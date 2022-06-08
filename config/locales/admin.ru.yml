@@ -34,11 +34,17 @@ ru:
         index_form:
           query_hint: Поиск по ФИО, email или номеру документа
           query_placeholder: Ivanov
+      documents:
+        similars: 'Найдены совпадения: %{count} шт'
       block_form:
         block: заблокировать аппликанта
         unblock: разблокировать аппликанта
       verifications:
         title: Список верификаций
+    verification_documents:
+      show:
+        original: Оригинал
+        similars: Совпадения
     applicants:
       index_form:
         query_hint: Поиск по ФИО, external_id

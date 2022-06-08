@@ -1,18 +1,18 @@
 class VerificationDocument < ApplicationRecord
+  NEIGHBOR_THRESHOLD = 0.4
+
+  has_neighbors
+
   mount_uploader :file, VerificationDocumentUploader
 
   belongs_to :verification, required: true
-  belongs_to :document_type, required: true, inverse_of: 'documents'
+  belongs_to :document_type, required: true, inverse_of: 'verification_documents'
 
   delegate :content_types, to: :document_type
   validates :file, presence: true
   after_commit :delayed_update_vector, on: :create
 
-  scope :similar_vector, ->(vector) {
-    select("*, cosine_similarity(vector, '{#{vector.to_a.join(', ')}}') as similarity")
-    .where.not(vector: nil)
-    .order(similarity: :desc)
-  }
+  scope :with_neighbor_threshold, ->(vector){where("neighbor_vector <=> '#{vector}' < #{NEIGHBOR_THRESHOLD}")}
 
   def file_file_name
     file.filename
@@ -35,11 +35,11 @@ class VerificationDocument < ApplicationRecord
   def update_vector
     if document_type.image?
       vector = ImageVectorizer.new(file.path).perform
-      self.update_column(:vector, vector)
+      self.update_column(:neighbor_vector, vector)
     end
   end
 
-  def similar_vector
-    self.class.similar_vector(vector).where.not({id: self.id})
+  def similar_documents
+    nearest_neighbors(distance: "cosine").with_neighbor_threshold(neighbor_vector).where.not(id: verification.verification_documents.map(&:id))
   end
 end
