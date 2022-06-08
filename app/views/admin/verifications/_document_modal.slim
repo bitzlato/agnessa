@@ -2,10 +2,10 @@
   .modal-dialog.modal-lg role="document"
     .modal-content
       .modal-body
-        - if document.image?
-          img src="#{document.url}" style="max-width: 100%;"
-        - if document.video?
-          video src="#{document.url}" controls="controls"  style="max-width: 100%;"
+        - if document.file.image?
+          img src="#{document.file.url}" style="max-width: 100%;"
+        - if document.file.video?
+          video src="#{document.file.url}" controls="controls"  style="max-width: 100%;"
       .modal-footer
         div = verification.full_name
         div = verification.document_number

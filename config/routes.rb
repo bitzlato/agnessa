@@ -81,6 +81,7 @@ Rails.application.routes.draw do
           post :refuse
         end
       end
+      resources :verification_documents, only: [:show]
 
       resource :account, only: [:show, :update] do
         post :recreate_secret

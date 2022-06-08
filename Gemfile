@@ -150,3 +150,5 @@ gem "coffee-rails", "~> 5.0"
 gem "nilify_blanks"
 
 gem 'active_record_upsert'
+
+gem "neighbor"

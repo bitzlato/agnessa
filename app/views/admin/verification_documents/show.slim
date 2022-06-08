@@ -1,0 +1,14 @@
+.row
+  .col-12
+    h3= t('.original')
+    img src=document.file.url
+
+.row
+  .col-12
+    h3= t('.similars')
+- document.similar_documents.each do |doc|
+  .row
+    .col-12
+      = link_to admin_verification_path(doc.verification) do
+        img src=doc.file.url
+        p= doc.neighbor_distance

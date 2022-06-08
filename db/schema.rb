@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_02_135156) do
+ActiveRecord::Schema.define(version: 2022_06_06_124808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+  enable_extension "vector"
 
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
@@ -147,7 +148,10 @@ ActiveRecord::Schema.define(version: 2022_06_02_135156) do
     t.string "file", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "vector", array: true
+    t.vector "neighbor_vector", limit: 512
     t.index ["document_type_id"], name: "index_verification_documents_on_document_type_id"
+    t.index ["neighbor_vector"], name: "index_verification_documents_on_neighbor_vector", opclass: :vector_cosine_ops, using: :ivfflat
     t.index ["verification_id"], name: "index_verification_documents_on_verification_id"
   end
 
@@ -158,7 +162,6 @@ ActiveRecord::Schema.define(version: 2022_06_02_135156) do
     t.string "status", default: "pending", null: false
     t.string "commment"
     t.integer "kind"
-    t.json "legacy_documents", default: []
     t.json "external_json", default: {}
     t.json "params", default: {}
     t.datetime "created_at", precision: 6, null: false

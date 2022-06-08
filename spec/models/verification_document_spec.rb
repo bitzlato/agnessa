@@ -11,17 +11,18 @@ RSpec.describe VerificationDocument, type: :model do
     ((1..40).to_a + ['clooney']).each do |img|
       image_attributes = {
         file: File.open(Rails.root.join("spec/fixtures/similarity/img#{img}.jpg")),
-        vector: vectors[img.to_s].presence
+        neighbor_vector: vectors[img.to_s].presence
       }
       doc = create(:verification_document, :image, common_image_attributes.merge(image_attributes))
-      unless doc.vector.present?
+      unless doc.neighbor_vector.present?
         doc.update_vector
-        vectors[img.to_s] = doc.vector
+        vectors[img.to_s] = doc.neighbor_vector
         File.open(json_path, 'w') { |file| file.write(vectors.to_json) }
       end
     end
 
     image = VerificationDocument.last
-    expect(image.similar_vector.map{|x| [x.read_attribute(:file), x.similarity]}.first).to eq(["img1.jpg", 0.8570948859369171])
+    result = image.nearest_neighbors(distance: "cosine").map{|x| [x.read_attribute(:file), x.neighbor_distance]}.first
+    expect(result).to eq(["img1.jpg", 0.14290511179819076])
   end
 end
