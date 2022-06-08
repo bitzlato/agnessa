@@ -55,6 +55,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install ffmpegthumbnailer
       run: sudo apt-get install -y ffmpegthumbnailer
+    - run: pgxn install vector
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
