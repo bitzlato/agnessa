@@ -1,5 +1,5 @@
 class VerificationDocument < ApplicationRecord
-  NEIGHBOR_THRESHOLD = 0.4
+  NEIGHBOR_THRESHOLD = 0.35
 
   has_neighbors
 

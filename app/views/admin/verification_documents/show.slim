@@ -1,7 +1,7 @@
 .row
   .col-12
     h3= t('.original')
-    img src=document.file.url
+    img.img-fluid src=document.file.url
 
 .row
   .col-12
@@ -10,5 +10,5 @@
   .row
     .col-12
       = link_to admin_verification_path(doc.verification) do
-        img src=doc.file.url
+        img.img-fluid src=doc.file.url
         p= doc.neighbor_distance
