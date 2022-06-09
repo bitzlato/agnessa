@@ -73,6 +73,6 @@ jobs:
     - run: bundle install
     - run: bundle exec rake db:create
     - run: sudo apt-get install --yes postgresql-client
-    - run: psql -d agnessa_test -h localhost -U runner -W runner -c 'CREATE EXTENSION vector;'
+    - run: psql -d agnessa_test -h localhost -U runner --password runner -c 'CREATE EXTENSION vector;'
     - run: bundle exec rake db:migrate RAILS_ENV=test
     - run: bundle exec rspec
