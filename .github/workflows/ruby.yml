@@ -70,5 +70,7 @@ jobs:
         cache: 'yarn'
     - run: yarn install
     - run: bundle install
-    - run: bundle exec rake db:create db:migrate RAILS_ENV=test
+    - run: bundle exec rake db:create
+    - run: psql -d agnessa_test -c 'CREATE EXTENSION vector;'
+    - run: bundle exec rake db:migrate RAILS_ENV=test
     - run: bundle exec rspec
