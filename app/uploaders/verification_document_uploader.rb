@@ -3,7 +3,7 @@ class VerificationDocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::BombShelter
   include CarrierWave::Video::Thumbnailer
   include CarrierWave::MiniMagick
-  # include SecureUniqueFilename
+  include SecureUniqueFilename
 
   storage :file
 
