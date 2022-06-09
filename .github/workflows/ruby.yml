@@ -51,8 +51,8 @@ jobs:
           # required
           POSTGRES_USER: runner
           POSTGRES_PASSWORD: runner
-      pgvector:
-        image: ankane/pgvector
+#      pgvector:
+#        image: ankane/pgvector
     steps:
     - uses: actions/checkout@v2
     - name: Install ffmpegthumbnailer
