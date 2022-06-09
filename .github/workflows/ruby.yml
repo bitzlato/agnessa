@@ -51,6 +51,7 @@ jobs:
           # required
           POSTGRES_USER: runner
           POSTGRES_PASSWORD: runner
+          POSTGRES_HOST: localhost
 #      pgvector:
 #        image: ankane/pgvector
     steps:
