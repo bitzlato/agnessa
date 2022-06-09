@@ -51,12 +51,14 @@ jobs:
           # required
           POSTGRES_USER: runner
           POSTGRES_PASSWORD: runner
+      pgvector:
+        image: ankane/pgvector
     steps:
     - uses: actions/checkout@v2
     - name: Install ffmpegthumbnailer
       run: sudo apt-get install -y ffmpegthumbnailer
-    - run: sudo apt-get install -y pgxnclient
-    - run: sudo pgxn install vector
+#    - run: sudo apt-get install -y pgxnclient
+#    - run: sudo pgxn install vector
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
