@@ -71,7 +71,7 @@ jobs:
     - run: yarn install
     - run: bundle install
     - run: bundle exec rake db:create
-    - run: apt-get install --yes --no-install-recommends postgresql-client
+    - run: sudo apt-get install --yes --no-install-recommends postgresql-client
     - run: psql -d agnessa_test -c 'CREATE EXTENSION vector;'
     - run: bundle exec rake db:migrate RAILS_ENV=test
     - run: bundle exec rspec
