@@ -9,7 +9,9 @@
 .row
   .col-12
     h3= t('.original')
-    p= [document.verification.full_name, document.verification.applicant, document.verification].join(' / ')
+    p
+      => [document.verification.full_name, document.verification.applicant, document.verification].join(' / ')
+      = status_badge document.verification.status
     .card.float-left.shadow-sm.mb-5.rounded style="width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px"
       = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{document.id}"
         = image_tag document.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
@@ -21,8 +23,10 @@
 - data.each do |ver, docs|
   .row
     .col-12
-      p= link_to admin_verification_path(ver), target: '_blank' do
-        = [ver.full_name, ver.applicant, ver].join(' / ')
+      p
+        = link_to admin_verification_path(ver), target: '_blank' do
+          => [ver.full_name, ver.applicant, ver].join(' / ')
+          = status_badge document.verification.status
       - docs.sort_by{|x| x.neighbor_distance}.each do |doc|
         .card.float-left.shadow-sm.mb-5.rounded style="width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px"
           .card-img-top
