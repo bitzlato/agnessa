@@ -1,14 +1,33 @@
 .row
-  .col-12
-    h3= t('.original')
-    img.img-fluid src=document.file.url
+  .col-3
+    = simple_form_for(:form, url: admin_verification_document_path(document), method: :get) do |f|
+      .input-group
+        = f.input_field :threshold, as: :string, value: threshold, class: 'form-control'
+        .input-group-append
+          = f.button :submit, value: 'Обновить', class: 'btn btn-outline-secondary'
 
 .row
   .col-12
+    h3= t('.original')
+    p= [document.verification.full_name, document.verification.applicant, document.verification].join(' / ')
+    .card.float-left.shadow-sm.mb-5.rounded style="width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px"
+      = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{document.id}"
+        = image_tag document.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
+    = render partial: 'admin/verifications/document_modal', locals: { verification: document.verification, document: document, index: document.id }
+.row
+  .col-12
     h3= t('.similars')
-- document.similar_documents.each do |doc|
+
+- data.each do |ver, docs|
   .row
     .col-12
-      = link_to admin_verification_path(doc.verification) do
-        img.img-fluid src=doc.file.url
-        p= doc.neighbor_distance
+      p= link_to admin_verification_path(ver), target: '_blank' do
+        = [ver.full_name, ver.applicant, ver].join(' / ')
+      - docs.sort_by{|x| x.neighbor_distance}.each do |doc|
+        .card.float-left.shadow-sm.mb-5.rounded style="width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px"
+          .card-img-top
+            = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{doc.id}"
+              = image_tag doc.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
+            p.card-text
+              = doc.neighbor_distance
+          = render partial: 'admin/verifications/document_modal', locals: { verification: doc.verification, document: doc, index: doc.id }

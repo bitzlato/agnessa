@@ -148,4 +148,8 @@ class Verification < ApplicationRecord
   def validate_not_blocked_applicant
     errors.add :applicant_id, "Заблокированный аппликант #{applicant.external_id}" if applicant.blocked
   end
+
+  def to_s
+    id.to_s
+  end
 end

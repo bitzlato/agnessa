@@ -1,17 +1,17 @@
 .row
   .col-md-12
     - if verification.verification_documents.any?
-      - verification.verification_documents.each_with_index do |doc, i|
+      - verification.verification_documents.each do |doc|
         .card.float-left.shadow-sm.mb-5.rounded style="width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px"
           .card-img-top
             -# = tag.video(tag.source(src: url), controls: 'controls')
-            = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{i}"
+            = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{doc.id}"
               = image_tag doc.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
           .card-body
             - if doc.similar_documents.any?
               p.card-text
                 = link_to t('.similars', count: doc.similar_documents.size),
                         admin_verification_document_path(doc), target: '_blank'
-        = render partial: 'document_modal', locals: {verification: verification, document: doc, index: i}
+        = render partial: 'document_modal', locals: {verification: verification, document: doc, index: doc.id}
     - else
       p= t 'no_documents_uploaded'

@@ -12,7 +12,7 @@ class VerificationDocument < ApplicationRecord
   validates :file, presence: true
   after_commit :delayed_update_vector, on: :create
 
-  scope :with_neighbor_threshold, ->(vector){where("neighbor_vector <=> '#{vector}' < #{NEIGHBOR_THRESHOLD}")}
+  scope :with_neighbor_threshold, ->(vector, threshold=NEIGHBOR_THRESHOLD) { where("neighbor_vector <=> '#{vector}' < #{threshold}") }
 
   def file_file_name
     file.filename
@@ -39,7 +39,7 @@ class VerificationDocument < ApplicationRecord
     end
   end
 
-  def similar_documents
-    nearest_neighbors(distance: "cosine").with_neighbor_threshold(neighbor_vector).where.not(id: verification.verification_documents.map(&:id))
+  def similar_documents threshold = NEIGHBOR_THRESHOLD
+    nearest_neighbors(distance: "cosine").with_neighbor_threshold(neighbor_vector, threshold).where.not(id: verification.verification_documents.map(&:id))
   end
 end
