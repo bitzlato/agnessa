@@ -13,6 +13,7 @@ class Account < ApplicationRecord
   validates :email_from, email: { mode: :strict }
   validates :return_url, url: true, if: :return_url?
   validates :subdomain, exclusion: Rails.configuration.application.reserved_subdomains
+  validates :document_similarity_threshold, numericality: { in: 40..100 }
 
   before_validation :set_secret, on: :create
   before_validation :downcase_subdomain
@@ -64,11 +65,11 @@ class Account < ApplicationRecord
 
   def create_document_types
     [
-      {file_type: 'image', title: 'Селфи с паспортом'},
+      {file_type: 'image', title: 'Селфи с паспортом', calculate_similarity: true},
       {file_type: 'video', title: 'Видео селфи с паспортом'},
       {file_type: 'image', title: 'Фотография документов'}
-    ].each do |el|
-      document_types.create!({file_type: el[:file_type], title: el[:title]})
+    ].each do |attributes|
+      document_types.create!(attributes)
     end
   end
 end

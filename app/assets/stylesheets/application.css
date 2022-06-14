@@ -54,3 +54,10 @@ code {
     position: sticky;
     top: 65px;
 }
+
+.image-vectorized {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 22px;
+}

@@ -99,4 +99,8 @@ module ApplicationHelper
 
     res.map{|x| x.to_s.rjust(2, "0")}.join(":")
   end
+
+  def distance_to_similarity_percent distance
+    (1-distance)*100
+  end
 end

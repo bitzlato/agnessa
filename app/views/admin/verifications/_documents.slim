@@ -6,7 +6,8 @@
           .card-img-top
             -# = tag.video(tag.source(src: url), controls: 'controls')
             = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{doc.id}"
-              = image_tag doc.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
+              = image_tag doc.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px"
+              = icon 'md-checkmark-circle', css_class: 'image-vectorized' if doc.neighbor_vector.present?
           .card-body
             - if doc.similar_documents.any?
               p.card-text

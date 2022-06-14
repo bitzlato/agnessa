@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_114310) do
+ActiveRecord::Schema.define(version: 2022_06_14_093808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2022_06_08_114310) do
     t.text "form_description"
     t.string "api_jwt_algorithm", default: "ES256", null: false
     t.jsonb "api_jwt_public_key"
+    t.integer "document_similarity_threshold", default: 70
     t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
   end
 
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 2022_06_08_114310) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "active", default: true
+    t.boolean "calculate_similarity", default: false
     t.index ["account_id", "title"], name: "index_document_types_on_account_id_and_title", unique: true
     t.index ["account_id"], name: "index_document_types_on_account_id"
   end

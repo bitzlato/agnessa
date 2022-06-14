@@ -52,6 +52,7 @@ ru:
         email_from:
         return_url:
         form_description: Описание формы
+        document_similarity_threshold: Порог совпадения фото %
       applicant:
         account: Аккаунт
         account_id: Аккаунт ID
