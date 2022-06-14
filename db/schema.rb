@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_114310) do
+ActiveRecord::Schema.define(version: 2022_06_14_145159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -182,7 +182,9 @@ ActiveRecord::Schema.define(version: 2022_06_08_114310) do
     t.string "remote_ip"
     t.string "user_agent"
     t.string "number"
+    t.bigint "citizenship_id"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
+    t.index ["citizenship_id"], name: "index_verifications_on_citizenship_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
     t.index ["number"], name: "index_verifications_on_number", unique: true
   end
@@ -197,4 +199,5 @@ ActiveRecord::Schema.define(version: 2022_06_08_114310) do
   add_foreign_key "verification_documents", "document_types"
   add_foreign_key "verification_documents", "verifications"
   add_foreign_key "verifications", "applicants"
+  add_foreign_key "verifications", "countries", column: "citizenship_id"
 end
