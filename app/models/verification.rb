@@ -60,6 +60,9 @@ class Verification < ApplicationRecord
 
   after_create :log_creation
 
+  def geoip_country
+    Geocoder.search(remote_ip).first&.country
+  end
 
   def preview_image
     @preview_image ||= verification_documents.first&.file
