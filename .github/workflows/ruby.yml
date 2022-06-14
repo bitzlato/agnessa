@@ -54,7 +54,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install ffmpegthumbnailer
-      run: sudo apt-get install -y ffmpegthumbnailer
+      run: sudo apt update && sudo apt install -y ffmpegthumbnailer
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
