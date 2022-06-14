@@ -2,7 +2,7 @@ class Admin::CountriesController < Admin::ApplicationController
   before_action :authorize_admin
 
   def index
-    countries = paginate Country.all.order('title_ru asc')
+    countries = paginate Country.order('title_ru asc')
     render locals: { countries: countries }
   end
 
