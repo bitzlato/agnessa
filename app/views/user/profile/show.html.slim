@@ -1,14 +1,16 @@
 h1= t('.title')
 
 .row
-  .col-md-6
+  .col-md-9
     = simple_form_for user, url: profile_path do |f|
       = render partial: 'form_errors', locals: {f: f}
       .form-inputs
         = f.input :email, disabled: true
         = f.input :first_name
         = f.input :last_name
-        = f.input :password
-        = f.input :password_confirmation
+        a data-toggle="collapse" href="#password-fields" aria-expanded="false" aria-controls="password-fields" >>
+        div#password-fields.collapse
+          = f.input :password
+          = f.input :password_confirmation
 
-      = f.submit class: 'btn btn-bg btn-primary'
+      = f.submit 'Сохранить', class: 'btn btn-bg btn-primary'
