@@ -6,8 +6,6 @@ html
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky-top[style="background-color: #e3f2fd;"]
       = content_tag :div, class: 'container-fluid' do
         = render 'shared/brand'
-    .container-fluid
-      br
+    .container
       = yield
-    / = render 'shared/footer'
     = noty_flashes
