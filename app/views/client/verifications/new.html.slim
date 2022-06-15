@@ -1,3 +1,36 @@
+.container
+  h1.pull-left Верификация аккаунта
+  div.pull-right
+    span.badge.badge-light RU
+  h4 = verification.applicant.external_id
+hr
+.container
+  = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+    h3 Личные данные
+    .row
+      .col-md-5
+        = f.input :name
+        = f.input :last_name
+        = f.input :patronymic
+      .col-md-5
+        = f.input :country
+        = f.input :birth_date, as: :date_picker
+        = f.input :email, as: :email
+      .col-md-2
+    h3 Выберите тип документа
+    .row
+      .col-md-5
+        / Тип документов
+        = f.input :document_number
+      .col-md-5
+      .col-md-2
+    h3 Загрузите фото документов
+    .row
+      = f.simple_fields_for :verification_documents do |document|
+          .col-4
+            = render 'document_field', document: document
+
+hr
 .row.justify-content-center.mt-4
   .jumbotron.col-12
     h1.mb-4
