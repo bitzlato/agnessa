@@ -9,10 +9,10 @@ h1= t('.title')
         = f.input :email, disabled: true
         = f.input :first_name
         = f.input :last_name
-        a.collapsed data-toggle="collapse" href="#password-fields" aria-expanded="false" aria-controls="password-fields"
+        a .collapsed data-toggle="collapse" href="#password-fields" aria-expanded="false" aria-controls="password-fields"
           |Изменить пароль
           i class="chevron fa fa-fw"
-        div#password-fields.collapse
+        div#password-fields.collapse.pt-2
           = f.input :password
           = f.input :password_confirmation
 
