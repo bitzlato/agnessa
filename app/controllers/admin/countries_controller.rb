@@ -2,7 +2,7 @@ class Admin::CountriesController < Admin::ApplicationController
   before_action :authorize_admin
 
   def index
-    countries = paginate Country.all.order('title_ru asc')
+    countries = paginate Country.order('title_ru asc')
     render locals: { countries: countries }
   end
 
@@ -24,7 +24,11 @@ class Admin::CountriesController < Admin::ApplicationController
 
   def update
     country.update!(country_params)
-    redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully updated.'
+    if request.xhr?
+      render locals: { country: country, document: country_params[:document] }
+    else
+      redirect_back fallback_location: admin_countries_url, notice: 'Country was successfully updated.'
+    end
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Country
     render :edit, locals: { member: Country }
