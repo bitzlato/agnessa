@@ -15,6 +15,8 @@ development:
   database: agnessa_development
   host:  <%= ENV.fetch('POSTGRES_HOST', 'localhost' ) %>
   port:  <%= ENV.fetch('AGNESSA_DATABASE_PORT', '5432' ) %>
+  user: <%= ENV.fetch('POSTGRES_USER', 'postgres' ) %>
+  password: <%= ENV.fetch( 'POSTGRES_PASSWORD', 'password' ) %>
 
 test:
   <<: *default
