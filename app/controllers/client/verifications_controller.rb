@@ -49,17 +49,19 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def applicant
-    @applicant ||= begin
-      raise HumanizedError, :no_external_id unless external_id.present?
-      p2p_id = BarongClient.instance.get_p2pid_from_barong_uid(external_id)
-      unless p2p_id.present?
-        Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}"))
-        raise HumanizedError, :invalid_barong_uid
-      end
-      current_account.applicants.upsert!({external_id: external_id}, validate: false)
-      @applicant.update_column(:legacy_external_id, p2p_id)
-      @applicant
-   end
+    @applicant ||= find_applicant
+  end
+
+  def find_applicant
+    raise HumanizedError, :no_external_id unless external_id.present?
+    p2p_id = BarongClient.instance.get_p2pid_from_barong_uid(external_id)
+    unless p2p_id.present?
+      Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}"))
+      raise HumanizedError, :invalid_barong_uid
+    end
+    applicant = current_account.applicants.upsert!({external_id: external_id}, validate: false)
+    applicant.update_column(:legacy_external_id, p2p_id)
+    applicant
   end
 
   def external_id
