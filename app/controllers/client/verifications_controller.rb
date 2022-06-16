@@ -82,3 +82,4 @@ class Client::VerificationsController < Client::ApplicationController
       permit(*PERMITTED_ATTRIBUTES)
   end
 end
+
