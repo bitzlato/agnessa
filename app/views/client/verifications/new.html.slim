@@ -6,7 +6,7 @@
       .col-md-12
         .alert.alert-warning role='alert'
           = raw verification.applicant.account.form_description_interpolated
-        - if last_refused_verification.present?
+        - if defined?(last_refused_verification) && last_refused_verification.present?
           h3= t('.last_refused_title')
           .alert.alert-warning.pre-line role='alert'
             = last_refused_verification.public_comment
