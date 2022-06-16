@@ -8,27 +8,44 @@ table.table.table-striped.table-hover.table-narrow.table-bordered
       th
         = 'Оператор' if form.subject_group == 'moderator_id'
         = 'Причина' if form.subject_group == 'reason'
+        = 'Статус' if form.subject_group == 'status'
       - dates.each do |d|
-        th colspan="4" = d.to_date
+        th colspan="#{form.subject_group == 'status' ? 2 : 4}" = d.to_date
   tbody
     tr
       td
       - dates.each do |d|
         th Кол
-        th Мин
-        th Макс
-        th Сред
+        - if form.subject_group != 'status'
+          th Мин
+          th Макс
+          th Сред
+        - else
+          th %
+  - total = dates.inject({}){|res, d| res[d] = result.sum{|x| x.last.dig(d, :verifications_amount).to_i}; res}
   - subjects.each do |subject|
     tr
       td
         - if form.subject_group == 'moderator_id'
           = Member.find(subject).user
-        - if form.subject_group == 'reason'
+        - elsif form.subject_group == 'reason'
           = t("reason.#{subject}")
+        - elsif form.subject_group == 'status'
+          = t("activerecord.attributes.verification.statuses.#{subject}")
       - dates.each do |d|
         - item = result[subject][d]
 
         td= item[:verifications_amount] if item
-        td= number_to_machine_s(item[:min_period]) if item
-        td= number_to_machine_s(item[:max_period]) if item
-        td= number_to_machine_s(item[:avg_period]) if item
+        - if form.subject_group != 'status'
+          td= number_to_machine_s(item[:min_period]) if item
+          td= number_to_machine_s(item[:max_period]) if item
+          td= number_to_machine_s(item[:avg_period]) if item
+        - else
+          td= percent_value(item[:verifications_amount], total[d]) if item
+  - if form.subject_group == 'status'
+    tr
+      td  Всего
+      - dates.each do |d|
+        td
+          = total[d]
+        td

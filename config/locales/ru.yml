@@ -143,6 +143,7 @@ ru:
         subject_groups:
           moderator_id: Операторы
           reason: Причины
+          status: Статус
         date_groups:
           day: День
           month: Месяц

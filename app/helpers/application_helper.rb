@@ -103,4 +103,8 @@ module ApplicationHelper
   def distance_to_similarity_percent distance
     (1-distance)*100
   end
+
+  def percent_value value, total
+    (value * 100.0 / total).round(0)
+  end
 end
