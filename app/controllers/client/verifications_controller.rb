@@ -9,7 +9,9 @@ class Client::VerificationsController < Client::ApplicationController
 
   def new
     @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
-    if applicant.blocked?
+    if applicant.verified?
+      render :verified, locals: {applicant: applicant }
+    elsif applicant.blocked?
       render :blocked, locals: {applicant: applicant }, status: :bad_request
     else
       check_for_existing_verification and return
