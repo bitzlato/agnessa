@@ -13,6 +13,7 @@ staging:
 development:
   <<: *default
   database: agnessa_development
+  host:  <%= ENV.fetch('POSTGRES_HOST', 'localhost' ) %>
   port:  <%= ENV.fetch('AGNESSA_DATABASE_PORT', '5432' ) %>
 
 test:
