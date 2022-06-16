@@ -37,4 +37,8 @@ class Applicant < ApplicationRecord
       log_records.create!(action: 'unblock', member: member)
     end
   end
+
+  def verified?
+    last_confirmed_verification_id.present?
+  end
 end

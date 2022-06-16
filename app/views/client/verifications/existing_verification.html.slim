@@ -1,0 +1,4 @@
+.row.justify-content-center.instruction
+  .jumbotron
+    h1.mb-4
+      = t 'client.verifications.existed.message', verification_id: '#' + verification.id.to_s, verification_status: I18n.t("activerecord.attributes.verification.public_statuses.#{verification.status}")

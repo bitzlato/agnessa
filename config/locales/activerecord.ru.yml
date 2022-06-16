@@ -106,6 +106,10 @@ ru:
           pending: Ожидание
           confirmed: Подтверждено
           refused: Отклонено
+        public_statuses:
+          pending: На рассмотрении
+          confirmed: Подтверждено
+          refused: Отклонено
     errors:
       models:
         verification:

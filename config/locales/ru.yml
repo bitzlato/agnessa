@@ -23,11 +23,16 @@ ru:
       title: 'Сводка'
   client:
     verifications:
+      existed:
+        message: 'От имени вашего аккаунта уже зарегистрировна заявка %{verification_id} со статусом: "%{verification_status}"'
       blocked:
         message: Для вашего аккаунта (%{account_id}) подача заявок была заблокирована
+      verified:
+        message: Ваш аккаунт (%{account_id}) уже прошел проверку
       new:
         applicant_comment_placeholder: Комментарий, информация об утерянном аккаунте, почта, прошлый ID...
         title:  'Заявка на верификацию аккаунта %{account_id} в %{org}'
+        last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
       document_field:
         document_hint:  'Размер файла:  От %{from} до %{to}'
       created:
