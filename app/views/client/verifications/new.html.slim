@@ -5,32 +5,37 @@
   = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
     h3 Личные данные
     .row
-      .col-md-5
-        = f.input :name
-        = f.input :last_name
-        = f.input :patronymic
-      .col-md-5
-        = f.input :citizenship_country_iso_code,
-                as: :select,
-                collection: country_options_for_select,
-                selected: f.object.citizenship_country_iso_code || applicant_geoip_country_iso_code
-        = f.input :birth_date, as: :date_picker
-        = f.input :email, as: :email
-      .col-md-2
+      .col-md-9
+        .row
+          .col-md-6
+            = f.input :name
+            = f.input :last_name
+            = f.input :patronymic
+          .col-md-6
+            = f.input :citizenship_country_iso_code,
+                    as: :select,
+                    collection: country_options_for_select,
+                    selected: f.object.citizenship_country_iso_code || applicant_geoip_country_iso_code
+            = f.input :birth_date, as: :date_picker
+            = f.input :email, as: :email
+      .col-md-3
     h3 Выберите тип документа
     .row
-      .col-md-5
-        / Тип документов
-        = f.input :document_number
-      .col-md-5
-      .col-md-2
-    h3 Загрузите фото документов
+      .col-md-9
+        .row
+          .col-md-6
+            / Тип документов
+            = f.input :document_number
+          .col-md-5
+      .col-md-3
     .row
-      = f.simple_fields_for :verification_documents do |document|
-        .col-md-3
-          = render 'document_field', document: document
-      .col-md-1
-      .col-md-2
+      .col-md-9
+        h3 Загрузите фото документов
+        .row
+          = f.simple_fields_for :verification_documents do |document|
+            .col-md-4
+              = render 'document_field', document: document
+      .col-md-3
         h3 Инструкция
         ul
           li Убедитесь, что Ваше лицо и все детали документов на фото чекто видны
@@ -38,6 +43,7 @@
           li На фото нет дополнительных объектов
           li
             | Размер: 50,0 КБ до 50,0 МБ
+            br
             | Формат: JPG, JPEG, PNG
           li В случае необходимости поддержка может запросить дополнительную информацию, например - видео с документами
 
