@@ -29,10 +29,10 @@ class Client::VerificationsController < Client::ApplicationController
     check_for_existing_verification and return
     verification = applicant.verifications.create! verification_params.merge(remote_ip: request.remote_ip,
                                                                              user_agent: request.user_agent)
-    render :created, locals: { verification: verification }
+    render :created, locals: { verification: verification}
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
-    render :new, locals: { verification: e.record }, status: :bad_request
+    render :new, locals: { verification: e.record, last_refused_verification: nil }, status: :bad_request
   end
 
   private
