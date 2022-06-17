@@ -68,10 +68,9 @@ hr
       .row
         .col-12.col-sm-6
 
-          / = f.input :citizenship_country_iso_code,
-          /         as: :select,
-          /         collection: Country.options_for_select,
-          /         selected: f.object.citizenship_country_iso_code || geoip_country_iso_code(f.object.remote_ip)
+          = f.input :citizenship_country_iso_code,
+                    as: :select,
+                    collection: country_options_for_select
 
         .col-12.col-sm-6
           = f.input :document_number
