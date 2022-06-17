@@ -1,7 +1,5 @@
 .container
-  h1.pull-left Верификация аккаунта
-  div.pull-right
-    span.badge.badge-light RU
+  h1 Верификация аккаунта
   h4 = verification.applicant.external_id
 .container
   = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
@@ -29,8 +27,20 @@
     h3 Загрузите фото документов
     .row
       = f.simple_fields_for :verification_documents do |document|
-          .col-4
-            = render 'document_field', document: document
+        .col-md-3
+          = render 'document_field', document: document
+      .col-md-1
+      .col-md-2
+        h3 Инструкция
+        ul
+          li Убедитесь, что Ваше лицо и все детали документов на фото чекто видны
+          li Документ на фото размещен полностью, края не обрезаны
+          li На фото нет дополнительных объектов
+          li
+            | Размер: 50,0 КБ до 50,0 МБ
+            | Формат: JPG, JPEG, PNG
+          li В случае необходимости поддержка может запросить дополнительную информацию, например - видео с документами
+
 
 hr
 .row.justify-content-center.mt-4
