@@ -3,7 +3,7 @@ class Client::VerificationsController < Client::ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :country, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache]}]
+  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :citizenship_country_iso_code, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache]}]
 
   helper_method :form_path, :external_id
 
@@ -21,6 +21,7 @@ class Client::VerificationsController < Client::ApplicationController
       current_account.document_types.available.each do |document_type|
         verification.verification_documents.new document_type: document_type
       end
+      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
       render locals: {verification: verification, last_refused_verification: last_refused_verification}
     end
   end

@@ -81,7 +81,8 @@ ru:
         applicant_comment: Дополнительная информация (об утерянном аккаунте)
         created_at: Создано
         applicant: Заявитель
-        country: Страна
+        citizenship_country: Гражданство
+        citizenship_country_iso_code: Гражданство
         legacy_external_id: Легаси ID
         status: Статус
         comment: Комментарий
