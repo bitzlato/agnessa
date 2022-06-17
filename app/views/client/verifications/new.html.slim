@@ -3,6 +3,14 @@
   h4 = verification.applicant.external_id
 .container
   = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+    .row
+      .col-md-12
+        div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+    - if defined?(last_refused_verification) && last_refused_verification.present?
+      h3= t('.last_refused_title')
+      .alert.alert-warning.pre-line role='alert'
+        = last_refused_verification.public_comment
     h3 Личные данные
     .row
       .col-md-9
@@ -18,6 +26,7 @@
                     selected: f.object.citizenship_country_iso_code || applicant_geoip_country_iso_code
             = f.input :birth_date, as: :date_picker
             = f.input :email, as: :email
+
       .col-md-3
     h3 Выберите тип документа
     .row
@@ -30,7 +39,6 @@
                     collection: document_type_collection_for_radio_buttons,
                     item_wrapper_class: 'd-inline-block'
             = f.input :document_number
-          .col-md-5
       .col-md-3
     .row
       .col-md-9
@@ -54,66 +62,66 @@
       .col-12
         .text-right
           = f.submit 'Продолжить', class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }
-
-hr
-.row.justify-content-center.mt-4
-  .jumbotron.col-12
-    h1.mb-4
-      = t '.title', account_id: verification.applicant.external_id, org: current_account.public_name
-    .row.mt-4
-      .col-md-12
-        .alert.alert-warning role='alert'
-          = raw verification.applicant.account.form_description_interpolated
-        - if defined?(last_refused_verification) && last_refused_verification.present?
-          h3= t('.last_refused_title')
-          .alert.alert-warning.pre-line role='alert'
-            = last_refused_verification.public_comment
-    = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
-      .row
-        .col-md-12
-          div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-      .row
-      .row
-        .col-12.col-sm-4
-          = f.input :name
-        .col-12.col-sm-4
-          = f.input :last_name
-        .col-12.col-sm-4
-          = f.input :patronymic
-      .row
-        .col-12.col-sm-4
-          = f.input :birth_date, as: :date_picker
-        .col-12.col-sm-4
-          = f.input :gender,
-                  collection: Verification::GENDERS,
-                  label_method: lambda { |item| t("attributes.genders.#{item}") }
-
-      .row
-        .col-12.col-sm-6
-
-          = f.input :citizenship_country_iso_code,
-                    as: :select,
-                    collection: country_options_for_select
-
-        .col-12.col-sm-6
-          = f.input :document_number
-      .row
-        .col-12.col-sm-6
-          = f.input :reason,
-            include_blank: false,
-            collection: Verification::REASONS,
-            label_method: lambda { |reason| t(reason, scope: 'attributes.reasons') },
-            input_html: { data: { 'verification-reason': true } }
-        .col-12.col-sm-6
-          = f.input :email, as: :email
-      .row[data-applicant-comment]
-        .col-12
-          = f.input :applicant_comment, as: :text, placeholder: t('.applicant_comment_placeholder')
-      .row
-        = f.simple_fields_for :verification_documents do |document|
-          .col-4
-            = render 'document_field', document: document
-      .row
-        .col-12
-          .text-center
-            = f.submit class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }
+/
+/ hr
+/ .row.justify-content-center.mt-4
+/   .jumbotron.col-12
+/     h1.mb-4
+/       = t '.title', account_id: verification.applicant.external_id, org: current_account.public_name
+/     .row.mt-4
+/       .col-md-12
+/         .alert.alert-warning role='alert'
+/           = raw verification.applicant.account.form_description_interpolated
+/         - if defined?(last_refused_verification) && last_refused_verification.present?
+/           h3= t('.last_refused_title')
+/           .alert.alert-warning.pre-line role='alert'
+/             = last_refused_verification.public_comment
+/     = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+/       .row
+/         .col-md-12
+/           div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+/       .row
+/       .row
+/         .col-12.col-sm-4
+/           = f.input :name
+/         .col-12.col-sm-4
+/           = f.input :last_name
+/         .col-12.col-sm-4
+/           = f.input :patronymic
+/       .row
+/         .col-12.col-sm-4
+/           = f.input :birth_date, as: :date_picker
+/         .col-12.col-sm-4
+/           = f.input :gender,
+/                   collection: Verification::GENDERS,
+/                   label_method: lambda { |item| t("attributes.genders.#{item}") }
+/
+/       .row
+/         .col-12.col-sm-6
+/
+/           = f.input :citizenship_country_iso_code,
+/                     as: :select,
+/                     collection: country_options_for_select
+/
+/         .col-12.col-sm-6
+/           = f.input :document_number
+/       .row
+/         .col-12.col-sm-6
+/           = f.input :reason,
+/             include_blank: false,
+/             collection: Verification::REASONS,
+/             label_method: lambda { |reason| t(reason, scope: 'attributes.reasons') },
+/             input_html: { data: { 'verification-reason': true } }
+/         .col-12.col-sm-6
+/           = f.input :email, as: :email
+/       .row[data-applicant-comment]
+/         .col-12
+/           = f.input :applicant_comment, as: :text, placeholder: t('.applicant_comment_placeholder')
+/       .row
+/         = f.simple_fields_for :verification_documents do |document|
+/           .col-4
+/             = render 'document_field', document: document
+/       .row
+/         .col-12
+/           .text-center
+/             = f.submit class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }

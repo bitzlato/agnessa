@@ -3,7 +3,7 @@ class Client::VerificationsController < Client::ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  PERMITTED_ATTRIBUTES = [:applicant_comment, :name, :reason, :citizenship_country_iso_code, :birth_date, :gender, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache]}]
+  PERMITTED_ATTRIBUTES = [:name, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache]}]
 
   helper_method :form_path, :external_id
 
@@ -15,7 +15,6 @@ class Client::VerificationsController < Client::ApplicationController
       render :blocked, locals: {applicant: applicant }, status: :bad_request
     else
       check_for_existing_verification and return
-      applicant_geoip_country_iso_code = Geocoder.search(request.remote_ip).first&.country
       last_refused_verification = applicant.verifications.refused.last
       verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
       verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
@@ -30,7 +29,8 @@ class Client::VerificationsController < Client::ApplicationController
   def create
     check_for_existing_verification and return
     verification = applicant.verifications.create! verification_params.merge(remote_ip: request.remote_ip,
-                                                                             user_agent: request.user_agent)
+                                                                             user_agent: request.user_agent,
+                                                                             reason: :trusted_trader)
     render :created, locals: { verification: verification}
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification

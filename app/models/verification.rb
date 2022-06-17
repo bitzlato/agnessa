@@ -1,5 +1,5 @@
 class Verification < ApplicationRecord
-  COPY_ATTRIBUTES = %w(name last_name patronymic birth_date gender citizenship_country_iso_code document_number reason email)
+  COPY_ATTRIBUTES = %w(name last_name patronymic birth_date gender document_type citizenship_country_iso_code document_number reason email)
   strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
@@ -27,7 +27,7 @@ class Verification < ApplicationRecord
   end
 
 
-  validates :citizenship_country_iso_code, :document_type, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
+  validates :citizenship_country_iso_code, :document_type, :name, :last_name, :birth_date, :document_number, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?

@@ -96,6 +96,7 @@ ru:
         last_name: Фамилия
         patronymic: Отчество
         document_number: Номер документа
+        document_type: Тип документа
         moderator: Модератор
         email: Почта
         public_comment: Публичный комментарий

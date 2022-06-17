@@ -113,6 +113,6 @@ module ApplicationHelper
   end
 
   def document_type_collection_for_radio_buttons
-    Rails.configuration.application.available_documents.map{ |x| [I18n.t(x, scope: 'available_documents'), x] }
+    Rails.configuration.application.available_documents.map{ |x| [I18n.t(x, scope: 'attributes.document_types'), x] }
   end
 end

@@ -1,9 +1,5 @@
 ru:
-  available_documents:
-    passport: Паспорт
-    id_card: ID карта
-    driver_license: Водительские права
-    foreign_passport: Загранпаспорт
+
 
   date:
     formats:
@@ -87,6 +83,12 @@ ru:
       trusted_trader: 'Стать доверенным торговцем'
       restore: 'Восстановление утерянного аккаунта'
       other: 'Другое'
+    document_types:
+      passport: Паспорт
+      id_card: ID карта
+      driver_license: Водительские права
+      foreign_passport: Загранпаспорт
+
   period: Период
   income:
     total:
