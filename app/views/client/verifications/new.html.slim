@@ -36,7 +36,6 @@
           = f.input :citizenship_country_id,
                   as: :select,
                   collection: Country.options_for_select,
-                  priority: Rails.configuration.application.country_priority,
                   selected: f.object.citizenship_country_id || f.object.geoip_country_iso_code
 
         .col-12.col-sm-6
