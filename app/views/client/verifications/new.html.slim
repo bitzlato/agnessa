@@ -46,7 +46,10 @@
             br
             | Формат: JPG, JPEG, PNG
           li В случае необходимости поддержка может запросить дополнительную информацию, например - видео с документами
-
+    .row
+      .col-12
+        .text-right
+          = f.submit 'Продолжить', class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }
 
 hr
 .row.justify-content-center.mt-4
