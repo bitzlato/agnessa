@@ -1,5 +1,7 @@
 //= require moment
 //= require simple_form-datetimepicker
+//= require bootstrap-sprockets
+
 
 const toggleVisibleApplicantComment = function () {
     var applicantComment = $("[data-applicant-comment]");
