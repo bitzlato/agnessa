@@ -36,7 +36,7 @@
           = f.input :citizenship_country_iso_code,
                   as: :select,
                   collection: country_options_for_select,
-                  selected: f.object.citizenship_country_iso_code || geoip_country_iso_code
+                  selected: f.object.citizenship_country_iso_code || applicant_geoip_country_iso_code
 
         .col-12.col-sm-6
           = f.input :document_number

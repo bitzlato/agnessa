@@ -15,14 +15,14 @@ class Client::VerificationsController < Client::ApplicationController
       render :blocked, locals: {applicant: applicant }, status: :bad_request
     else
       check_for_existing_verification and return
-      geoip_country_iso_code = Geocoder.search(request.remote_ip).first&.country
+      applicant_geoip_country_iso_code = Geocoder.search(request.remote_ip).first&.country
       last_refused_verification = applicant.verifications.refused.last
       verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
       verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
       current_account.document_types.available.each do |document_type|
         verification.verification_documents.new document_type: document_type
       end
-      render locals: {verification: verification, last_refused_verification: last_refused_verification, geoip_country_iso_code: geoip_country_iso_code}
+      render locals: {verification: verification, last_refused_verification: last_refused_verification, applicant_geoip_country_iso_code: applicant_geoip_country_iso_code}
     end
   end
 
