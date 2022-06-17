@@ -1,6 +1,4 @@
 class VerificationDocument < ApplicationRecord
-  NEIGHBOR_THRESHOLD = 0.35
-
   has_neighbors
 
   mount_uploader :file, VerificationDocumentUploader
@@ -12,7 +10,7 @@ class VerificationDocument < ApplicationRecord
   validates :file, presence: true
   after_commit :delayed_update_vector, on: :create
 
-  scope :with_neighbor_threshold, ->(vector, threshold=NEIGHBOR_THRESHOLD) { where("neighbor_vector <=> '#{vector}' < #{threshold}") }
+  scope :with_neighbor_distance_threshold, ->(vector, threshold) { where("neighbor_vector <=> '#{vector}' < #{threshold}") }
 
   def file_file_name
     file.filename
@@ -27,19 +25,25 @@ class VerificationDocument < ApplicationRecord
   end
 
   def delayed_update_vector
-    if document_type.image?
+    if update_vector?
       VerificationDocumentVectorUpdateJob.perform_later(id)
     end
   end
 
   def update_vector
-    if document_type.image?
+    if update_vector?
       vector = ImageVectorizer.new(file.path).perform
       self.update_column(:neighbor_vector, vector)
     end
   end
 
-  def similar_documents threshold = NEIGHBOR_THRESHOLD
-    nearest_neighbors(distance: "cosine").with_neighbor_threshold(neighbor_vector, threshold).where.not(id: verification.verification_documents.map(&:id))
+  def update_vector?
+    document_type.image? and document_type.calculate_similarity
+  end
+
+  def similar_documents threshold_percent=nil
+    threshold_percent ||= verification.account.document_similarity_threshold
+    distance = (100 - threshold_percent)/100.0
+    nearest_neighbors(distance: "cosine").with_neighbor_distance_threshold(neighbor_vector, distance).where.not(id: verification.verification_documents.map(&:id))
   end
 end

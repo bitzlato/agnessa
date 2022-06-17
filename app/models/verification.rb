@@ -1,4 +1,5 @@
 class Verification < ApplicationRecord
+  COPY_ATTRIBUTES = %w(name last_name patronymic birth_date gender country document_number reason email)
   strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
@@ -120,6 +121,12 @@ class Verification < ApplicationRecord
 
   def review_result_labels_public_comments
     ReviewResultLabel.where(label: review_result_labels).pluck(:public_comment)
+  end
+
+  def copy_verification_attributes verification
+    COPY_ATTRIBUTES.each do |attr|
+      self.send("#{attr}=", verification.send(attr))
+    end
   end
 
   private

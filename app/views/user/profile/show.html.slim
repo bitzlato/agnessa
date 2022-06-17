@@ -1,14 +1,19 @@
+= link_to "&larr; назад".html_safe, :back
 h1= t('.title')
 
 .row
-  .col-md-6
+  .col-md-9
     = simple_form_for user, url: profile_path do |f|
       = render partial: 'form_errors', locals: {f: f}
       .form-inputs
         = f.input :email, disabled: true
         = f.input :first_name
         = f.input :last_name
-        = f.input :password
-        = f.input :password_confirmation
+        a.pb-2.collapsed data-toggle="collapse" href="#password-fields" aria-expanded="false" aria-controls="password-fields"
+          |Изменить пароль
+          i class="chevron fa fa-fw"
+        div#password-fields.collapse.pt-2
+          = f.input :password
+          = f.input :password_confirmation
 
-      = f.submit class: 'btn btn-bg btn-primary'
+      = f.submit 'Сохранить', class: 'btn btn-bg btn-primary'

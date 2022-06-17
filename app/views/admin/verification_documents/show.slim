@@ -14,7 +14,7 @@
       = status_badge document.verification.status
     .card.float-left.shadow-sm.mb-5.rounded style="width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px"
       = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{document.id}"
-        = image_tag document.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
+        = image_tag document.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px"
     = render partial: 'admin/verifications/document_modal', locals: { verification: document.verification, document: document, index: document.id }
 .row
   .col-12
@@ -31,7 +31,7 @@
         .card.float-left.shadow-sm.mb-5.rounded style="width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px"
           .card-img-top
             = link_to '#', 'data-toggle': 'modal', 'data-target': "#document_modal_#{doc.id}"
-              = image_tag doc.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px", class: 'card-img-top'
+              = image_tag doc.file.thumb.url, style: "max-width: #{VerificationDocumentUploader::THUMBNAIL_WIDTH}px; max-height: #{VerificationDocumentUploader::THUMBNAIL_HEIGHT}px"
             p.card-text
-              = doc.neighbor_distance
+              = distance_to_similarity_percent(doc.neighbor_distance)
           = render partial: 'admin/verifications/document_modal', locals: { verification: doc.verification, document: doc, index: doc.id }

@@ -3,7 +3,7 @@
 class VerificationStatisticsForm
   TIME_AGO_VALUES = [1.day, 1.month, 6.months]
   DATE_GROUPS = [:day, :month]
-  SUBJECTS = [:moderator_id, :reason]
+  SUBJECTS = [:moderator_id, :reason, :status]
 
   include Virtus.model
 
