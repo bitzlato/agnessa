@@ -5,8 +5,4 @@ module VerificationsHelper
 
     status_from_query.blank? ? scope : scope.by_status(status_from_query)
   end
-
-  def geoip_country_iso_code
-    Geocoder.search(request.remote_ip).first&.country
-  end
 end
