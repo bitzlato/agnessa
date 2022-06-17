@@ -4,8 +4,9 @@
   .d-flex.align-items-center.mb-2
     .flex-shrink-0.mr-2.align-self-start
       = image_tag asset_url('file-earmark-check@2x.png'), width: 13
-    p.small.mb-0 Убедитесь, что документ на фото размещен полностью, края не обрезаны, информация хорошо считываеьтся
-
+    p.small.mb-0
+      = first_point
+      
   .d-flex.align-items-center.mb-2
     .flex-shrink-0.mr-2.align-self-start
       = image_tag asset_url('file-x@2x.png'), width: 13

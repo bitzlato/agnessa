@@ -32,7 +32,7 @@
     / = f.simple_fields_for :verification_documents do |document|
     /   = render 'document_field', document: document
 
-    = render 'photo_instruction'
+    = render 'photo_instruction', first_point: 'Убедитесь, что Ваше лицо и все детали документов на фото четко видны'
 
     .container.fixed-bottom.pb-4
       = link_to 'Продолжить', step4_client_verifications_path, class: 'btn btn-primary w-100' 
