@@ -27,7 +27,7 @@ class Verification < ApplicationRecord
   end
 
 
-  validates :citizenship_country_iso_code, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
+  validates :citizenship_country_iso_code, :document_type, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?
@@ -39,6 +39,8 @@ class Verification < ApplicationRecord
   validate :validate_not_blocked_applicant, on: :create
   validate :minimum_documents_amount, on: :create
   validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
+
+  validates :document_type, inclusion: { in: Rails.configuration.application.available_documents }, allow_blank: true
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }

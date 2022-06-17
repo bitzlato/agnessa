@@ -111,4 +111,8 @@ module ApplicationHelper
   def country_options_for_select
     Country.order('title_ru ASC').map { |value| [value.send("title_#{I18n.locale}"), value.iso_code] }
   end
+
+  def document_type_collection_for_radio_buttons
+    Rails.configuration.application.available_documents.map{ |x| [I18n.t(x, scope: 'available_documents'), x] }
+  end
 end
