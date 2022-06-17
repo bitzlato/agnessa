@@ -13,6 +13,7 @@ class Verification < ApplicationRecord
   has_many :log_records
   has_many :verification_documents, inverse_of: 'verification'
   accepts_nested_attributes_for :verification_documents
+  has_one :citizenship_country, class_name: 'Country', foreign_key: :iso_code, primary_key: :citizenship_country_id
 
   before_save do
     self.first_name = first_name.to_s.upcase
