@@ -32,7 +32,7 @@
 
       .row
         .col-12.col-sm-6
-          = f.input :country, as: :country,
+          = f.input :citizenship_country_id,  as: :select,  collection: Country.options_for_select,
                   priority: Rails.configuration.application.country_priority
         .col-12.col-sm-6
           = f.input :document_number

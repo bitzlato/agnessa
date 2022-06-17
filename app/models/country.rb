@@ -17,4 +17,8 @@ class Country < ApplicationRecord
       self.available_documents = self.available_documents.append(val).uniq
     end
   end
+
+  def self.options_for_select
+    Country.all.map { |value| [value.title_ru, value.iso_code]}
+  end
 end

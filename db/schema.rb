@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 2022_06_14_145159) do
 
   create_table "verifications", force: :cascade do |t|
     t.bigint "applicant_id", null: false
-    t.string "country", limit: 2
+    t.string "citizenship_country_id", limit: 2
     t.string "legacy_external_id"
     t.string "status", default: "pending", null: false
     t.string "commment"

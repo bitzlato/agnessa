@@ -1,5 +1,5 @@
 class AddCitizenshipToVerification < ActiveRecord::Migration[6.1]
   def change
-    add_reference :verifications, :citizenship, foreign_key: { to_table: :countries }
+    rename_column :verifications, :country,:citizenship_country_id
   end
 end
