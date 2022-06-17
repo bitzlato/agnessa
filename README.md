@@ -5,6 +5,27 @@
 
 Legacy(native) kyc user verification service
 
+# Dependencies
+
+### [pg_vector](https://github.com/pgvector/pgvector)
+
+Install with
+
+```brew install pgvector/brew/pgvector```
+
+Load to database
+
+```CREATE EXTENSION vector;```
+
+### Optional, if face similarity needed
+python3
+
+```brew install python```
+
+deepface
+
+```pip3 install deepface```
+
 # Development
 
 Installation:

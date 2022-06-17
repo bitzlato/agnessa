@@ -1,4 +1,5 @@
 class Verification < ApplicationRecord
+  COPY_ATTRIBUTES = %w(name last_name patronymic birth_date gender citizenship_country_iso_code document_number reason email)
   strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
@@ -12,6 +13,7 @@ class Verification < ApplicationRecord
   has_many :log_records
   has_many :verification_documents, inverse_of: 'verification'
   accepts_nested_attributes_for :verification_documents
+  has_one :citizenship_country, class_name: 'Country', foreign_key: :iso_code, primary_key: :citizenship_country_iso_code
 
   before_save do
     self.first_name = first_name.to_s.upcase
@@ -25,7 +27,7 @@ class Verification < ApplicationRecord
   end
 
 
-  validates :country, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
+  validates :citizenship_country_iso_code, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?
@@ -117,6 +119,12 @@ class Verification < ApplicationRecord
 
   def review_result_labels_public_comments
     ReviewResultLabel.where(label: review_result_labels).pluck(:public_comment)
+  end
+
+  def copy_verification_attributes verification
+    COPY_ATTRIBUTES.each do |attr|
+      self.send("#{attr}=", verification.send(attr))
+    end
   end
 
   private

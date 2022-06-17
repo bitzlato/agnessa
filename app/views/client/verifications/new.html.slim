@@ -39,6 +39,10 @@ hr
       .col-md-12
         .alert.alert-warning role='alert'
           = raw verification.applicant.account.form_description_interpolated
+        - if defined?(last_refused_verification) && last_refused_verification.present?
+          h3= t('.last_refused_title')
+          .alert.alert-warning.pre-line role='alert'
+            = last_refused_verification.public_comment
     = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
       .row
         .col-md-12
@@ -61,8 +65,12 @@ hr
 
       .row
         .col-12.col-sm-6
-          = f.input :country, as: :country,
-                  priority: Rails.configuration.application.country_priority
+
+          = f.input :citizenship_country_iso_code,
+                  as: :select,
+                  collection: Country.options_for_select,
+                  selected: f.object.citizenship_country_iso_code || geoip_country_iso_code(f.object.remote_ip)
+
         .col-12.col-sm-6
           = f.input :document_number
       .row
