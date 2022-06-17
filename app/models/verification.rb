@@ -18,6 +18,7 @@ class Verification < ApplicationRecord
   before_save do
     self.first_name = first_name.to_s.upcase
     self.last_name = last_name.to_s.upcase
+    self.citizenship_country_iso_code = citizenship_country_iso_code.to_s.upcase
     self.patronymic = patronymic.to_s.upcase if patronymic.present?
     self.document_number = document_number.to_s.upcase
   end
@@ -36,6 +37,7 @@ class Verification < ApplicationRecord
   validate :validate_labels
 
   validate :over_18_years_old, on: :create
+  validate :citizenship_country_in_white_list, on: :create
   validate :validate_not_blocked_applicant, on: :create
   validate :minimum_documents_amount, on: :create
   validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
@@ -128,6 +130,12 @@ class Verification < ApplicationRecord
   end
 
   private
+
+  def citizenship_country_in_white_list
+    unless Country.alive.find_by(iso_code: citizenship_country_iso_code)
+      errors.add :citizenship_country_iso_code, I18n.t('errors.messages.citizenship_not_allowed')
+    end
+  end
 
   def over_18_years_old
     errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
