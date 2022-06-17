@@ -82,7 +82,7 @@ ru:
         created_at: Создано
         applicant: Заявитель
         citizenship_country: Гражданство
-        citizenship_country_id: Гражданство
+        citizenship_country_iso_code: Гражданство
         legacy_external_id: Легаси ID
         status: Статус
         comment: Комментарий

@@ -10,7 +10,7 @@ class VerificationDecorator < ApplicationDecorator
   end
 
   def self.table_columns
-    %i[preview_image id created_at full_name document_number email citizenship_country_id status reason applicant]
+    %i[preview_image id created_at full_name document_number email citizenship_country_iso_code status reason applicant]
   end
 
   def preview_image

@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :verification do
     association :applicant
     association :moderator, factory: :member
-    citizenship_country_id { "RU" }
+    citizenship_country_iso_code { "RU" }
 
     sequence(:name) { |i| "name_#{i}" }
     sequence(:last_name) { |i| "LastName_#{i}" }
