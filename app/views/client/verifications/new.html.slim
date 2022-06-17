@@ -22,8 +22,7 @@
           .col-md-6
             = f.input :citizenship_country_iso_code,
                     as: :select,
-                    collection: country_options_for_select,
-                    selected: f.object.citizenship_country_iso_code || applicant_geoip_country_iso_code
+                    collection: country_options_for_select
             = f.input :birth_date, as: :date_picker
             = f.input :email, as: :email
 
