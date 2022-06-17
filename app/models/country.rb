@@ -17,8 +17,4 @@ class Country < ApplicationRecord
       self.available_documents = self.available_documents.append(val).uniq
     end
   end
-
-  def self.options_for_select
-    Country.order('title_ru ASC').map { |value| [value.send("title_#{I18n.locale}"), value.iso_code] }
-  end
 end

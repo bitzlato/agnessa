@@ -107,4 +107,8 @@ module ApplicationHelper
   def percent_value value, total
     (value * 100.0 / total).round(0)
   end
+
+  def country_options_for_select
+    Country.order('title_ru ASC').map { |value| [value.send("title_#{I18n.locale}"), value.iso_code] }
+  end
 end

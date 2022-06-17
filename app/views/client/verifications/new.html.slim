@@ -35,7 +35,7 @@
 
           = f.input :citizenship_country_iso_code,
                   as: :select,
-                  collection: Country.options_for_select,
+                  collection: country_options_for_select,
                   selected: f.object.citizenship_country_iso_code || geoip_country_iso_code
 
         .col-12.col-sm-6
