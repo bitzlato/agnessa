@@ -31,12 +31,12 @@
     .row
       .col-md-9
         .row
-          .col-md-10
+          .col-md-12
             = f.input :document_type,
                     as: :radio_buttons,
                     label: false,
                     collection: document_type_collection_for_radio_buttons,
-                    item_wrapper_class: 'd-inline-block'
+                    wrapper: :horizontal_collection_inline
             = f.input :document_number
       .col-md-3
     .row
