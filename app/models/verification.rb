@@ -61,8 +61,8 @@ class Verification < ApplicationRecord
 
   after_create :log_creation
 
-  def geoip_country
-    Geocoder.search(remote_ip).first&.country
+  def geoip_country_iso_code
+      Geocoder.search(remote_ip).first&.country
   end
 
   def preview_image

@@ -19,6 +19,6 @@ class Country < ApplicationRecord
   end
 
   def self.options_for_select
-    Country.all.map { |value| [value.title_ru, value.iso_code]}
+    Country.order('title_ru ASC').map { |value| [value.title_ru, value.iso_code]}
   end
 end
