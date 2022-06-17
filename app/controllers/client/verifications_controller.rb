@@ -30,6 +30,78 @@ class Client::VerificationsController < Client::ApplicationController
     end
   end
 
+  def step1
+    @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
+    if applicant.verified?
+      render :verified, locals: {applicant: applicant }
+    elsif applicant.blocked?
+      render :blocked, locals: {applicant: applicant }, status: :bad_request
+    else
+      check_for_existing_verification and return
+      last_refused_verification = applicant.verifications.refused.last
+      verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
+      verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
+      current_account.document_types.available.each do |document_type|
+        verification.verification_documents.new document_type: document_type
+      end
+      render locals: {verification: verification, last_refused_verification: last_refused_verification}
+    end
+  end
+
+  def step2
+    @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
+    if applicant.verified?
+      render :verified, locals: {applicant: applicant }
+    elsif applicant.blocked?
+      render :blocked, locals: {applicant: applicant }, status: :bad_request
+    else
+      check_for_existing_verification and return
+      last_refused_verification = applicant.verifications.refused.last
+      verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
+      verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
+      current_account.document_types.available.each do |document_type|
+        verification.verification_documents.new document_type: document_type
+      end
+      render locals: {verification: verification, last_refused_verification: last_refused_verification}
+    end
+  end
+
+  def step3
+    @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
+    if applicant.verified?
+      render :verified, locals: {applicant: applicant }
+    elsif applicant.blocked?
+      render :blocked, locals: {applicant: applicant }, status: :bad_request
+    else
+      check_for_existing_verification and return
+      last_refused_verification = applicant.verifications.refused.last
+      verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
+      verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
+      current_account.document_types.available.each do |document_type|
+        verification.verification_documents.new document_type: document_type
+      end
+      render locals: {verification: verification, last_refused_verification: last_refused_verification}
+    end
+  end
+
+  def step4
+    @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
+    if applicant.verified?
+      render :verified, locals: {applicant: applicant }
+    elsif applicant.blocked?
+      render :blocked, locals: {applicant: applicant }, status: :bad_request
+    else
+      check_for_existing_verification and return
+      last_refused_verification = applicant.verifications.refused.last
+      verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
+      verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
+      current_account.document_types.available.each do |document_type|
+        verification.verification_documents.new document_type: document_type
+      end
+      render locals: {verification: verification, last_refused_verification: last_refused_verification}
+    end
+  end
+
   def create
     return if check_for_existing_verification
 
