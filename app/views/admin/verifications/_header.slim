@@ -29,6 +29,11 @@
         = verification.document_number
       - if similar_documents.any?
         li =link_to t('.similar_documents', count: similar_documents.count), admin_verifications_path('q[document_number_eq]': verification['document_number']), target: '_blank'
+      - if verification.document_type
+        .mt-4
+          .text-muted= verification.class.human_attribute_name :document_type
+          ul.list-unstyled
+            li  = verification.document_type
   .col-md-2
     .text-muted= verification.class.human_attribute_name :email
     ul.list-unstyled
