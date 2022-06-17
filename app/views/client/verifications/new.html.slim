@@ -34,9 +34,8 @@
         .col-12.col-sm-6
 
           = f.input :citizenship_country_iso_code,
-                  as: :select,
-                  collection: country_options_for_select,
-                  selected: f.object.citizenship_country_iso_code || Geocoder.search(request.remote_ip).first&.country
+                    as: :select,
+                    collection: country_options_for_select
 
         .col-12.col-sm-6
           = f.input :document_number
