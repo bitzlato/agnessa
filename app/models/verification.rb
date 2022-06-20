@@ -28,6 +28,7 @@ class Verification < ApplicationRecord
 
 
   validates :citizenship_country_iso_code, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
+  validates :citizenship_country_iso_code, inclusion: { in: proc { Country.alive.pluck(:iso_code) } }
   validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?
@@ -36,7 +37,6 @@ class Verification < ApplicationRecord
   validate :validate_labels
 
   validate :over_18_years_old, on: :create
-  validate :citizenship_country_in_white_list, on: :create
   validate :validate_not_blocked_applicant, on: :create
   validate :minimum_documents_amount, on: :create
   validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
@@ -129,12 +129,6 @@ class Verification < ApplicationRecord
   end
 
   private
-
-  def citizenship_country_in_white_list
-    unless Country.alive.find_by(iso_code: citizenship_country_iso_code)
-      errors.add :citizenship_country_iso_code, I18n.t('errors.messages.citizenship_not_allowed')
-    end
-  end
 
   def over_18_years_old
     errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
