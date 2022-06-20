@@ -22,6 +22,7 @@ class Client::VerificationsController < Client::ApplicationController
         verification.verification_documents.new document_type: document_type
       end
       verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
+        verification.document_type = 'passport' if verification.document_type.nil?
       render locals: {verification: verification, last_refused_verification: last_refused_verification}
     end
   end
