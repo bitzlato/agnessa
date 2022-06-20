@@ -6,7 +6,7 @@
 #
 class SummaryQuery
   SUMMARY_MODELS = {
-    Verification => { grouped_by: %i[status citizenship_country_iso_code reason], aggregations: ['count(verifications.id)'] },
+    Verification => { grouped_by: %i[status country reason], aggregations: ['count(verifications.id)'] },
   }.freeze
 
   # rubocop:disable Metrics/MethodLength
