@@ -1,5 +1,5 @@
 class Verification < ApplicationRecord
-  COPY_ATTRIBUTES = %w(name last_name patronymic birth_date gender document_type citizenship_country_iso_code document_number reason email)
+  COPY_ATTRIBUTES = %w(name last_name patronymic birth_date document_type citizenship_country_iso_code document_number reason email)
   strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
   # Strip off all spaces and keep only alphabetic and numeric characters
   strip_attributes only: :document_number, regex: /[^[:alnum:]_-]/
