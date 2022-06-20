@@ -47,6 +47,14 @@ module ApplicationHelper
     buffer.html_safe
   end
 
+  def content_type_to_extensions(content_types)
+    ext = []
+    content_types.each do |content_type|
+      ext.append Rack::Mime::MIME_TYPES.invert[content_type]
+    end
+    ext.join(' ,')
+  end
+
   def document_file_hint
     t('client.verifications.document_field.document_hint', from: number_to_human_size(Rails.configuration.application.min_upload_file_size),
                                                            to: number_to_human_size(Rails.configuration.application.max_upload_file_size),
