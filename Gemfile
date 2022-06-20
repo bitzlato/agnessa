@@ -17,7 +17,8 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-gem 'simple_form-datetimepicker'
+gem 'simple_form-datetimepicker', git: 'https://github.com/bitzlato/simple_form-datetimepicker.git'
+
 
 gem 'slim-rails'
 gem 'ransack', github: 'activerecord-hackery/ransack'
@@ -154,3 +155,5 @@ gem 'active_record_upsert'
 gem "neighbor"
 
 gem "geocoder", "~> 1.8"
+
+gem "bootstrap", "~> 4.3"
