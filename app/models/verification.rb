@@ -28,7 +28,7 @@ class Verification < ApplicationRecord
 
 
   validates :citizenship_country_iso_code, :name, :last_name, :gender, :birth_date, :document_number, :reason, presence: true, on: :create
-  validates :citizenship_country_iso_code, inclusion: { in: proc { Country.alive.pluck(:iso_code) } }
+  validates :citizenship_country_iso_code, inclusion: { in: proc { Country.alive.pluck(:iso_code) } }, message: I18n.t('errors.messages.citizenship_not_allowed')
   validates :email, presence: true, email: { mode: :strict }
 
   validates :review_result_labels, presence: true, if: :refused?
