@@ -8,6 +8,16 @@ GIT
       i18n
 
 GIT
+  remote: https://github.com/bitzlato/simple_form-datetimepicker.git
+  revision: 64673a4531f551ff3e06d954987ae89f59083e29
+  specs:
+    simple_form-datetimepicker (0.0.3)
+      bootstrap3-datetimepicker-rails
+      coffee-rails
+      momentjs-rails
+      rails (>= 5.0.0)
+
+GIT
   remote: https://github.com/bitzlato/sumsub-ruby-sdk.git
   revision: 115dfd4bc83ae873270938eedc35127ea247c297
   specs:
@@ -532,11 +542,6 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    simple_form-datetimepicker (0.0.3)
-      bootstrap3-datetimepicker-rails
-      coffee-rails
-      momentjs-rails
-      rails (>= 5.0.0)
     simple_form_extension (1.4.18)
       rails (>= 3.1)
       redactor-rails
@@ -708,7 +713,7 @@ DEPENDENCIES
   semver2 (~> 3.4)
   sidekiq (~> 6.4.1)
   simple_form (~> 5.1)
-  simple_form-datetimepicker
+  simple_form-datetimepicker!
   simple_form_extension (~> 1.4)
   simple_form_fancy_uploads
   slackistrano
