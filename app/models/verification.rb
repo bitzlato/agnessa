@@ -9,16 +9,15 @@ class Verification < ApplicationRecord
 
   belongs_to :moderator, class_name: 'Member', required: false
   belongs_to :applicant
+  belongs_to :citizenship_country, class_name: 'Country', foreign_key: :citizenship_country_iso_code, primary_key: :iso_code
   has_one :account, through: :applicant
   has_many :log_records
   has_many :verification_documents, inverse_of: 'verification'
   accepts_nested_attributes_for :verification_documents
-  has_one :citizenship_country, class_name: 'Country', foreign_key: :iso_code, primary_key: :citizenship_country_iso_code
 
   before_save do
     self.first_name = first_name.to_s.upcase
     self.last_name = last_name.to_s.upcase
-    self.citizenship_country_iso_code = citizenship_country_iso_code.to_s.upcase
     self.patronymic = patronymic.to_s.upcase if patronymic.present?
     self.document_number = document_number.to_s.upcase
   end
