@@ -4,6 +4,8 @@
     div 
       div= time_ago_in_words verification.object.created_at
       small.text-muted=l(verification.object.created_at, format: :long)
+    - if member.admin?
+      = render 'notify', verification: verification
   .col-md-2
     .text-muted= verification.class.human_attribute_name :full_name
     ul.list-unstyled

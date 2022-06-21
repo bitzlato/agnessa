@@ -32,6 +32,16 @@
                                          POST     /members(.:format)                                                                                admin/members#create
                             admin_member PATCH    /members/:id(.:format)                                                                            admin/members#update
                                          PUT      /members/:id(.:format)                                                                            admin/members#update
+                   archive_admin_country DELETE   /countries/:id/archive(.:format)                                                                  admin/countries#archive
+                   restore_admin_country POST     /countries/:id/restore(.:format)                                                                  admin/countries#restore
+                         admin_countries GET      /countries(.:format)                                                                              admin/countries#index
+                                         POST     /countries(.:format)                                                                              admin/countries#create
+                       new_admin_country GET      /countries/new(.:format)                                                                          admin/countries#new
+                      edit_admin_country GET      /countries/:id/edit(.:format)                                                                     admin/countries#edit
+                           admin_country GET      /countries/:id(.:format)                                                                          admin/countries#show
+                                         PATCH    /countries/:id(.:format)                                                                          admin/countries#update
+                                         PUT      /countries/:id(.:format)                                                                          admin/countries#update
+                                         DELETE   /countries/:id(.:format)                                                                          admin/countries#destroy
               admin_review_result_labels GET      /review_result_labels(.:format)                                                                   admin/review_result_labels#index
                                          POST     /review_result_labels(.:format)                                                                   admin/review_result_labels#create
            new_admin_review_result_label GET      /review_result_labels/new(.:format)                                                               admin/review_result_labels#new
@@ -40,6 +50,7 @@
                                          PATCH    /review_result_labels/:id(.:format)                                                               admin/review_result_labels#update
                                          PUT      /review_result_labels/:id(.:format)                                                               admin/review_result_labels#update
                                          DELETE   /review_result_labels/:id(.:format)                                                               admin/review_result_labels#destroy
+               notify_admin_verification POST     /verifications/:id/notify(.:format)                                                               admin/verifications#notify
               confirm_admin_verification POST     /verifications/:id/confirm(.:format)                                                              admin/verifications#confirm
                refuse_admin_verification POST     /verifications/:id/refuse(.:format)                                                               admin/verifications#refuse
                      admin_verifications GET      /verifications(.:format)                                                                          admin/verifications#index
@@ -50,6 +61,7 @@
                                          PATCH    /verifications/:id(.:format)                                                                      admin/verifications#update
                                          PUT      /verifications/:id(.:format)                                                                      admin/verifications#update
                                          DELETE   /verifications/:id(.:format)                                                                      admin/verifications#destroy
+             admin_verification_document GET      /verification_documents/:id(.:format)                                                             admin/verification_documents#show
            recreate_secret_admin_account POST     /account/recreate_secret(.:format)                                                                admin/accounts#recreate_secret
 verification_callback_test_admin_account POST     /account/verification_callback_test(.:format)                                                     admin/accounts#verification_callback_test
                            admin_account GET      /account(.:format)                                                                                admin/accounts#show

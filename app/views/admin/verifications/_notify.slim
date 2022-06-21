@@ -1,0 +1,11 @@
+div
+  = link_to 'Обновить статус в приложении', 
+    notify_admin_verification_path(verification), 
+    method: :post, 
+    class: 'btn btn-secondary btn-sm', 
+    data: { 'disable-width' => 'Отправляю..' },
+    remote: true, 
+    id: :verification_callback_form
+
+  #verification_callback_result
+
