@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-module ClientConstraint
+module AdminConstraint
   def self.matches?(request)
     (RequestStore.store[:current_account] = Account.find_by_subdomain(request.subdomain)).present?
   end
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :update], controller: 'profile'
   end
 
-  scope constraints: ClientConstraint do
+  scope constraints: AdminConstraint do
     mount ClientApi => '/'
 
     scope as: :admin, module: :admin do
@@ -77,6 +77,7 @@ Rails.application.routes.draw do
       resources :review_result_labels
       resources :verifications do
         member  do
+          post :notify
           post :confirm
           post :refuse
         end

@@ -39,6 +39,22 @@ class Admin::VerificationsController < Admin::ResourcesController
     end
   end
 
+  def notify
+    url = current_account.verification_callback_url
+    if url.present?
+      begin
+        response = VerificationStatusNotifier.perform(verification)
+        status = response.status
+        body = response.body
+      rescue Faraday::ConnectionFailed
+        body = 'ConnectionFailed'
+      end
+    else
+      body = "Не задан #{I18n.t('simple_form.labels.account.verification_callback_url')}"
+    end
+    render locals: {status: status, body: body}, layout: false
+  end
+
   def confirm
     verification.confirm!(member: current_member)
     redirect_to_next reason: verification.reason, notice: 'Подтверждено'
