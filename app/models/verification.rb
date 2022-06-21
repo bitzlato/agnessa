@@ -9,11 +9,11 @@ class Verification < ApplicationRecord
 
   belongs_to :moderator, class_name: 'Member', required: false
   belongs_to :applicant
+  belongs_to :citizenship_country, class_name: 'Country', foreign_key: :citizenship_country_iso_code, primary_key: :iso_code
   has_one :account, through: :applicant
   has_many :log_records
   has_many :verification_documents, inverse_of: 'verification'
   accepts_nested_attributes_for :verification_documents
-  has_one :citizenship_country, class_name: 'Country', foreign_key: :iso_code, primary_key: :citizenship_country_iso_code
 
   before_save do
     self.first_name = first_name.to_s.upcase
@@ -35,6 +35,7 @@ class Verification < ApplicationRecord
 
   validate :validate_labels
 
+  validate :permitted_citizenship, on: :create
   validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
   validate :minimum_documents_amount, on: :create
@@ -130,6 +131,10 @@ class Verification < ApplicationRecord
   end
 
   private
+
+  def permitted_citizenship
+    errors.add :citizenship_country_iso_code, I18n.t('errors.messages.citizenship_not_allowed') unless citizenship_country.alive?
+  end
 
   def over_18_years_old
     errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
