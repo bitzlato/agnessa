@@ -6,6 +6,7 @@ class VerificationStatusNotifier
 
   def self.perform verification
     url = verification.account.verification_callback_url
+    verification.touch :notified_at
     data = {
       external_id: verification.applicant.external_id,
       applicant_id: verification.applicant.id,
