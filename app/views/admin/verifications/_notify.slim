@@ -8,4 +8,8 @@ div
     id: :verification_callback_form
 
   #verification_callback_result
+  
+  - if verification.notifed_at
+    .text-small Последнее уведомление
+    = I18n.l verification.notifed_at
 
