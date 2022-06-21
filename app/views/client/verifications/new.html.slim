@@ -1,5 +1,5 @@
 .container
-  h1 Верификация аккаунта
+  h1 =t '.title'
   h4 = verification.applicant.external_id
 .container
   = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
@@ -11,7 +11,7 @@
       h3= t('.last_refused_title')
       .alert.alert-warning.pre-line role='alert'
         = last_refused_verification.public_comment
-    h3 Личные данные
+    h3 = t '.personal_data'
     .row
       .col-md-9
         .row
@@ -27,7 +27,7 @@
             = f.input :email, as: :email
 
       .col-md-3
-    h3 Выберите тип документа
+    h3 =t '.choose_document_type'
     .row
       .col-md-9
         .row
@@ -41,7 +41,7 @@
       .col-md-3
     .row
       .col-md-9
-        h3 Загрузите фото документов
+        h3  =t '.upload_document_photo'
         .row
           = f.simple_fields_for :verification_documents do |document|
             .col-md-4
@@ -60,4 +60,4 @@
     .row
       .col-12
         .text-right
-          = f.submit 'Продолжить', class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }
+          = f.submit t('.submit'), class: 'btn btn-lg btn-primary', data: { 'disable-width' => 'Отправляю..' }

@@ -32,8 +32,11 @@ ru:
       verified:
         message: Ваш аккаунт (%{account_id}) уже прошел проверку
       new:
-        applicant_comment_placeholder: Комментарий, информация об утерянном аккаунте, почта, прошлый ID...
-        title:  'Заявка на верификацию аккаунта %{account_id} в %{org}'
+        title: 'Верификация аккаунта'
+        personal_data: 'Личные данные'
+        choose_document_type: 'Выберите тип документа'
+        upload_document_photo: 'Загрузите фото документов'
+        submit: 'Продоложить'
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
       document_field:
         document_hint:  'Размер файла:  От %{from} до %{to}'
