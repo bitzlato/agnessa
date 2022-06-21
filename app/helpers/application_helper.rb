@@ -47,6 +47,10 @@ module ApplicationHelper
     buffer.html_safe
   end
 
+  def content_type_to_extensions(content_types)
+    content_types.map { |ct| Rack::Mime::MIME_TYPES.invert[ct] }.join(' ,')
+  end
+
   def document_file_hint
     t('client.verifications.document_field.document_hint', from: number_to_human_size(Rails.configuration.application.min_upload_file_size),
                                                            to: number_to_human_size(Rails.configuration.application.max_upload_file_size),
@@ -110,5 +114,9 @@ module ApplicationHelper
 
   def country_options_for_select
     Country.order('title_ru ASC').map { |value| [value.send("title_#{I18n.locale}"), value.iso_code] }
+  end
+
+  def document_type_collection_for_radio_buttons
+    Rails.configuration.application.available_documents.map{ |x| [I18n.t(x, scope: 'attributes.document_types'), x] }
   end
 end
