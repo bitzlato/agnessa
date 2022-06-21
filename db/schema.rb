@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_17_102514) do
+ActiveRecord::Schema.define(version: 2022_06_21_063231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -186,6 +186,7 @@ ActiveRecord::Schema.define(version: 2022_06_17_102514) do
     t.string "number"
     t.bigint "citizenship_id"
     t.string "document_type"
+    t.datetime "notified_at"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["citizenship_id"], name: "index_verifications_on_citizenship_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
