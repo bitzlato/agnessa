@@ -6,6 +6,10 @@ class Country < ApplicationRecord
   validates_inclusion_of :available_documents, in: Rails.application.config.application.available_documents
 
 
+  before_create do
+    self.available_documents = Rails.application.config.application.available_documents
+  end
+
   before_save do
     self.iso_code = iso_code.upcase
   end
