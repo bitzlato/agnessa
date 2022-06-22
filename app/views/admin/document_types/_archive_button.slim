@@ -1,0 +1,4 @@
+- if document_type.archived?
+  = link_to 'Восстановить', restore_admin_document_type_path(document_type), class: 'btn btn-sm btn-success', method: :post
+- else
+  = link_to 'Архивировать', archive_admin_document_type_path(document_type), class: 'btn btn-sm btn-secondary', method: :delete

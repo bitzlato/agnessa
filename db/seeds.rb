@@ -24,7 +24,7 @@ verification = applicant.verifications.build({
   reason: :unban, email: 'test@test.test', status: :pending
 })
 
-account.document_types.available.each do |document_type|
+account.document_types.alive.each do |document_type|
   if document_type.file_type == 'video'
     verification.verification_documents.new document_type: document_type, file: File.open(File.join(Rails.root, '/spec/fixtures/video.mp4'))
   else

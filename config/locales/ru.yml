@@ -74,6 +74,7 @@ ru:
       users: 'Пользователи'
       review_result_labels: 'Статусы верификаций'
       profile: 'Профиль организации'
+      document_types: 'Типы прикрепляемых документов'
       log_records: 'Журнал событий'
       countries: 'Страны'
 
