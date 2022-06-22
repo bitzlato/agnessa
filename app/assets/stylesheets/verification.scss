@@ -3,9 +3,11 @@
 */
 
 $color-primary: rgba(72, 91, 193, 1);
+$color-primary-light: rgba(219, 228, 252, 1);
 
 $theme-colors: (
   "primary": $color-primary,
+  "light": $color-primary-light,
 );
 
 $grid-gutter-width: 24px !default;
