@@ -3,7 +3,7 @@ class Country < ApplicationRecord
 
   validates :title_en, :title_ru, :iso_code, presence: true
   validates :iso_code, :title_ru, :title_en, uniqueness: true
-  validates_inclusion_of :available_documents, in: Rails.application.config.application.available_documents
+  validates :available_documents, inclusion: { in: Rails.application.config.application.available_documents }, allow_blank: true
 
   before_save do
     self.iso_code = iso_code.upcase
