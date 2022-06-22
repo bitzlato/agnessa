@@ -32,7 +32,7 @@ class Admin::CountriesController < Admin::ApplicationController
     end
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Country
-    render :edit, locals: { member: Country }
+    render :edit, locals: { country: country }
   end
 
   def restore
@@ -56,6 +56,6 @@ class Admin::CountriesController < Admin::ApplicationController
   end
 
   def country_params
-    params.require(:country).permit(:iso_code, :title_ru, :document, :title_en, { available_documents: [] })
+    params.require(:country).permit(:iso_code, :title_ru, :document, :title_en,  :available_documents => [])
   end
 end
