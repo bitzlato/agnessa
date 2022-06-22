@@ -2,21 +2,67 @@
  *= require build/css/bootstrap-datetimepicker.min
 */
 
+$color-primary: rgba(72, 91, 193, 1);
+
+$theme-colors: (
+  "primary": $color-primary,
+);
+
+$grid-gutter-width: 24px !default;
+
 @import "bootstrap";
 
 .instruction {
-    padding-top: 100px;
+  padding-top: 100px;
 }
 
-.file .btn-default .fileinput-exists, .file .btn-default .fileinput-new, .file  .form-control, .file .input-group-addon {
-    display: none;
+.file .btn-default .fileinput-exists,
+.file .btn-default .fileinput-new,
+.file .form-control,
+.file .input-group-addon {
+  display: none;
 }
 
 .file .invalid-feedback {
-    display: block;
+  display: block;
 }
 
 .pre-line {
   white-space: pre-line;
 }
 
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+ul,
+ol {
+  padding-inline-start: 20px;
+}
+
+::marker {
+  color: inherit;
+}
+
+.form-control-label {
+  font-size: 14px;
+}
+
+.form-control-label abbr[title] {
+  text-decoration: none;
+}
+
+.form-check.form-check-inline label {
+  margin-bottom: 0;
+}
+
+.form-check-input {
+  width: 16px;
+  height: 16px;
+  background-color: $color-primary;
+  border-color: $color-primary;
+}
