@@ -7,7 +7,8 @@ class Admin::CountriesController < Admin::ApplicationController
   end
 
   def new
-    render locals: { country: Country.new }
+    country = Country.new(available_documents: Rails.application.config.application.available_documents)
+    render locals: { country: country }
   end
 
   def create
