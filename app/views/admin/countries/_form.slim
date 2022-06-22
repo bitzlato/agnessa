@@ -1,5 +1,9 @@
 = simple_form_for [:admin, country] do |f|
-  = f.input :iso_code, required: true
-  = f.input :title_ru, required: true
-  = f.input :title_en, required: true
+  = f.input :iso_code
+  = f.input :title_ru
+  = f.input :title_en
+  = f.input :available_documents,
+            as: :check_boxes,
+            wrapper: :horizontal_collection_inline,
+            collection: Rails.application.config.application.available_documents
   = f.button :submit,  class: 'btn btn-success'
