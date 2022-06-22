@@ -1,0 +1,23 @@
+.container
+  h1 Типы прикрепляемых файлов
+
+  hr
+  div.mb-2= t 'application.index.total_records', count: document_types.count
+  table.table.table-striped.table-hover
+    thead.thead-dark
+      tr
+        th Название
+        th Тип Файла
+        th Ext
+        th
+
+    tbody
+      - document_types.each do |document_type|
+        tr
+          td = document_type.title
+          td = document_type.file_type
+          td = content_type_to_extensions(document_type.content_types)
+          td
+            = render 'archive_button', document_type: document_type
+      br
+  = paginate document_types
