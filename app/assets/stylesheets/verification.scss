@@ -84,3 +84,11 @@ abbr[title="required"] {
 .bootstrap-datetimepicker-widget table td span.active {
   background-color: $color-primary;
 }
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  padding: 8px;
+}
+
+.bootstrap-datetimepicker-widget table th {
+  padding: 8px 0;
+}
