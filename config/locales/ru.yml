@@ -1,14 +1,19 @@
 ru:
-
-
   date:
     formats:
-      date_picker: '%Y-%m-%d'
+      default: "%d.%m.%Y"
+      date_picker:  "%d.%m.%Y"
       date_picker_js: 'DD.MM.YYYY'
+
   time:
+    am: утра
     formats:
-      date_picker: '%Y-%m-%d %I:%M:%S %p'
+      default: "%a, %d %b %Y, %H:%M:%S %z"
+      long: "%d %B %Y, %H:%M"
+      short: "%d %b, %H:%M"
       date_picker_js: 'DD.MM.YYYY hh:mm:ss'
+      date_picker: "%a, %d %b %Y, %H:%M:%S %z"
+    pm: вечера
   verification:
     success_sending: 'Данные отправлены'
   are_you_sure?: Уверен?
