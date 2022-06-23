@@ -54,7 +54,7 @@
         .row.mt-3.align-items-end.justify-content-between
           = f.simple_fields_for :verification_documents do |document|
             .col-md-5
-              = render 'document_field_designed', document: document
+              = render 'document_field', document: document
           / .col-md-5
           /   p
           /     span.text-primary.font-weight-semibold= '1. '
