@@ -50,8 +50,7 @@ javascript:
 
 
       function showPhoto(event) {
-        // var input = event.target;
-        var input = document.querySelectorAll('[data-file-input]')[1];
+        var input = event.target;
         if (input.files && input.files[0]) {
           var fileName = input.files[0].name;
           toggleShowFilename(fileName);
