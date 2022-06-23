@@ -19,7 +19,7 @@ div data-file-input=""
           | Загрузить файл
       span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted
         | Файл не выбран
-      input.custom-file-input.position-absolute type="file" name=document.object_name+'[file]'  style="height: 0" data-input="" accept=document.object.document_type.content_types.join(',')
+      input.custom-file-input.position-absolute value=document.object.file type="file" name=document.object_name+'[file]'  style="height: 0" data-input="" accept=document.object.document_type.content_types.join(',')
 
   div style="display: none" data-filename-container=""
     button.form-control.p-0.m-0.input-group.overflow-hidden.flex-nowrap style="cursor: pointer" type="button" data-clear-button=""

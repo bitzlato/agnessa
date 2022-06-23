@@ -1,5 +1,6 @@
 javascript:
   function initFileInputs() {
+    const tmpPath = '/uploads/tmp/'
     var fileInputs = document.querySelectorAll('[data-file-input]');
     if (!fileInputs) {
       return;
@@ -47,8 +48,10 @@ javascript:
         }
       }
 
+
       function showPhoto(event) {
-        var input = event.target;
+        // var input = event.target;
+        var input = document.querySelectorAll('[data-file-input]')[1];
         if (input.files && input.files[0]) {
           var fileName = input.files[0].name;
           toggleShowFilename(fileName);
@@ -57,6 +60,32 @@ javascript:
           toggleShowFilename();
           toggleShowPreview();
         }
+      }
+
+      function toggleCachedPreview(filePath) {
+          if (filePath) {
+              preview.src = filePath;
+              preview.style.display = 'block';
+              previewPlaceholder.style.display = 'none';
+          } else {
+              preview.src = '';
+              preview.style.display = 'none';
+              previewPlaceholder.style.display = 'block';
+          }
+      }
+
+      function  showCachedPhoto() {
+          var input = document.querySelectorAll('[data-file-input]')[1];
+          var cacheUrl = tmpPath + document.querySelector('#verification_verification_documents_attributes_1_file_cache').value;
+          var fileName = cacheUrl.replace(/^.*[\\\/]/, '')
+
+          if (fileName) {
+              toggleShowFilename(fileName);
+              toggleCachedPreview(cacheUrl)
+          } else {
+              toggleShowFilename();
+              toggleCachedPreview();
+          }
       }
 
       function clearFile() {
@@ -77,6 +106,7 @@ javascript:
       });
 
       clearFileButton.addEventListener('click', clearFile);
+      showCachedPhoto();
     });
   }
 
