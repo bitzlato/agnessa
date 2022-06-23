@@ -45,7 +45,8 @@
                     label: false,
                     collection: document_type_collection_for_radio_buttons,
                     wrapper: :horizontal_collection_inline
-            = f.input :document_number
+            .w-50
+              = f.input :document_number
       .col-md-3
 
     .row.mt-5
@@ -87,7 +88,7 @@
               = 'Селфи с документом и листком бумаги, с текущей датой и фразой «для криптобанка Bitzlato»'
             div data-file-input=""
               .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4.mb-3 style="height: 230px; border-style: dashed"
-                = image_tag asset_url('photo-doc-example-1@2x.png'), width: 186, class: 'w-50', data: {'preview-placeholder': ''}
+                = image_tag asset_url('photo-doc-example-2@2x.png'), width: 186, class: 'w-50', data: {'preview-placeholder': ''}
                 img style="max-width: 80%; max-height: 100%;" data-preview=""
 
               div data-controls=""
@@ -154,7 +155,7 @@
             p.small.mb-0
               | В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
 
-    .row.mt-5
+    .row.my-5
       .col-8
       .col-4
         .text-right
