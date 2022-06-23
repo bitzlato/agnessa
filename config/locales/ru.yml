@@ -4,11 +4,11 @@ ru:
   date:
     formats:
       date_picker: '%Y-%m-%d'
-      date_picker_js: 'YYYY-MM-DD'
+      date_picker_js: 'DD.MM.YYYY'
   time:
     formats:
       date_picker: '%Y-%m-%d %I:%M:%S %p'
-      date_picker_js: 'YYYY-MM-DD hh:mm:ss'
+      date_picker_js: 'DD.MM.YYYY hh:mm:ss'
   verification:
     success_sending: 'Данные отправлены'
   are_you_sure?: Уверен?
