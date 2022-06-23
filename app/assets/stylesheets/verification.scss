@@ -68,3 +68,7 @@ ol {
   background-color: $color-primary;
   border-color: $color-primary;
 }
+
+abbr[title="required"] {
+  display: none;
+}
