@@ -9,6 +9,7 @@
         th Название
         th Тип Файла
         th Позиция
+        th Placeholder Photo
         th Ext
         th
 
@@ -18,6 +19,7 @@
           td = document_type.title
           td = document_type.file_type
           td = document_type.position
+          td = document_type.placeholder_photo
           td = content_type_to_extensions(document_type.content_types)
           td
             = render 'archive_button', document_type: document_type
