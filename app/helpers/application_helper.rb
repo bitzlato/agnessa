@@ -48,7 +48,7 @@ module ApplicationHelper
   end
 
   def content_type_to_extensions(content_types)
-    content_types.map { |ct| Rack::Mime::MIME_TYPES.invert[ct] }.join(' ,')
+    content_types.map { |ct| Rack::Mime::MIME_TYPES.invert[ct] }.reject(&:blank?).uniq.join(' ,')
   end
 
   def document_file_hint

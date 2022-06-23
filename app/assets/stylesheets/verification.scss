@@ -67,3 +67,7 @@ ol {
   height: 16px;
   accent-color: $color-primary;
 }
+
+abbr[title="required"] {
+  display: none;
+}

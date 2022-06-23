@@ -1,5 +1,6 @@
 javascript:
   function initFileInputs() {
+    const tmpPath = '/uploads/tmp/'
     var fileInputs = document.querySelectorAll('[data-file-input]');
     if (!fileInputs) {
       return;
@@ -47,6 +48,7 @@ javascript:
         }
       }
 
+
       function showPhoto(event) {
         var input = event.target;
         if (input.files && input.files[0]) {
@@ -57,6 +59,32 @@ javascript:
           toggleShowFilename();
           toggleShowPreview();
         }
+      }
+
+      function toggleCachedPreview(filePath) {
+          if (filePath) {
+              preview.src = filePath;
+              preview.style.display = 'block';
+              previewPlaceholder.style.display = 'none';
+          } else {
+              preview.src = '';
+              preview.style.display = 'none';
+              previewPlaceholder.style.display = 'block';
+          }
+      }
+
+      function  showCachedPhoto(input) {
+          var file_cache_index = input.dataset.index;
+          var cacheUrl = tmpPath + document.querySelector(`#verification_verification_documents_attributes_${file_cache_index}_file_cache`).value;
+          var fileName = cacheUrl.replace(/^.*[\\\/]/, '')
+
+          if (fileName) {
+              toggleShowFilename(fileName);
+              toggleCachedPreview(cacheUrl)
+          } else {
+              toggleShowFilename();
+              toggleCachedPreview();
+          }
       }
 
       function clearFile() {
@@ -73,6 +101,7 @@ javascript:
       inputsList.forEach(input => {
         if (input) {
           input.addEventListener('change', showPhoto);
+          showCachedPhoto(input);
         }
       });
 
