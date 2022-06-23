@@ -6,5 +6,7 @@ FactoryBot.define do
 
     form_description { '%{email_from} %{sumdomain} %{name}'}
     # sequence(:verification_callback_url) { |i| "test#{i}.test.test" }
+    #
+    position { rand(1..100) }
   end
 end

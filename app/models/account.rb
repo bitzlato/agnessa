@@ -65,8 +65,8 @@ class Account < ApplicationRecord
 
   def create_document_types
     [
-      { file_type: 'image', title: 'Селфи с документом и листком бумаги, с текущей датой и фразой «для криптобанка Bitzlato»', calculate_similarity: true },
-      { file_type: 'image', title: 'Фотография или скан действительного документа, удостоверяющего личность' }
+      { file_type: 'image', title: 'Фотография или скан действительного документа, удостоверяющего личность', position: 1, calculate_similarity: false },
+      { file_type: 'image', title: 'Селфи с документом и листком бумаги, с текущей датой и фразой «для криптобанка Bitzlato»', calculate_similarity: true, position: 2 }
     ].each do |attributes|
       document_types.create!(attributes)
     end
