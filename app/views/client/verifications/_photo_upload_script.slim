@@ -74,9 +74,9 @@ javascript:
           }
       }
 
-      function  showCachedPhoto() {
-          var input = document.querySelectorAll('[data-file-input]')[1];
-          var cacheUrl = tmpPath + document.querySelector('#verification_verification_documents_attributes_1_file_cache').value;
+      function  showCachedPhoto(input) {
+          var file_cache_index = input.dataset.index;
+          var cacheUrl = tmpPath + document.querySelector(`#verification_verification_documents_attributes_${file_cache_index}_file_cache`).value;
           var fileName = cacheUrl.replace(/^.*[\\\/]/, '')
 
           if (fileName) {
@@ -102,11 +102,11 @@ javascript:
       inputsList.forEach(input => {
         if (input) {
           input.addEventListener('change', showPhoto);
+          showCachedPhoto(input);
         }
       });
 
       clearFileButton.addEventListener('click', clearFile);
-      showCachedPhoto();
     });
   }
 

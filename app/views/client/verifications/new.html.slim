@@ -54,7 +54,7 @@
         .row.mt-3.align-items-end.justify-content-between
           = f.simple_fields_for :verification_documents do |document|
             .col-md-5
-              = render 'document_field_designed', document: document, f: f
+              = render 'document_field_designed', document: document
           / .col-md-5
           /   p
           /     span.text-primary.font-weight-semibold= '1. '
@@ -111,13 +111,6 @@
           /           span.text-truncate.w-75.pr-3 data-filename=""
           /           span.position-absolute.px-3 style="right: 0"
           /             | &times;
-      /
-      / .col-md-9
-      /   h3.text-primary.font-weight-bold  =t '.upload_document_photo'
-      /   .row.mt-3
-      /     = f.simple_fields_for :verification_documents do |document|
-      /       .col-md-4
-      /         = render 'document_field', document: document
 
       .col-md-3
         .pl-5

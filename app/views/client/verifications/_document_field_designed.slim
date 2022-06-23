@@ -19,7 +19,7 @@ div data-file-input=""
           | Загрузить файл
       span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted
         | Файл не выбран
-      input.custom-file-input.position-absolute value=document.object.file type="file" name=document.object_name+'[file]'  style="height: 0" data-input="" accept=document.object.document_type.content_types.join(',')
+      input.custom-file-input.position-absolute data-index=document.index value=document.object.file type="file" name=document.object_name+'[file]'  style="height: 0" data-input="" accept=document.object.document_type.content_types.join(',')
 
   div style="display: none" data-filename-container=""
     button.form-control.p-0.m-0.input-group.overflow-hidden.flex-nowrap style="cursor: pointer" type="button" data-clear-button=""
@@ -30,13 +30,6 @@ div data-file-input=""
         span.text-truncate.w-75.pr-3 data-filename=""
         span.position-absolute.px-3 style="right: 0"
           | &times;
-.col-lg-12
-  = document.input :file,
-          wrapper: :vertical_file,
-          as: :file,
-          value: :huiyna,
-          label: document.object.document_type.title,
-          input_html: { accept: document.object.document_type.content_types.join(',')}
 
   = document.input :file_cache, as: :hidden
   = document.input :document_type_id, as: :hidden
