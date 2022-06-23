@@ -3,8 +3,7 @@ class Country < ApplicationRecord
 
   validates :title_en, :title_ru, :iso_code, presence: true
   validates :iso_code, :title_ru, :title_en, uniqueness: true
-  validates_inclusion_of :available_documents, in: Rails.application.config.application.available_documents
-
+  validate :check_available_documents
 
   before_save do
     self.iso_code = iso_code.upcase
@@ -15,6 +14,16 @@ class Country < ApplicationRecord
       self.available_documents.delete(val)
     else
       self.available_documents = self.available_documents.append(val).uniq
+    end
+  end
+
+  private
+
+  def check_available_documents
+    available_documents.each do |doc|
+      unless  Rails.application.config.application.available_documents.include?(doc) || πdoc == ''
+        errors.add :available_documents, 'имеет непредусмотренное значение'
+      end
     end
   end
 end
