@@ -21,7 +21,7 @@ class Country < ApplicationRecord
 
   def check_available_documents
     available_documents.each do |doc|
-      unless  Rails.application.config.application.available_documents.include?(doc) || πdoc == ''
+      unless  Rails.application.config.application.available_documents.include?(doc) || doc == ''
         errors.add :available_documents, 'имеет непредусмотренное значение'
       end
     end
