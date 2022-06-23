@@ -1,6 +1,5 @@
 p
-  span.text-primary.font-weight-semibold= '1. '
-  / = 'Фотография или скан действительного документа, удостоверяющего личность'
+  span.text-primary.font-weight-semibold= "#{document.index+1}. "
   = document.object.document_type.title
 
 div data-file-input=""
