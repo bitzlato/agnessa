@@ -71,3 +71,16 @@ ol {
 abbr[title="required"] {
   display: none;
 }
+
+.bootstrap-datetimepicker-widget table td.today:before {
+  border-bottom-color: $color-primary;
+}
+
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: $color-primary;
+}
+
+.bootstrap-datetimepicker-widget table td span.active {
+  background-color: $color-primary;
+}
