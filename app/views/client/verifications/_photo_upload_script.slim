@@ -1,0 +1,83 @@
+javascript:
+  function initFileInputs() {
+    var fileInputs = document.querySelectorAll('[data-file-input]');
+    if (!fileInputs) {
+      return;
+    }
+
+    Array.from(fileInputs).forEach(fileInputContainer => {
+      var inputs = fileInputContainer.querySelectorAll('[data-input]');
+
+      if (!inputs) {
+        return;
+      }
+
+      var inputsList = Array.from(inputs);
+
+      var clearFileButton = fileInputContainer.querySelector('[data-clear-button]');
+      var previewPlaceholder = fileInputContainer.querySelector('[data-preview-placeholder]');
+      var preview = fileInputContainer.querySelector('[data-preview]');
+
+      function toggleShowFilename(fileName) {
+        var photoInputControls = fileInputContainer.querySelector('[data-controls]')
+        var photoFilename = fileInputContainer.querySelector('[data-filename-container]');
+
+        if (fileName) {
+          photoInputControls.style.display = 'none';
+          photoFilename.style.display = 'block';
+
+          var fileNameContainer = photoFilename.querySelector('[data-filename]');
+          fileNameContainer.innerHTML = fileName;
+        } else {
+          photoInputControls.style.display = 'block';
+          photoFilename.style.display = 'none';
+        }
+      }
+
+      function toggleShowPreview(file) {
+        if (file) {
+          var src = URL.createObjectURL(file);
+          preview.src = src;
+          preview.style.display = 'block';
+          previewPlaceholder.style.display = 'none';
+        } else {
+          preview.src = '';
+          preview.style.display = 'none';
+          previewPlaceholder.style.display = 'block';
+        }
+      }
+
+      function showPhoto(event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+          var fileName = input.files[0].name;
+          toggleShowFilename(fileName);
+          toggleShowPreview(input.files[0])
+        } else {
+          toggleShowFilename();
+          toggleShowPreview();
+        }
+      }
+
+      function clearFile() {
+        inputsList.forEach(input => {
+          if (input) {
+            input.value = '';
+          }
+        });
+
+        toggleShowFilename();
+        toggleShowPreview();
+      }
+
+      inputsList.forEach(input => {
+        if (input) {
+          input.addEventListener('change', showPhoto);
+        }
+      });
+
+      clearFileButton.addEventListener('click', clearFile);
+    });
+  }
+
+  initFileInputs();
