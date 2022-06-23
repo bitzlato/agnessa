@@ -1,7 +1,11 @@
 .border-bottom
   .container
-    h1.h3.font-weight-semibold.mt-4 =t '.title'
-    h4.h6.mb-3.font-weight-normal = verification.applicant.external_id
+    .d-flex.align-items-center.justify-content-between.my-3
+      div
+        h1.h3.font-weight-semibold =t '.title'
+        h4.h6.font-weight-normal = verification.applicant.external_id
+      div
+        = image_tag asset_url('bz-logo.svg'), width: 40
 
 .container
   = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
