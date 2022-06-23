@@ -52,7 +52,7 @@
       .col-md-9
         h3.text-primary.font-weight-bold  =t '.upload_document_photo'
         .row.mt-3.align-items-end.justify-content-between
-          = f.object.verification_documents.each do |document|
+          = f.simple_fields_for :verification_documents do |document|
             .col-md-5
               = render 'document_field_designed', document: document, f: f
           / .col-md-5
