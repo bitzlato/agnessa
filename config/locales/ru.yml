@@ -42,12 +42,11 @@ ru:
         document_hint:  'Размер файла:  От %{from} до %{to}'
       created:
         title: 'Принята заявка #%{id}'
-        message: '<div ng-show="vm.submited" style="text-align: justify; font-size: 1em;" class="ng-binding">
-                    <br><h2 style="text-align: center; margin-top: -17px;" class="ng-binding">Благодарим за подачу заявки!</h2><br> 
-                        Администрация сервиса рассмотрит Вашу заявку так быстро, насколько это возможно. В случае одобрения - верифицированы будут все Ваши аккаунты в сервисах.<br>
-                        В случае отказа - Вы получите соответствующее уведомление в течении 24-х часов.
-                        <a href="https://support.bitzlato.com" class="ng-binding">Служба поддержки</a>
-                </div>'
+        message: '<div>
+          <h2 class="h3 mt-5 font-weight-bold">Ваша заявка №%{id} на&nbsp;верификацию принята</h2>
+          <p class="h6 mt-4 font-weight-normal">Мы рассмотрим Вашу заявку в ближайшее время, результат отправим на email, указанный Вами при верификации</p>
+          <p class="h6 mt-3 small text-muted">срок рассмотрения заявки:<br>1 час в рабочее время, но не более 12 часов</p>
+        </div>'
 
   status:
     all: Все
