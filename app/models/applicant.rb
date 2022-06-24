@@ -38,6 +38,10 @@ class Applicant < ApplicationRecord
     end
   end
 
+  def unconfirm!
+    update! confirmed_at: nil, last_confirmed_verification_id: nil
+  end
+
   def verified?
     last_confirmed_verification_id.present?
   end
