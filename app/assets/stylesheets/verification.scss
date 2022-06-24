@@ -4,10 +4,12 @@
 
 $color-primary: rgba(72, 91, 193, 1);
 $color-primary-light: rgba(219, 228, 252, 1);
+$color-info: rgba(240, 243, 249, 1);
 
 $theme-colors: (
   "primary": $color-primary,
   "light": $color-primary-light,
+  "info": $color-info,
 );
 
 $grid-gutter-width: 24px !default;
@@ -93,7 +95,6 @@ abbr[title="required"] {
   padding: 8px 0;
 }
 
-
 $arrow-base64: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSI1IiB2aWV3Qm94PSIwIDAgOSA1IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNC41IDVDNC42Nzc1NiA0Ljk5NTExIDQuODM5OTEgNC45MzE1MSA0Ljk3MTgyIDQuNzk0NTJMOC44Mjc1MSAwLjk4ODI1OEM4LjkzOTEyIDAuODgwNjI2IDkgMC43NDM2NCA5IDAuNTgyMTkyQzkgMC4yNTkyOTYgOC43MzYxOSAwIDguNDAxMzUgMEM4LjIzOTAxIDAgOC4wODE3NCAwLjA2MzYwMDggNy45NjUwNSAwLjE3NjEyNUw0LjUwNTA3IDMuNjA1NjhMMS4wMzQ5NSAwLjE3NjEyNUMwLjkxODI2NCAwLjA2ODQ5MzIgMC43NjYwNjUgMCAwLjU5ODY0NyAwQzAuMjYzODExIDAgMCAwLjI1OTI5NiAwIDAuNTgyMTkyQzAgMC43NDM2NCAwLjA2MDg3OTQgMC44ODA2MjYgMC4xNzI0OTIgMC45ODgyNThMNC4wMzMyNiA0Ljc5NDUyQzQuMTcwMjQgNC45MzE1MSA0LjMyMjQzIDUgNC41IDVaIiBmaWxsPSIjNkM3NTdEIi8+Cjwvc3ZnPgo=";
 $error-base64: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e";
 $success-base64: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e";
@@ -107,15 +108,18 @@ $success-base64: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' w
   background-size: 10px 10px;
 }
 
-
-.was-validated .custom-select:invalid, .custom-select.is-invalid {
+.was-validated .custom-select:invalid,
+.custom-select.is-invalid {
   background-image: url($arrow-base64), url($error-base64);
   background-size: 10px 10px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-  background-position: right calc(0.375em + 0.1875rem + 30px) center, right calc(0.375em + 0.1875rem) center !important;
+  background-position: right calc(0.375em + 0.1875rem + 30px) center,
+    right calc(0.375em + 0.1875rem) center !important;
 }
 
-.was-validated .custom-select:valid, .custom-select.is-valid {
+.was-validated .custom-select:valid,
+.custom-select.is-valid {
   background-image: url($arrow-base64), url($success-base64);
   background-size: 10px 10px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-  background-position: right calc(0.375em + 0.1875rem + 30px) center, right calc(0.375em + 0.1875rem) center !important;
+  background-position: right calc(0.375em + 0.1875rem + 30px) center,
+    right calc(0.375em + 0.1875rem) center !important;
 }

@@ -157,3 +157,5 @@ gem "neighbor"
 gem "geocoder", "~> 1.8"
 
 gem "bootstrap", "~> 4.3"
+
+gem "browser", "~> 5.3"

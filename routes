@@ -69,6 +69,10 @@ verification_callback_test_admin_account POST     /account/verification_callback
                                          PUT      /account(.:format)                                                                                admin/accounts#update
            admin_verification_statistics GET      /verification_statistics(.:format)                                                                admin/verification_statistics#show
                             admin_invite DELETE   /invites/:id(.:format)                                                                            admin/invites#destroy
+              step1_client_verifications GET      /applicants/:encoded_external_id/verifications/step1(.:format)                                    client/verifications#step1
+              step2_client_verifications GET      /applicants/:encoded_external_id/verifications/step2(.:format)                                    client/verifications#step2
+              step3_client_verifications GET      /applicants/:encoded_external_id/verifications/step3(.:format)                                    client/verifications#step3
+              step4_client_verifications GET      /applicants/:encoded_external_id/verifications/step4(.:format)                                    client/verifications#step4
                     client_verifications POST     /applicants/:encoded_external_id/verifications(.:format)                                          client/verifications#create
                  new_client_verification GET      /applicants/:encoded_external_id/verifications/new(.:format)                                      client/verifications#new
            client_short_new_verification GET      /v/:encoded_external_id(.:format)                                                                 client/verifications#new

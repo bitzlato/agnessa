@@ -1,0 +1,35 @@
+.mt-4
+  h1.h4.font-weight-bold Верификация аккаунта
+  h4.h6.font-weight-normal = verification.applicant.external_id
+
+  p.mt-4.small.font-weight-medium Верификация аккаунта дает множество преимуществ. Вы сможете подать заявку на верификацию за 4 шага: 
+
+  .bg-info.px-2.py-3.rounded
+    h5.h6.font-weight-bold.mt-0.mb-3.text-primary Вам потребуется:
+    ol.small
+      li.font-weight-semibold.text-primary.py-1
+        span.text-body Указать личные данные
+      li.font-weight-semibold.text-primary.py-1
+        span.text-body Указать тип документа и его номер
+      li.font-weight-semibold.text-primary.py-1
+        span.text-body Сделать фото действительного документа, удостоверяющего личность
+      li.font-weight-semibold.text-primary.py-1
+        span.text-body Сделать селфи с документом и листком бумаги, где написаны текущая дата и "Bitzlato"
+
+    .d-flex.align-items-center.justify-content-center.my-3
+      .px-4
+        = image_tag asset_url('photo-doc-example-1@2x.png'), width: 75
+      .px-4
+        = image_tag asset_url('photo-doc-example-2@2x.png'), width: 75
+
+    .my-4.w-50.mx-auto.border-primary.border-top style="border-top-style: dashed!important"
+
+    .d-flex.align-items-center
+      .flex-shrink-0.mr-2.align-self-start
+        = image_tag asset_url('shield@2x.png'), width: 13
+      p.small.font-weight-semibold.mb-0 В случае необходимости служба поддержки может запросить у вас дополнительную информацию, например - видео с документом
+
+  .mb-5.pb-5
+
+.container.fixed-bottom.pb-4.d-flex.justify-content-center
+  = link_to 'Пройти верификацию', step1_client_verifications_path, class: 'btn btn-primary flex-grow-1' 

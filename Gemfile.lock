@@ -161,6 +161,7 @@ GEM
       sassc-rails (>= 2.0.0)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
+    browser (5.3.1)
     bson (4.12.1)
     bugsnag (6.24.2)
       concurrent-ruby (~> 1.0)
@@ -645,6 +646,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap (>= 1.4.4)
   bootstrap (~> 4.3)
+  browser (~> 5.3)
   bugsnag
   bugsnag-capistrano
   byebug

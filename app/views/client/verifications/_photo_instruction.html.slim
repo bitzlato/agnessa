@@ -1,0 +1,19 @@
+.mt-4.bg-info.px-2.py-3.rounded
+  .d-flex.align-items-center.mb-2
+    .flex-shrink-0.mr-2.align-self-start
+      = image_tag asset_url('file-earmark-check@2x.png'), width: 13
+    p.small.mb-0
+      = first_point
+      
+  .d-flex.align-items-center.mb-2
+    .flex-shrink-0.mr-2.align-self-start
+      = image_tag asset_url('file-x@2x.png'), width: 13
+    p.small.mb-0 На фото нет дополнительных объектов
+
+  .d-flex.align-items-center.mb-2
+    .flex-shrink-0.mr-2.align-self-start
+      = image_tag asset_url('file-richtext@2x.png'), width: 13
+    p.small.mb-0
+      = 'Размер: 50,0 КБ до 50,0 МБ'
+      br
+      = 'Формат: JPG, JPEG, PNG'

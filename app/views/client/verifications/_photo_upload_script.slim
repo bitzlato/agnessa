@@ -79,8 +79,9 @@ javascript:
 
     function showCachedPhoto(input) {
         var file_cache_index = input.dataset.index;
-        var cacheUrl = tmpPath + document.querySelector(`#verification_verification_documents_attributes_${file_cache_index}_file_cache`).value;
-        var fileName = cacheUrl.replace(/^.*[\\\/]/, '')
+        var cacheFileElement = document.querySelector(`#verification_verification_documents_attributes_${file_cache_index}_file_cache`);
+        var cacheUrl = cacheFileElement ? tmpPath + cacheFileElement.value : null;
+        var fileName = cacheUrl ? cacheUrl.replace(/^.*[\\\/]/, '') : null;
 
         if (fileName) {
             toggleShowFilename(fileName);
