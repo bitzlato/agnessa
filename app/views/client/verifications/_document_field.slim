@@ -9,7 +9,7 @@ div id="#{element_id}" data-file-input=""
     img style="max-width: 80%; max-height: 100%;" data-preview=""
 
   div data-controls=""
-    label.form-control.p-0.m-0.input-group.overflow-hidden style="cursor: pointer"
+    label.form-control.p-0.m-0.input-group.overflow-hidden style="cursor: pointer" class=((document.object.errors.full_messages.any?)? 'border-danger' : '')
       span.input-group-prepend
         span.input-group-text.bg-primary.text-white.border-0.rounded-0
           | Загрузить файл
@@ -18,7 +18,7 @@ div id="#{element_id}" data-file-input=""
       input.custom-file-input.position-absolute data-index=document.index value=document.object.file type="file" name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',')  style="height: 0" data-input=""
 
   div style="display: none" data-filename-container=""
-    div.form-control.p-0.m-0.input-group.overflow-hidden.flex-nowrap
+    div.form-control.p-0.m-0.input-group.overflow-hidden.flex-nowrap class=((document.object.errors.full_messages.any?)? 'border-danger' : '')
       span.input-group-prepend
         span.input-group-text.bg-light.text-black.border-0.rounded-0
           | Файл загружен
@@ -27,37 +27,41 @@ div id="#{element_id}" data-file-input=""
         button.btn.text-muted.position-absolute.px-3 style="right: 0" type="button" data-clear-button=""
           | &times;
 
+  -if document.object.errors.full_messages.any?
+    div.d-block.invalid-feedback
+      = document.object.errors.full_messages.join(', ')
+
   = document.input :remove_file, as: :hidden, input_html: { data: { 'remove-input': '' } }
   = document.input :file_cache, as: :hidden
   = document.input :document_type_id, as: :hidden
 
-/ With error
-div data-file-input=""
-  .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4.mb-3 style="height: 230px; border-style: dashed"
-    = image_tag asset_url(document.object.document_type.placeholder_photo || ''), width: 186, class: 'w-50', data: {'preview-placeholder': ''}
-    img style="max-width: 80%; max-height: 100%;" data-preview=""
-
-  div data-controls="" style="display: none" 
-    label.form-control.p-0.m-0.input-group.overflow-hidden style="cursor: pointer"
-      span.input-group-prepend
-        span.input-group-text.bg-primary.text-white.border-0.rounded-0
-          | Загрузить файл
-      span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted
-        | Файл не выбран
-      input.custom-file-input.position-absolute data-index=document.index value=document.object.file type="file" name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',')  style="height: 0" data-input=""
-
-  div data-filename-container=""
-    div.form-control.p-0.m-0.input-group.overflow-hidden.flex-nowrap.border-danger
-      span.input-group-prepend
-        span.input-group-text.bg-light.text-black.border-0.rounded-0
-          | Файл загружен
-      span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted.position-relative style="min-width: 0"
-        span.text-truncate.w-75.pr-3 data-filename="" Passport.jpeg
-        button.btn.text-muted.position-absolute.px-3 style="right: 0" type="button" data-clear-button=""
-          | &times;
-
-  div.d-block.invalid-feedback
-    | Файл не загружен
+/ / With error
+/ div data-file-input=""
+/   .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4.mb-3 style="height: 230px; border-style: dashed"
+/     = image_tag asset_url(document.object.document_type.placeholder_photo || ''), width: 186, class: 'w-50', data: {'preview-placeholder': ''}
+/     img style="max-width: 80%; max-height: 100%;" data-preview=""
+/
+/   div data-controls="" style="display: none"
+/     label.form-control.p-0.m-0.input-group.overflow-hidden style="cursor: pointer"
+/       span.input-group-prepend
+/         span.input-group-text.bg-primary.text-white.border-0.rounded-0
+/           | Загрузить файл
+/       span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted
+/         | Файл не выбран
+/       input.custom-file-input.position-absolute data-index=document.index value=document.object.file type="file" name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',')  style="height: 0" data-input=""
+/
+/   div data-filename-container=""
+/     div.form-control.p-0.m-0.input-group.overflow-hidden.flex-nowrap.border-danger
+/       span.input-group-prepend
+/         span.input-group-text.bg-light.text-black.border-0.rounded-0
+/           | Файл загружен
+/       span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted.position-relative style="min-width: 0"
+/         span.text-truncate.w-75.pr-3 data-filename="" Passport.jpeg
+/         button.btn.text-muted.position-absolute.px-3 style="right: 0" type="button" data-clear-button=""
+/           | &times;
+/
+/   div.d-block.invalid-feedback
+/     | Файл не загружен
 
 javascript:
   document.addEventListener("DOMContentLoaded", function(event) {
