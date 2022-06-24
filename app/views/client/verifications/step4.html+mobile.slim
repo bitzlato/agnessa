@@ -1,0 +1,40 @@
+.container
+  .d-flex.mt-5
+    h1.h4.w-25.m-0.font-weight-bold.small.text-primary.text-uppercase шаг 4
+
+    .d-flex.align-items-center.w-75
+      .progress.w-100 style="height: 4px"
+        .progress-bar role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+
+  p.mt-1.small.font-weight-medium Селфи с документом
+
+  = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+    h3.h4.mt-4.mb-3.font-weight-bold.text-primary Селфи с документом
+
+    p.font-weight-semibold
+      span.text-primary= '2. '
+      = 'Селфи с документом и листком бумаги, где написаны текущая дата и "Bitzlato"'
+
+    .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4 style="border-style: dashed"
+      = image_tag asset_url('photo-doc-example-1@2x.png'), width: 186, class: 'w-50', style: 'min-width: 186px'
+
+    .d-flex.mt-4
+      label.btn.btn-primary.flex-grow-1.mr-4
+        / For image file
+        input.custom-file-input.position-absolute type="file" accept="image/*" style="height: 0"
+        = 'Загрузить файл'
+
+      label.btn.btn-primary.flex-grow-1
+        / For image file from camera
+        input.custom-file-input.position-absolute type="file" accept="image/*" capture="user" style="height: 0"
+        = 'Открыть камеру'
+
+    / = f.simple_fields_for :verification_documents do |document|
+    /   = render 'document_field', document: document
+
+    = render 'photo_instruction'
+
+    .container.fixed-bottom.pb-4
+      = link_to 'Продолжить', step4_client_verifications_path, class: 'btn btn-primary w-100' 
+
+  .mb-5.pb-5
