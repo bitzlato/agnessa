@@ -29,7 +29,8 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def create
-    check_for_existing_verification and return
+    return if check_for_existing_verification
+
     verification = applicant.verifications.create! verification_params.merge(remote_ip: request.remote_ip,
                                                                              user_agent: request.user_agent,
                                                                              reason: DEFAULT_REASON)
