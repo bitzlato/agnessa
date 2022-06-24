@@ -32,6 +32,7 @@ class Client::VerificationsController < Client::ApplicationController
     render :created, locals: { verification: verification}
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
+    report_exception e, true, params: params
     render :new, locals: { verification: e.record, last_refused_verification: nil }, status: :bad_request
   end
 
