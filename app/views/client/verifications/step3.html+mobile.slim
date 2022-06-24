@@ -9,7 +9,8 @@
   p.mt-3.small.font-weight-semibold
     = 'Загрузите фотографию или скан действительного документа, удостоверяющего личность'
 
-  div data-file-input=""
+  - element_id = 'document-step-3'
+  div id="#{element_id}" data-file-input=""
     .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4.mb-4 style="height: 230px; border-style: dashed"
       = image_tag asset_url('photo-doc-example-1@2x.png'), width: 186, class: 'w-50', style: 'max-width: 200px', data: {'preview-placeholder': ''}
       img style="max-width: 80%; max-height: 100%;" data-preview=""
@@ -25,10 +26,17 @@
           = 'Открыть камеру'
 
     div style="display: none" data-filename-container=""
-      button.position-relative.btn.btn-outline-secondary.d-flex.justify-content-between.w-100 type="button" data-clear-button=""
+      div.position-relative.btn.btn-outline-secondary.d-flex.justify-content-between.w-100 type="button" 
         span.text-truncate.w-100.pr-4 data-filename=""
-        span.position-absolute.px-3 style="right: 0"
+        span.position-absolute.px-3 style="right: 0" data-clear-button=""
           | &times;
+
+    input type="hidden" data-remove-input=""
+
+    javascript:
+      document.addEventListener("DOMContentLoaded", function(event) {
+        attachFileInput({id: "#{element_id}" });
+      });
 
   = render 'photo_instruction', first_point: 'Убедитесь, что документ на фото размещен полностью, края не обрезаны, информация хорошо считывается'
 
