@@ -53,16 +53,17 @@
               = f.input :document_number
     .col-md-3
 
-  .row.mt-5
-    .col-md-9
-      h3.text-primary.font-weight-bold  =t '.upload_document_photo'
-      .row.mt-3.align-items-end.justify-content-between
-        = f.simple_fields_for :verification_documents do |document|
-          .col-md-5
-            = render 'document_field', document: document
-    .col-md-3
-      .pl-5
-        h3.text-primary.font-weight-bold Инструкция
+    .row.mt-5
+      .col-md-9
+        h3.text-primary.font-weight-bold  =t '.upload_document_photo'
+        .row.mt-3.justify-content-between
+          = f.simple_fields_for :verification_documents do |document|
+            .col-md-5
+              = render 'document_field', document: document
+      .col-md-3
+        .pl-5
+          h3.text-primary.font-weight-bold Инструкция
+
 
         .d-flex.align-items-center.mt-3.mb-2
           .flex-shrink-0.mr-3.align-self-start
