@@ -1,5 +1,6 @@
-.row.justify-content-center.instruction
-  .jumbotron
-    h1.mb-4
-      = t 'client.verifications.verified.message', account_id: "##{external_id}"
+.mt-5.pt-5.mx-auto.text-center.w-100 style="max-width: 380px;"
+  = image_tag asset_url('thank-you-illustration.svg'), width: 253, style: 'max-width: 253px'
+  div = t 'client.verifications.verified.message', account_id: "##{external_id}"
+
+
 
