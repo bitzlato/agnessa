@@ -1,4 +1,10 @@
 ru:
+  available_documents:
+    passport: Паспорт
+    id_card: ID карта
+    driver_license: Водительские права
+    foreign_passport: Загранпаспорт
+
   date:
     formats:
       default: "%d.%m.%Y"
