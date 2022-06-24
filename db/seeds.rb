@@ -19,8 +19,10 @@ account.members.create_with(role: 'admin').
 
 applicant = account.applicants.find_or_create_by!(external_id: 'test')
 
+CountrySeed.new.call
+
 verification = applicant.verifications.build({
-  name: 'test', last_name: 'test', birth_date: '01-01-1991', gender: :male, legacy_external_id: 'test', country: 'ru', document_number: 'test',
+  name: 'test', last_name: 'test', birth_date: '01-01-1991', gender: :male, legacy_external_id: 'test', citizenship_country_iso_code: 'RU', document_number: 'test',
   reason: :unban, email: 'test@test.test', status: :pending
 })
 
