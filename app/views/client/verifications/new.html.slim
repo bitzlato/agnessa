@@ -1,109 +1,107 @@
-.border-bottom
-  .container
-    .d-flex.align-items-center.justify-content-between.my-3
-      div
-        h1.h3.font-weight-semibold =t '.title'
-        h4.h6.font-weight-normal = verification.applicant.external_id
-      div
-        = image_tag asset_url('bz-logo.svg'), width: 40
+=content_for :verification_header do
+  .d-flex.align-items-center.justify-content-between.my-3
+    div
+      h1.h3.font-weight-semibold =t '.title'
+      h4.h6.font-weight-normal = verification.applicant.external_id
+    div
+      = image_tag asset_url('bz-logo.svg'), width: 40
 
-.container
-  = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
-    .row
-      .col-md-12
-        div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+= simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+  .row
+    .col-md-12
+      div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-    - if last_refused_verification.present?
-      .position-absolute.mt-4 style="top: 0; left: 0; right: 0;"
-        .row
+  - if last_refused_verification.present?
+    .position-absolute.mt-4 style="top: 0; left: 0; right: 0;"
+      .row
+        .col-md-5
+        .col-md-3
+          / h3 =t('.last_refused_title')
+          .alert.alert-warning.pre-line.px-4.py-3 role='alert'
+            = last_refused_verification.public_comment
+
+  h3.mt-3.text-primary.font-weight-bold = t '.personal_data'
+  .row.mt-4
+    .col-md-9
+      .row
+        .col-md-6
+          = f.input :name
+          = f.input :last_name
+          = f.input :patronymic
+        .col-md-6
+          = f.input :citizenship_country_iso_code,
+                  as: :select,
+                  collection: country_options_for_select,
+                  input_html: { class: 'custom-select' }
+          = f.input :birth_date, as: :date_picker, icons: :font_awesome
+          = f.input :email, as: :email
+
+    .col-md-3
+
+  h3.mt-4.text-primary.font-weight-bold =t '.choose_document_type'
+  .row
+    .col-md-9
+      .row.mt-3
+        .col-md-12
+          = f.input :document_type,
+                  as: :radio_buttons,
+                  label: false,
+                  collection: document_type_collection_for_radio_buttons,
+                  wrapper: :horizontal_collection_inline
+          .row
+            .col-md-6
+              = f.input :document_number
+    .col-md-3
+
+  .row.mt-5
+    .col-md-9
+      h3.text-primary.font-weight-bold  =t '.upload_document_photo'
+      .row.mt-3.align-items-end.justify-content-between
+        = f.simple_fields_for :verification_documents do |document|
           .col-md-5
-          .col-md-3
-            / h3 =t('.last_refused_title')
-            .alert.alert-warning.pre-line.px-4.py-3 role='alert'
-              = last_refused_verification.public_comment
+            = render 'document_field', document: document
+    .col-md-3
+      .pl-5
+        h3.text-primary.font-weight-bold Инструкция
 
-    h3.mt-3.text-primary.font-weight-bold = t '.personal_data'
-    .row.mt-4
-      .col-md-9
-        .row
-          .col-md-6
-            = f.input :name
-            = f.input :last_name
-            = f.input :patronymic
-          .col-md-6
-            = f.input :citizenship_country_iso_code,
-                    as: :select,
-                    collection: country_options_for_select,
-                    input_html: { class: 'custom-select' }
-            = f.input :birth_date, as: :date_picker, icons: :font_awesome
-            = f.input :email, as: :email
+        .d-flex.align-items-center.mt-3.mb-2
+          .flex-shrink-0.mr-3.align-self-start
+            = image_tag asset_url('desktop-verification/file-text@2x.png'), width: 13
+          p.small.mb-0
+            | Убедитесь, что Ваше лицо и все детали документов на фото четко видны
 
-      .col-md-3
+        .d-flex.align-items-center.mb-2
+          .flex-shrink-0.mr-3.align-self-start
+            = image_tag asset_url('desktop-verification/file-earmark-check@2x.png'), width: 13
+          p.small.mb-0
+            | Документ на фото размещен полностью, края не обрезаны
 
-    h3.mt-4.text-primary.font-weight-bold =t '.choose_document_type'
-    .row
-      .col-md-9
-        .row.mt-3
-          .col-md-12
-            = f.input :document_type,
-                    as: :radio_buttons,
-                    label: false,
-                    collection: document_type_collection_for_radio_buttons,
-                    wrapper: :horizontal_collection_inline
-            .row
-              .col-md-6
-                = f.input :document_number
-      .col-md-3
+        .d-flex.align-items-center.mb-2
+          .flex-shrink-0.mr-3.align-self-start
+            = image_tag asset_url('desktop-verification/file-x@2x.png'), width: 13
+          p.small.mb-0
+            | На фото нет дополнительных объектов
 
-    .row.mt-5
-      .col-md-9
-        h3.text-primary.font-weight-bold  =t '.upload_document_photo'
-        .row.mt-3.align-items-end.justify-content-between
-          = f.simple_fields_for :verification_documents do |document|
-            .col-md-5
-              = render 'document_field', document: document
-      .col-md-3
-        .pl-5
-          h3.text-primary.font-weight-bold Инструкция
+        .d-flex.align-items-center.mb-2
+          .flex-shrink-0.mr-3.align-self-start
+            = image_tag asset_url('desktop-verification/file-richtext@2x.png'), width: 13
+          p.small.mb-0
+            = "Размер: #{number_to_human_size(Rails.configuration.application.min_upload_file_size)} до #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
+            br
+            = "Формат: #{content_type_to_extensions(Rails.configuration.application.image_content_types)}"
 
-          .d-flex.align-items-center.mt-3.mb-2
-            .flex-shrink-0.mr-3.align-self-start
-              = image_tag asset_url('desktop-verification/file-text@2x.png'), width: 13
-            p.small.mb-0
-              | Убедитесь, что Ваше лицо и все детали документов на фото четко видны
+        .border-top.my-3
 
-          .d-flex.align-items-center.mb-2
-            .flex-shrink-0.mr-3.align-self-start
-              = image_tag asset_url('desktop-verification/file-earmark-check@2x.png'), width: 13
-            p.small.mb-0
-              | Документ на фото размещен полностью, края не обрезаны
+        .d-flex.align-items-center.mb-2
+          .flex-shrink-0.mr-3.align-self-start
+            = image_tag asset_url('desktop-verification/shield-lock@2x.png'), width: 13
+          p.small.mb-0
+            | В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
 
-          .d-flex.align-items-center.mb-2
-            .flex-shrink-0.mr-3.align-self-start
-              = image_tag asset_url('desktop-verification/file-x@2x.png'), width: 13
-            p.small.mb-0
-              | На фото нет дополнительных объектов
-
-          .d-flex.align-items-center.mb-2
-            .flex-shrink-0.mr-3.align-self-start
-              = image_tag asset_url('desktop-verification/file-richtext@2x.png'), width: 13
-            p.small.mb-0
-              = "Размер: #{number_to_human_size(Rails.configuration.application.min_upload_file_size)} до #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
-              br
-              = "Формат: #{content_type_to_extensions(Rails.configuration.application.image_content_types)}"
-
-          .border-top.my-3
-
-          .d-flex.align-items-center.mb-2
-            .flex-shrink-0.mr-3.align-self-start
-              = image_tag asset_url('desktop-verification/shield-lock@2x.png'), width: 13
-            p.small.mb-0
-              | В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
-
-    .row.my-5
-      .col-8
-      .col-4
-        .text-right
-          = f.submit t('.submit'), class: 'btn btn-lg btn-primary w-100', data: { 'disable-width' => 'Отправляю..' }
+  .row.my-5
+    .col-8
+    .col-4
+      .text-right
+        = f.submit t('.submit'), class: 'btn btn-lg btn-primary w-100', data: { 'disable-width' => 'Отправляю..' }
 
 = render 'photo_upload_script'
