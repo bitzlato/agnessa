@@ -18,6 +18,7 @@ class Client::VerificationsController < Client::ApplicationController
       render :blocked, locals: {applicant: applicant }, status: :bad_request
     else
       check_for_existing_verification and return
+      applicant_geoip_country_iso_code = Geocoder.search(request.remote_ip).first&.country
       last_refused_verification = applicant.verifications.refused.last
       verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
       verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
