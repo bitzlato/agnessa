@@ -29,7 +29,8 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def create
-    check_for_existing_verification and return
+    return if check_for_existing_verification
+
     verification = applicant.verifications.create! verification_params.merge(remote_ip: request.remote_ip,
                                                                              user_agent: request.user_agent,
                                                                              reason: DEFAULT_REASON)
@@ -60,7 +61,10 @@ class Client::VerificationsController < Client::ApplicationController
     raise HumanizedError, :no_external_id unless external_id.present?
     p2p_id = BarongClient.instance.get_p2pid_from_barong_uid(external_id)
     unless p2p_id.present?
-      Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}"))
+      # Бывают ссылки вида https://check.changebot.org/verifications/verifications
+      # их пропускаем
+      # https://app.bugsnag.com/bitzlato/agnessa/errors/625fff2a5152420008eec2ba?filters[event.since]=30d&filters[error.status]=open
+      Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}")) unless external_id=='verifications'
       raise HumanizedError, :invalid_barong_uid
     end
     applicant = current_account.applicants.upsert!({external_id: external_id}, validate: false)

@@ -26,7 +26,6 @@ class Verification < ApplicationRecord
     update_column('number', id.to_s)
   end
 
-
   validates :citizenship_country_iso_code, :document_type, :name, :last_name, :birth_date, :document_number, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
 
@@ -64,7 +63,6 @@ class Verification < ApplicationRecord
   validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
 
   after_create :log_creation
-
 
   def preview_image
     @preview_image ||= verification_documents.first&.file
@@ -111,6 +109,7 @@ class Verification < ApplicationRecord
         review_result_labels: labels.map(&:presence).compact
       )
       log_records.create!(applicant: applicant, action: 'refuse', member: member)
+      applicant.unconfirm!
     end
     VerificationStatusNotifyJob.perform_async(id)
     VerificationMailer.refused(id).deliver_later if send_email
