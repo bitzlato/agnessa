@@ -1,26 +1,23 @@
-.container
-  .d-flex.mt-5
-    h1.h4.w-25.m-0.font-weight-bold.small.text-primary.text-uppercase шаг 1
+.d-flex.mt-4
+  h1.h4.w-25.m-0.font-weight-bold.small.text-primary Шаг 1 из 4
 
-    .d-flex.align-items-center.w-75
-      .progress.w-100 style="height: 4px"
-        .progress-bar role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+  .d-flex.align-items-center.w-75
+    .progress.w-100 style="height: 4px"
+      .progress-bar role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
 
-  p.mt-1.small.font-weight-medium Заполните личные данные
+= simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+  h3.h4.mt-4.mb-3.font-weight-bold.text-primary Личные данные
 
-  = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
-    h3.h4.mt-4.mb-3.font-weight-bold.text-primary Личные данные
+  = f.input :name
+  = f.input :last_name
+  = f.input :patronymic
+  = f.input :citizenship_country_iso_code,
+          as: :select,
+          collection: country_options_for_select
+  = f.input :birth_date, as: :date_picker
+  = f.input :email, as: :email
 
-    = f.input :name
-    = f.input :last_name
-    = f.input :patronymic
-    = f.input :citizenship_country_iso_code,
-            as: :select,
-            collection: country_options_for_select
-    = f.input :birth_date, as: :date_picker
-    = f.input :email, as: :email
+  .container.fixed-bottom.pb-4
+    = link_to 'Продолжить', step2_client_verifications_path, class: 'btn btn-primary w-100' 
 
-    .container.fixed-bottom.pb-4
-      = link_to 'Продолжить', step2_client_verifications_path, class: 'btn btn-primary w-100' 
-
-  .mb-5.pb-5
+.mb-5.pb-5

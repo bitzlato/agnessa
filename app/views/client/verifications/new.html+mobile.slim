@@ -1,10 +1,10 @@
-.container
-  h1.h4.mt-5.font-weight-bold Верификация аккаунта
+.mt-4
+  h1.h4.font-weight-bold Верификация аккаунта
   h4.h6.font-weight-normal = verification.applicant.external_id
 
   p.mt-4.small.font-weight-medium Верификация аккаунта дает множество преимуществ. Вы сможете подать заявку на верификацию за 4 шага: 
 
-  .bg-light.px-2.py-3.rounded
+  .bg-info.px-2.py-3.rounded
     h5.h6.font-weight-bold.mt-0.mb-3.text-primary Вам потребуется:
     ol.small
       li.font-weight-semibold.text-primary.py-1
@@ -33,4 +33,3 @@
 
 .container.fixed-bottom.pb-4.d-flex.justify-content-center
   = link_to 'Пройти верификацию', step1_client_verifications_path, class: 'btn btn-primary flex-grow-1' 
-

@@ -1,44 +1,42 @@
-.container
-  .d-flex.mt-5
-    h1.h4.w-25.m-0.font-weight-bold.small.text-primary.text-uppercase шаг 2
+.d-flex.mt-4
+  h1.h4.w-25.m-0.font-weight-bold.small.text-primary Шаг 2 из 4
 
-    .d-flex.align-items-center.w-75
-      .progress.w-100 style="height: 4px"
-        .progress-bar role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+  .d-flex.align-items-center.w-75
+    .progress.w-100 style="height: 4px"
+      .progress-bar role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
 
-  p.mt-1.small.font-weight-medium Выберите тип документа
+= simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+  h3.h4.mt-4.mb-3.font-weight-bold.text-primary Выберите тип документа
 
-  = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
-    h3.h4.mt-4.mb-3.font-weight-bold.text-primary Выберите тип документа
+  / = f.input :document_type,
+  /         as: :radio_buttons,
+  /         label: false,
+  /         collection: document_type_collection_for_radio_buttons,
+  /         item_wrapper_class: 'd-flex'
 
-    / = f.input :document_type,
-    /         as: :radio_buttons,
-    /         label: false,
-    /         collection: document_type_collection_for_radio_buttons,
-    /         item_wrapper_class: 'd-flex'
+  .custom-control.custom-radio.my-4
+    input.custom-control-input type="radio" id="customRadioInline1" name="type" value="passport"
+    label class="custom-control-label" for="customRadioInline1"
+      = image_tag asset_url('passport@2x.png'), width: 24, class: 'mr-2'
+      = 'Паспорт'
 
-    .custom-control.custom-radio.my-4
-      input.custom-control-input type="radio" id="customRadioInline1" name="type" value="passport"
-      label class="custom-control-label" for="customRadioInline1"
-        = image_tag asset_url('passport@2x.png'), width: 24, class: 'mr-2'
-        = 'Паспорт'
+  .custom-control.custom-radio.my-4
+    input.custom-control-input type="radio" id="customRadioInline2" name="type" value="id-card"
+    label class="custom-control-label" for="customRadioInline2"
+      = image_tag asset_url('id-card@2x.png'), width: 24, class: 'mr-2'
+      = 'ID карта'
 
-    .custom-control.custom-radio.my-4
-      input.custom-control-input type="radio" id="customRadioInline2" name="type" value="id-card"
-      label class="custom-control-label" for="customRadioInline2"
-        = image_tag asset_url('id-card@2x.png'), width: 24, class: 'mr-2'
-        = 'ID карта'
+  .custom-control.custom-radio.my-4
+    input.custom-control-input type="radio" id="customRadioInline3" name="type" value="driving-license"
+    label class="custom-control-label" for="customRadioInline3"
+      = image_tag asset_url('car@2x.png'), width: 24, class: 'mr-2'
+      = 'Водительские права'
 
-    .custom-control.custom-radio.my-4
-      input.custom-control-input type="radio" id="customRadioInline3" name="type" value="driving-license"
-      label class="custom-control-label" for="customRadioInline3"
-        = image_tag asset_url('car@2x.png'), width: 24, class: 'mr-2'
-        = 'Водительские права'
+  .mt-5
+    = f.input :document_number
 
-    .mt-5
-      = f.input :document_number
+.container.fixed-bottom.pb-4.d-flex
+  = link_to 'Назад', step1_client_verifications_path, class: 'btn btn-outline-primary font-weight-semibold w-100 mr-4', style: 'max-width: 130px'
+  = link_to 'Продолжить', step3_client_verifications_path, class: 'btn btn-primary font-weight-semibold w-100' 
 
-    .container.fixed-bottom.pb-4
-      = link_to 'Продолжить', step3_client_verifications_path, class: 'btn btn-primary w-100' 
-
-  .mb-5.pb-5
+.mb-5.pb-5
