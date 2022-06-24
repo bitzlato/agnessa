@@ -1,18 +1,17 @@
-.border-bottom
-  .container
-    .d-flex.align-items-center.justify-content-between.my-3
-      div
-        h1.h3.font-weight-semibold =t '.title'
-        h4.h6.font-weight-normal = verification.id
-      div
-        = image_tag asset_url('bz-logo.svg'), width: 40
+=content_for :verification_header do
+  .d-flex.align-items-center.justify-content-between.my-3
+    div
+      h1.h3.font-weight-semibold =t '.title'
+      h4.h6.font-weight-normal = verification.id
+    div
+      = image_tag asset_url('bz-logo.svg'), width: 40
 
-.container
-  .mt-5.pt-5.mx-auto.text-center.w-100 style="max-width: 380px;"
-    = image_tag asset_url('thank-you-illustration.svg'), width: 253, style: 'max-width: 253px'
 
-    div= raw t '.message', id: verification.id
+.mt-5.pt-5.mx-auto.text-center.w-100 style="max-width: 380px;"
+  = image_tag asset_url('thank-you-illustration.svg'), width: 253, style: 'max-width: 253px'
 
-    - if current_account.return_url.present?
-      = link_to 'Продолжить', current_account.return_url, class: 'btn btn-primary w-100 mt-5', style: 'max-width: 220px'
+  div= raw t '.message', id: verification.id
+
+  - if current_account.return_url.present?
+    = link_to t('.button'), current_account.return_url, class: 'btn btn-primary w-100 mt-5', style: 'max-width: 220px'
 
