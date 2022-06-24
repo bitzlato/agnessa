@@ -9,7 +9,7 @@ class Client::VerificationsController < Client::ApplicationController
   helper_method :form_path, :external_id
 
   before_action :detect_browser, only: %i[new step1 step2 step3 step4]
-
+  
   def new
     @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
     if applicant.verified?
