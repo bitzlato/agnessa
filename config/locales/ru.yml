@@ -35,7 +35,9 @@ ru:
       blocked:
         message: Для вашего аккаунта (%{account_id}) подача заявок была заблокирована
       verified:
-        message: Ваш аккаунт (%{account_id}) уже прошел проверку
+        title: Поздравляем!
+        message: Ваш аккаунт %{account_id} верифицирован
+        button: Перейти на сайт Bitzlato
       new:
         title: 'Верификация аккаунта'
         personal_data: 'Личные данные'
@@ -52,7 +54,7 @@ ru:
           <p class="h6 mt-4 font-weight-normal">Мы рассмотрим Вашу заявку в ближайшее время, результат отправим на email, указанный Вами при верификации</p>
           <p class="h6 mt-3 small text-muted">срок рассмотрения заявки:<br>1 час в рабочее время, но не более 12 часов</p>
         </div>'
-        button: 'Перейти на сайт bitzlato'
+        button: Перейти на сайт Bitzlato
 
   status:
     all: Все
