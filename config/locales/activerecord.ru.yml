@@ -26,7 +26,7 @@ ru:
       log_record:
         action: Действие
         full_name: Полное имя
-        document_number: Номер документа
+        document_number: Серия и номер документа
         verification: Заявка
         moderator_id: Модератор
         created_at: Дата
@@ -95,7 +95,7 @@ ru:
         birth_date: Дата рождения
         last_name: Фамилия
         patronymic: Отчество
-        document_number: Номер документа
+        document_number: Серия и номер документа
         document_type: Тип документа
         moderator: Модератор
         email: Почта
@@ -117,16 +117,16 @@ ru:
         verification:
           attributes:
             email:
-              invalid: Неверный формат электронной почты
-              blank: Не указана почта
+              invalid: имеет неверный формат электронной почты
+              blank: не указана
             reason:
               blank: 'Причина обращения не выбрана'
             name:
-              blank: 'Имя не указано'
+              blank: 'не указано'
             last_name:
-              blank: 'Фамилия не указана'
+              blank: 'не указана'
             document_number:
-              blank: 'Серия и номер не указан'
+              blank: 'не заполнены'
             documents:
               blank: 'Документы не были прикреплены'
       messages:

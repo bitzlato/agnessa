@@ -46,7 +46,7 @@ ru:
       document_field:
         document_hint:  'Размер файла:  От %{from} до %{to}'
       created:
-        title: 'Принята заявка #%{id}'
+        title: 'Принята заявка %{id}'
         message: '<div>
           <h2 class="h3 mt-5 font-weight-bold">Ваша заявка №%{id} на&nbsp;верификацию принята</h2>
           <p class="h6 mt-4 font-weight-normal">Мы рассмотрим Вашу заявку в ближайшее время, результат отправим на email, указанный Вами при верификации</p>

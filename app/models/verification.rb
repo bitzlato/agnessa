@@ -133,7 +133,7 @@ class Verification < ApplicationRecord
   private
 
   def permitted_citizenship
-    errors.add :citizenship_country_iso_code, I18n.t('errors.messages.citizenship_not_allowed') unless citizenship_country.alive?
+    errors.add :citizenship_country_iso_code, I18n.t('errors.messages.citizenship_not_allowed') unless citizenship_country&.alive?
   end
 
   def over_18_years_old
