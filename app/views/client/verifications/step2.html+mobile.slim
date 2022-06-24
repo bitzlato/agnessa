@@ -11,8 +11,11 @@
   = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
     h3.h4.mt-4.mb-3.font-weight-bold.text-primary Выберите тип документа
 
-    / Тип документов
-    / = f.collection_radio_buttons :options, [[true, 'Yes'], [false, 'No']], :first, :last
+    / = f.input :document_type,
+    /         as: :radio_buttons,
+    /         label: false,
+    /         collection: document_type_collection_for_radio_buttons,
+    /         item_wrapper_class: 'd-flex'
 
     .custom-control.custom-radio.my-4
       input.custom-control-input type="radio" id="customRadioInline1" name="type" value="passport"

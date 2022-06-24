@@ -14,8 +14,9 @@
     = f.input :name
     = f.input :last_name
     = f.input :patronymic
-
-    = f.input :country
+    = f.input :citizenship_country_iso_code,
+            as: :select,
+            collection: country_options_for_select
     = f.input :birth_date, as: :date_picker
     = f.input :email, as: :email
 
