@@ -18,4 +18,10 @@ html
     = csp_meta_tag
 
   body
+    .border-bottom
+      .container
+        = yield :verification_header
+
+    .container
       = yield
+

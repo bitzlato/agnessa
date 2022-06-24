@@ -7,7 +7,7 @@ ru:
       minimum_documents_amount: необходимое количество документов - %{amount}
       wrong_verification_documents: Документы не соотвествуют данному аккаунту
       over_18_years_old: необходимо иметь возраст от 18 лет
-      citizenship_not_allowed: ваше гражданство недоступно для верификации
+      citizenship_not_allowed: недоступно для верификации
       accepted: нужно подтвердить
       blank: не может быть пустым
       confirmation: не совпадает со значением поля %{attribute}
