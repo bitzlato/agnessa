@@ -128,7 +128,7 @@ class Client::VerificationsController < Client::ApplicationController
   def check_for_existing_verification
     existing_verification = applicant.verifications.pending.last
     if existing_verification.present?
-      render("existing_verification", locals: {verification: existing_verification})
+      render :created, locals: { verification: existing_verification }
     end
   end
 

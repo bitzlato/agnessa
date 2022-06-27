@@ -30,8 +30,6 @@ ru:
       title: 'Сводка'
   client:
     verifications:
-      existed:
-        message: 'От имени вашего аккаунта уже зарегистрировна заявка %{verification_id} со статусом: "%{verification_status}"'
       blocked:
         message: Для вашего аккаунта (%{account_id}) подача заявок была заблокирована
       verified:
