@@ -65,33 +65,6 @@ javascript:
       }
     }
 
-    function toggleCachedPreview(filePath) {
-        if (filePath) {
-            preview.src = filePath;
-            preview.style.display = 'block';
-            previewPlaceholder.style.display = 'none';
-        } else {
-            preview.src = '';
-            preview.style.display = 'none';
-            previewPlaceholder.style.display = 'block';
-        }
-    }
-
-    function showCachedPhoto(input) {
-        var file_cache_index = input.dataset.index;
-        var cacheFileElement = document.querySelector(`#verification_verification_documents_attributes_${file_cache_index}_file_cache`);
-        var cacheUrl = cacheFileElement ? tmpPath + cacheFileElement.value : null;
-        var fileName = cacheUrl ? cacheUrl.replace(/^.*[\\\/]/, '') : null;
-
-        if (fileName) {
-            toggleShowFilename(fileName);
-            toggleCachedPreview(cacheUrl)
-        } else {
-            toggleShowFilename();
-            toggleCachedPreview();
-        }
-    }
-
     function clearFile() {
       inputsList.forEach(input => {
         if (input) {
@@ -108,7 +81,6 @@ javascript:
     inputsList.forEach(input => {
       if (input) {
         input.addEventListener('change', onInputChange);
-        // showCachedPhoto(input);
       }
     });
 
