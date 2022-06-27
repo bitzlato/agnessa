@@ -27,7 +27,7 @@ div id="#{element_id}" data-file-input=""
         span.input-group-text.bg-light.text-black.border-0.rounded-0
           | Файл загружен
       span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted.position-relative style="min-width: 0"
-        span.text-truncate.w-75.pr-3 data-filename=""
+        span.text-truncate.w-75.pr-3 data-filename='' =File.basename(document.object.file_cache || '')
         button.btn.text-muted.position-absolute.px-3 style="right: 0" type="button" data-clear-button=""
           | &times;
 
