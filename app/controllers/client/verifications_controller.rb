@@ -8,7 +8,7 @@ class Client::VerificationsController < Client::ApplicationController
 
   helper_method :form_path, :external_id
 
-  before_action :detect_browser, only: %i[new step1 step2 step3 step4]
+  before_action :detect_browser, only: %i[new step1 step2 step3 step4 create]
   
   def new
     @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
@@ -25,7 +25,7 @@ class Client::VerificationsController < Client::ApplicationController
         verification.verification_documents.new document_type: document_type
       end
       verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-        verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
+      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
       render locals: {verification: verification, last_refused_verification: last_refused_verification}
     end
   end
