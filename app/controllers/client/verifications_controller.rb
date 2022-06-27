@@ -4,7 +4,7 @@ class Client::VerificationsController < Client::ApplicationController
   skip_before_action :verify_authenticity_token
 
   DEFAULT_REASON = :trusted_trader
-  PERMITTED_ATTRIBUTES = [:name, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache]}]
+  PERMITTED_ATTRIBUTES = [:name, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]}]
 
   helper_method :form_path, :external_id
 
@@ -45,7 +45,7 @@ class Client::VerificationsController < Client::ApplicationController
         verification.verification_documents.new document_type: document_type
       end
       verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-        verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
+      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
       render locals: {verification: verification, last_refused_verification: last_refused_verification}
     end
   end
@@ -65,7 +65,7 @@ class Client::VerificationsController < Client::ApplicationController
         verification.verification_documents.new document_type: document_type
       end
       verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-        verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
+      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
       render locals: {verification: verification, last_refused_verification: last_refused_verification}
     end
   end
@@ -85,7 +85,7 @@ class Client::VerificationsController < Client::ApplicationController
         verification.verification_documents.new document_type: document_type
       end
       verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-        verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
+      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
       render locals: {verification: verification, last_refused_verification: last_refused_verification}
     end
   end
@@ -105,7 +105,7 @@ class Client::VerificationsController < Client::ApplicationController
         verification.verification_documents.new document_type: document_type
       end
       verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-        verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
+      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
       render locals: {verification: verification, last_refused_verification: last_refused_verification}
     end
   end

@@ -1,9 +1,9 @@
 javascript:
   function attachFileInput({id}) {
     var fileInputContainer = document.getElementById(id);
-    var removeInput = fileInputContainer.querySelector('[data-remove-input]');
+      var fileCacheInput = fileInputContainer.querySelector('[data-file-cache-input]');
 
-    if (!fileInputContainer) {
+      if (!fileInputContainer) {
       console.error('Element by id', id, 'not found');
       return;
     }
@@ -56,11 +56,9 @@ javascript:
         var fileName = input.files[0].name;
         toggleShowFilename(fileName);
         toggleShowPreview(input.files[0])
-        removeInput.value = '1';
       } else {
         toggleShowFilename();
         toggleShowPreview();
-        removeInput.value = '';
       }
     }
 
@@ -70,9 +68,7 @@ javascript:
           input.value = '';
         }
       });
-
-      removeInput.value = '1';
-
+      fileCacheInput.value = '';
       toggleShowFilename();
       toggleShowPreview();
     }
