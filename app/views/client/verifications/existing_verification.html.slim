@@ -1,6 +1,0 @@
-.mt-5.pt-5.mx-auto.text-center.w-100 style="max-width: 380px;"
-  = image_tag asset_url('thank-you-illustration.svg'), width: 253, style: 'max-width: 253px'
-
-  div= raw t 'client.verifications.existed.message', verification_id: '#' + verification.id.to_s, verification_status: I18n.t("activerecord.attributes.verification.public_statuses.#{verification.status}")
-
-

@@ -119,6 +119,7 @@ class Client::VerificationsController < Client::ApplicationController
     render :created, locals: { verification: verification}
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
+    report_exception e, true, params: params
     render :new, locals: { verification: e.record, last_refused_verification: nil }, status: :bad_request
   end
 
@@ -127,7 +128,7 @@ class Client::VerificationsController < Client::ApplicationController
   def check_for_existing_verification
     existing_verification = applicant.verifications.pending.last
     if existing_verification.present?
-      render("existing_verification", locals: {verification: existing_verification})
+      render :created, locals: { verification: existing_verification }
     end
   end
 
