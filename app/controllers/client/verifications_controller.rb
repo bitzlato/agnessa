@@ -9,7 +9,7 @@ class Client::VerificationsController < Client::ApplicationController
   helper_method :form_path, :external_id
 
   before_action :detect_browser, only: %i[new step1 step2 step3 step4 create]
-  
+
   def new
     @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
     if applicant.verified?
@@ -133,7 +133,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = browser.device.mobile? ? :mobile : :desktop
+    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :desktop
   end
 
   def form_path
