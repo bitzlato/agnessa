@@ -7,7 +7,7 @@
     remote: true, 
     id: :verification_callback_form
 
-  - unless verification.applicant.last_confirmed_verification == verification
+  - if verification.applicant.last_confirmed_verification.present? && verification.applicant.last_confirmed_verification != verification
     .text-danger Внимание! Это не последняя заявка.
 
   #verification_callback_result
