@@ -1,10 +1,9 @@
 javascript:
   function attachFileInput({id}) {
-    var tmpPath = '/uploads/tmp/'
     var fileInputContainer = document.getElementById(id);
-    var removeInput = fileInputContainer.querySelector('[data-remove-input]');
+      var fileCacheInput = fileInputContainer.querySelector('[data-file-cache-input]');
 
-    if (!fileInputContainer) {
+      if (!fileInputContainer) {
       console.error('Element by id', id, 'not found');
       return;
     }
@@ -57,39 +56,10 @@ javascript:
         var fileName = input.files[0].name;
         toggleShowFilename(fileName);
         toggleShowPreview(input.files[0])
-        removeInput.value = '1';
       } else {
         toggleShowFilename();
         toggleShowPreview();
-        removeInput.value = '';
       }
-    }
-
-    function toggleCachedPreview(filePath) {
-        if (filePath) {
-            preview.src = filePath;
-            preview.style.display = 'block';
-            previewPlaceholder.style.display = 'none';
-        } else {
-            preview.src = '';
-            preview.style.display = 'none';
-            previewPlaceholder.style.display = 'block';
-        }
-    }
-
-    function showCachedPhoto(input) {
-        var file_cache_index = input.dataset.index;
-        var cacheFileElement = document.querySelector(`#verification_verification_documents_attributes_${file_cache_index}_file_cache`);
-        var cacheUrl = cacheFileElement ? tmpPath + cacheFileElement.value : null;
-        var fileName = cacheUrl ? cacheUrl.replace(/^.*[\\\/]/, '') : null;
-
-        if (fileName) {
-            toggleShowFilename(fileName);
-            toggleCachedPreview(cacheUrl)
-        } else {
-            toggleShowFilename();
-            toggleCachedPreview();
-        }
     }
 
     function clearFile() {
@@ -98,9 +68,7 @@ javascript:
           input.value = '';
         }
       });
-
-      removeInput.value = '1';
-
+      fileCacheInput.value = '';
       toggleShowFilename();
       toggleShowPreview();
     }
@@ -108,7 +76,6 @@ javascript:
     inputsList.forEach(input => {
       if (input) {
         input.addEventListener('change', onInputChange);
-        showCachedPhoto(input);
       }
     });
 
