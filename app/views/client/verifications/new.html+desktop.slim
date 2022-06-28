@@ -11,18 +11,19 @@
     .col-md-12
       div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-  - if last_refused_verification.present?
-    .position-absolute.mt-4 style="top: 0; left: 0; right: 0;"
-      .row
-        .col-md-5
-        .col-md-3
-          / h3 =t('.last_refused_title')
-          .alert.alert-warning.pre-line.px-4.py-3 role='alert'
+  .row.d-block.d-lg-none.mt-4
+    .col-md-12
+      - if last_refused_verification.present?
+        .alert.alert-warning.pre-line.px-3.py-0 role='alert'
+          h3.my-3.text-body data-toggle="collapse" data-target="#collapseErrors" aria-expanded="true" aria-controls="collapseErrors"
+            =t('.last_refused_title') 
+          div.collapse.show id="collapseErrors"
             = last_refused_verification.public_comment
+            .mb-3
 
   h3.mt-3.text-primary.font-weight-bold = t '.personal_data'
   .row.mt-4
-    .col-md-9
+    .col-md-12.col-lg-9
       .row
         .col-md-6
           = f.input :name
@@ -36,11 +37,18 @@
           = f.input :birth_date, as: :date_picker, icons: :font_awesome
           = f.input :email, as: :email
 
-    .col-md-3
+    .col-lg-3.d-none.d-lg-block
+      - if last_refused_verification.present?
+        .alert.alert-warning.pre-line.px-3.py-0 role='alert'
+          h3.my-3.text-body
+            =t('.last_refused_title') 
+          div
+            = last_refused_verification.public_comment
+            .mb-3
 
   h3.mt-4.text-primary.font-weight-bold =t '.choose_document_type'
   .row
-    .col-md-9
+    .col-md-12.col-lg-9
       .row.mt-3
         .col-md-12
           = f.input :document_type,
@@ -53,17 +61,16 @@
               = f.input :document_number
     .col-md-3
 
-    .row.mt-5
-      .col-md-9
+    .col-md-12.row.mt-md-5.mt-sm-4
+      .col-md-12.col-lg-9
         h3.text-primary.font-weight-bold  =t '.upload_document_photo'
-        .row.mt-3.justify-content-between
+        .row.mt-3
           = f.simple_fields_for :verification_documents do |document|
-            .col-md-5
+            .col-md-6.col-xl-5
               = render 'document_field', document: document
-      .col-md-3
-        .pl-5
+      .col-md-12.col-lg-3
+        .pl-lg-5.mt-sm-4
           h3.text-primary.font-weight-bold Инструкция
-
 
         .d-flex.align-items-center.mt-3.mb-2
           .flex-shrink-0.mr-3.align-self-start
@@ -100,8 +107,8 @@
             | В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
 
   .row.my-5
-    .col-8
-    .col-4
+    .col-md-8
+    .col-md-4
       .text-right
         = f.submit t('.submit'), class: 'btn btn-lg btn-primary w-100', data: { 'disable-width' => 'Отправляю..' }
 
