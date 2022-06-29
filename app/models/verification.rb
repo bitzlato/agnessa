@@ -1,5 +1,5 @@
 class Verification < ApplicationRecord
-  attr_accessor :next_step, :next_step
+  attr_accessor :next_step
 
   def next_step=(val)
     @next_step = val.to_i
