@@ -11,15 +11,9 @@
     .col-md-12
       div = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-  .row.d-block.d-lg-none.mt-4
+  .row.d-block.d-lg-none
     .col-md-12
-      - if last_refused_verification.present?
-        .alert.alert-warning.pre-line.p-0 role='alert'
-          h3.m-0.py-3.px-3.text-body style="border-bottom: 1px solid rgba(102, 77, 3, 0.25);" data-toggle="collapse" data-target="#collapseErrors" aria-expanded="true" aria-controls="collapseErrors"
-            =t('.last_refused_title') 
-          div.px-3.collapse.show id="collapseErrors"
-            .py-3
-              = last_refused_verification.public_comment
+      = render 'mobile_alert_error', last_refused_verification: last_refused_verification
 
   h3.mt-3.text-primary.font-weight-bold = t '.personal_data'
   .row.mt-4
