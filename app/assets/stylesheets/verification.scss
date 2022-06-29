@@ -12,6 +12,23 @@ $theme-colors: (
   "info": $color-info,
 );
 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  lg-x: 1200px,
+  xl: 1440px,
+);
+
+$container-max-widths: (
+  sm: 95%,
+  md: 95%,
+  lg: 960px,
+  lg-x: 1140px,
+  xl: 1380px,
+);
+
 $grid-gutter-width: 24px !default;
 
 @import "bootstrap";
@@ -123,3 +140,15 @@ $success-base64: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' w
   background-position: right calc(0.375em + 0.1875rem + 30px) center,
     right calc(0.375em + 0.1875rem) center !important;
 }
+
+.alert.alert-warning {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.alert.alert-warning h3 {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+}
+
