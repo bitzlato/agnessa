@@ -4,7 +4,7 @@ class Client::VerificationsController < Client::ApplicationController
   skip_before_action :verify_authenticity_token
 
   DEFAULT_REASON = :trusted_trader
-  PERMITTED_ATTRIBUTES = [:name, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]}]
+  PERMITTED_ATTRIBUTES = [:name, :next_step, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]}]
 
   helper_method :form_path, :external_id, :last_refused_verification
 
@@ -17,7 +17,7 @@ class Client::VerificationsController < Client::ApplicationController
     elsif applicant.blocked?
       render :blocked, locals: {applicant: applicant }, status: :bad_request
     else
-      check_for_existing_verification and return
+      return if check_for_existing_verification
       verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
       verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
       current_account.document_types.alive.order('position ASC').each do |document_type|
@@ -35,17 +35,16 @@ class Client::VerificationsController < Client::ApplicationController
     if is_mobile?
       verification = applicant.verifications.new verification_params.
         reverse_merge(remote_ip: request.remote_ip,
-                      step: 1,
+                      next_step: 1,
                       user_agent: request.user_agent,
                       reason: DEFAULT_REASON)
-
-      if verification.step == 0
-        render :new, locals: {verification: verification}
-      elsif verification.step < 4
-        render 'step' + step.to_s, locals: { verification: verification }
+      if verification.next_step.zero?
+        render :new, locals: { verification: verification }
+      elsif verification.next_step <= 4
+        render "step#{verification.next_step.to_s}", locals: { verification: verification }
       else
         verification.save!
-        render :created, locals: { verification: verification}
+        render :created, locals: { verification: verification }
       end
     else
       verification = applicant.verifications.create! verification_params.
@@ -70,7 +69,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :desktop
+    request.variant = params[:mobile] || browser.device.mobile? ? :mobile : :desktop
   end
 
   def is_mobile?

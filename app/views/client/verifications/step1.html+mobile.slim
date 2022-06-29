@@ -18,6 +18,7 @@
   = f.input :email, as: :email
 
   .container.fixed-bottom.pb-4
-    = link_to 'Продолжить', step2_client_verifications_path, class: 'btn btn-primary w-100' 
+    = f.input :next_step, as: :hidden, input_html: { value: 2 }
+    = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
 
 .mb-5.pb-5

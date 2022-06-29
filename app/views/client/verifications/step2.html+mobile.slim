@@ -35,8 +35,11 @@
   .mt-5
     = f.input :document_number
 
-.container.fixed-bottom.pb-4.d-flex
-  = link_to 'Назад', step1_client_verifications_path, class: 'btn btn-outline-primary font-weight-semibold w-100 mr-4', style: 'max-width: 130px'
-  = link_to 'Продолжить', step3_client_verifications_path, class: 'btn btn-primary font-weight-semibold w-100' 
+  .container.fixed-bottom.pb-4.d-flex
+    = f.input :next_step, as: :hidden, input_html: { value: 3 }
+    / = button_to 'Назад', client_verifications_path(verification: { next_step: 2 }), class: 'btn btn-outline-primary font-weight-semibold w-100 mr-4', style: 'max-width: 130px', method: :post, remote: true
+    = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
+  / = link_to 'Назад', step1_client_verifications_path, class: 'btn btn-outline-primary font-weight-semibold w-100 mr-4', style: 'max-width: 130px'
+  / = link_to 'Продолжить', step3_client_verifications_path, class: 'btn btn-primary font-weight-semibold w-100'
 
-.mb-5.pb-5
+  .mb-5.pb-5
