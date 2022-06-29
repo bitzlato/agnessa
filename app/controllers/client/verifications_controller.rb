@@ -41,7 +41,7 @@ class Client::VerificationsController < Client::ApplicationController
       if verification.next_step.zero?
         render :new, locals: { verification: verification }
       elsif verification.next_step <= 4
-        render "step#{verification.next_step.to_s}", locals: { verification: verification }
+        render 'step'+verification.next_step.to_s, locals: { verification: verification }
       else
         verification.save!
         render :created, locals: { verification: verification }
