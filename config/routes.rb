@@ -101,14 +101,7 @@ Rails.application.routes.draw do
     scope as: :client, module: :client do
       resources :applicants, only: [], param: :encoded_external_id do
         member do
-          resources :verifications, only: [:new, :create] do
-            collection do
-              get :step1
-              get :step2
-              get :step3
-              get :step4
-            end
-          end
+          resources :verifications, only: [:new, :create]
         end
       end
 
