@@ -159,3 +159,5 @@ gem "geocoder", "~> 1.8"
 gem "bootstrap", "~> 4.3"
 
 gem "browser", "~> 5.3"
+
+gem "active_form_model", "~> 0.4.1"
