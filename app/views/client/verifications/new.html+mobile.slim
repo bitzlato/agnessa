@@ -1,6 +1,10 @@
-.mt-4
-  h1.h4.font-weight-bold Верификация аккаунта
-  h4.h6.font-weight-normal = verification.applicant.external_id
+= content_for :verification_header do
+  .d-flex.align-items-center.justify-content-between.my-3
+    div
+      h1.h3.font-weight-semibold = t '.title'
+      h4.h6.font-weight-normal = verification.applicant.external_id
+    div
+      = image_tag asset_url('bz-logo.svg'), width: 40
 
   p.mt-4.small.font-weight-medium Верификация аккаунта дает множество преимуществ. Вы сможете подать заявку на верификацию за 4 шага: 
 
