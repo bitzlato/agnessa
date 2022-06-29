@@ -61,50 +61,50 @@
               = f.input :document_number
     .col-md-3
 
-    .col-md-12.row.mt-md-5.mt-sm-4
-      .col-md-12.col-lg-9
-        h3.text-primary.font-weight-bold  =t '.upload_document_photo'
-        .row.mt-3
-          = f.simple_fields_for :verification_documents do |document|
-            .col-md-6.col-xl-5
-              = render 'document_field', document: document
-      .col-md-12.col-lg-3
-        .pl-lg-5.mt-sm-4
-          h3.text-primary.font-weight-bold Инструкция
+    .col-md-12.mt-4.mt-md-5
+      .row
+        .col-lg-12.col-xl-9
+          h3.text-primary.font-weight-bold  =t '.upload_document_photo'
+          .row.mt-xl-3
+            = f.simple_fields_for :verification_documents do |document|
+              .col-md-6.col-xl-5.mt-4.mt-xl-0
+                = render 'document_field', document: document
+        .col-lg-12.col-xl-3
+          h3.text-primary.font-weight-bold.mt-4.mt-xl-0 Инструкция
 
-        .d-flex.align-items-center.mt-3.mb-2
-          .flex-shrink-0.mr-3.align-self-start
-            = image_tag asset_url('desktop-verification/file-text@2x.png'), width: 13
-          p.small.mb-0
-            | Убедитесь, что Ваше лицо и все детали документов на фото четко видны
+          .d-flex.align-items-center.mt-3.mb-2
+            .flex-shrink-0.mr-3.align-self-start
+              = image_tag asset_url('desktop-verification/file-text@2x.png'), width: 13
+            p.small.mb-0
+              | Убедитесь, что Ваше лицо и все детали документов на фото четко видны
 
-        .d-flex.align-items-center.mb-2
-          .flex-shrink-0.mr-3.align-self-start
-            = image_tag asset_url('desktop-verification/file-earmark-check@2x.png'), width: 13
-          p.small.mb-0
-            | Документ на фото размещен полностью, края не обрезаны
+          .d-flex.align-items-center.mb-2
+            .flex-shrink-0.mr-3.align-self-start
+              = image_tag asset_url('desktop-verification/file-earmark-check@2x.png'), width: 13
+            p.small.mb-0
+              | Документ на фото размещен полностью, края не обрезаны
 
-        .d-flex.align-items-center.mb-2
-          .flex-shrink-0.mr-3.align-self-start
-            = image_tag asset_url('desktop-verification/file-x@2x.png'), width: 13
-          p.small.mb-0
-            | На фото нет дополнительных объектов
+          .d-flex.align-items-center.mb-2
+            .flex-shrink-0.mr-3.align-self-start
+              = image_tag asset_url('desktop-verification/file-x@2x.png'), width: 13
+            p.small.mb-0
+              | На фото нет дополнительных объектов
 
-        .d-flex.align-items-center.mb-2
-          .flex-shrink-0.mr-3.align-self-start
-            = image_tag asset_url('desktop-verification/file-richtext@2x.png'), width: 13
-          p.small.mb-0
-            = "Размер: #{number_to_human_size(Rails.configuration.application.min_upload_file_size)} до #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
-            br
-            = "Формат: #{content_type_to_extensions(Rails.configuration.application.image_content_types)}"
+          .d-flex.align-items-center.mb-2
+            .flex-shrink-0.mr-3.align-self-start
+              = image_tag asset_url('desktop-verification/file-richtext@2x.png'), width: 13
+            p.small.mb-0
+              = "Размер: #{number_to_human_size(Rails.configuration.application.min_upload_file_size)} до #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
+              br
+              = "Формат: #{content_type_to_extensions(Rails.configuration.application.image_content_types)}"
 
-        .border-top.my-3
+          .border-top.my-3
 
-        .d-flex.align-items-center.mb-2
-          .flex-shrink-0.mr-3.align-self-start
-            = image_tag asset_url('desktop-verification/shield-lock@2x.png'), width: 13
-          p.small.mb-0
-            | В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
+          .d-flex.align-items-center.mb-2
+            .flex-shrink-0.mr-3.align-self-start
+              = image_tag asset_url('desktop-verification/shield-lock@2x.png'), width: 13
+            p.small.mb-0
+              | В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
 
   .row.my-5
     .col-md-8
