@@ -32,18 +32,26 @@ class Client::VerificationsController < Client::ApplicationController
   def create
     return if check_for_existing_verification
 
-    verification = applicant.verifications.new verification_params.
-      reverse_merge(remote_ip: request.remote_ip,
-                    step: 1,
-                    user_agent: request.user_agent,
-                    reason: DEFAULT_REASON)
+    if is_mobile?
+      verification = applicant.verifications.new verification_params.
+        reverse_merge(remote_ip: request.remote_ip,
+                      step: 1,
+                      user_agent: request.user_agent,
+                      reason: DEFAULT_REASON)
 
-    if verification.step == 0
-      render :new, locals: {verification: verification}
-    elsif verification.step < 4
-      render 'step' + step.to_s, locals: { verification: verification }
+      if verification.step == 0
+        render :new, locals: {verification: verification}
+      elsif verification.step < 4
+        render 'step' + step.to_s, locals: { verification: verification }
+      else
+        verification.save!
+        render :created, locals: { verification: verification}
+      end
     else
-      verification.save!
+      verification = applicant.verifications.create! verification_params.
+        reverse_merge(remote_ip: request.remote_ip,
+                      user_agent: request.user_agent,
+                      reason: DEFAULT_REASON)
       render :created, locals: { verification: verification}
     end
   rescue ActiveRecord::RecordInvalid => e
@@ -63,6 +71,10 @@ class Client::VerificationsController < Client::ApplicationController
 
   def detect_browser
     request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :desktop
+  end
+
+  def is_mobile?
+    detect_browser == :mobile
   end
 
   def form_path
