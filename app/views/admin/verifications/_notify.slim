@@ -1,18 +1,19 @@
 .mt-2
-  = link_to 'Уведомить приложение',
-    notify_admin_verification_path(verification), 
-    method: :post, 
-    class: 'btn btn-secondary btn-sm', 
-    data: { 'disable-width' => 'Отправляю..' },
-    remote: true, 
-    id: :verification_callback_form
+  - if current_member.admin?
+    = link_to 'Уведомить приложение',
+      notify_admin_verification_path(verification), 
+      method: :post, 
+      class: 'btn btn-secondary btn-sm', 
+      data: { 'disable-width' => 'Отправляю..' },
+      remote: true, 
+      id: :verification_callback_form
 
-  - if verification.applicant.last_confirmed_verification.present? && verification.applicant.last_confirmed_verification != verification
-    .text-danger Внимание! Это не последняя заявка.
+    - if verification.applicant.last_confirmed_verification.present? && verification.applicant.last_confirmed_verification != verification
+      .text-danger Внимание! Это не последняя заявка.
 
-  #verification_callback_result
-  
+    #verification_callback_result
+    
   - if verification.notified_at
-    .text-small Последнее уведомление
+    .text-small Последнее уведомление приложения
     = I18n.l verification.notified_at
 
