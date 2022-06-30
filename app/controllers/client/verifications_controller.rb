@@ -33,7 +33,7 @@ class Client::VerificationsController < Client::ApplicationController
     return if check_for_existing_verification
 
     if is_mobile?
-      verification = applicant.verifications.new verification_params.
+      verification = VerificationForm.new verification_params.
         reverse_merge(remote_ip: request.remote_ip,
                       next_step: 1,
                       user_agent: request.user_agent,
