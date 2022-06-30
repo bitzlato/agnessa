@@ -1,7 +1,7 @@
 class Admin::ReviewResultLabelsController < Admin::ApplicationController
 
   def index
-    labels = paginate ReviewResultLabel.all.order('created_at DESC')
+    labels = paginate ReviewResultLabel.all.order('archived_at DESC').order('created_at DESC')
     render locals: {labels: labels}
   end
 
@@ -15,6 +15,16 @@ class Admin::ReviewResultLabelsController < Admin::ApplicationController
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Label
     render :edit, locals: {label: label}
+  end
+
+  def restore
+    label.restore!
+    redirect_back fallback_location: admin_review_result_labels_path, notice: 'Label was successfully restored.'
+  end
+
+  def archive
+    label.archive!
+    redirect_back fallback_location: admin_review_result_labels_path, notice: 'Label was successfully archived.'
   end
 
   private

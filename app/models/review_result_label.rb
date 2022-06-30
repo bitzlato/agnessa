@@ -1,4 +1,6 @@
 class ReviewResultLabel < ApplicationRecord
+  include Archivable
+
   validates_presence_of :label
   validates_uniqueness_of :label
 

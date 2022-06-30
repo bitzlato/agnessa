@@ -11,6 +11,7 @@
         th Публичный комментарий
         th Действия
         th
+        th
 
     tbody
       - labels.each do |label|
@@ -19,6 +20,8 @@
           td = label.label
           td = label.label_ru
           td = label.public_comment
-          td = link_to 'Редактировать', edit_admin_review_result_label_path(label)
+          td = link_to 'Редактировать', edit_admin_review_result_label_path(label), class: 'btn btn-sm btn-info'
+          td = render 'archive_button', record: label
+
       br
   = paginate labels
