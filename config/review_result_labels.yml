@@ -47,4 +47,6 @@ review_result_labels:
     - label: EXPOSED_DOCUMENTS
       label_ru: 'Засвечен текст документа'
       public_comment: 'Засвечен текст документа'
-
+    - label: NO_LIST_WITH_BZ
+      label_ru: Засвечен текст документа
+      public_comment: На фото селфи с паспортом нету листика с датой и фразой “для криптобанка Bitzlato”
