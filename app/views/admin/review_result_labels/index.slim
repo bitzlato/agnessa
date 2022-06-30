@@ -2,6 +2,7 @@
   h2 Статусы верификаций
   hr
   div.mb-2= t 'application.index.total_records', count: labels.count
+  div.pull-right =link_to 'Новый статус', new_admin_review_result_label_path, class: 'btn btn-sm btn-secondary'
   table.table.table-striped.table-hover
     thead.thead-dark
       tr
@@ -11,6 +12,7 @@
         th Публичный комментарий
         th Действия
         th
+        th
 
     tbody
       - labels.each do |label|
@@ -19,6 +21,8 @@
           td = label.label
           td = label.label_ru
           td = label.public_comment
-          td = link_to 'Редактировать', edit_admin_review_result_label_path(label)
+          td = link_to 'Редактировать', edit_admin_review_result_label_path(label), class: 'btn btn-sm btn-info'
+          td = render 'archive_button', record: label
+
       br
   = paginate labels

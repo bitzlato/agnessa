@@ -79,7 +79,11 @@ Rails.application.routes.draw do
       resources :countries, except: %w[delete] do
         concerns :archivable
       end
-      resources :review_result_labels
+
+      resources :review_result_labels do
+        concerns :archivable
+      end
+
       resources :verifications do
         member  do
           post :notify

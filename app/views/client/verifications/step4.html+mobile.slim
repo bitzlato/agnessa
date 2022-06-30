@@ -5,6 +5,8 @@
     .progress.w-100 style="height: 4px"
       .progress-bar role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
 
+= render 'mobile_alert_error', last_refused_verification: last_refused_verification
+
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
   p.mt-3.small.font-weight-semibold
     = 'Загрузите селфи с документом и листком бумаги, с текущей датой и фразой «для криптобанка Bitzlato»'

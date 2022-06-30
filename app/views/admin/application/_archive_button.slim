@@ -1,0 +1,4 @@
+- if record.archived?
+  = link_to 'Восстановить', [:restore, :admin, record], class: 'btn btn-sm btn-success', method: :post
+- else
+  = link_to 'Архивировать', [:archive, :admin, record], class: 'btn btn-sm btn-secondary', method: :delete

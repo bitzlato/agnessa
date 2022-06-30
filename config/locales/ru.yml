@@ -43,6 +43,8 @@ ru:
         upload_document_photo: 'Загрузите фото документов'
         submit: 'Продоложить'
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
+      mobile_alert_error:
+        last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
       document_field:
         document_hint:  'Размер файла:  От %{from} до %{to}'
       created:
