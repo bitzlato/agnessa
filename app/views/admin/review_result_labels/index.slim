@@ -2,6 +2,7 @@
   h2 Статусы верификаций
   hr
   div.mb-2= t 'application.index.total_records', count: labels.count
+  div.pull-right =link_to 'Новый статус', new_admin_review_result_label_path, class: 'btn btn-sm btn-secondary'
   table.table.table-striped.table-hover
     thead.thead-dark
       tr

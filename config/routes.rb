@@ -80,7 +80,7 @@ Rails.application.routes.draw do
         concerns :archivable
       end
 
-      resources :review_result_labels, only: %i[index edit] do
+      resources :review_result_labels do
         concerns :archivable
       end
 
