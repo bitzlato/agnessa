@@ -8,6 +8,7 @@
 = render 'mobile_alert_error', last_refused_verification: last_refused_verification
 
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+  =render 'hidden_fields', f: f
   p.mt-3.small.font-weight-semibold
     = 'Загрузите фотографию или скан действительного документа, удостоверяющего личность'
 

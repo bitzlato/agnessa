@@ -33,7 +33,7 @@ class Client::VerificationsController < Client::ApplicationController
     return if check_for_existing_verification
 
     if is_mobile?
-      verification = VerificationForm.new verification_params.
+      verification = applicant.verifications.new verification_params.
         reverse_merge(remote_ip: request.remote_ip,
                       next_step: 1,
                       user_agent: request.user_agent,
@@ -69,7 +69,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :desktop
+    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :mobile
   end
 
   def is_mobile?

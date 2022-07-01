@@ -1,10 +1,5 @@
 class Verification < ApplicationRecord
-  attr_accessor :next_step
-
-  def next_step=(val)
-    @next_step = val.to_i
-  end
-
+  include VerificationForm
   COPY_ATTRIBUTES = %w(name last_name patronymic birth_date document_type citizenship_country_iso_code document_number reason email)
   strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
   # Strip off all spaces and keep only alphabetic and numeric characters
