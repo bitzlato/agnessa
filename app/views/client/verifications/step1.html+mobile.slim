@@ -18,8 +18,10 @@
   = f.input :birth_date, as: :date_picker
   = f.input :email, as: :email
 
-  .container.fixed-bottom.pb-4
+  .container.fixed-bottom.pb-4.d-flex
     = f.input :next_step, as: :hidden, input_html: { value: 2 }
+    / = button_to 'Назад', client_verifications_path(verification: { next_step: 0 }), class: 'btn btn-outline-primary font-weight-semibold w-100 mr-4', style: 'max-width: 130px', method: :post
+    = f.submit 'Назад', name: 'back', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
     = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
 
 .mb-5.pb-5

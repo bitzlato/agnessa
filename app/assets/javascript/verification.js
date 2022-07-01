@@ -1,6 +1,7 @@
 //= require moment
 //= require simple_form-datetimepicker
 //= require bootstrap-sprockets
+//= require rails-ujs
 
 
 const toggleVisibleApplicantComment = function () {

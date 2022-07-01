@@ -9,7 +9,7 @@
   =render 'hidden_fields', f: f
 
   = f.simple_fields_for :verification_documents do |document|
-      / TODO: нужно придумать хороший надежный способ, как опредлеить какой именнь тип документа нужен на конкретном шаге
+      / TODO: нужно придумать хороший надежный способ, как опредлеить какой именно тип документа нужен на конкретном шаге
       = render 'document_field_mobile', document: document if document.object == f.object.verification_documents.first
 
   / p.mt-3.small.font-weight-semibold
@@ -48,9 +48,8 @@
 
   .container.fixed-bottom.pb-4.d-flex
     = f.input :next_step, as: :hidden, input_html: { value: 4 }
+    = link_to 'Назад', client_verifications_path(verification: { next_step: 2 }), class: 'btn btn-outline-primary font-weight-semibold w-100 mr-4', style: 'max-width: 130px', method: :post
     = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
-    / = link_to 'Назад', step2_client_verifications_path, class: 'btn btn-outline-primary font-weight-semibold w-100 mr-4', style: 'max-width: 130px'
-    / = link_to 'Продолжить', step4_client_verifications_path, class: 'btn btn-primary font-weight-semibold w-100'
 
   .mb-5.pb-5
 

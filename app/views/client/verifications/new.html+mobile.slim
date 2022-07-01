@@ -35,5 +35,5 @@
 
 .container.fixed-bottom.pb-4.d-flex.justify-content-center
   = simple_form_for verification, url: form_path, html: { multipart: true,  class: 'w-100', novalidate: false } do |f|
-    =render 'hidden_fields', f: f
+    = render 'hidden_fields', f: f
     = f.submit 'Пройти верификацию', class: 'btn btn-primary flex-grow-1 w-100', data: { 'disable-with' => 'Отправляю..' }
