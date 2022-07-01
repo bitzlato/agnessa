@@ -1,0 +1,8 @@
+-document_type_collection_for_radio_buttons.each do |doc_type|
+  .custom-control.custom-radio.my-4
+    input.custom-control-input type="radio" id="radio-#{doc_type[1]}" name="#{f.object_name}[document_type]" value=doc_type[1]
+    label class="custom-control-label" for="radio-#{doc_type[1]}"
+      - image = doc_type[2][:image]
+      = image_tag asset_url(image), width: 24, class: 'mr-2'
+      = doc_type[0]
+

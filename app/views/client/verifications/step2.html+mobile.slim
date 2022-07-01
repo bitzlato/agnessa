@@ -11,29 +11,7 @@
   =render 'hidden_fields', f: f
   h3.h4.mt-4.mb-3.font-weight-bold.text-primary Выберите тип документа
 
-  / = f.input :document_type,
-  /         as: :radio_buttons,
-  /         label: false,
-  /         collection: document_type_collection_for_radio_buttons,
-  /         item_wrapper_class: 'd-flex'
-
-  .custom-control.custom-radio.my-4
-    input.custom-control-input type="radio" id="customRadioInline1" name="type" value="passport"
-    label class="custom-control-label" for="customRadioInline1"
-      = image_tag asset_url('passport@2x.png'), width: 24, class: 'mr-2'
-      = 'Паспорт'
-
-  .custom-control.custom-radio.my-4
-    input.custom-control-input type="radio" id="customRadioInline2" name="type" value="id-card"
-    label class="custom-control-label" for="customRadioInline2"
-      = image_tag asset_url('id-card@2x.png'), width: 24, class: 'mr-2'
-      = 'ID карта'
-
-  .custom-control.custom-radio.my-4
-    input.custom-control-input type="radio" id="customRadioInline3" name="type" value="driving-license"
-    label class="custom-control-label" for="customRadioInline3"
-      = image_tag asset_url('car@2x.png'), width: 24, class: 'mr-2'
-      = 'Водительские права'
+  =render 'document_type_mobile_radio', f: f
 
   .mt-5
     = f.input :document_number
