@@ -34,4 +34,7 @@
   .mb-5.pb-5
 
 .container.fixed-bottom.pb-4.d-flex.justify-content-center
-  = button_to 'Пройти верификацию', client_verifications_path(verification: { next_step: 1 }), class: 'btn btn-primary flex-grow-1', method: :post
+  = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+    =render 'hidden_fields', f: f
+    = f.submit 'Пройти верификацию', class: 'btn btn-primary flex-grow-1 w-100', data: { 'disable-with' => 'Отправляю..' }
+    / = link_to 'Пройти верификацию', client_verifications_path(verification: { next_step: 1 }), class: 'btn btn-primary flex-grow-1', method: :post

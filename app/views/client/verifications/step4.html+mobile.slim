@@ -9,37 +9,42 @@
 
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
   =render 'hidden_fields', f: f
-  p.mt-3.small.font-weight-semibold
-    = 'Загрузите селфи с документом и листком бумаги, с текущей датой и фразой «для криптобанка Bitzlato»'
 
-  - element_id = 'document-step-4'
-  div id="#{element_id}" data-file-input=""
-    .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4.mb-4 style="height: 230px; border-style: dashed"
-      = image_tag asset_url('photo-doc-example-2@2x.png'), width: 186, class: 'w-50', style: 'max-width: 200px', data: {'preview-placeholder': ''}
-      img style="max-width: 80%; max-height: 100%;" data-preview=""
-
-    div data-controls=""
-      .d-flex
-        label.btn.btn-primary.flex-grow-1.mr-4
-          input.custom-file-input.position-absolute type="file" accept="image/*" style="height: 0" data-input=""
-          = 'Загрузить файл'
-
-        label.btn.btn-primary.flex-grow-1
-          input.custom-file-input.position-absolute type="file" accept="image/*" capture="user" style="height: 0" data-input=""
-          = 'Открыть камеру'
-
-    div style="display: none" data-filename-container=""
-      div.position-relative.btn.btn-outline-secondary.d-flex.justify-content-between.w-100
-        span.text-truncate.w-100.pr-4 data-filename=""
-        span.position-absolute.px-3 style="right: 0" data-clear-button=""
-          | &times;
-
-    input type="hidden" data-remove-input=""
-
-    javascript:
-      document.addEventListener("DOMContentLoaded", function(event) {
-        attachFileInput({id: "#{element_id}" });
-      });
+  = f.simple_fields_for :verification_documents do |document|
+    / TODO: нужно придумать хороший надежный способ, как опредлеить какой именнь тип документа нужен на конкретном шаге
+    = render 'document_field_mobile', document: document if document.object == f.object.verification_documents.last
+  /
+  / p.mt-3.small.font-weight-semibold
+  /   = 'Загрузите селфи с документом и листком бумаги, с текущей датой и фразой «для криптобанка Bitzlato»'
+  /
+  / - element_id = 'document-step-4'
+  / div id="#{element_id}" data-file-input=""
+  /   .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4.mb-4 style="height: 230px; border-style: dashed"
+  /     = image_tag asset_url('photo-doc-example-2@2x.png'), width: 186, class: 'w-50', style: 'max-width: 200px', data: {'preview-placeholder': ''}
+  /     img style="max-width: 80%; max-height: 100%;" data-preview=""
+  /
+  /   div data-controls=""
+  /     .d-flex
+  /       label.btn.btn-primary.flex-grow-1.mr-4
+  /         input.custom-file-input.position-absolute type="file" accept="image/*" style="height: 0" data-input=""
+  /         = 'Загрузить файл'
+  /
+  /       label.btn.btn-primary.flex-grow-1
+  /         input.custom-file-input.position-absolute type="file" accept="image/*" capture="user" style="height: 0" data-input=""
+  /         = 'Открыть камеру'
+  /
+  /   div style="display: none" data-filename-container=""
+  /     div.position-relative.btn.btn-outline-secondary.d-flex.justify-content-between.w-100
+  /       span.text-truncate.w-100.pr-4 data-filename=""
+  /       span.position-absolute.px-3 style="right: 0" data-clear-button=""
+  /         | &times;
+  /
+  /   input type="hidden" data-remove-input=""
+  /
+  /   javascript:
+  //    document.addEventListener("DOMContentLoaded", function(event) {
+  //      attachFileInput({id: "#{element_id}" });
+  //    });
 
 
   = render 'photo_instruction', first_point: 'Убедитесь, что документ на фото размещен полностью, края не обрезаны, информация хорошо считывается'
