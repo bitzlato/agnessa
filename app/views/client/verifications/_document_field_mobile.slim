@@ -34,10 +34,10 @@ div id="#{element_id}" data-file-input=""
     div.d-block.invalid-feedback
       = document.object.errors.full_messages.join(', ')
 
-  javascript:
-      document.addEventListener("DOMContentLoaded", function(event) {
-          attachFileInput({id: "#{element_id}" });
-      });
-
 = document.input :file_cache, as: :hidden, input_html: { data: { 'file-cache-input': '' } }
 = document.input :document_type_id, as: :hidden
+
+javascript:
+    document.addEventListener("DOMContentLoaded", function(event) {
+        attachFileInput({id: "#{element_id}" });
+    });
