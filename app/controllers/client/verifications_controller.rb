@@ -76,7 +76,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :desktop
+    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :mobile
   end
 
   def is_mobile?
