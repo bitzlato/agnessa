@@ -38,13 +38,10 @@ class Client::VerificationsController < Client::ApplicationController
                       next_step: 1,
                       user_agent: request.user_agent,
                       reason: DEFAULT_REASON)
-      if params[:submit] == 'back'
-        #TODO: из формы прииходит next_step на след шаг, что означает нужно сделать 2 шага назад
-        #TODO: как это можно сделать краисвее
-        verification.next_step -= 2
-        verification.next_step = 0 if verification.next_step < 0
-      end
-      if verification.next_step.zero?
+
+      verification.next_step = back_step? ? (verification.next_step-2).to_s : verification.next_step.to_s
+
+      if verification.next_step <= 0
         render :new, locals: { verification: verification }
       elsif verification.next_step <= 4
         render 'step'+verification.next_step.to_s, locals: { verification: verification }
@@ -66,6 +63,10 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   private
+
+  def back_step?
+    params[:submit] == 'back'
+  end
 
   def check_for_existing_verification
     existing_verification = applicant.verifications.pending.last
