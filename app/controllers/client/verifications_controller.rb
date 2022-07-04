@@ -23,7 +23,7 @@ class Client::VerificationsController < Client::ApplicationController
       current_account.document_types.alive.order('position ASC').each do |document_type|
         verification.verification_documents.new document_type: document_type
       end
-      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country || 'RU' if verification.citizenship_country_iso_code.nil?
+      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
       verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
       render locals: {verification: verification}
     end
