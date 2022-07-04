@@ -1,9 +1,9 @@
 javascript:
   function attachFileInput({id}) {
     var fileInputContainer = document.getElementById(id);
-      var fileCacheInput = fileInputContainer.querySelector('[data-file-cache-input]');
+    var fileCacheInput = fileInputContainer.querySelector('[data-file-cache-input]');
 
-      if (!fileInputContainer) {
+    if (!fileInputContainer) {
       console.error('Element by id', id, 'not found');
       return;
     }
@@ -68,7 +68,9 @@ javascript:
           input.value = '';
         }
       });
-      fileCacheInput.value = '';
+      if (fileCacheInput) {
+        fileCacheInput.value = '';
+      }
       toggleShowFilename();
       toggleShowPreview();
     }

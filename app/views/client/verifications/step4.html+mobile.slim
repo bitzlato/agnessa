@@ -1,5 +1,5 @@
 .d-flex.mt-4
-  h1.h4.w-25.m-0.font-weight-bold.small.text-primary.text-uppercase Шаг 4 из 4
+  h1.h4.w-25.m-0.font-weight-bold.small.text-primary Шаг 4 из 4
 
   .d-flex.align-items-center.w-75
     .progress.w-100 style="height: 4px"
@@ -28,7 +28,7 @@
           = 'Открыть камеру'
 
     div style="display: none" data-filename-container=""
-      div.position-relative.btn.btn-outline-secondary.d-flex.justify-content-between.w-100
+      div.position-relative.border.border-secondary.px-3.py-2.rounded.d-flex.justify-content-between.w-100 type="button" 
         span.text-truncate.w-100.pr-4 data-filename=""
         span.position-absolute.px-3 style="right: 0" data-clear-button=""
           | &times;
@@ -39,7 +39,6 @@
       document.addEventListener("DOMContentLoaded", function(event) {
         attachFileInput({id: "#{element_id}" });
       });
-
 
   = render 'photo_instruction', first_point: 'Убедитесь, что документ на фото размещен полностью, края не обрезаны, информация хорошо считывается'
 

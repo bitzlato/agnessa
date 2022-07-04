@@ -34,6 +34,9 @@
       = image_tag asset_url('car@2x.png'), width: 24, class: 'mr-2'
       = 'Водительские права'
 
+  / Для ошибки типа документа
+  div.invalid-feedback.d-block = "Тип документа не может быть пустым"
+
   .mt-5
     = f.input :document_number
 
