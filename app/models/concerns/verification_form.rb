@@ -1,5 +1,7 @@
 module VerificationForm
   extend ActiveSupport::Concern
+
+  #TODO: qwerty
   attr_accessor :next_step
 
   included do

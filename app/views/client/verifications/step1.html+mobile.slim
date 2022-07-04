@@ -15,7 +15,8 @@
   = f.input :citizenship_country_iso_code,
           as: :select,
           collection: country_options_for_select
-  = f.input :birth_date, as: :date_picker
+  .position-relative
+    = f.input :birth_date, as: :date_picker, icons: :font_awesome
   = f.input :email, as: :email
 
   .container.fixed-bottom.pb-4.d-flex
