@@ -6,11 +6,23 @@
       .progress-bar role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
 
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
-  =render 'hidden_fields', f: f
+  = f.input :name, as: :hidden
+  = f.input :last_name, as: :hidden
+  = f.input :patronymic, as: :hidden
+  = f.input :citizenship_country_iso_code, as: :hidden
+  = f.input :birth_date, as: :hidden
+  = f.input :email, as: :hidden
+  = f.input :document_type, as: :hidden
+  = f.input :document_number, as: :hidden
+  = f.simple_fields_for :verification_documents do |document|
+    = document.input :file, as: :hidden
+    = document.input :file_cache, as: :hidden
+    = document.input :document_type_id, as: :hidden
 
   = f.simple_fields_for :verification_documents do |document|
       / TODO: нужно придумать хороший надежный способ, как опредлеить какой именно тип документа нужен на конкретном шаге
       = render 'document_field_mobile', document: document if document.object == f.object.verification_documents.first
+
 
   / p.mt-3.small.font-weight-semibold
   /   = 'Загрузите фотографию или скан действительного документа, удостоверяющего личность'

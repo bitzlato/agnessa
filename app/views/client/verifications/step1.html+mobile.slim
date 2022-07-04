@@ -6,7 +6,13 @@
       .progress-bar role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
 
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
-  =render 'hidden_fields', f: f
+  = f.input :document_type, as: :hidden
+  = f.input :document_number, as: :hidden
+  = f.simple_fields_for :verification_documents do |document|
+    = document.input :file, as: :hidden
+    = document.input :file_cache, as: :hidden
+    = document.input :document_type_id, as: :hidden
+
   h3.h4.mt-4.mb-3.font-weight-bold.text-primary Личные данные
 
   = f.input :name
