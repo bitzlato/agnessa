@@ -23,7 +23,7 @@ class Client::VerificationsController < Client::ApplicationController
       current_account.document_types.alive.order('position ASC').each do |document_type|
         verification.verification_documents.new document_type: document_type
       end
-      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
+      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country || 'RU' if verification.citizenship_country_iso_code.nil?
       verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
       render locals: {verification: verification}
     end
@@ -38,6 +38,12 @@ class Client::VerificationsController < Client::ApplicationController
                       next_step: 1,
                       user_agent: request.user_agent,
                       reason: DEFAULT_REASON)
+      if params[:submit] == 'back'
+        #TODO: из формы прииходит next_step на след шаг, что означает нужно сделать 2 шага назад
+        #TODO: как это можно сделать краисвее
+        verification.next_step -= 2
+        verification.next_step = 0 if verification.next_step < 0
+      end
       if verification.next_step.zero?
         render :new, locals: { verification: verification }
       elsif verification.next_step <= 4
