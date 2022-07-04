@@ -20,8 +20,11 @@ class Client::VerificationsController < Client::ApplicationController
       return if check_for_existing_verification
       verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
       verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
-      current_account.document_types.alive.order('position ASC').each do |document_type|
-        verification.verification_documents.new document_type: document_type
+
+      if verification.verification_documents.count != current_account.document_types.alive.count
+        current_account.document_types.alive.order('position ASC').each do |document_type|
+          verification.verification_documents.new document_type: document_type
+        end
       end
       verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
       verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?

@@ -14,14 +14,13 @@
   = f.input :email, as: :hidden
   = f.input :document_type, as: :hidden
   = f.input :document_number, as: :hidden
-  = f.simple_fields_for :verification_documents do |document|
-    = document.input :file, as: :hidden
-    = document.input :file_cache, as: :hidden
-    = document.input :document_type_id, as: :hidden
+  / = f.simple_fields_for :verification_documents do |document|
+  /   = document.input :file_cache, as: :hidden
+  /   = document.input :document_type_id, as: :hidden
 
   = f.simple_fields_for :verification_documents do |document|
     / TODO: нужно придумать хороший надежный способ, как опредлеить какой именнь тип документа нужен на конкретном шаге
-    = render 'document_field_mobile', document: document if document.object == f.object.verification_documents.last
+    = render 'document_field_mobile', document: document if document.object.document_type.position == 2
 
   = render 'photo_instruction', first_point: 'Убедитесь, что документ на фото размещен полностью, края не обрезаны, информация хорошо считывается'
 
