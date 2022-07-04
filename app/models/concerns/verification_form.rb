@@ -1,12 +1,11 @@
 module VerificationForm
   extend ActiveSupport::Concern
 
-  #TODO: qwerty
-  attr_accessor :next_step
-
   included do
-    def next_step
-      super.to_i
-    end
+    attr_writer :next_step
+  end
+
+  def next_step
+    @next_step.to_i
   end
 end
