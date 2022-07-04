@@ -13,7 +13,6 @@
   = f.input :birth_date, as: :hidden
   = f.input :email, as: :hidden
   = f.simple_fields_for :verification_documents do |document|
-    = document.input :file, as: :hidden
     = document.input :file_cache, as: :hidden
     = document.input :document_type_id, as: :hidden
 
