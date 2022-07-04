@@ -1,4 +1,8 @@
 - element_id = "document-#{rand(100)}" #TODO: исправить
+
+p.mt-3.small.font-weight-semibold
+  = document.object.document_type.title
+
 div id="#{element_id}" data-file-input=""
   .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4.mb-4 style="height: 230px; border-style: dashed"
     - if document.object.file.cached?
