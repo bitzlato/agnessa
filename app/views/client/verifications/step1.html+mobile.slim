@@ -5,9 +5,13 @@
     .progress.w-100 style="height: 4px"
       .progress-bar role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
 
-= render 'mobile_alert_error', last_refused_verification: last_refused_verification
-
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
+  = f.input :document_type, as: :hidden
+  = f.input :document_number, as: :hidden
+  = f.simple_fields_for :verification_documents do |document|
+    = document.input :file_cache, as: :hidden
+    = document.input :document_type_id, as: :hidden
+
   h3.h4.mt-4.mb-3.font-weight-bold.text-primary Личные данные
 
   = f.input :name
@@ -15,11 +19,15 @@
   = f.input :patronymic
   = f.input :citizenship_country_iso_code,
           as: :select,
-          collection: country_options_for_select
-  = f.input :birth_date, as: :date_picker
+          collection: country_options_for_select,
+          input_html: { class: 'custom-select' }
+  .position-relative
+    = f.input :birth_date, as: :date_picker, icons: :font_awesome
   = f.input :email, as: :email
 
-  .container.fixed-bottom.pb-4
-    = link_to 'Продолжить', step2_client_verifications_path, class: 'btn btn-primary w-100' 
+  .container.fixed-bottom.pb-4.d-flex
+    = f.input :next_step, as: :hidden, input_html: { value: 2 }
+    button type="submit" value='back' name='submit' class='btn btn-outline-primary font-weight-semibold w-100 mr-4' style='max-width: 130px' Назад
+    = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
 
 .mb-5.pb-5

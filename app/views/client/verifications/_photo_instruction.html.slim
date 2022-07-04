@@ -14,6 +14,6 @@
     .flex-shrink-0.mr-2.align-self-start
       = image_tag asset_url('file-richtext@2x.png'), width: 13
     p.small.mb-0
-      = 'Размер: 50,0 КБ до 50,0 МБ'
+      = "Размер: #{number_to_human_size(Rails.configuration.application.min_upload_file_size)} до #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
       br
-      = 'Формат: JPG, JPEG, PNG'
+      = "Формат: #{content_type_to_extensions(Rails.configuration.application.image_content_types)}"

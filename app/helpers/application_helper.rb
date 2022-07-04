@@ -3,6 +3,13 @@ module ApplicationHelper
                      'refused' => 'badge badge-secondary',
                      'confirmed' => 'badge badge-success' }
 
+  DOCUMENT_TYPE_IMAGE = {
+    'passport': 'passport@2x.png',
+    'id_card':  'id-card@2x.png',
+    'driver_license': 'car@2x.png',
+    'foreign_passport': 'passport@2x.png'
+  }.with_indifferent_access.freeze
+
   def status_badge(status)
     content_tag(:span, t(status, scope: :status), class: STATUS_CLASSES[status])
   end
@@ -117,6 +124,6 @@ module ApplicationHelper
   end
 
   def document_type_collection_for_radio_buttons
-    Rails.configuration.application.available_documents.map{ |x| [I18n.t(x, scope: 'attributes.document_types'), x] }
+    Rails.configuration.application.available_documents.map { |x| [I18n.t(x, scope: 'attributes.document_types'), x, { 'image': DOCUMENT_TYPE_IMAGE[x] }] }
   end
 end

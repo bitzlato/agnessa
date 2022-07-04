@@ -5,47 +5,28 @@
     .progress.w-100 style="height: 4px"
       .progress-bar role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
 
-= render 'mobile_alert_error', last_refused_verification: last_refused_verification
-
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
-  p.mt-3.small.font-weight-semibold
-    = 'Загрузите фотографию или скан действительного документа, удостоверяющего личность'
-
-  - element_id = 'document-step-3'
-  div id="#{element_id}" data-file-input=""
-    .img-thumbnail.d-flex.align-items-center.justify-content-center.py-4.mb-4 style="height: 230px; border-style: dashed"
-      = image_tag asset_url('photo-doc-example-1@2x.png'), width: 186, class: 'w-50', style: 'max-width: 200px', data: {'preview-placeholder': ''}
-      img style="max-width: 80%; max-height: 100%;" data-preview=""
-
-    div data-controls=""
-      .d-flex
-        label.btn.btn-primary.flex-grow-1.mr-4
-          input.custom-file-input.position-absolute type="file" accept="image/*" style="height: 0" data-input=""
-          = 'Загрузить файл'
-
-        label.btn.btn-primary.flex-grow-1
-          input.custom-file-input.position-absolute type="file" accept="image/*" capture="user" style="height: 0" data-input=""
-          = 'Открыть камеру'
-
-    div style="display: none" data-filename-container=""
-      div.position-relative.btn.btn-outline-secondary.d-flex.justify-content-between.w-100 type="button" 
-        span.text-truncate.w-100.pr-4 data-filename=""
-        span.position-absolute.px-3 style="right: 0" data-clear-button=""
-          | &times;
-
-    input type="hidden" data-remove-input=""
-
-    javascript:
-      document.addEventListener("DOMContentLoaded", function(event) {
-        attachFileInput({id: "#{element_id}" });
-      });
-
+  = f.input :name, as: :hidden
+  = f.input :last_name, as: :hidden
+  = f.input :patronymic, as: :hidden
+  = f.input :citizenship_country_iso_code, as: :hidden
+  = f.input :birth_date, as: :hidden
+  = f.input :email, as: :hidden
+  = f.input :document_type, as: :hidden
+  = f.input :document_number, as: :hidden
+  = f.simple_fields_for :verification_documents do |document|
+   -if document.object.document_type.position == 1
+      = render 'document_field_mobile', document: document
+   -else
+     = document.input :file_cache, as: :hidden
+     = document.input :document_type_id, as: :hidden
   = render 'photo_instruction', first_point: 'Убедитесь, что документ на фото размещен полностью, края не обрезаны, информация хорошо считывается'
 
-.container.fixed-bottom.pb-4.d-flex
-  = link_to 'Назад', step2_client_verifications_path, class: 'btn btn-outline-primary font-weight-semibold w-100 mr-4', style: 'max-width: 130px'
-  = link_to 'Продолжить', step4_client_verifications_path, class: 'btn btn-primary font-weight-semibold w-100' 
+  .container.fixed-bottom.pb-4.d-flex
+    = f.input :next_step, as: :hidden, input_html: { value: 4 }
+    button type="submit" value='back' name='submit' class='btn btn-outline-primary font-weight-semibold w-100 mr-4' style='max-width: 130px' Назад
+    = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
 
-.mb-5.pb-5
+  .mb-5.pb-5
 
 = render 'photo_upload_script'

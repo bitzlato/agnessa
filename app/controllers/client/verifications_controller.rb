@@ -4,9 +4,9 @@ class Client::VerificationsController < Client::ApplicationController
   skip_before_action :verify_authenticity_token
 
   DEFAULT_REASON = :trusted_trader
-  PERMITTED_ATTRIBUTES = [:name, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]}]
+  PERMITTED_ATTRIBUTES = [:name, :next_step, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]}]
 
-  helper_method :form_path, :external_id
+  helper_method :form_path, :external_id, :last_refused_verification
 
   before_action :detect_browser, only: %i[new step1 step2 step3 step4 create]
 
@@ -17,113 +17,59 @@ class Client::VerificationsController < Client::ApplicationController
     elsif applicant.blocked?
       render :blocked, locals: {applicant: applicant }, status: :bad_request
     else
-      check_for_existing_verification and return
-      last_refused_verification = applicant.verifications.refused.last
+      return if check_for_existing_verification
       verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
       verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
-      current_account.document_types.alive.order('position ASC').each do |document_type|
-        verification.verification_documents.new document_type: document_type
-      end
-      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
-      render locals: {verification: verification, last_refused_verification: last_refused_verification}
-    end
-  end
 
-  def step1
-    @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
-    if applicant.verified?
-      render :verified, locals: {applicant: applicant }
-    elsif applicant.blocked?
-      render :blocked, locals: {applicant: applicant }, status: :bad_request
-    else
-      check_for_existing_verification and return
-      last_refused_verification = applicant.verifications.refused.last
-      verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
-      verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
-      current_account.document_types.alive.order('position ASC').each do |document_type|
-        verification.verification_documents.new document_type: document_type
+      if verification.verification_documents.count != current_account.document_types.alive.count
+        current_account.document_types.alive.order('position ASC').each do |document_type|
+          verification.verification_documents.new document_type: document_type
+        end
       end
       verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
       verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
-      render locals: {verification: verification, last_refused_verification: last_refused_verification}
-    end
-  end
-
-  def step2
-    @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
-    if applicant.verified?
-      render :verified, locals: {applicant: applicant }
-    elsif applicant.blocked?
-      render :blocked, locals: {applicant: applicant }, status: :bad_request
-    else
-      check_for_existing_verification and return
-      last_refused_verification = applicant.verifications.refused.last
-      verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
-      verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
-      current_account.document_types.alive.order('position ASC').each do |document_type|
-        verification.verification_documents.new document_type: document_type
-      end
-      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
-      render locals: {verification: verification, last_refused_verification: last_refused_verification}
-    end
-  end
-
-  def step3
-    @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
-    if applicant.verified?
-      render :verified, locals: {applicant: applicant }
-    elsif applicant.blocked?
-      render :blocked, locals: {applicant: applicant }, status: :bad_request
-    else
-      check_for_existing_verification and return
-      last_refused_verification = applicant.verifications.refused.last
-      verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
-      verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
-      current_account.document_types.alive.order('position ASC').each do |document_type|
-        verification.verification_documents.new document_type: document_type
-      end
-      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
-      render locals: {verification: verification, last_refused_verification: last_refused_verification}
-    end
-  end
-
-  def step4
-    @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
-    if applicant.verified?
-      render :verified, locals: {applicant: applicant }
-    elsif applicant.blocked?
-      render :blocked, locals: {applicant: applicant }, status: :bad_request
-    else
-      check_for_existing_verification and return
-      last_refused_verification = applicant.verifications.refused.last
-      verification = applicant.verifications.new params.fetch(:verification, {}).permit(*PERMITTED_ATTRIBUTES)
-      verification.copy_verification_attributes(last_refused_verification) if last_refused_verification.present?
-      current_account.document_types.alive.order('position ASC').each do |document_type|
-        verification.verification_documents.new document_type: document_type
-      end
-      verification.citizenship_country_iso_code = Geocoder.search(request.remote_ip).first&.country if verification.citizenship_country_iso_code.nil?
-      verification.document_type = verification.citizenship_country&.available_documents&.first if verification.document_type.nil?
-      render locals: {verification: verification, last_refused_verification: last_refused_verification}
+      render locals: {verification: verification}
     end
   end
 
   def create
     return if check_for_existing_verification
 
-    verification = applicant.verifications.create! verification_params.merge(remote_ip: request.remote_ip,
-                                                                             user_agent: request.user_agent,
-                                                                             reason: DEFAULT_REASON)
-    render :created, locals: { verification: verification}
+    if is_mobile?
+      verification = applicant.verifications.new verification_params.
+        reverse_merge(remote_ip: request.remote_ip,
+                      next_step: 1,
+                      user_agent: request.user_agent,
+                      reason: DEFAULT_REASON)
+
+      verification.next_step = back_step? ? (verification.next_step - 2).to_s : verification.next_step.to_s
+
+      if verification.next_step <= 0
+        render :new, locals: { verification: verification }
+      elsif verification.next_step <= 4
+        render 'step'+verification.next_step.to_s, locals: { verification: verification }
+      else
+        verification.save!
+        render :created, locals: { verification: verification }
+      end
+    else
+      verification = applicant.verifications.create! verification_params.
+        reverse_merge(remote_ip: request.remote_ip,
+                      user_agent: request.user_agent,
+                      reason: DEFAULT_REASON)
+      render :created, locals: { verification: verification}
+    end
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
     report_exception e, true, params: params
-    render :new, locals: { verification: e.record, last_refused_verification: nil }, status: :bad_request
+    render :new, locals: { verification: e.record }, status: :bad_request
   end
 
   private
+
+  def back_step?
+    params[:submit] == 'back'
+  end
 
   def check_for_existing_verification
     existing_verification = applicant.verifications.pending.last
@@ -133,7 +79,11 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :desktop
+    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :mobile
+  end
+
+  def is_mobile?
+    detect_browser == :mobile
   end
 
   def form_path
@@ -142,6 +92,10 @@ class Client::VerificationsController < Client::ApplicationController
 
   def applicant
     @applicant ||= find_applicant
+  end
+
+  def last_refused_verification
+    applicant.verifications.refused.last
   end
 
   def find_applicant
@@ -169,4 +123,3 @@ class Client::VerificationsController < Client::ApplicationController
       permit(*PERMITTED_ATTRIBUTES)
   end
 end
-
