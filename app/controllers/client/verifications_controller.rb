@@ -39,7 +39,7 @@ class Client::VerificationsController < Client::ApplicationController
                       user_agent: request.user_agent,
                       reason: DEFAULT_REASON)
 
-      verification.next_step = back_step? ? (verification.next_step-2).to_s : verification.next_step.to_s
+      verification.next_step = back_step? ? (verification.next_step - 2).to_s : verification.next_step.to_s
 
       if verification.next_step <= 0
         render :new, locals: { verification: verification }
