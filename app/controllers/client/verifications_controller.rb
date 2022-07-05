@@ -10,6 +10,19 @@ class Client::VerificationsController < Client::ApplicationController
 
   before_action :detect_browser, only: %i[new step1 step2 step3 step4 create]
 
+  VERIFICATION_ATTRS_WITH_STEP = {
+    name: 1,
+    last_name: 1,
+    patronymic: 1,
+    citizenship_country_iso_code: 1,
+    birth_date: 1,
+    email: 1,
+    document_type: 2,
+    document_number: 2,
+    'verification_documents.file': 3, #TODO: что-то придумать
+    'verification_documents.file': 4
+  }
+
   def new
     @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
     if applicant.verified?
@@ -62,10 +75,19 @@ class Client::VerificationsController < Client::ApplicationController
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
     report_exception e, true, params: params
-    render :new, locals: { verification: e.record }, status: :bad_request
+
+    if is_mobile?
+      render 'step'+minimal_step_with_errors(e.record.errors).to_s, locals: { verification: e.record }
+    else
+      render :new, locals: { verification: e.record }, status: :bad_request
+    end
   end
 
   private
+
+  def minimal_step_with_errors(errors)
+    errors.map { |attr, msg| VERIFICATION_ATTRS_WITH_STEP[attr] }.min
+  end
 
   def back_step?
     params[:submit] == 'back'

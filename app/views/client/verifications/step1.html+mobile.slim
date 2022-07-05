@@ -8,6 +8,7 @@
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
   = f.input :document_type, as: :hidden
   = f.input :document_number, as: :hidden
+  / FIXME: рисует тэг с ошибками ошибкой для hidden fields
   = f.simple_fields_for :verification_documents do |document|
     = document.input :file_cache, as: :hidden
     = document.input :document_type_id, as: :hidden
