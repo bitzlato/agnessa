@@ -77,7 +77,7 @@ class Client::VerificationsController < Client::ApplicationController
     report_exception e, true, params: params
 
     if is_mobile?
-      render 'step'+minimal_step_with_errors(e.record.errors).to_s, locals: { verification: e.record }
+      render 'step'+minimal_step_with_errors(e.record.errors).to_s, locals: { verification: e.record }, status: :bad_request
     else
       render :new, locals: { verification: e.record }, status: :bad_request
     end
