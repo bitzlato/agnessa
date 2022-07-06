@@ -44,11 +44,14 @@ default:  &settings
     - image/jpeg
     - image/webp
   reserved_subdomains: ['www', 'api', 'stage', 'staging']
+  always_mobile_version: false
 
 staging:
   <<: *settings
+  always_mobile_version: true
 development:
   <<: *settings
+  always_mobile_version: true
 production:
   <<: *settings
 test:

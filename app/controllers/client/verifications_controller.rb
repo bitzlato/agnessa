@@ -119,7 +119,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :mobile
+    request.variant = params[:mobile] && browser.device.mobile? || Rails.configuration.application.always_mobile_version ? :mobile : :desktop
   end
 
   def is_mobile?
