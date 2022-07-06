@@ -20,8 +20,9 @@ class Client::VerificationsController < Client::ApplicationController
     document_type: 2,
     document_number: 2,
     'verification_documents.file': 3, #TODO: что-то придумать
-    'verification_documents.file': 4
-  }
+    # 'document_position1': 3,
+    # 'document_position2': 4
+  }.with_indifferent_access.freeze
 
   def new
     @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
@@ -86,7 +87,24 @@ class Client::VerificationsController < Client::ApplicationController
   private
 
   def minimal_step_with_errors(errors)
-    errors.map { |attr, msg| VERIFICATION_ATTRS_WITH_STEP[attr] }.min
+    # step_with_errors = []
+    #
+    # errors.map { |attr, msg| step_with_errors << VERIFICATION_ATTRS_WITH_STEP[attr] }
+    #
+    # verification_params[:verification_documents_attributes].each do |key, val|
+    #   val = val.to_h
+    #   next unless val['file_cache'].blank?
+    #
+    #   document_type = DocumentType.find(val.to_h['document_type_id'])
+    #   error_step = VERIFICATION_ATTRS_WITH_STEP['document_position'+document_type.position.to_s]
+    #
+    #   step_with_errors << error_step if error_step
+    # end
+    # report_exception "Empty next_step, but have error #{errors}", true, params: params if step_with_errors.empty?
+    #
+    # step_with_errors.compact.min
+
+    errors.map { |attr, msg| VERIFICATION_ATTRS_WITH_STEP[attr] }.compact.min || 1
   end
 
   def back_step?
@@ -101,7 +119,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :desktop
+    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :mobile
   end
 
   def is_mobile?
