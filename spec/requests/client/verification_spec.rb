@@ -15,9 +15,9 @@ RSpec.describe Client::VerificationsController, :type => :request do
 
   describe 'new' do
     it 'opens page with correct domain' do
-      expect(account.applicants.count).to eq(0)
-      get new_client_verification_path(encoded_external_id: external_id)
-      expect(account.applicants.count).to eq(1)
+      expect {
+        get new_client_verification_path(encoded_external_id: external_id)
+      }.to change {account.applicants.count}.from(0).to(1)
       expect(response.status).to eq(200)
     end
 
