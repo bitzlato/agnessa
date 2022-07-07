@@ -181,11 +181,11 @@ ActiveRecord::Schema.define(version: 2022_07_07_082526) do
     t.text "private_comment"
     t.json "review_result_labels", default: []
     t.citext "patronymic"
+    t.string "remote_ip"
+    t.string "user_agent"
     t.date "birth_date"
     t.string "gender"
     t.text "applicant_comment"
-    t.string "remote_ip"
-    t.string "user_agent"
     t.string "number"
     t.string "document_type"
     t.datetime "notified_at"
