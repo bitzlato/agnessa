@@ -31,19 +31,16 @@ class Verification < ApplicationRecord
 
   validates :citizenship_country_iso_code, :document_type, :name, :last_name, :birth_date, :document_number, :reason, presence: true, on: :create
   validates :email, presence: true, email: { mode: :strict }
-
   validates :review_result_labels, presence: true, if: :refused?
   validates :review_result_labels, absence: true, if: :confirmed?
+  validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
+  validates :document_type, inclusion: { in: Rails.configuration.application.available_documents }, allow_blank: true
 
+  validate :validate_documents, on: :create
   validate :validate_labels
-
   validate :permitted_citizenship, on: :create
   validate :over_18_years_old, on: :create
   validate :validate_not_blocked_applicant, on: :create
-  validate :minimum_documents_amount, on: :create
-  validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
-
-  validates :document_type, inclusion: { in: Rails.configuration.application.available_documents }, allow_blank: true
 
   STATUSES = %w[pending refused confirmed]
   validates :status, presence: true, inclusion: { in: STATUSES }
@@ -134,18 +131,18 @@ class Verification < ApplicationRecord
 
   private
 
+  def validate_documents
+    account.document_types.alive.ordered.each do |dt|
+      errors.add :documents, "Нет документа типа #{dt.id}" unless verification_documents.find { |vd| vd.document_type_id == dt.id }
+    end
+  end
+
   def permitted_citizenship
     errors.add :citizenship_country_iso_code, I18n.t('errors.messages.citizenship_not_allowed') unless citizenship_country&.alive?
   end
 
   def over_18_years_old
     errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
-  end
-
-  def minimum_documents_amount
-    if verification_documents.size < account.document_types.alive.size
-      errors.add :documents, I18n.t('errors.messages.minimum_documents_amount', amount: account.document_types.size)
-    end
   end
 
   def log_creation

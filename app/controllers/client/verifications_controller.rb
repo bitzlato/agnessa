@@ -76,7 +76,8 @@ class Client::VerificationsController < Client::ApplicationController
     report_exception e, true, params: params
 
     if is_mobile?
-      step = [minimal_step_from_fields(e.record.errors), minimal_step_from_documents(e.record.errors)].min
+      step = [minimal_step_from_fields(e.record.errors), minimal_step_from_documents(e.record)].compact.min ||
+        raise("unknown non validated step: #{e.record.errors}")
       render 'step'+step.to_s,
         locals: { verification: e.record },
         status: :bad_request
@@ -89,11 +90,12 @@ class Client::VerificationsController < Client::ApplicationController
 
   private
 
-  def minimal_step_from_documents
+  def minimal_step_from_documents(record)
+    record.verification_documents.map { |vd| DOCUMENT_POSITIONS_BY_STEP[vd.document_type.position] }.compact.min
   end
 
   def minimal_step_from_fields(errors)
-    errors.map { |attr, msg| VERIFICATION_ATTRS_WITH_STEP[attr] }.compact.min || 1
+    errors.map { |attr, msg| VERIFICATION_ATTRS_WITH_STEP[attr] }.compact.min
   end
 
   def back_step?

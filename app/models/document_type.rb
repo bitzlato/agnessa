@@ -4,6 +4,7 @@ class DocumentType < ApplicationRecord
   belongs_to :account
   has_many :verification_documents
 
+  scope :ordered, -> { order :position }
 
   FILE_TYPES = %w[video image].freeze
   enum file_type: FILE_TYPES.each_with_object({}) { |e, a| a[e] = e }

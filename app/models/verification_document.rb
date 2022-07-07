@@ -7,7 +7,9 @@ class VerificationDocument < ApplicationRecord
   belongs_to :document_type, required: true, inverse_of: 'verification_documents'
 
   delegate :content_types, to: :document_type
+
   validates :file, presence: true
+
   after_commit :delayed_update_vector, on: :create
 
   scope :with_neighbor_distance_threshold, ->(vector, threshold) { where("neighbor_vector <=> '#{vector}' < #{threshold}") }
