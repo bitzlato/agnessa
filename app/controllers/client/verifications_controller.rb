@@ -19,8 +19,8 @@ class Client::VerificationsController < Client::ApplicationController
     email: 1,
     document_type: 2,
     document_number: 2,
-    'document3': 3,
-    'document4': 4
+    document3: 3,
+    document4: 4
   }.with_indifferent_access.freeze
 
   def new
