@@ -19,9 +19,8 @@ class Client::VerificationsController < Client::ApplicationController
     email: 1,
     document_type: 2,
     document_number: 2,
-    'verification_documents.file': 3, #TODO: что-то придумать
-    # 'document_position1': 3,
-    # 'document_position2': 4
+    'document3': 3,
+    'document4': 4
   }.with_indifferent_access.freeze
 
   def new
@@ -87,24 +86,24 @@ class Client::VerificationsController < Client::ApplicationController
   private
 
   def minimal_step_with_errors(errors)
-    # step_with_errors = []
-    #
-    # errors.map { |attr, msg| step_with_errors << VERIFICATION_ATTRS_WITH_STEP[attr] }
-    #
-    # verification_params[:verification_documents_attributes].each do |key, val|
-    #   val = val.to_h
-    #   next unless val['file_cache'].blank?
-    #
-    #   document_type = DocumentType.find(val.to_h['document_type_id'])
-    #   error_step = VERIFICATION_ATTRS_WITH_STEP['document_position'+document_type.position.to_s]
-    #
-    #   step_with_errors << error_step if error_step
-    # end
-    # report_exception "Empty next_step, but have error #{errors}", true, params: params if step_with_errors.empty?
-    #
-    # step_with_errors.compact.min
+    step_with_errors = []
 
-    errors.map { |attr, msg| VERIFICATION_ATTRS_WITH_STEP[attr] }.compact.min || 1
+    errors.map { |attr, msg| step_with_errors << VERIFICATION_ATTRS_WITH_STEP[attr] }
+
+    verification_params[:verification_documents_attributes].each do |key, val|
+      val = val.to_h
+      document = VerificationDocument.new(val)
+      document.validate
+
+      if document.errors.to_h.find { |attr, msg| attr == :file}
+        error_step = VERIFICATION_ATTRS_WITH_STEP['document'+document.document_type.step.to_s]
+        step_with_errors << error_step if error_step
+      end
+    end
+
+    report_exception "Empty next_step, but have error #{errors}", true, params: params if step_with_errors.empty?
+
+    step_with_errors.compact.min || 1
   end
 
   def back_step?

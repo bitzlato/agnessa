@@ -16,8 +16,7 @@
   = f.input :document_number, as: :hidden
 
   = f.simple_fields_for :verification_documents do |document|
-    / TODO: нужно придумать хороший надежный способ, как опредлеить какой именнь тип документа нужен на конкретном шаге
-    -if document.object.document_type.position == 2
+    -if document.object.document_type.step == 4
        = render 'document_field_mobile', document: document
     -else
       = document.input :file_cache, as: :hidden
