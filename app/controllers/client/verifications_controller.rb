@@ -101,7 +101,7 @@ class Client::VerificationsController < Client::ApplicationController
       end
     end
 
-    report_exception "Empty next_step, but have error #{errors}", true, params: params if step_with_errors.empty?
+    report_exception "Empty next_step, but have error #{errors.full_messages}", true, params: params if step_with_errors.empty?
 
     step_with_errors.compact.min || 1
   end
