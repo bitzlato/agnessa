@@ -36,7 +36,7 @@ module VerificationForm
   end
 
   def validate_step?(step_to_validate)
-    return next_step? unless is_mobile?
+    return new_record? unless is_mobile?
     new_record? && step_to_validate <= current_step
   end
 
