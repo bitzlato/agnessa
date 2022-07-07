@@ -16,9 +16,9 @@
   = f.input :document_number, as: :hidden
 
   = f.simple_fields_for :verification_documents do |document|
-    -if document.object.document_type.position == 1
+    - if DOCUMENT_POSITIONS_BY_STEP.fetch(document.object.document_type.position)==4
        = render 'document_field_mobile', document: document
-    -else
+    - else
       = document.input :file_cache, as: :hidden
       = document.input :document_type_id, as: :hidden
 

@@ -6,6 +6,7 @@ class Client::VerificationsController < Client::ApplicationController
   DEFAULT_REASON = :trusted_trader
   PERMITTED_ATTRIBUTES = [:name, :next_step, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]}]
 
+  DOCUMENT_POSITIONS_BY_STEP = { 1 => 3, 2 => 4 }
   helper_method :form_path, :external_id, :last_refused_verification
 
   before_action :detect_browser, only: %i[new step1 step2 step3 step4 create]
@@ -19,8 +20,6 @@ class Client::VerificationsController < Client::ApplicationController
     email: 1,
     document_type: 2,
     document_number: 2,
-    document3: 3,
-    document4: 4
   }.with_indifferent_access.freeze
 
   def new
@@ -77,33 +76,24 @@ class Client::VerificationsController < Client::ApplicationController
     report_exception e, true, params: params
 
     if is_mobile?
-      render 'step'+minimal_step_with_errors(e.record.errors).to_s, locals: { verification: e.record }, status: :bad_request
+      step = [minimal_step_from_fields(e.record.errors), minimal_step_from_documents(e.record.errors)].min
+      render 'step'+step.to_s,
+        locals: { verification: e.record },
+        status: :bad_request
     else
-      render :new, locals: { verification: e.record }, status: :bad_request
+      render :new,
+        locals: { verification: e.record },
+        status: :bad_request
     end
   end
 
   private
 
-  def minimal_step_with_errors(errors)
-    step_with_errors = []
+  def minimal_step_from_documents
+  end
 
-    errors.map { |attr, msg| step_with_errors << VERIFICATION_ATTRS_WITH_STEP[attr] }
-
-    verification_params[:verification_documents_attributes].each do |key, val|
-      val = val.to_h
-      document = VerificationDocument.new(val)
-      document.validate
-
-      if document.errors.to_h.find { |attr, msg| attr == :file}
-        error_step = document.document_type.step
-        step_with_errors << error_step if error_step
-      end
-    end
-
-    report_exception "Empty step_with_errors, but have error #{errors.full_messages}", true, params: params if step_with_errors.empty?
-
-    step_with_errors.compact.min || 1
+  def minimal_step_from_fields(errors)
+    errors.map { |attr, msg| VERIFICATION_ATTRS_WITH_STEP[attr] }.compact.min || 1
   end
 
   def back_step?
