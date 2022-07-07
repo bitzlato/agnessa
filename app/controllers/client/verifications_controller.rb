@@ -96,7 +96,7 @@ class Client::VerificationsController < Client::ApplicationController
       document.validate
 
       if document.errors.to_h.find { |attr, msg| attr == :file}
-        error_step = VERIFICATION_ATTRS_WITH_STEP['document'+document.document_type.step.to_s]
+        error_step = document.document_type.step
         step_with_errors << error_step if error_step
       end
     end
@@ -118,7 +118,8 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = params[:mobile] && browser.device.mobile?  ? :mobile : :desktop
+    request.variant = params[:mobile] && browser.device.mobile?  ? :mobile : :mobile
+
   end
 
   def is_mobile?
