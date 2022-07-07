@@ -181,17 +181,15 @@ ActiveRecord::Schema.define(version: 2022_06_30_084230) do
     t.text "private_comment"
     t.json "review_result_labels", default: []
     t.citext "patronymic"
+    t.string "remote_ip"
+    t.string "user_agent"
     t.date "birth_date"
     t.string "gender"
     t.text "applicant_comment"
-    t.string "remote_ip"
-    t.string "user_agent"
     t.string "number"
-    t.bigint "citizenship_id"
     t.string "document_type"
     t.datetime "notified_at"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
-    t.index ["citizenship_id"], name: "index_verifications_on_citizenship_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
     t.index ["number"], name: "index_verifications_on_number", unique: true
   end
@@ -206,5 +204,4 @@ ActiveRecord::Schema.define(version: 2022_06_30_084230) do
   add_foreign_key "verification_documents", "document_types"
   add_foreign_key "verification_documents", "verifications"
   add_foreign_key "verifications", "applicants"
-  add_foreign_key "verifications", "countries", column: "citizenship_id"
 end
