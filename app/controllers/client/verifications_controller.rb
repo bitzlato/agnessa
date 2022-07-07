@@ -118,7 +118,7 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = ENV.true?('FORCE_MOBILE_FORM') && browser.device.mobile?  ? :mobile : :desktop
+    request.variant = ENV.true?('FORCE_MOBILE_FORM') || browser.device.mobile?  ? :mobile : :desktop
   end
 
   def is_mobile?
