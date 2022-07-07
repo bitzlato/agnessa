@@ -20,6 +20,7 @@
   = f.input :citizenship_country_iso_code,
           as: :select,
           collection: country_options_for_select,
+          include_blank: false,
           input_html: { class: 'custom-select' }
   .position-relative
     = f.input :birth_date, as: :date_picker, icons: :font_awesome

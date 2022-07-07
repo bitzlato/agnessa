@@ -8,7 +8,8 @@ class Client::VerificationsController < Client::ApplicationController
 
   helper_method :form_path, :external_id, :last_refused_verification
 
-  before_action :detect_browser, only: %i[new step1 step2 step3 step4 create]
+  before_action :detect_browser
+  before_action :detect_applicant_blocked
 
   def new
     @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
@@ -38,16 +39,23 @@ class Client::VerificationsController < Client::ApplicationController
     if is_mobile?
       verification = applicant.verifications.new verification_params.
         reverse_merge(remote_ip: request.remote_ip,
+                      is_mobile: true,
                       next_step: 1,
                       user_agent: request.user_agent,
                       reason: DEFAULT_REASON)
 
-      verification.next_step = back_step? ? (verification.next_step - 2).to_s : verification.next_step.to_s
+      verification.next_step = verification.next_step - 2 if back_step?
 
       if verification.next_step <= 0
         render :new, locals: { verification: verification }
       elsif verification.next_step <= 4
-        render 'step'+verification.next_step.to_s, locals: { verification: verification }
+        if back_step?
+          step_to_show = verification.next_step
+        else
+          validate_step verification
+          step_to_show = [verification.next_step, minimal_step_from_fields(verification.errors), minimal_step_from_documents(verification)].compact.min
+        end
+        render 'step'+step_to_show.to_s, locals: { verification: verification }
       else
         verification.save!
         render :created, locals: { verification: verification }
@@ -55,6 +63,7 @@ class Client::VerificationsController < Client::ApplicationController
     else
       verification = applicant.verifications.create! verification_params.
         reverse_merge(remote_ip: request.remote_ip,
+                      is_mobile: false,
                       user_agent: request.user_agent,
                       reason: DEFAULT_REASON)
       render :created, locals: { verification: verification}
@@ -62,10 +71,34 @@ class Client::VerificationsController < Client::ApplicationController
   rescue ActiveRecord::RecordInvalid => e
     raise e unless e.record.is_a? Verification
     report_exception e, true, params: params
-    render :new, locals: { verification: e.record }, status: :bad_request
+
+    if is_mobile?
+      step = [minimal_step_from_fields(e.record.errors), minimal_step_from_documents(e.record)].compact.min ||
+        raise("unknown non validated step: #{e.record.errors}")
+      render 'step'+step.to_s,
+        locals: { verification: e.record },
+        status: :bad_request
+    else
+      render :new,
+        locals: { verification: e.record },
+        status: :bad_request
+    end
   end
 
   private
+
+  def validate_step(record)
+    return if record.next_step < 1
+    record.valid?
+  end
+
+  def minimal_step_from_documents(record)
+    record.verification_documents.map { |vd| VerificationForm::DOCUMENT_POSITIONS_BY_STEP[vd.document_type.position] unless vd.valid? }.compact.min
+  end
+
+  def minimal_step_from_fields(errors)
+    errors.map { |attr, msg| VerificationForm::VERIFICATION_ATTRS_WITH_STEP[attr] }.compact.min
+  end
 
   def back_step?
     params[:submit] == 'back'
@@ -79,7 +112,11 @@ class Client::VerificationsController < Client::ApplicationController
   end
 
   def detect_browser
-    request.variant = params[:mobile] && browser.device.mobile? ? :mobile : :desktop
+    request.variant = ENV.true?('FORCE_MOBILE_FORM') || browser.device.mobile?  ? :mobile : :desktop
+  end
+
+  def detect_applicant_blocked
+    raise HumanizedError, 'Ваш аккаунт заблокирован. Подача заявок не возможна' if applicant.blocked?
   end
 
   def is_mobile?
@@ -100,17 +137,23 @@ class Client::VerificationsController < Client::ApplicationController
 
   def find_applicant
     raise HumanizedError, :no_external_id unless external_id.present?
-    p2p_id = BarongClient.instance.get_p2pid_from_barong_uid(external_id)
-    unless p2p_id.present?
-      # Бывают ссылки вида https://check.changebot.org/verifications/verifications
-      # их пропускаем
-      # https://app.bugsnag.com/bitzlato/agnessa/errors/625fff2a5152420008eec2ba?filters[event.since]=30d&filters[error.status]=open
-      Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}")) unless external_id=='verifications'
-      raise HumanizedError, :invalid_barong_uid
+    unless external_id.start_with? 'ID'
+      p2p_id = BarongClient.instance.get_p2pid_from_barong_uid(external_id)
+      unless p2p_id.present?
+        # Бывают ссылки вида https://check.changebot.org/verifications/verifications
+        # их пропускаем
+        # https://app.bugsnag.com/bitzlato/agnessa/errors/625fff2a5152420008eec2ba?filters[event.since]=30d&filters[error.status]=open
+        Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}")) unless external_id=='verifications'
+        raise HumanizedError, :invalid_barong_uid
+      end
     end
     applicant = current_account.applicants.upsert!({external_id: external_id}, validate: false)
     applicant.update_column(:legacy_external_id, p2p_id)
     applicant
+  end
+
+  def derect_applicant_blocked
+    blockecd
   end
 
   def external_id
