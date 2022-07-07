@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_30_084230) do
+ActiveRecord::Schema.define(version: 2022_07_07_062405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2022_06_30_084230) do
     t.datetime "archived_at"
     t.integer "position"
     t.string "placeholder_photo"
+    t.integer "step"
     t.index ["account_id", "title"], name: "index_document_types_on_account_id_and_title", unique: true
     t.index ["account_id"], name: "index_document_types_on_account_id"
   end
