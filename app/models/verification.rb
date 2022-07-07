@@ -1,4 +1,6 @@
 class Verification < ApplicationRecord
+  DOCUMENT_POSITIONS_BY_STEP = { 1 => 3, 2 => 4 }
+
   include VerificationForm
   COPY_ATTRIBUTES = %w(name last_name patronymic birth_date document_type citizenship_country_iso_code document_number reason email)
   strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
