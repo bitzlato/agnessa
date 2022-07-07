@@ -28,7 +28,6 @@
 
   .container.fixed-bottom.pb-4.d-flex
     = f.input :next_step, as: :hidden, input_html: { value: 2 }
-    button type="submit" value='back' name='submit' class='btn btn-outline-primary font-weight-semibold w-100 mr-4' style='max-width: 130px' Назад
     = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
 
 .mb-5.pb-5

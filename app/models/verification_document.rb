@@ -8,7 +8,7 @@ class VerificationDocument < ApplicationRecord
 
   delegate :content_types, to: :document_type
 
-  validates :file, presence: true
+  validates :file, presence: true, if: -> { validate_presence? }
 
   after_commit :delayed_update_vector, on: :create
 
@@ -32,6 +32,10 @@ class VerificationDocument < ApplicationRecord
     end
   end
 
+  def step
+    VerificationForm::DOCUMENT_POSITIONS_BY_STEP.fetch document_type.position
+  end
+
   def update_vector
     if update_vector?
       vector = ImageVectorizer.new(file.path).perform
@@ -47,5 +51,11 @@ class VerificationDocument < ApplicationRecord
     threshold_percent ||= verification.account.document_similarity_threshold
     distance = (100 - threshold_percent)/100.0
     nearest_neighbors(distance: "cosine").with_neighbor_distance_threshold(neighbor_vector, distance).where.not(id: verification.verification_documents.map(&:id))
+  end
+
+  private
+
+  def validate_presence?
+    verification.validate_step? step
   end
 end
