@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_30_084230) do
+ActiveRecord::Schema.define(version: 2022_07_07_082526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 2022_06_30_084230) do
     t.string "number"
     t.string "document_type"
     t.datetime "notified_at"
+    t.boolean "is_mobile"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
     t.index ["number"], name: "index_verifications_on_number", unique: true

@@ -6,21 +6,10 @@ class Client::VerificationsController < Client::ApplicationController
   DEFAULT_REASON = :trusted_trader
   PERMITTED_ATTRIBUTES = [:name, :next_step, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]}]
 
-  DOCUMENT_POSITIONS_BY_STEP = { 1 => 3, 2 => 4 }
   helper_method :form_path, :external_id, :last_refused_verification
 
-  before_action :detect_browser, only: %i[new step1 step2 step3 step4 create]
-
-  VERIFICATION_ATTRS_WITH_STEP = {
-    name: 1,
-    last_name: 1,
-    patronymic: 1,
-    citizenship_country_iso_code: 1,
-    birth_date: 1,
-    email: 1,
-    document_type: 2,
-    document_number: 2,
-  }.with_indifferent_access.freeze
+  before_action :detect_browser
+  before_action :detect_applicant_blocked
 
   def new
     @applicant = current_account.applicants.find_or_initialize_by(external_id: external_id)
@@ -50,6 +39,7 @@ class Client::VerificationsController < Client::ApplicationController
     if is_mobile?
       verification = applicant.verifications.new verification_params.
         reverse_merge(remote_ip: request.remote_ip,
+                      is_mobile: true,
                       next_step: 1,
                       user_agent: request.user_agent,
                       reason: DEFAULT_REASON)
@@ -59,7 +49,13 @@ class Client::VerificationsController < Client::ApplicationController
       if verification.next_step <= 0
         render :new, locals: { verification: verification }
       elsif verification.next_step <= 4
-        render 'step'+verification.next_step.to_s, locals: { verification: verification }
+        if back_step?
+          step_to_show = verification.next_step
+        else
+          validate_step verification
+          step_to_show = [verification.next_step, minimal_step_from_fields(verification.errors), minimal_step_from_documents(verification)].compact.min
+        end
+        render 'step'+step_to_show.to_s, locals: { verification: verification }
       else
         verification.save!
         render :created, locals: { verification: verification }
@@ -67,6 +63,7 @@ class Client::VerificationsController < Client::ApplicationController
     else
       verification = applicant.verifications.create! verification_params.
         reverse_merge(remote_ip: request.remote_ip,
+                      is_mobile: false,
                       user_agent: request.user_agent,
                       reason: DEFAULT_REASON)
       render :created, locals: { verification: verification}
@@ -90,12 +87,17 @@ class Client::VerificationsController < Client::ApplicationController
 
   private
 
+  def validate_step(record)
+    return if record.next_step < 1
+    record.valid?
+  end
+
   def minimal_step_from_documents(record)
-    record.verification_documents.map { |vd| DOCUMENT_POSITIONS_BY_STEP[vd.document_type.position] }.compact.min
+    record.verification_documents.map { |vd| VerificationForm::DOCUMENT_POSITIONS_BY_STEP[vd.document_type.position] unless vd.valid? }.compact.min
   end
 
   def minimal_step_from_fields(errors)
-    errors.map { |attr, msg| VERIFICATION_ATTRS_WITH_STEP[attr] }.compact.min
+    errors.map { |attr, msg| VerificationForm::VERIFICATION_ATTRS_WITH_STEP[attr] }.compact.min
   end
 
   def back_step?
@@ -111,6 +113,10 @@ class Client::VerificationsController < Client::ApplicationController
 
   def detect_browser
     request.variant = ENV.true?('FORCE_MOBILE_FORM') || browser.device.mobile?  ? :mobile : :desktop
+  end
+
+  def detect_applicant_blocked
+    raise HumanizedError, 'Ваш аккаунт заблокирован. Подача заявок не возможна' if applicant.blocked?
   end
 
   def is_mobile?
@@ -144,6 +150,10 @@ class Client::VerificationsController < Client::ApplicationController
     applicant = current_account.applicants.upsert!({external_id: external_id}, validate: false)
     applicant.update_column(:legacy_external_id, p2p_id)
     applicant
+  end
+
+  def derect_applicant_blocked
+    blockecd
   end
 
   def external_id

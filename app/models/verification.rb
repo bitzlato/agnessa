@@ -1,7 +1,10 @@
 class Verification < ApplicationRecord
-  DOCUMENT_POSITIONS_BY_STEP = { 1 => 3, 2 => 4 }
+  STATUSES = %w[pending refused confirmed]
+  GENDERS = %w[male female]
+  REASONS = %w[unban trusted_trader restore other]
 
   include VerificationForm
+
   COPY_ATTRIBUTES = %w(name last_name patronymic birth_date document_type citizenship_country_iso_code document_number reason email)
   strip_attributes replace_newlines: true, collapse_spaces: true, except: :public_comment
   # Strip off all spaces and keep only alphabetic and numeric characters
@@ -9,13 +12,33 @@ class Verification < ApplicationRecord
 
   alias_attribute :first_name, :name
 
-
   belongs_to :moderator, class_name: 'Member', required: false
   belongs_to :applicant
   belongs_to :citizenship_country, class_name: 'Country', foreign_key: :citizenship_country_iso_code, primary_key: :iso_code
   has_one :account, through: :applicant
   has_many :log_records
   has_many :verification_documents, inverse_of: 'verification'
+
+  scope :by_reason, ->(reason) { where reason: reason }
+  scope :by_status, ->(status) { where status: status }
+  STATUSES.each { |status| scope status, -> { by_status status } }
+  scope :finished, ->(){ where(status: %w(refused confirmed)) }
+  scope :for_export, ->(){ finished.where("verifications.updated_at > ?", 3.days.ago) }
+
+  validates :review_result_labels, presence: true, if: :refused?
+  validates :review_result_labels, absence: true, if: :confirmed?
+
+  validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
+
+  validate :validate_labels
+
+  validates :status, presence: true, inclusion: { in: STATUSES }
+  validates :gender, inclusion: { in: GENDERS }, allow_blank: true
+  validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
+
+  validates :email, email: { mode: :strict }
+  validates :document_type, inclusion: { in: Rails.configuration.application.available_documents }, allow_blank: true
+
   accepts_nested_attributes_for :verification_documents
 
   before_save do
@@ -28,39 +51,6 @@ class Verification < ApplicationRecord
   after_create do
     update_column('number', id.to_s)
   end
-
-  validates :citizenship_country_iso_code, :document_type, :name, :last_name, :birth_date, :document_number, :reason, presence: true, on: :create
-  validates :email, presence: true, email: { mode: :strict }
-  validates :review_result_labels, presence: true, if: :refused?
-  validates :review_result_labels, absence: true, if: :confirmed?
-  validates :applicant_comment, presence: true, if: -> { reason == 'restore' }, on: :create
-  validates :document_type, inclusion: { in: Rails.configuration.application.available_documents }, allow_blank: true
-
-  validate :validate_documents, on: :create
-  validate :validate_labels
-  validate :permitted_citizenship, on: :create
-  validate :over_18_years_old, on: :create
-  validate :validate_not_blocked_applicant, on: :create
-
-  STATUSES = %w[pending refused confirmed]
-  validates :status, presence: true, inclusion: { in: STATUSES }
-
-  GENDERS = %w[male female]
-  validates :gender, inclusion: { in: GENDERS }, allow_blank: true
-
-  scope :by_reason, ->(reason) { where reason: reason }
-
-  scope :by_status, ->(status) { where status: status }
-  STATUSES.each do |status|
-    scope status, -> { by_status status }
-  end
-
-  scope :finished, ->(){ where(status: %w(refused confirmed)) }
-
-  scope :for_export, ->(){ finished.where("verifications.updated_at > ?", 3.days.ago) }
-
-  REASONS = %w[unban trusted_trader restore other]
-  validates :reason, presence: true, inclusion: { in: REASONS }, if: :refused?
 
   after_create :log_creation
 
@@ -131,20 +121,6 @@ class Verification < ApplicationRecord
 
   private
 
-  def validate_documents
-    account.document_types.alive.ordered.each do |dt|
-      errors.add :documents, "Нет документа типа #{dt.id}" unless verification_documents.find { |vd| vd.document_type_id == dt.id }
-    end
-  end
-
-  def permitted_citizenship
-    errors.add :citizenship_country_iso_code, I18n.t('errors.messages.citizenship_not_allowed') unless citizenship_country&.alive?
-  end
-
-  def over_18_years_old
-    errors.add :birth_date, I18n.t('errors.messages.over_18_years_old') if birth_date.present? && birth_date > 18.years.ago.to_datetime
-  end
-
   def log_creation
     log_records.create!(applicant: applicant, action: 'create', created_at: created_at)
   end
@@ -157,10 +133,6 @@ class Verification < ApplicationRecord
 
   def documents_file_name
     ''
-  end
-
-  def validate_not_blocked_applicant
-    errors.add :applicant_id, "Заблокированный аппликант #{applicant.external_id}" if applicant.blocked
   end
 
   def to_s
