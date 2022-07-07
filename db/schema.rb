@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_07_062405) do
+ActiveRecord::Schema.define(version: 2022_06_30_084230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 2022_07_07_062405) do
     t.datetime "archived_at"
     t.integer "position"
     t.string "placeholder_photo"
-    t.integer "step"
     t.index ["account_id", "title"], name: "index_document_types_on_account_id_and_title", unique: true
     t.index ["account_id"], name: "index_document_types_on_account_id"
   end
@@ -188,11 +187,9 @@ ActiveRecord::Schema.define(version: 2022_07_07_062405) do
     t.string "remote_ip"
     t.string "user_agent"
     t.string "number"
-    t.bigint "citizenship_id"
     t.string "document_type"
     t.datetime "notified_at"
     t.index ["applicant_id"], name: "index_verifications_on_applicant_id"
-    t.index ["citizenship_id"], name: "index_verifications_on_citizenship_id"
     t.index ["legacy_external_id"], name: "index_verifications_on_legacy_external_id", unique: true
     t.index ["number"], name: "index_verifications_on_number", unique: true
   end
@@ -207,5 +204,4 @@ ActiveRecord::Schema.define(version: 2022_07_07_062405) do
   add_foreign_key "verification_documents", "document_types"
   add_foreign_key "verification_documents", "verifications"
   add_foreign_key "verifications", "applicants"
-  add_foreign_key "verifications", "countries", column: "citizenship_id"
 end
