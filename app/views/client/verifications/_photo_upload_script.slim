@@ -1,5 +1,5 @@
 javascript:
-  function attachFileInput({id}) {
+  function attachFileInput({ id }) {
     var fileInputContainer = document.getElementById(id);
     var fileCacheInput = fileInputContainer.querySelector('[data-file-cache-input]');
 
@@ -21,7 +21,7 @@ javascript:
     var preview = fileInputContainer.querySelector('[data-preview]');
 
     function toggleShowFilename(fileName) {
-      var photoInputControls = fileInputContainer.querySelector('[data-controls]')
+      var photoInputControls = fileInputContainer.querySelector('[data-controls]');
       var photoFilename = fileInputContainer.querySelector('[data-filename-container]');
 
       if (fileName) {
@@ -49,33 +49,51 @@ javascript:
       }
     }
 
-
     function onInputChange(event) {
       var input = event.target;
       if (input.files && input.files[0]) {
         var fileName = input.files[0].name;
         toggleShowFilename(fileName);
-        toggleShowPreview(input.files[0])
+        toggleShowPreview(input.files[0]);
+        hideError();
       } else {
         toggleShowFilename();
         toggleShowPreview();
       }
     }
 
+    function hideError() {
+      var errorContainer = fileInputContainer.querySelector('.invalid-feedback');
+      if (errorContainer) {
+        errorContainer.classList.remove('d-block');
+        errorContainer.classList.add('d-none');
+      }
+
+      var errorBlocks = fileInputContainer.querySelectorAll('.border-danger');
+      if (errorBlocks) {
+        var errorBlocksList = Array.from(errorBlocks);
+        errorBlocksList.forEach((block) => {
+          block.classList.remove('border-danger');
+        });
+      }
+    }
+
     function clearFile() {
-      inputsList.forEach(input => {
+      inputsList.forEach((input) => {
         if (input) {
           input.value = '';
         }
       });
+
       if (fileCacheInput) {
-          fileCacheInput.value = '';
+        fileCacheInput.value = '';
       }
+
       toggleShowFilename();
       toggleShowPreview();
     }
 
-    inputsList.forEach(input => {
+    inputsList.forEach((input) => {
       if (input) {
         input.addEventListener('change', onInputChange);
       }

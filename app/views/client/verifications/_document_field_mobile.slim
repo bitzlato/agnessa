@@ -15,7 +15,7 @@ div id="#{element_id}" data-file-input=""
   div data-controls="" style=(document.object.file.cached? ? 'display: none;' : '')
     .d-flex
       label.btn.btn-primary.flex-grow-1.mr-4  class=((document.object.errors.full_messages.any?)? 'border-danger' : '')
-        input.custom-file-input.position-absolute type="file" capture="filesystem" style="height: 0" data-index=document.index value=document.object.file name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',') data-input=""
+        input.custom-file-input.position-absolute type="file" style="height: 0" data-index=document.index value=document.object.file name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',') data-input=""
         = 'Загрузить файл'
 
       label.btn.btn-primary.flex-grow-1

@@ -26,7 +26,7 @@
     = f.input :birth_date, as: :date_picker, icons: :font_awesome
   = f.input :email, as: :email
 
-  .container.fixed-bottom.pb-4.d-flex
+  .container.fixed-bottom.pt-2.pb-4.d-flex.bg-white.footer-submit
     = f.input :next_step, as: :hidden, input_html: { value: 2 }
     = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
 
