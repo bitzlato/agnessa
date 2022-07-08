@@ -12,9 +12,9 @@ div id="#{element_id}" data-file-input=""
       = image_tag asset_url(document.object.document_type.placeholder_photo || ''), width: 186, class: 'w-50', data: {'preview-placeholder': ''}, style: 'max-width: 200px'
       img style="max-width: 80%; max-height: 100%;" data-preview=""
 
-  div data-controls=""
+  div data-controls="" style=(document.object.file.cached? ? 'display: none;' : '')
     .d-flex
-      label.btn.btn-primary.flex-grow-1.mr-4
+      label.btn.btn-primary.flex-grow-1.mr-4  class=((document.object.errors.full_messages.any?)? 'border-danger' : '')
         input.custom-file-input.position-absolute type="file" capture="filesystem" style="height: 0" data-index=document.index value=document.object.file name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',') data-input=""
         = 'Загрузить файл'
 
@@ -22,9 +22,9 @@ div id="#{element_id}" data-file-input=""
         input.custom-file-input.position-absolute type="file" capture="user" style="height: 0" data-input=""
         = 'Открыть камеру'
 
-  div style="display: none" data-filename-container=""
+  div data-filename-container="" style=(document.object.file.cached? ? '' : 'display: none;')
     div.position-relative.border.border-secondary.px-3.py-2.rounded.d-flex.justify-content-between.w-100 type="button"  class=((document.object.errors.full_messages.any?)? 'border-danger' : '')
-      span.text-truncate.w-100.pr-4 data-filename=""
+      span.text-truncate.w-100.pr-4 data-filename="" =File.basename(document.object.file_cache || '')
       span.position-absolute.px-3 style="right: 0" data-clear-button=""
         | &times;
 
