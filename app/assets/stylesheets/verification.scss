@@ -69,6 +69,10 @@ ol {
   color: inherit;
 }
 
+.form-control::placeholder {
+  color: rgba(90, 97, 108, 0.47);
+}
+
 .form-control-label {
   font-size: 14px;
 }
