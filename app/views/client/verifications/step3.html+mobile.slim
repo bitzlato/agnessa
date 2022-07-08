@@ -22,7 +22,7 @@
      = document.input :document_type_id, as: :hidden
   = render 'photo_instruction', first_point: 'Убедитесь, что документ на фото размещен полностью, края не обрезаны, информация хорошо считывается'
 
-  .container.fixed-bottom.pb-4.d-flex
+  .container.fixed-bottom.pt-2.pb-4.d-flex.bg-white.footer-submit
     = f.input :next_step, as: :hidden, input_html: { value: 4 }
     button type="submit" value='back' name='submit' class='btn btn-outline-primary font-weight-semibold w-100 mr-4' style='max-width: 130px' Назад
     = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
