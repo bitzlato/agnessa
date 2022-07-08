@@ -23,25 +23,19 @@ RSpec.describe Client::VerificationsController, type: :controller do
 
   describe 'create' do
     let(:country) { create(:country)}
-    let(:verification) { build(:verification, account: account, citizenship_country: country) }
+    let(:applicant) { create(:applicant, account: account)}
+    let(:verification) { create(:verification,
+                                applicant: applicant,
+                                citizenship_country: country)
+    }
+    let(:params) {
+      {
+        encoded_external_id: VerificationUrlGenerator.generate_token('123', account.secret),
+        verification: verification.attributes
+      }
+    }
     it 'success create' do
       @request.host = "#{account.subdomain}.example.com"
-      params = {
-        encoded_external_id: VerificationUrlGenerator.generate_token('123', account.secret),
-        verification: {
-          name: verification.name,
-          next_step: 5,
-          document_type: verification.document_type,
-          citizenship_country_iso_code: verification.citizenship_country_iso_code,
-          birth_date: verification.birth_date,
-          last_name: verification.last_name,
-          patronymic: verification.patronymic,
-          email: verification.email,
-          document_number: verification.document_number,
-          verification_documents_attributes:
-            account.document_types.alive.each_with_index{ |x, index| {index.to_s => {document_type_id: x.id, file: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/image.jpg')), 'image/jpeg')}}  }
-        }
-      }
       post :create, params: params
       expect(response.status).to eq(200)
     end
