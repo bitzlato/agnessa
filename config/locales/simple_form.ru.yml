@@ -1,6 +1,14 @@
 ru:
   simple_form:
     placeholders:
+      verification:
+        name: Введите ваше имя
+        last_name: Введите вашу фамилию
+        patronymic: Введите ваше отчество
+        email: Введите ваш email
+        citizenship_country_iso_code: Введите вашу страну
+        birth_date: Выберите дату
+        document_number: Введите серию и номер документа
       defaults:
         created_at_gteq: ''
         created_at_lt: ''
