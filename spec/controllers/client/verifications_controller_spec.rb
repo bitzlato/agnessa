@@ -41,8 +41,6 @@ RSpec.describe Client::VerificationsController, type: :controller do
         )
       }
     end
-    before do
-    end
     it 'success' do
       post :create, params: params
       expect(response.status).to eq(200)
