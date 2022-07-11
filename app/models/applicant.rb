@@ -28,7 +28,7 @@ class Applicant < ApplicationRecord
       Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}")) unless external_id=='verifications'
       raise HumanizedError, :invalid_barong_uid
     end
-    applicant.update_column(:legacy_external_id, p2p_id)
+    update_column(:legacy_external_id, p2p_id)
   end
 
   def full_name
