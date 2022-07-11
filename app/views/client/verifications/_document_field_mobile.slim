@@ -19,7 +19,7 @@ div id="#{element_id}" data-file-input=""
         = 'Загрузить файл'
 
       label.btn.btn-primary.flex-grow-1.mb-0 class=((document.object.errors.full_messages.any?)? 'border-danger' : '')
-        input.custom-file-input.position-absolute type="file" capture="user" style="height: 0" data-input=""
+        input.custom-file-input.position-absolute type="file" capture="user" style="height: 0"  data-index=document.index value=document.object.file name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',') data-input=""
         = 'Открыть камеру'
 
   div data-filename-container="" style=(document.object.file.cached? ? '' : 'display: none;')
