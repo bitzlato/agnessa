@@ -19,6 +19,18 @@ class Applicant < ApplicationRecord
     external_id.to_s
   end
 
+  def update_legacy_external_id!
+    p2p_id = BarongClient.instance.get_p2pid_from_barong_uid(external_id)
+    unless p2p_id.present?
+      # Бывают ссылки вида https://check.changebot.org/verifications/verifications
+      # их пропускаем
+      # https://app.bugsnag.com/bitzlato/agnessa/errors/625fff2a5152420008eec2ba?filters[event.since]=30d&filters[error.status]=open
+      Bugsnag.notify(StandardError.new("Unknown P2P Changebot Id: #{external_id}")) unless external_id=='verifications'
+      raise HumanizedError, :invalid_barong_uid
+    end
+    applicant.update_column(:legacy_external_id, p2p_id)
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
