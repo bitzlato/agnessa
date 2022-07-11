@@ -16,8 +16,7 @@ class Applicant < ApplicationRecord
   end
 
   def to_s
-    # TODO Добавить ФИО из последней одобренной заявки, если нет одобренной то из последней заявки вообще
-    "##{external_id}"
+    external_id.to_s
   end
 
   def full_name

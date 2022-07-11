@@ -55,5 +55,6 @@
   .col-md-2
     .text-muted= verification.class.human_attribute_name :applicant
     = link_to verification.applicant, admin_applicant_path(verification.applicant)
-    = " (#{verification.object.applicant.legacy_external_id})"
+    - if verification.object.applicant.legacy_external_id.present?
+        span.text-muted.m-l-2= "(legacy: #{verification.object.applicant.legacy_external_id})"
     = render 'admin/applicants/buttons', applicant: verification.applicant
