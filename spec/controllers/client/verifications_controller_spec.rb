@@ -44,7 +44,6 @@ RSpec.describe Client::VerificationsController, type: :controller do
     it 'success' do
       post :create, params: params
       expect(response.status).to eq(200)
-      expect(Verification.last.status).to eq('pending')
     end
   end
 end
