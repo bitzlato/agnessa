@@ -16,11 +16,11 @@ div id="#{element_id}" data-file-input=""
     .d-flex
       label.btn.btn-primary.flex-grow-1.mb-0.mr-4
         input.custom-file-input.position-absolute type="file" style="height: 0" data-index=document.index value=document.object.file name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',') data-input=""
-        = 'Загрузить файл'
+        = t 'client.verifications.document_field.upload_file'
 
       label.btn.btn-primary.flex-grow-1.mb-0
         input.custom-file-input.position-absolute type="file" capture="user" style="height: 0"  data-index=document.index value=document.object.file name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',') data-input=""
-        = 'Открыть камеру'
+        = t 'client.verifications.document_field.open_camera'
 
   div data-filename-container="" style=(document.object.file.cached? ? '' : 'display: none;')
     div.position-relative.border.border-secondary.px-3.py-2.rounded.d-flex.justify-content-between.align-items-center.w-100 type="button" style="height: 38px" class=((document.object.errors.full_messages.any?)? 'border-danger' : '')

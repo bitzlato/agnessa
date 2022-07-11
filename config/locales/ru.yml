@@ -43,6 +43,7 @@ ru:
         choose_document_type: 'Выберите тип документа'
         upload_document_photo: 'Загрузите фото документов'
         submit: Продоложить
+        back: Назад
         sending: Отправляю..
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
         additional_documents:  В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
@@ -57,6 +58,8 @@ ru:
         make_document_photo: Сделать фото действительного документа, удостоверяющего личность
         make_selfie: 'Сделать селфи с документом и листком бумаги, где написаны текущая дата и фраза "для криптобанка Bitzlato"'
         do_verification: 'Пройти верификацию'
+        file_size: 'Размер: %{from} до %{to}'
+        format: 'Формат: %{formats}'
       step1:
         personal_data: Личные данные
       mobile_alert_error:
@@ -66,6 +69,7 @@ ru:
         upload_file: Загрузить файл
         file_not_choosen: Файл не выбран
         uploaded_file: Файл загружен
+        open_camera: Открыть камеру
       created:
         title: 'Принята заявка %{id}'
         message: '<div>

@@ -8,12 +8,12 @@
   .d-flex.align-items-center.mb-2
     .flex-shrink-0.mr-2.align-self-start
       = image_tag asset_url('file-x@2x.png'), width: 13
-    p.small.mb-0 На фото нет дополнительных объектов
+    p.small.mb-0 =t('client.verifications.new.no_objects')
 
   .d-flex.align-items-center.mb-2
     .flex-shrink-0.mr-2.align-self-start
       = image_tag asset_url('file-richtext@2x.png'), width: 13
     p.small.mb-0
-      = "Размер: #{number_to_human_size(Rails.configuration.application.min_upload_file_size)} до #{number_to_human_size(Rails.configuration.application.max_upload_file_size)}"
+      = t 'client.verifications.new.file_size', from: number_to_human_size(Rails.configuration.application.min_upload_file_size), to: number_to_human_size(Rails.configuration.application.max_upload_file_size)
       br
-      = "Формат: #{content_type_to_extensions(Rails.configuration.application.image_content_types)}"
+      = t 'client.verifications.new.format', formats: content_type_to_extensions(Rails.configuration.application.image_content_types)
