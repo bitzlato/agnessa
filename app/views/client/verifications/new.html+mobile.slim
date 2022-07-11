@@ -1,22 +1,22 @@
 .mt-4
-  h1.h4.font-weight-bold Верификация аккаунта
+  h1.h4.font-weight-bold = t '.title'
   h4.h6.font-weight-normal = verification.applicant.external_id
 
   = render 'mobile_alert_error', last_refused_verification: last_refused_verification
 
-  p.mt-4.small.font-weight-medium Верификация аккаунта дает множество преимуществ. Вы сможете подать заявку на верификацию за 4 шага: 
+  p.mt-4.small.font-weight-medium = t '.explain'
 
   .bg-info.px-2.py-3.rounded
-    h5.h6.font-weight-bold.mt-0.mb-3.text-primary Вам потребуется:
+    h5.h6.font-weight-bold.mt-0.mb-3.text-primary = t '.you_need'
     ol.small
       li.font-weight-semibold.text-primary.py-1
-        span.text-body Указать личные данные
+        span.text-body = t '.select_personal_data'
       li.font-weight-semibold.text-primary.py-1
-        span.text-body Указать тип документа и его номер
+        span.text-body = t '.select_document_type'
       li.font-weight-semibold.text-primary.py-1
-        span.text-body Сделать фото действительного документа, удостоверяющего личность
+        span.text-body = t '.make_document_photo'
       li.font-weight-semibold.text-primary.py-1
-        span.text-body Сделать селфи с документом и листком бумаги, где написаны текущая дата и фраза "для криптобанка Bitzlato"
+        span.text-body = t '.make_selfie'
     .d-flex.align-items-center.justify-content-center.my-3
       .px-4
         = image_tag asset_url('photo-doc-example-1@2x.png'), width: 75
@@ -28,11 +28,11 @@
     .d-flex.align-items-center
       .flex-shrink-0.mr-2.align-self-start
         = image_tag asset_url('shield@2x.png'), width: 13
-      p.small.font-weight-semibold.mb-0 В случае необходимости служба поддержки может запросить у вас дополнительную информацию, например - видео с документом
+      p.small.font-weight-semibold.mb-0 = t '.additional_documents'
 
   .mb-5.pb-5
 
 .container.fixed-bottom.pt-2.pb-4.d-flex.justify-content-center.bg-white.footer-submit
   = simple_form_for verification, url: form_path, html: { multipart: true,  class: 'w-100', novalidate: false } do |f|
     = render 'hidden_fields', f: f
-    = f.submit 'Пройти верификацию', class: 'btn btn-primary flex-grow-1 w-100', data: { 'disable-with' => 'Отправляю..' }
+    = f.submit t('.do_verification'), class: 'btn btn-primary flex-grow-1 w-100', data: { 'disable-with' => 'Отправляю..' }
