@@ -37,11 +37,13 @@ ru:
         message: Ваш аккаунт %{account_id} верифицирован
         button: Перейти на сайт Bitzlato
       new:
+        step_x_from_y: Шаг %{current_step} из %{total_step}
         title: 'Верификация аккаунта'
         personal_data: 'Личные данные'
         choose_document_type: 'Выберите тип документа'
         upload_document_photo: 'Загрузите фото документов'
-        submit: 'Продоложить'
+        submit: Продоложить
+        sending: Отправляю..
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
         additional_documents:  В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
         instruction: Инструкция
@@ -55,6 +57,8 @@ ru:
         make_document_photo: Сделать фото действительного документа, удостоверяющего личность
         make_selfie: 'Сделать селфи с документом и листком бумаги, где написаны текущая дата и фраза "для криптобанка Bitzlato"'
         do_verification: 'Пройти верификацию'
+      step1:
+        personal_data: Личные данные
       mobile_alert_error:
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
       document_field:
