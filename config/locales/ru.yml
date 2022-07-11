@@ -43,10 +43,18 @@ ru:
         upload_document_photo: 'Загрузите фото документов'
         submit: 'Продоложить'
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
+        additional_documents:  В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
+        instruction: Инструкция
+        clear_face: Убедитесь, что Ваше лицо и все детали документов на фото четко видны
+        full_document: Документ на фото размещен полностью, края не обрезаны
+        no_objects: На фото нет дополнительных объектов
       mobile_alert_error:
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
       document_field:
         document_hint:  'Размер файла:  От %{from} до %{to}'
+        upload_file: Загрузить файл
+        file_not_choosen: Файл не выбран
+        uploaded_file: Файл загружен
       created:
         title: 'Принята заявка %{id}'
         message: '<div>

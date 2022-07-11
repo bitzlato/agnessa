@@ -65,25 +65,24 @@
               .col-md-6.col-xl-5.mt-4.mt-xl-0
                 = render 'document_field', document: document
         .col-lg-12.col-xl-3
-          h3.text-primary.font-weight-bold.mt-4.mt-xl-0 Инструкция
+          h3.text-primary.font-weight-bold.mt-4.mt-xl-0 = t '.instruction'
 
           .d-flex.align-items-center.mt-3.mb-2
             .flex-shrink-0.mr-3.align-self-start
               = image_tag asset_url('desktop-verification/file-text@2x.png'), width: 13
             p.small.mb-0
-              | Убедитесь, что Ваше лицо и все детали документов на фото четко видны
+              = t '.clear_face'
 
           .d-flex.align-items-center.mb-2
             .flex-shrink-0.mr-3.align-self-start
               = image_tag asset_url('desktop-verification/file-earmark-check@2x.png'), width: 13
             p.small.mb-0
-              | Документ на фото размещен полностью, края не обрезаны
-
+              = t '.full_document'
           .d-flex.align-items-center.mb-2
             .flex-shrink-0.mr-3.align-self-start
               = image_tag asset_url('desktop-verification/file-x@2x.png'), width: 13
             p.small.mb-0
-              | На фото нет дополнительных объектов
+              = t '.no_objects'
 
           .d-flex.align-items-center.mb-2
             .flex-shrink-0.mr-3.align-self-start
@@ -99,7 +98,7 @@
             .flex-shrink-0.mr-3.align-self-start
               = image_tag asset_url('desktop-verification/shield-lock@2x.png'), width: 13
             p.small.mb-0
-              | В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
+              =t '.additional_documents'
 
   .row.my-5
     .col-md-8
