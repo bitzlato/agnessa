@@ -46,8 +46,6 @@ module Agnessa
     # Auto-load API and its subdirectories
     # config.paths.add 'app/api', glob: '**/*.rb'
     # config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
-    config.i18n.default_locale = :ru
-    config.i18n.fallbacks = [:en]
     config.autoloader = :classic
     config.autoload_paths += %W(#{config.root}/lib)
 

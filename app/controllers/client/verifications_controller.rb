@@ -1,10 +1,23 @@
 class Client::VerificationsController < Client::ApplicationController
+  include LocaleSupport
+
   layout 'verification'
 
   skip_before_action :verify_authenticity_token
 
   DEFAULT_REASON = :trusted_trader
-  PERMITTED_ATTRIBUTES = [:name, :next_step, :document_type, :citizenship_country_iso_code, :birth_date, :last_name, :patronymic, :email, :document_number, {verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]}]
+  PERMITTED_ATTRIBUTES = [
+    :name,
+    :next_step,
+    :document_type,
+    :citizenship_country_iso_code,
+    :birth_date,
+    :last_name,
+    :patronymic,
+    :email,
+    :document_number,
+    verification_documents_attributes: [:document_type_id, :file, :file_cache, :remove_file]
+  ]
 
   helper_method :form_path, :external_id, :last_refused_verification
 

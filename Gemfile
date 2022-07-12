@@ -33,6 +33,7 @@ gem 'invisible_captcha'
 gem 'active_link_to'
 gem "font-awesome-rails"
 gem 'strip_attributes'
+gem 'http_accept_language'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
