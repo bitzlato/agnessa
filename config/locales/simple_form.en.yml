@@ -17,12 +17,24 @@ en:
         birth_date: Select a date
         document_number: Enter series and document number
     labels:
+      defaults:
+        created_at_gteq: 'Создано после:'
+        created_at_lt: 'Создано до:'
+        legacy_external_id_cont: 'ID содержит:'
+        document_number_cont: 'Номер паспорта содержит:'
+        name_or_last_name_or_patronymic_cont: 'Имя\Отчество\Фамилия содержит:'
+        first_name_or_last_name_or_patronymic_cont: 'Имя\Отчество\Фамилия содержит:'
       verification:
         country: 'Citizenship'
         reason: 'Reason'
         status: 'Password'
         document_number: 'ID document number'
-
+        citizenship_country_iso_code: 'Citizenship'
+        citizenship_country: 'Citizenship'
+        email: 'Email to which the verification response will be sent'
+        name: 'Your name'
+        last_name: 'Your last name'
+        patronymic: 'Your middle name'
     "yes": 'Yes'
     "no": 'No'
     required:

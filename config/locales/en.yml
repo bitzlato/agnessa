@@ -1,4 +1,18 @@
 en:
+  attributes:
+    genders:
+      male: Male
+      female: Female
+    reasons:
+      unban: Unban Account
+      trusted_trader: Become a trusted trader
+      restore: Lost account recovery
+      other: Other
+    document_types:
+      passport: Passport
+      id_card: ID card
+      driver_license: Driver license
+      foreign_passport: International passport
   date:
     formats:
       default: "%m/%d/%Y"
