@@ -4,9 +4,6 @@ en:
       default: "%m/%d/%Y"
       date_picker: "%m/%d/%Y"
       date_picker_js: 'MM/DD/YYYY'
-
-  time:
-
   verification:
     success_sending: Data sent
   are_you_sure?: Are you shure?
@@ -22,6 +19,7 @@ en:
     summary:
       title: Summary
       client:
+  client:
     verifications:
       blocked:
         message: Your account (%{account_id}) has been blocked from submitting application
