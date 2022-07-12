@@ -7,6 +7,15 @@ en:
       update: "Submit"
     disable_with: 'Sending...'
   simple_form:
+    placeholders:
+      verification:
+        name: Enter your name
+        last_name: Enter your last name
+        patronymic: Enter your middle name
+        email: Enter your email
+        citizenship_country_iso_code: Enter your country
+        birth_date: Select a date
+        document_number: Enter series and document number
     labels:
       verification:
         country: 'Citizenship'

@@ -1,0 +1,71 @@
+en:
+  date:
+    formats:
+      default: "%m/%d/%Y"
+      date_picker: "%m/%d/%Y"
+      date_picker_js: 'MM/DD/YYYY'
+
+  time:
+
+  verification:
+    success_sending: Data sent
+  are_you_sure?: Are you shure?
+  titles:
+    application: Agnessa
+  application:
+    user_dropdown:
+      settings: User profile
+      exit: Exit
+      signin: Sign In
+    index:
+      total_records: 'Total records: %{count}'
+    summary:
+      title: Summary
+      client:
+    verifications:
+      blocked:
+        message: Your account (%{account_id}) has been blocked from submitting application
+      verified:
+        title: Congratulations!
+        message: Your account %{account_id} has been verified
+        button: Go to Bitzlato website
+      new:
+        step_x_from_y: Step %{current_step} of %{total_step}
+        title: Account verification
+        personal_data: Personal Data
+        choose_document_type: Select document type
+        upload_document_photo: Upload photo documents
+        submit: Next
+        back: Back
+        sending: Sending...
+        last_refused_title: 'Your last application was rejected due to:'
+        additional_documents: If necessary, the support service may request additional information, for example, a video with a document
+        instruction: Instruction
+        clear_face: Make sure that your face and all the details of the documents in the photo are clearly visible
+        full_document: The document in the photo is placed completely, the edges are not cut off
+        no_objects: There are no additional objects in the photo
+        explain: 'Account verification provides many benefits. You can apply for verification in 4 steps:'
+        you_need: 'You will need:'
+        select_personal_data: Specify personal data
+        select_document_type: Specify document type and number
+        make_document_photo: Take a photo of a valid ID
+        make_selfie: 'Take a selfie with a document and a piece of paper with the current date and the phrase "for Bitzlato cryptobank" written on it'
+        do_verification: 'Pass verification'
+        file_size: 'Size: %{from} to %{to}'
+        format: 'File Formats: %{formats}'
+      mobile_alert_error:
+        last_refused_title: 'Your last application was rejected due to:'
+      document_field:
+        document_hint: 'File size:  from %{from} to %{to}'
+        upload_file: Upload file
+        file_not_choosen: File not selected
+        uploaded_file: File uploaded
+        open_camera: Open camera
+      created:
+        title: Application accepted %{id}
+        message: '<div>
+           <h2 class="h3 mt-5 font-weight-bold">Your application #%{id} for verification has been accepted</h2>
+           <p class="h6 mt-4 font-weight-normal">We will review your application in the near future, we will send the result to the email you specified during verification</p>
+           <p class="h6 mt-3 small text-muted">Deadline for consideration of the application:<br>1 hour during business hours, but no more than 12 hours</p>
+         </div>'
+        button: Go to Bitzlato website
