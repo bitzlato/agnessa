@@ -1,0 +1,129 @@
+ru:
+  activerecord:
+    models:
+      log_record:
+        one: Event log
+        many: Event logs
+      account:
+        one: Account
+        many: Accounts
+      applicant:
+        one: Applicant
+        many: Applicants
+      member:
+        one: Member
+        many: Mebers
+      verification:
+        one: Verification
+        many: Verifications
+      review_result_label: Verification Results
+    attributes:
+      user:
+        first_name: Name
+        last_name: Last name
+        password: Password
+        password_confirmation: Password confirmation
+      log_record:
+        action: Action
+        full_name: Full Name
+        document_number: Document number
+        verification: Verification
+        moderator_id: Moderator
+        created_at: Date
+        actions:
+          creation: Create verification
+          confirm: Confirm verification
+          refuse: Refuse verification
+          block: Block applicant
+          unblock: Unblock applicant
+      reasons:
+        unban: Account unban
+        trusted_trader: Become a trusted trader
+        restore: Lost account recovery
+        other: Other
+      account:
+        created_at: Created
+        name: Name of the organization
+        secret: Organization secret key
+        verification_callback_url:
+        email_from:
+        return_url:
+        form_description: Form description
+        document_similarity_threshold: Photo Match Threshold %
+      applicant:
+        account: Account
+        account_id: Account ID
+        external_id: External ID
+        created_at: Created At
+        blocked: Blocked
+        first_name: Name
+        patronymic: Middle Name
+        last_name: Last Name
+        last_confirmed_verification: Last Approved Application
+        confirmed_at: Confirmed At
+      member:
+        email: email
+        login: Login
+        role: Role
+        created_at: Created at
+        account: Account
+      review_result_label:
+        label: Label
+        label_ru: Russian Labek
+        description: Description
+      verification_document:
+        file: File
+      verification:
+        applicant_comment: Additional information (about the lost account)
+        created_at: Created
+        applicant: Applicant
+        citizenship_country: Citizenship
+        citizenship_country_iso_code: Citizenship
+        legacy_external_id: Legacy ID
+        status: Status
+        comment: Comment
+        documents: Documents
+        external_json: Legacy JSON
+        reason: Reason
+        name: Name
+        full_name: Full Name
+        gender: Gender
+        birth_date: Birth date
+        last_name: Last Name
+        patronymic: Middle name
+        document_number: Document Number
+        document_type: Document type
+        moderator: Moderator
+        email: Email
+        public_comment: Public Comment
+        private_comment: Private Comment
+        review_result_labels: Refuse reason
+        external: External ID
+        member_id: Moderator
+        statuses:
+          pending: Pending
+          confirmed: Confirmed
+          refused: Rejected
+        public_statuses:
+          pending: Under consideration
+          confirmed: Confirmed
+          refused: Rejected
+    errors:
+      models:
+        verification:
+          attributes:
+            email:
+              invalid: has an invalid email format
+              blank: not specified
+            reason:
+              blank: Reason for request not selected
+            name:
+              blank:  not specified
+            last_name:
+              blank:  not specified
+            document_number:
+              blank:  not specified
+            documents:
+              blank: Documents not attached
+      messages:
+        record_invalid: 'Errors occurred: %{errors}'
