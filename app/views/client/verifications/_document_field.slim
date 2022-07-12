@@ -16,16 +16,16 @@ div id="#{element_id}" data-file-input=""
     label.form-control.p-0.m-0.input-group.overflow-hidden style="cursor: pointer" class=((document.object.errors.full_messages.any?)? 'border-danger' : '')
       span.input-group-prepend
         span.input-group-text.bg-primary.text-white.border-0.rounded-0
-          | Загрузить файл
+          = t '.upload_file'
       span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted
-        | Файл не выбран
+        = t '.file_not_choosen'
       input.custom-file-input.position-absolute data-index=document.index value=document.object.file type="file" name=document.object_name+'[file]' accept=document.object.document_type.content_types.join(',')  style="height: 0" data-input=""
 
   div style=(document.object.file.cached? ? '' : 'display: none;') data-filename-container=""
     div.form-control.p-0.m-0.input-group.overflow-hidden.flex-nowrap class=((document.object.errors.full_messages.any?)? 'border-danger' : '')
       span.input-group-prepend
         span.input-group-text.bg-light.text-black.border-0.rounded-0
-          | Файл загружен
+          = t '.uploaded_file'
       span.flex-grow-1.d-flex.align-items-center.justify-content-center.text-muted.position-relative style="min-width: 0"
         span.text-truncate.w-75.pr-3 data-filename='' =File.basename(document.object.file_cache || '')
         button.btn.text-muted.position-absolute.px-3 style="right: 0" type="button" data-clear-button=""

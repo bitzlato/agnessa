@@ -1,5 +1,5 @@
 .d-flex.mt-4
-  h1.h4.w-25.m-0.font-weight-bold.small.text-primary Шаг 1 из 4
+  h1.h4.w-25.m-0.font-weight-bold.small.text-primary =t('client.verifications.new.step_x_from_y', current_step: 1, total_step: 4)
 
   .d-flex.align-items-center.w-75
     .progress.w-100 style="height: 4px"
@@ -13,7 +13,7 @@
       = document.input :file_cache, as: :hidden
       = document.input :document_type_id, as: :hidden
 
-    h3.h4.mt-4.mb-3.font-weight-bold.text-primary Личные данные
+    h3.h4.mt-4.mb-3.font-weight-bold.text-primary = t 'application.verifications.new.personal_data'
 
     = f.input :name
     = f.input :last_name
@@ -29,6 +29,6 @@
 
     .container.fixed-bottom.pt-2.pb-4.d-flex.bg-white.footer-submit
       = f.input :next_step, as: :hidden, input_html: { value: 2 }
-      = f.submit 'Продолжить', class: 'btn btn-primary w-100', data: { 'disable-with' => 'Отправляю..' }
+      = f.submit t('client.verifications.new.submit'), class: 'btn btn-primary w-100', data: { 'disable-with' => t('client.verifications.new.sending') }
 
 .mb-5.pb-5

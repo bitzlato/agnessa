@@ -37,16 +37,39 @@ ru:
         message: Ваш аккаунт %{account_id} верифицирован
         button: Перейти на сайт Bitzlato
       new:
+        step_x_from_y: Шаг %{current_step} из %{total_step}
         title: 'Верификация аккаунта'
         personal_data: 'Личные данные'
         choose_document_type: 'Выберите тип документа'
         upload_document_photo: 'Загрузите фото документов'
-        submit: 'Продоложить'
+        submit: Продоложить
+        back: Назад
+        sending: Отправляю...
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
+        additional_documents:  В случае необходимости служба поддержки может запросить дополнительную информацию, например - видео с документом
+        instruction: Инструкция
+        clear_face: Убедитесь, что Ваше лицо и все детали документов на фото четко видны
+        full_document: Документ на фото размещен полностью, края не обрезаны
+        no_objects: На фото нет дополнительных объектов
+        explain: 'Верификация аккаунта дает множество преимуществ. Вы сможете подать заявку на верификацию за 4 шага:'
+        you_need: 'Вам потребуется:'
+        select_personal_data: Указать личные данные
+        select_document_type: Указать тип документа и его номер
+        make_document_photo: Сделать фото действительного документа, удостоверяющего личность
+        make_selfie: 'Сделать селфи с документом и листком бумаги, где написаны текущая дата и фраза "для криптобанка Bitzlato"'
+        do_verification: 'Пройти верификацию'
+        file_size: 'Размер: %{from} до %{to}'
+        format: 'Формат: %{formats}'
+      step1:
+        personal_data: Личные данные
       mobile_alert_error:
         last_refused_title: 'Ваша последняя заявка была отклонена по причине:'
       document_field:
         document_hint:  'Размер файла:  От %{from} до %{to}'
+        upload_file: Загрузить файл
+        file_not_choosen: Файл не выбран
+        uploaded_file: Файл загружен
+        open_camera: Открыть камеру
       created:
         title: 'Принята заявка %{id}'
         message: '<div>
