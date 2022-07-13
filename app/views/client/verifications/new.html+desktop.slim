@@ -3,9 +3,10 @@
     div
       h1.h3.font-weight-semibold =t '.title'
       h4.h6.font-weight-normal = verification.applicant.external_id
-    div
-      = image_tag asset_url('bz-logo.svg'), width: 40
-    =link_to I18n.locale.upcase, client_short_new_verification_url(locale: (I18n.locale == :ru ? 'en' : 'ru')), class: 'badge badge-light'
+    div.d-flex.align-items-center
+      =link_to I18n.locale.upcase, client_short_new_verification_url(locale: (I18n.locale == :ru ? 'en' : 'ru')), class: 'locale-switcher'
+      .ml-lg-5.ml-sm-2
+        = image_tag asset_url('bz-logo.svg'), width: 40
 
 = simple_form_for verification, url: form_path, html: { multipart: true, novalidate: false } do |f|
   .row

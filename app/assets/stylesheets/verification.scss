@@ -181,3 +181,20 @@ $success-base64: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' w
   font-size: 13px;
 }
 
+.locale-switcher {
+  display: inline-block;
+  width: 44px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  border: 1px solid rgba(38, 45, 55, 0.15);
+  border-radius: 6px;
+  color: rgba(38, 45, 55, 1);
+  text-align: center;
+}
+
+.locale-switcher:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: rgba(38, 45, 55, 1);
+  text-decoration: none;
+}
