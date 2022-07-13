@@ -1,6 +1,7 @@
 default:  &settings
   default_locale: ru
-  fallbacks: en
+  fallbacks:
+    - en
   available_locales:
     - ru
     - en
