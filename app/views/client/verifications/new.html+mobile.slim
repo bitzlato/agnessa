@@ -1,6 +1,9 @@
 .mt-4
-  h1.h4.font-weight-bold = t '.title'
-  h4.h6.font-weight-normal = verification.applicant.external_id
+  .d-flex.align-items-start.justify-content-between
+    div
+      h1.h4.font-weight-bold = t '.title'
+      h4.h6.font-weight-normal = verification.applicant.external_id
+    =link_to I18n.locale.upcase, client_short_new_verification_url(locale: (I18n.locale == :ru ? 'en' : 'ru')), class: 'locale-switcher'
 
   = render 'mobile_alert_error', last_refused_verification: last_refused_verification
 
