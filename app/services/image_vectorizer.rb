@@ -13,7 +13,7 @@ class ImageVectorizer
     cmd = "python3 #{Rails.root.join('lib/image_vector.py')} #{path} #{model_name} #{detector_backend}"
     Rails.logger.info "Execute #{cmd}"
     result = %x{cmd}
-    raise "Error executing #{cmd}: #{$?}" unless $?.success?
+    raise "Error executing #{cmd}: #{$?} '#{result}'" unless $?.success?
     JSON.parse(result.split('result').last.strip)
   rescue StandardError => err
     report_exception err, true, path: path
