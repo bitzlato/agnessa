@@ -1,6 +1,8 @@
 class ImageVectorizer
   attr_accessor :path, :model_name, :detector_backend
 
+  Error = Class.new StandardError
+
   def initialize path, model_name='Facenet512', detector_backend='retinaface'
     @path = path
     @model_name = model_name
@@ -10,8 +12,9 @@ class ImageVectorizer
   def perform
     result = `python3 #{Rails.root.join('lib/image_vector.py')} #{path} #{model_name} #{detector_backend}`
     JSON.parse(result.split('result').last.strip)
-  rescue
-    raise StandardError.new("Error vectorizing #{path}")
+  rescue StandardError => err
+    report_exception err, true, path: path
+    raise Error, "Error vectorizing #{path} with #{err}"
   end
 
   def perform_api
